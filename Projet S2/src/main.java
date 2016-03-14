@@ -1,6 +1,6 @@
 
 public class main {
-
+// classe main
 	public static void main(String[] args) {
 		Plateau plateau = new Plateau();
 		Personnage voleur = new Voleur();
