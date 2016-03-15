@@ -1,5 +1,5 @@
 import java.util.Random;
-public class Plateau {
+public class ile {
 	int cpt =  0 ;
 	Case[][] plateau;
 //	Case[][] TblRocher;
@@ -7,10 +7,11 @@ public class Plateau {
 	int Rocherx, Rochery;
 	int NavJ1, NavJ2;
 	int randomK, randomC;
-
-	Plateau(){
+	float proportion;
+	ile(int taille, int proportion){
+		this.proportion = proportion;
 //		TblRocher = new Case[10][10];
-		plateau = new Case[10][10];
+		plateau = new Case[taille][taille];
 		randomK = random.nextInt(plateau.length);
 		randomC = random.nextInt(plateau.length);
 		initialiser();
@@ -26,9 +27,9 @@ public class Plateau {
 			}
 
 		}
-		while(cpt<plateau.length+2){
-			Rocherx = random.nextInt(8)+1;
-			Rochery = random.nextInt(8)+1;
+		while(cpt<plateau.length*(proportion/10)+2){
+			Rocherx = random.nextInt(plateau.length-2)+1;
+			Rochery = random.nextInt(plateau.length-2)+1;
 			
 			if(plateau[Rocherx][Rochery].id == 0){
 				if(cpt == randomK){
@@ -43,10 +44,10 @@ public class Plateau {
 				cpt++;
 			}
 		}
-		NavJ1 = random.nextInt(10);
-		NavJ2 = random.nextInt(10);
-		plateau[NavJ1][0]= new CaseNavire();
-		plateau[NavJ2][9]= new CaseNavire();
+		NavJ1 = random.nextInt(plateau.length-2)+1;
+		NavJ2 = random.nextInt(plateau.length-2)+1;
+		plateau[NavJ1][0]= new CaseNavire(2);
+		plateau[NavJ2][plateau.length-1]= new CaseNavire(3);
 	}
 
 	public String toString(){

@@ -19,6 +19,7 @@ public class CaseRocher extends Case{
 	}
 	public void setKey(boolean setter){
 		this.key = setter; 
+		id = 4;
 	}
 	public void setChest(boolean setter){
 		this.chest =setter;
