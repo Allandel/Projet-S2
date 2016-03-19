@@ -1,7 +1,11 @@
+/**
+ * Classe principale pour lancer le jeu
+ * @author Allan
+ * @version 1.0
+ */
 import javax.swing.JOptionPane;
 
 public class main {
-// classe main
 	
 	public static void main(String[] args) {
 		JOptionPane entreeTaille= new JOptionPane();
@@ -20,11 +24,9 @@ public class main {
 		int proportionNb = Integer.parseInt(proportion);
 		ile plateau = new ile(taillenb, proportionNb);
 		int[][] plateauAffichage = new int[plateau.plateau.length][plateau.plateau.length];
-		String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png",};
+		String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png"};
 		SuperPlateau platjeu = new SuperPlateau(gifs,taillenb);
-		Personnage voleur = new Voleur();
-	//	plateau.plateau[5][5].setPersonnageCourant(new Voleur());;
-//		System.out.println(plateau.toString());
+		System.out.println(plateau.toString());
 		for(int i= 0; i<plateau.plateau.length;i++){
 			for(int j = 0; j<plateau.plateau[0].length;j++){
 				plateauAffichage[i][j] = plateau.plateau[j][i].id;

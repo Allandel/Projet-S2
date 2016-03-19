@@ -1,11 +1,25 @@
-
+/**
+ * Classe héritée de Case représentant les Rochers
+ * @author Allan
+ * @version 1.0
+ */
 public class CaseRocher extends Case{
 	int x,y;
-	private boolean key=false;
-	private boolean chest= false;
+	boolean hidden;
+	/**
+	 * Constructeur permettant d'attribuer l'ID du rocher ainsi que ses coordonnées
+	 * @param x
+	 * @param y
+	 */
 	public CaseRocher(int x, int y){
+		super();
 		id = 1;
+		this.x = x;
+		this.y = y;
 	}
+	/**
+	 * Retourne l'initiale de l'objet contenu dans la case
+	 */
 	public String toString(){
 		if(key==true){
 			return "K";
@@ -19,15 +33,10 @@ public class CaseRocher extends Case{
 	}
 	public void setKey(boolean setter){
 		this.key = setter; 
-		id = 4;
 	}
 	public void setChest(boolean setter){
 		this.chest =setter;
+		hidden = true;
 	}
-	public void getKey() {
-		// TODO Auto-generated method stub
-		if ( key== true ) {
-			System.out.println("-----------6-");
-		}
-	}
+
 }

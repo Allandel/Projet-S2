@@ -1,28 +1,29 @@
-
+/**
+ * Classe représentant une case
+ * @author Allan
+ * @version 1.0
+ */
 public class Case {
+	public boolean isAccessible() {
+		return accessible;
+	}
+	public void setAccessible(boolean accessible) {
+		this.accessible = accessible;
+	}
 	int id;
+	boolean accessible;
+	boolean key;
+	boolean chest;
+	/**
+	 * Construit une case initialisant l'attribut accessible, key et chest a false
+	 */
+	public Case(){
+		accessible =false;
+		key = false;
+		chest = false;
+	}
 	public void setPersonnageCourant(Personnage p) {
 	
 	}
-	
-	int nbrVoisin(int [][]plateau,int x, int y){
-		int nbr=0;
-		
-		if(plateau[x+1][y]!=0)
-			nbr++;
-		if(plateau[x-1][y]!=0)
-			nbr++;
-		if(plateau[x][y+1]!=0)
-			nbr++;
-		if(plateau[x][y-1]!=0)
-			nbr++;
-		
-		return nbr;
-	}
-	
-	boolean estAccessible(int [][]plateau,int x, int y){
-		if(this.nbrVoisin(plateau, x, y)<4)
-			return true;
-		return false;
-	}
+
 }
