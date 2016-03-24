@@ -82,6 +82,30 @@ public class ile {
 
 	}
 	/**
+	 * @return the caseCoffre
+	 */
+	public Case getCaseCoffre() {
+		return CaseCoffre;
+	}
+	/**
+	 * @return the caseCle
+	 */
+	public Case getCaseCle() {
+		return CaseCle;
+	}
+	/**
+	 * @return the navJ1
+	 */
+	public int getNavJ1() {
+		return NavJ1;
+	}
+	/**
+	 * @return the navJ2
+	 */
+	public int getNavJ2() {
+		return NavJ2;
+	}
+	/**
 	 * D�fini  si le coffre et la cl� sont accessibles depuis les coordonn�es donn�es
 	 * @param x
 	 * @param y

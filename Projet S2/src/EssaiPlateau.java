@@ -8,7 +8,7 @@ public class EssaiPlateau {
 		Random r=new Random();
 		int tailleX=12;
 		int tailleY=15;
-		String[] gifs={"images/un.gif","images/deux.gif","images/trois.gif","images/quatre.gif"};
+		String[] gifs={"img/un.gif","img/deux.gif","img/trois.gif","img/quatre.gif"};
 
 		Plateau[] grille = new Plateau[2] ;
 		grille[0] = new Plateau(gifs,10, true);
