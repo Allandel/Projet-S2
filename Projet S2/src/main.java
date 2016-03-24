@@ -10,7 +10,7 @@ public class main {
 	public static void main(String[] args) {
 		JOptionPane entreeTaille= new JOptionPane();
 		boolean nb = false;
-		String taille ;
+		String taille, proportion ;
 		do{
 		
 		taille = entreeTaille.showInputDialog("Choisir la taille du plateau: ");
@@ -19,7 +19,16 @@ public class main {
 		}
 		
 		}while(!nb);
-		String proportion = entreeTaille.showInputDialog("Entrez la proportion de rochers: ");
+		
+		nb=false;
+		
+		do{
+			proportion = entreeTaille.showInputDialog("Entrez la proportion de rochers: ");
+			if(proportion.matches("[0-9]+")){
+				nb = true;
+			}	
+		}while(!nb);
+		
 		int taillenb = Integer.parseInt(taille);
 		int proportionNb = Integer.parseInt(proportion);
 		ile plateau = new ile(taillenb, proportionNb);
