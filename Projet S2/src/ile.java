@@ -1,5 +1,5 @@
 /**
- * Classe permettant de générer le plateau de jeu
+ * Classe permettant de gï¿½nï¿½rer le plateau de jeu
  * @author Allan
  * @version 1.0
  */
@@ -33,7 +33,7 @@ public class ile {
 		}while(!accesNav1 || !accesNav2 );
 	}
 	/**
-	 * Crée un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
+	 * Crï¿½e un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
 	 */
 	void initialiser(){
 		int cpt =  0 ;
@@ -54,28 +54,35 @@ public class ile {
 		plateau[NavJ1][1]= new CaseNavire(2);
 		plateau[NavJ2][plateau.length-2]= new CaseNavire(3);
 		nbRocher = (int)(taille*taille*proportion)/100;
-		while(cpt<nbRocher+2){
+		while(cpt<nbRocher){
 			Rocherx = random.nextInt(plateau.length-2)+1;
 			Rochery = random.nextInt(plateau.length-2)+1;
 			if(plateau[Rocherx][Rochery].id == 0){
-
 				plateau[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
-				if(cpt==3){
-					((CaseRocher) plateau[Rocherx][Rochery]).setChest(true);
-					CaseCoffre = plateau[Rocherx][Rochery];
-				}
-				if(cpt==4){
-					((CaseRocher) plateau[Rocherx][Rochery]).setKey(true);
-					CaseCle = plateau[Rocherx][Rochery];
-				}
 				cpt++;
 			}
 			
 		}
+		
+		for(int i =0; i<2;i++){
+			Rocherx = random.nextInt(plateau.length-2)+1;
+			Rochery = random.nextInt(plateau.length-2)+1;
+			if(plateau[Rocherx][Rochery].id == 0){
+				plateau[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
+				if(i==0){
+					((CaseRocher) plateau[Rocherx][Rochery]).setChest(true);
+					CaseCoffre = plateau[Rocherx][Rochery];
+				}
+				if(i==1){
+					((CaseRocher) plateau[Rocherx][Rochery]).setKey(true);
+					CaseCle = plateau[Rocherx][Rochery];
+				}
+		}
+		}
 
 	}
 	/**
-	 * Défini  si le coffre et la clé sont accessibles depuis les coordonnées données
+	 * Dï¿½fini  si le coffre et la clï¿½ sont accessibles depuis les coordonnï¿½es donnï¿½es
 	 * @param x
 	 * @param y
 	 */
@@ -113,7 +120,7 @@ public class ile {
 		}
 	}
 	/**
-	 * Retourne un booléen en fonction de l'accessibilité du coffre et de la clé
+	 * Retourne un boolï¿½en en fonction de l'accessibilitï¿½ du coffre et de la clï¿½
 	 * @return
 	 */
 	boolean accessible(){
@@ -124,7 +131,7 @@ public class ile {
 		}
 	}
 	/**
-	 * Réinitialise tous les booléens accessible a false
+	 * Rï¿½initialise tous les boolï¿½ens accessible a false
 	 */
 	void resetAcces(){
 		for(int i=0;i<plateau.length-1;i++){

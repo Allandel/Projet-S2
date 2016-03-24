@@ -1,5 +1,5 @@
 /**
- * Classe représentant une case
+ * Classe reprï¿½sentant une case
  * @author Allan
  * @version 1.0
  */
