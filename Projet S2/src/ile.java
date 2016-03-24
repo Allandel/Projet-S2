@@ -23,13 +23,12 @@ public class ile {
 		this.proportion = proportion;
 		this.taille= taille;
 		do{
-		initialiser();
-		estAccessible(NavJ1, 1);
-		accesNav1 = accessible();
-		resetAcces();
-		estAccessible(NavJ2, plateau.length-2);
-		accesNav2 = accessible();
-
+			initialiser();
+			estAccessible(NavJ1, 1);
+			accesNav1 = accessible();
+			resetAcces();
+			estAccessible(NavJ2, plateau.length-2);
+			accesNav2 = accessible();
 		}while(!accesNav1 || !accesNav2 );
 	}
 	/**
@@ -61,24 +60,25 @@ public class ile {
 				plateau[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
 				cpt++;
 			}
-			
+
 		}
-		
-		for(int i =0; i<2;i++){
+		cpt=0;
+		do{
 			Rocherx = random.nextInt(plateau.length-2)+1;
 			Rochery = random.nextInt(plateau.length-2)+1;
 			if(plateau[Rocherx][Rochery].id == 0){
 				plateau[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
-				if(i==0){
+				if(cpt==0){
 					((CaseRocher) plateau[Rocherx][Rochery]).setChest(true);
 					CaseCoffre = plateau[Rocherx][Rochery];
 				}
-				if(i==1){
+				if(cpt==1){
 					((CaseRocher) plateau[Rocherx][Rochery]).setKey(true);
 					CaseCle = plateau[Rocherx][Rochery];
 				}
-		}
-		}
+				cpt++;
+			}
+		}while(cpt<2);
 
 	}
 	/**
@@ -95,7 +95,8 @@ public class ile {
 				plateau[x-1][y].setAccessible(true);
 
 			}
-		}if(y<plateau.length-1){
+		}
+		if(y<plateau.length-1){
 			if(plateau[x][y+1].id==0 && !plateau[x][y+1].accessible){
 				estAccessible(x,y+1);
 			}else{
@@ -152,7 +153,7 @@ public class ile {
 		for(int i = 0;i<plateau.length;i++){
 			res+=borne+"\n";
 			for(int j = 0;j<plateau[0].length;j++){
-					res+= "| "+plateau[i][j]+" ";
+				res+= "| "+plateau[i][j]+" ";
 			}
 			res+="|\n";
 		}
