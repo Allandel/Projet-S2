@@ -43,10 +43,10 @@ public class ile {
 			}
 		}
 		for(int i = 0; i<plateau.length;i++){
-			plateau[0][i].id = 5;
-			plateau[plateau.length-1][i].id= 5;
-			plateau[i][0].id= 5 ;
-			plateau[i][plateau.length-1].id= 5;
+			plateau[0][i].setId(5);
+			plateau[plateau.length-1][i].setId(5);
+			plateau[i][0].setId(5);
+			plateau[i][plateau.length-1].setId(5);
 		}
 		NavJ1= random.nextInt(plateau.length-2)+1;
 		NavJ2= random.nextInt(plateau.length-2)+1;
@@ -56,7 +56,7 @@ public class ile {
 		while(cpt<nbRocher){
 			Rocherx = random.nextInt(plateau.length-2)+1;
 			Rochery = random.nextInt(plateau.length-2)+1;
-			if(plateau[Rocherx][Rochery].id == 0){
+			if(plateau[Rocherx][Rochery].getId() == 0){
 				plateau[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
 				cpt++;
 			}
@@ -66,7 +66,7 @@ public class ile {
 		do{
 			Rocherx = random.nextInt(plateau.length-2)+1;
 			Rochery = random.nextInt(plateau.length-2)+1;
-			if(plateau[Rocherx][Rochery].id == 0){
+			if(plateau[Rocherx][Rochery].getId()==0){
 				plateau[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
 				if(cpt==0){
 					((CaseRocher) plateau[Rocherx][Rochery]).setChest(true);
@@ -87,9 +87,9 @@ public class ile {
 	 * @param y
 	 */
 	void estAccessible(int x, int y){
-		plateau[x][y].accessible = true;
+		plateau[x][y].setAccessible(true);
 		if(x>0){
-			if(plateau[x-1][y].id==0 && !plateau[x-1][y].accessible){
+			if(plateau[x-1][y].getId()==0 && !plateau[x-1][y].isAccessible()){
 				estAccessible(x-1,y);
 			}else{
 				plateau[x-1][y].setAccessible(true);
@@ -97,7 +97,7 @@ public class ile {
 			}
 		}
 		if(y<plateau.length-1){
-			if(plateau[x][y+1].id==0 && !plateau[x][y+1].accessible){
+			if(plateau[x][y+1].getId()==0 && !plateau[x][y+1].isAccessible()){
 				estAccessible(x,y+1);
 			}else{
 				plateau[x][y+1].setAccessible(true);
@@ -105,7 +105,7 @@ public class ile {
 			}
 		}
 		if(x<plateau.length-1){
-			if(plateau[x+1][y].id==0 && !plateau[x+1][y].accessible){
+			if(plateau[x+1][y].getId()==0 && !plateau[x+1][y].isAccessible()){
 				estAccessible(x+1,y);
 			}else{
 				plateau[x+1][y].setAccessible(true);
@@ -113,7 +113,7 @@ public class ile {
 			}
 		}
 		if(y>0){
-			if(plateau[x][y-1].id==0 && !plateau[x][y-1].accessible){
+			if(plateau[x][y-1].getId()==0 && !plateau[x][y-1].isAccessible()){
 				estAccessible(x,y-1);
 			}else{
 				plateau[x][y-1].setAccessible(true);

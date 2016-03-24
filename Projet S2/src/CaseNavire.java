@@ -1,15 +1,15 @@
 /**
- * Classe héritée de Case représentant les navires
+ * Classe hï¿½ritï¿½e de Case reprï¿½sentant les navires
  * @author Allan
  * @version 1.0
  */
 public class CaseNavire extends Case {
 	/**
-	 * Construit un navire en lui attribuant l'ID donné
+	 * Construit un navire en lui attribuant l'ID donnï¿½
 	 * @param id
 	 */
 	public CaseNavire(int id){
-		this.id = id;
+		this.setId(id);
 	}
 	public String toString(){
 		return "N";

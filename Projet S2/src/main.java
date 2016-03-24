@@ -41,7 +41,7 @@ public class main {
 		System.out.println(plateau.toString());
 		for(int i= 0; i<plateau.plateau.length;i++){
 			for(int j = 0; j<plateau.plateau[0].length;j++){
-				plateauAffichage[i][j] = plateau.plateau[j][i].id;
+				plateauAffichage[i][j] = plateau.plateau[j][i].getId();
 			}
 		}
 		platjeu.setJeu(plateauAffichage);

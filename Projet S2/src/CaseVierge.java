@@ -1,13 +1,14 @@
 /**
- * Classe héritée de Case représentant une case vierge
+ * Classe hï¿½ritï¿½e de Case reprï¿½sentant une case vierge
  * @author Allan
  * @version 1.0
  */
 public class CaseVierge extends Case {
-	Personnage personnageCourant;
+	private Personnage personnageCourant;
+	
 	public CaseVierge(){
 		super();
-		id = 0;
+		this.setId(0);
 		this.personnageCourant = null;
 	}
 	/**
@@ -23,6 +24,11 @@ public class CaseVierge extends Case {
 	public void removePersonnageCourant(){
 		this.personnageCourant = null;
 	}
+	
+	public Personnage getPersonnageCourant(){
+		return personnageCourant;
+	}
+	
 	public String toString(){
 		if(personnageCourant ==null){
 			return  " ";

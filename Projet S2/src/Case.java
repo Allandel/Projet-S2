@@ -4,23 +4,36 @@
  * @version 1.0
  */
 public class Case {
+	private int id;
+	private boolean accessible;
+	
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public boolean isAccessible() {
 		return accessible;
 	}
+	
 	public void setAccessible(boolean accessible) {
 		this.accessible = accessible;
 	}
-	int id;
-	boolean accessible;
-	boolean key;
-	boolean chest;
+	
 	/**
 	 * Construit une case initialisant l'attribut accessible, key et chest a false
 	 */
 	public Case(){
 		accessible =false;
-		key = false;
-		chest = false;
 	}
 	public void setPersonnageCourant(Personnage p) {
 
