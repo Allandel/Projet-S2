@@ -3,6 +3,9 @@
  * @author Allan
  * @version 1.0
  */
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JOptionPane;
 
 public class main {
@@ -12,6 +15,7 @@ public class main {
 		boolean nb = false;
 		String taille, proportion ;
 		int taillenb, proportionNb;
+		InputEvent event;
 		do{
 
 			taille = entreeTaille.showInputDialog("Choisir la taille du plateau, 10 minimum : ");
@@ -46,7 +50,13 @@ public class main {
 		}
 		platjeu.setJeu(plateauAffichage);
 		platjeu.affichage();
-
+		event=  plateau[equipe].waitEvent(20000);
+		if (event instanceof MouseEvent) {
+			int x = getX((MouseEvent) event) ;
+			int y = getY((MouseEvent) event) ;
+			System.out.println(x+y);
+		}
+		
 	}
 
 }
