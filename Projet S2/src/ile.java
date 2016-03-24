@@ -6,14 +6,14 @@
 import java.util.Random;
 public class ile {
 
-	Case[][] plateau;
-	Case tmp, CaseCoffre, CaseCle;
-	Random random = new Random();
-	int taille, nbRocher;
-	int Rocherx, Rochery;
-	int NavJ1, NavJ2;
-	float proportion;
-	boolean accesNav1, accesNav2;
+	private Case[][] plateau;
+	private Case tmp, CaseCoffre, CaseCle;
+	private Random random = new Random();
+	private int taille, nbRocher;
+	private int Rocherx, Rochery;
+	private int NavJ1, NavJ2;
+	private float proportion;
+	private boolean accesNav1, accesNav2;
 	/**
 	 * Construit une ile puis la rempli en fonction de la proportion de Rochers choisie
 	 * @param taille
@@ -143,6 +143,11 @@ public class ile {
 		CaseCoffre.setAccessible(false);
 		CaseCle.setAccessible(false);
 	}
+
+	Case[][] getPlateau(){
+		return plateau;
+	}
+	
 	public String toString(){
 		String borne ="";
 		for(int i =0;i<plateau.length;i++){
