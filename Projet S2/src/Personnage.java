@@ -1,5 +1,13 @@
 
 public class Personnage{
-	int energie;
-	String nom;
+	private int energie=100,x, y;
+	private String nom;
+	
+	void setNom(String nom){
+		this.nom=nom;
+	}
+	
+	void deplacer(){
+		
+	}
 }
