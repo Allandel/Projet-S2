@@ -6,32 +6,32 @@
 import javax.swing.JOptionPane;
 
 public class main {
-	
+
 	public static void main(String[] args) {
 		JOptionPane entreeTaille= new JOptionPane();
 		boolean nb = false;
 		String taille, proportion ;
 		int taillenb, proportionNb;
 		do{
-		
-		taille = entreeTaille.showInputDialog("Choisir la taille du plateau, 10 minimum : ");
-		if(taille.matches("[0-9]+")){
-			taillenb = Integer.parseInt(taille);
-			if(taillenb>=10)
-				nb = true;
-		}
-		
+
+			taille = entreeTaille.showInputDialog("Choisir la taille du plateau, 10 minimum : ");
+			if(taille.matches("[0-9]+")){
+				taillenb = Integer.parseInt(taille);
+				if(taillenb>=10)
+					nb = true;
+			}
+
 		}while(!nb);
-		
+
 		nb=false;
-		
+
 		do{
 			proportion = entreeTaille.showInputDialog("Entrez la proportion de rochers: ");
 			if(proportion.matches("[0-9]+")){
 				nb = true;
 			}	
 		}while(!nb);
-		
+
 		taillenb = Integer.parseInt(taille);
 		proportionNb = Integer.parseInt(proportion);
 		ile plateau = new ile(taillenb, proportionNb);
@@ -46,7 +46,7 @@ public class main {
 		}
 		platjeu.setJeu(plateauAffichage);
 		platjeu.affichage();
-		
+
 	}
 
 }

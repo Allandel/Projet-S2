@@ -23,7 +23,7 @@ public class Case {
 		chest = false;
 	}
 	public void setPersonnageCourant(Personnage p) {
-	
+
 	}
 
 }

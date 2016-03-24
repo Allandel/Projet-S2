@@ -52,7 +52,7 @@ public class ile {
 		NavJ2= random.nextInt(plateau.length-2)+1;
 		plateau[NavJ1][1]= new CaseNavire(2);
 		plateau[NavJ2][plateau.length-2]= new CaseNavire(3);
-		nbRocher = (int)(taille*taille*proportion)/100;
+		nbRocher = (int)((taille-2)*(taille-2)*proportion)/100;
 		while(cpt<nbRocher){
 			Rocherx = random.nextInt(plateau.length-2)+1;
 			Rochery = random.nextInt(plateau.length-2)+1;
