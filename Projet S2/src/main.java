@@ -11,11 +11,14 @@ public class main {
 		JOptionPane entreeTaille= new JOptionPane();
 		boolean nb = false;
 		String taille, proportion ;
+		int taillenb, proportionNb;
 		do{
 		
-		taille = entreeTaille.showInputDialog("Choisir la taille du plateau: ");
+		taille = entreeTaille.showInputDialog("Choisir la taille du plateau, 10 minimum : ");
 		if(taille.matches("[0-9]+")){
-			nb = true;
+			taillenb = Integer.parseInt(taille);
+			if(taillenb>=10)
+				nb = true;
 		}
 		
 		}while(!nb);
@@ -29,8 +32,8 @@ public class main {
 			}	
 		}while(!nb);
 		
-		int taillenb = Integer.parseInt(taille);
-		int proportionNb = Integer.parseInt(proportion);
+		taillenb = Integer.parseInt(taille);
+		proportionNb = Integer.parseInt(proportion);
 		ile plateau = new ile(taillenb, proportionNb);
 		int[][] plateauAffichage = new int[plateau.plateau.length][plateau.plateau.length];
 		String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png"};
