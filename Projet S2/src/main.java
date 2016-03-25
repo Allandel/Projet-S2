@@ -40,7 +40,10 @@ public class main {
 		proportionNb = Integer.parseInt(proportion);
 		ile ileDuJeu = new ile(taillenb, proportionNb);
 		int[][] plateauAffichage = new int[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
+		int[][] plateauAffichageJ1 = new int[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
+		int[][] plateauAffichageJ2 = new int[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
 		String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png"};
+		int navJ1=ileDuJeu.getNavJ1(), navJ2=ileDuJeu.getNavJ2();
 		
 		System.out.println(ileDuJeu.toString());
 		for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
@@ -49,16 +52,27 @@ public class main {
 			}
 		}
 		
-		Plateau [] platjeu = new Plateau[3];
+		for(int i=0;i<3;i++){
+			for(int cpt=navJ1-1;cpt<navJ1+2;cpt++){
+				plateauAffichageJ1[i][cpt]=plateauAffichage[i][cpt];
+			}
+		}
+		
+		for(int i=taillenb-3;i<taillenb;i++){
+			for(int cpt=navJ2-1;cpt<navJ2+2;cpt++){
+				plateauAffichageJ2[i][cpt]=plateauAffichage[i][cpt];
+			}
+		}
+		
+		Plateau [] platjeu = new Plateau[2];
 		platjeu[0] = new Plateau(gifs,taillenb);
 		platjeu[0].close();
 		platjeu[1] = new Plateau(gifs,taillenb);
 		platjeu[1].close();
-		platjeu[2] = new Plateau(gifs,taillenb);
-		platjeu[2].close();
 		
 		platjeu[0].setJeu(plateauAffichage);		
 		platjeu[0].affichage();
+		/*
 		int x=0,y=0;
 		do{
 			event=  platjeu[0].waitEvent();
@@ -67,6 +81,6 @@ public class main {
 				y=platjeu[0].getY((MouseEvent) event) ;
 			}
 		}while(x!=ileDuJeu.getNavJ1() || y!=1);
-		platjeu[0].close();
+		platjeu[0].close();*/
 	}
 }
