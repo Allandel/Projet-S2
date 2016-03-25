@@ -49,6 +49,8 @@ public class ile {
 		setKeyCoffre();		
 	}
 	
+	
+	
 	void setKeyCoffre(){
 		int cpt=0;
 		do{
@@ -67,7 +69,6 @@ public class ile {
 				cpt++;
 			}
 		}while(cpt<2);
-
 	}
 	
 	void setZero(){
