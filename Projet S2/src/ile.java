@@ -37,11 +37,9 @@ public class ile {
 	void initialiser(){
 		int cpt =  0 ;
 		plateau = new Case[taille][taille];
-		for(int i = 0;i<plateau.length;i++){
-			for(int j = 0;j<plateau.length;j++){
-				plateau[i][j]= new CaseVierge();
-			}
-		}
+		
+		setZero();
+		
 		for(int i = 0; i<plateau.length;i++){
 			plateau[0][i].setId(5);
 			plateau[plateau.length-1][i].setId(5);
@@ -81,6 +79,14 @@ public class ile {
 		}while(cpt<2);
 
 	}
+
+	void setZero(){
+		for(int i = 0;i<plateau.length;i++){
+			for(int j = 0;j<plateau.length;j++){
+				plateau[i][j]= new CaseVierge();
+			}
+		}
+	}
 	/**
 	 * @return the caseCoffre
 	 */
@@ -117,7 +123,6 @@ public class ile {
 				estAccessible(x-1,y);
 			}else{
 				plateau[x-1][y].setAccessible(true);
-
 			}
 		}
 		if(y<plateau.length-1){
@@ -125,7 +130,6 @@ public class ile {
 				estAccessible(x,y+1);
 			}else{
 				plateau[x][y+1].setAccessible(true);
-
 			}
 		}
 		if(x<plateau.length-1){
@@ -133,7 +137,6 @@ public class ile {
 				estAccessible(x+1,y);
 			}else{
 				plateau[x+1][y].setAccessible(true);
-
 			}
 		}
 		if(y>0){
