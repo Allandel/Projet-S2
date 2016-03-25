@@ -35,32 +35,22 @@ public class ile {
 	 * Cr�e un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
 	 */
 	void initialiser(){
-		int cpt =  0 ;
 		plateau = new Case[taille][taille];
 		
 		setZero();
+		setMer();
 		
-		for(int i = 0; i<plateau.length;i++){
-			plateau[0][i].setId(5);
-			plateau[plateau.length-1][i].setId(5);
-			plateau[i][0].setId(5);
-			plateau[i][plateau.length-1].setId(5);
-		}
 		NavJ1= random.nextInt(plateau.length-2)+1;
 		NavJ2= random.nextInt(plateau.length-2)+1;
 		plateau[NavJ1][1]= new CaseNavire(2);
 		plateau[NavJ2][plateau.length-2]= new CaseNavire(3);
-		nbRocher = (int)((taille)*(taille-2)*proportion)/100;
-		while(cpt<nbRocher){
-			Rocherx = random.nextInt(plateau.length-2)+1;
-			Rochery = random.nextInt(plateau.length-2)+1;
-			if(plateau[Rocherx][Rochery].getId() == 0){
-				plateau[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
-				cpt++;
-			}
-
-		}
-		cpt=0;
+		
+		setRocher(taille,proportion);
+		setKeyCoffre();		
+	}
+	
+	void setKeyCoffre(){
+		int cpt=0;
 		do{
 			Rocherx = random.nextInt(plateau.length-2)+1;
 			Rochery = random.nextInt(plateau.length-2)+1;
@@ -79,13 +69,36 @@ public class ile {
 		}while(cpt<2);
 
 	}
-
+	
 	void setZero(){
 		for(int i = 0;i<plateau.length;i++){
 			for(int j = 0;j<plateau.length;j++){
 				plateau[i][j]= new CaseVierge();
 			}
 		}
+	}
+	
+	void setMer(){
+		for(int i = 0; i<plateau.length;i++){
+			plateau[0][i].setId(5);
+			plateau[plateau.length-1][i].setId(5);
+			plateau[i][0].setId(5);
+			plateau[i][plateau.length-1].setId(5);
+		}
+	}
+	
+	void setRocher(int taille, float proportion){
+		int cpt=0;
+		nbRocher = (int)((taille)*(taille-2)*proportion)/100;
+		while(cpt<nbRocher){
+			Rocherx = random.nextInt(plateau.length-2)+1;
+			Rochery = random.nextInt(plateau.length-2)+1;
+			if(plateau[Rocherx][Rochery].getId() == 0){
+				plateau[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
+				cpt++;
+			}
+		}
+
 	}
 	/**
 	 * @return the caseCoffre
