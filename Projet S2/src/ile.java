@@ -7,7 +7,7 @@ import java.util.Random;
 public class ile {
 
 	private Case[][] plateau;
-	private Case tmp, CaseCoffre, CaseCle;
+	private Case CaseCoffre, CaseCle;
 	private Random random = new Random();
 	private int taille, nbRocher;
 	private int Rocherx, Rochery;
@@ -46,7 +46,7 @@ public class ile {
 		plateau[NavJ2][plateau.length-2]= new CaseNavire(3);
 		
 		setRocher(taille,proportion);
-		setKeyCoffre();		
+		setKeyCoffre();	
 	}
 	
 	
@@ -100,6 +100,34 @@ public class ile {
 			}
 		}
 
+	}
+	
+	void setPersonnage1(Personnage v){//A faire en récursif si approuvé
+		if(plateau[NavJ1+1][1].getId()==0){
+			plateau[NavJ1+1][1].setPersonnageCourant(v);
+			v.setCoordonnées(NavJ1+1, 1);
+		}else if(plateau[NavJ1+1][2].getId()==0){
+			plateau[NavJ1+1][2].setPersonnageCourant(v);
+			v.setCoordonnées(NavJ1+1, 2);
+		}else if(plateau[NavJ1][2].getId()==0){
+			plateau[NavJ1][2].setPersonnageCourant(v);
+			v.setCoordonnées(NavJ1, 2);
+		}else if (plateau[NavJ1-1][2].getId()==0){
+			plateau[NavJ1-1][2].setPersonnageCourant(v);
+			v.setCoordonnées(NavJ1-1, 2);
+		}else if(plateau[NavJ1-1][1].getId()==0){
+			plateau[NavJ1-1][1].setPersonnageCourant(v);
+			v.setCoordonnées(NavJ1-1, 1);
+		}
+	}
+	
+	public boolean mouvement(int x, int y, Personnage p){//Mouvement provisoire (Peut être à déplacer dans Personnage.java si possible)
+		if((x==p.getX()+1&& y==p.getY()&& plateau[x][y].getId()==0)||(x==p.getX()&& y==p.getY()+1&& plateau[x][y].getId()==0)||(x==p.getX()-1&& y==p.getY()&& plateau[x][y].getId()==0)||(x==p.getX()&& y==p.getY()-1&& plateau[x][y].getId()==0)){
+			plateau[x][y].setPersonnageCourant(p);
+			plateau[p.getX()][p.getY()].removePersonnageCourant();
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * @return the caseCoffre

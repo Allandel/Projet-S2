@@ -38,5 +38,9 @@ public class Case {
 	public void setPersonnageCourant(Personnage p) {
 
 	}
+	
+	public void removePersonnageCourant(){
+		
+	}
 
 }
