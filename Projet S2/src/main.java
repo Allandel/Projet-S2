@@ -42,37 +42,48 @@ public class main {
 		int[][] plateauAffichage = new int[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
 		int[][] plateauAffichageJ1 = new int[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
 		int[][] plateauAffichageJ2 = new int[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
+		boolean[][] plateauVisibleJ1= new boolean[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
+		boolean[][] plateauVisibleJ2= new boolean[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
 		String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png"};
 		int navJ1=ileDuJeu.getNavJ1(), navJ2=ileDuJeu.getNavJ2();
-		
+
 		System.out.println(ileDuJeu.toString());
 		for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
 			for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
 				plateauAffichage[i][j] = ileDuJeu.getPlateau()[j][i].getId();
 			}
 		}
-		
+
+		for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
+			for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
+				plateauVisibleJ1[i][j] = false;
+				plateauVisibleJ2[i][j] = false;
+			}
+		}
+
 		for(int i=0;i<3;i++){
 			for(int cpt=navJ1-1;cpt<navJ1+2;cpt++){
 				plateauAffichageJ1[i][cpt]=plateauAffichage[i][cpt];
+				plateauVisibleJ1[i][cpt]=true;
 			}
 		}
-		
+
 		for(int i=taillenb-3;i<taillenb;i++){
 			for(int cpt=navJ2-1;cpt<navJ2+2;cpt++){
 				plateauAffichageJ2[i][cpt]=plateauAffichage[i][cpt];
+				plateauVisibleJ2[i][cpt]=true;
 			}
 		}
-		
+
 		Plateau [] platjeu = new Plateau[2];
 		platjeu[0] = new Plateau(gifs,taillenb);
 		platjeu[0].close();
 		platjeu[1] = new Plateau(gifs,taillenb);
 		platjeu[1].close();
-		
+
 		platjeu[0].setJeu(plateauAffichage);		
 		platjeu[0].affichage();
-		/*
+
 		int x=0,y=0;
 		do{
 			event=  platjeu[0].waitEvent();
@@ -80,7 +91,7 @@ public class main {
 				x=platjeu[0].getX((MouseEvent) event) ;
 				y=platjeu[0].getY((MouseEvent) event) ;
 			}
-		}while(x!=ileDuJeu.getNavJ1() || y!=1);
-		platjeu[0].close();*/
+		}while(x!=ileDuJeu.getNavJ1() || y!=1);	 
+		platjeu[0].close();
 	}
 }
