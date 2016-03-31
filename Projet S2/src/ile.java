@@ -131,7 +131,6 @@ public class ile {
 	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Personnage p){//Mouvement provisoire (Peut �tre � d�placer dans Personnage.java si possible)
 		plateauIle[xAvant][yAvant].removePersonnageCourant();
 		plateauIle[xApres][yApres].setPersonnageCourant(p);
-		
 	}
 	/**
 	 * @return the caseCoffre
