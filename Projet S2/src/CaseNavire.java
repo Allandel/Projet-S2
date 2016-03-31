@@ -25,11 +25,17 @@ public class CaseNavire extends Case {
 	}
 	public void sortieBateau(){
 		if(!stockNavire.isEmpty()){
-			String listePerso="";
+			int cpt=0;
+			JOptionPane pane=new JOptionPane();
+			String rang="";
+			String [] listePerso= new String[stockNavire.size()];
 			for(Personnage perso : stockNavire){
-				listePerso=listePerso+"- "+perso.getType()+" "+perso.getNom()+"\n";
+				listePerso[cpt]=perso.getType()+" "+perso.getNom();
+				cpt++;
 			}
-			persoSortant=JOptionPane.showInputDialog(listePerso+"\n Choisir le personnage à faire sortir :");
+			rang=(String) JOptionPane.showInputDialog(null,"Quels personnage voulez-vous faire sortir du navire ?", "Sortie du navire", JOptionPane.QUESTION_MESSAGE, null, listePerso, listePerso[0]);
+			
+			//persoSortant=JOptionPane.showInputDialog(listePerso+"\n Choisir le personnage à faire sortir :");
 		}else{
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Il n'y a pas de personnages dans le Navire", "Attention",
