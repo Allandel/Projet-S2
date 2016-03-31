@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class Personnage{
 	
-	private int energie=100,x, y;
+	private int energie=100;
 	private String nom;
 	private int id;
 	private ArrayList <String> inventaire=new ArrayList<String>();
@@ -14,17 +14,14 @@ public class Personnage{
 		return this.nom;
 	}
 	
-	public void setCoordonnées(int x, int y){
-		this.x=x;
-		this.y=y;
+	public void setId(int id){
+		this.id=id;
+	}
+
+	public int getId(){
+		return id;
 	}
 	
-	public int getX(){
-		return this.x;
-	}
-	public int getY(){
-		return this.y;
-	}
 	void deplacer(int x, int y){
 	
 	}

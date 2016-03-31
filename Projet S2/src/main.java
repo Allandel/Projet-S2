@@ -15,9 +15,8 @@ public class main {
 		boolean nb = false;
 		String taille, proportion ;
 		int taillenb, proportionNb;
-		Personnage Explo1=new Explorateur();
 		InputEvent event;
-		boolean findujeu=false;//temporaire afin de faire tourner les déplacements.
+		boolean findujeu=false;//temporaire afin de faire tourner les dï¿½placements.
 		do{
 
 			taille = entreeTaille.showInputDialog("Choisir la taille du plateau, 10 minimum : ");
@@ -41,12 +40,9 @@ public class main {
 		taillenb = Integer.parseInt(taille);
 		proportionNb = Integer.parseInt(proportion);
 		ile ileDuJeu = new ile(taillenb, proportionNb);
-		ileDuJeu.setPersonnage1(Explo1);
+
 		int[][] plateauAffichage = new int[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
-		int[][] plateauAffichageJ1 = new int[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
-		int[][] plateauAffichageJ2 = new int[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
 		String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png","img/1.explorateur.png"};
-		int navJ1=ileDuJeu.getNavJ1(), navJ2=ileDuJeu.getNavJ2();
 
 		System.out.println(ileDuJeu.toString());
 		for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
@@ -55,65 +51,52 @@ public class main {
 			}
 		}
 
-		for(int i=0;i<3;i++){
-			for(int cpt=navJ1-1;cpt<navJ1+2;cpt++){
-				plateauAffichageJ1[i][cpt]=plateauAffichage[i][cpt];
-			}
-		}
 
-		for(int i=taillenb-3;i<taillenb;i++){
-			for(int cpt=navJ2-1;cpt<navJ2+2;cpt++){
-				plateauAffichageJ2[i][cpt]=plateauAffichage[i][cpt];
-			}
-		}
-
-		Plateau [] platjeu = new Plateau[2];
-		platjeu[0] = new Plateau(gifs,taillenb);
-		platjeu[0].close();
-		platjeu[1] = new Plateau(gifs,taillenb);
-		platjeu[1].close();
-		platjeu[0].setJeu(plateauAffichage);		
-		platjeu[0].affichage();
-
-		int x=0,y=0;
-
-		do{	
-			event=  platjeu[0].waitEvent();
-			if (event instanceof MouseEvent) {
-				x=platjeu[0].getX((MouseEvent) event) ;
-				y=platjeu[0].getY((MouseEvent) event) ;
-			}
-			if(x==Explo1.getX() && y==Explo1.getY()){
-
-				event=platjeu[0].waitEvent();
-				if(event instanceof MouseEvent){
-					x=platjeu[0].getX((MouseEvent) event);
-					y=platjeu[0].getY((MouseEvent) event);
-					if(ileDuJeu.mouvement(x,y,Explo1)){
-						for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
-							for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
-								plateauAffichage[i][j] = ileDuJeu.getPlateau()[j][i].getId();
-
-							}
-						}
-						platjeu[0].setJeu(plateauAffichage);
-					}
-				}
-			}else if(x==ileDuJeu.getNavJ1() && y==1){//Marche pas si l'explorateur est déjà à l'intérieur du Bateau
-				ileDuJeu.getPlateau()[ileDuJeu.getNavJ1()][1].sortieBateau();
-			}
-
-		}while(findujeu!=true);
-		/*
-		int x=0,y=0;
+		Plateau platjeu = new Plateau(gifs,taillenb);
+		platjeu.setJeu(plateauAffichage);
+		platjeu.affichage();
+		
+		int xEvent1,yEvent1, xEvent2, yEvent2, cpt=0;
+		
 		do{
-			event=  platjeu[0].waitEvent();
+		xEvent1=0;
+		yEvent1=0;
+		xEvent2=0;
+		yEvent2=0;
+		do{
+			event=  platjeu.waitEvent();
 			if (event instanceof MouseEvent) {
-				x=platjeu[0].getX((MouseEvent) event) ;
-				y=platjeu[0].getY((MouseEvent) event) ;
+				xEvent1=platjeu.getX((MouseEvent) event) ;
+				yEvent1=platjeu.getY((MouseEvent) event) ;
 			}
-		}while(x!=ileDuJeu.getNavJ1() || y!=1);
-		platjeu[0].close();*/
+			
+			System.out.print("1");
+			System.out.println(" - "+plateauAffichage[yEvent1][xEvent1]);
+		}while(plateauAffichage[yEvent1][xEvent1]!=6);
+		System.out.println("2");
+		if(plateauAffichage[yEvent1][xEvent1]==6){
+			do{	
+				event=platjeu.waitEvent();
 
+				if(event instanceof MouseEvent){
+					xEvent2=platjeu.getX((MouseEvent) event);
+					yEvent2=platjeu.getY((MouseEvent) event);
+				}
+				System.out.println("3");
+			}while((xEvent1-xEvent2)>1 || (yEvent1-yEvent2)>1 || (xEvent2-xEvent1)>1 || (yEvent2-yEvent1)>1 || plateauAffichage[yEvent2][xEvent2]!=0);
+			System.out.println("4");
+			ileDuJeu.mouvement(xEvent1,yEvent1,xEvent2, yEvent2, ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
+
+			for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
+				for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
+					plateauAffichage[i][j] = ileDuJeu.getPlateau()[j][i].getId();
+				}
+			}
+			platjeu.setJeu(plateauAffichage);
+			platjeu.affichage();
+			System.out.println(ileDuJeu.toString());
+			cpt++;
+		}
+		}while(cpt!=10);
 	}
 }
