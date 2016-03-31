@@ -14,10 +14,11 @@ public class main {
 	public static void main(String[] args) {
 		JOptionPane entreeTaille= new JOptionPane();
 		boolean nb = false;
-		String taille, proportion ;
+		String taille, proportion;
 		int taillenb, proportionNb;
 		InputEvent event;
 		boolean findujeu=false;//temporaire afin de faire tourner les d�placements.
+		
 		do{
 
 			taille = entreeTaille.showInputDialog("Choisir la taille du plateau, 10 minimum : ");
@@ -105,6 +106,8 @@ public class main {
 				
 				if(plateauAffichage[yEvent2][xEvent2]==0)
 					ileDuJeu.mouvement(xEvent1,yEvent1,xEvent2, yEvent2, ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
+				if(plateauAffichage[yEvent2][xEvent2] == 1 )
+					ileDuJeu.getPlateau()[xEvent2][yEvent2].interactionRocher(ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
 				if(plateauAffichage[yEvent2][xEvent2]==2){
 					ileDuJeu.getPlateau()[xEvent2][yEvent2].entreeBateau(ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
 					ileDuJeu.getPlateau()[xEvent1][yEvent1].removePersonnageCourant();

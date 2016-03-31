@@ -10,6 +10,7 @@ public class Personnage{
 	void setNom(String nom){
 		this.nom=nom;
 	}
+
 	
 	void setType(String type){
 		this.type=type;
@@ -33,5 +34,11 @@ public class Personnage{
 	
 	void deplacer(int x, int y){
 	
+	}
+	public void setcle(){
+		inventaire.add("Cle");
+	}
+	public ArrayList getInventaire(){
+		return this.inventaire;
 	}
 }
