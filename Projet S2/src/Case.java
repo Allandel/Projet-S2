@@ -38,7 +38,7 @@ public class Case {
 	}
 	public void setPersonnageCourant(Personnage p){
 		this.personnageCourant = p;
-		this.setId(6);
+		this.setId(p.getId());
 	}
 	
 	public void removePersonnageCourant(){

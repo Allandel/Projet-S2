@@ -14,6 +14,10 @@ public class Personnage{
 	public void setId(int id){
 		this.id=id;
 	}
+
+	public int getId(){
+		return id;
+	}
 	
 	void deplacer(int x, int y){
 	
