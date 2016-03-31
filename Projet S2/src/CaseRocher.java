@@ -38,5 +38,8 @@ public class CaseRocher extends Case{
 		this.chest =setter;
 		hidden = true;
 	}
+	public void checkRocher(){
+		
+	}
 
 }

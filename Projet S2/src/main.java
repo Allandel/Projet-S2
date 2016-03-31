@@ -78,27 +78,29 @@ public class main {
 		int x=0,y=0;
 
 		do{	
-			do{
-				event=  platjeu[0].waitEvent();
-				if (event instanceof MouseEvent) {
-					x=platjeu[0].getX((MouseEvent) event) ;
-					y=platjeu[0].getY((MouseEvent) event) ;
-				}
-			}while(x!=Explo1.getX() || y!=Explo1.getY());
-			event=platjeu[0].waitEvent();
-			if(event instanceof MouseEvent){
-				x=platjeu[0].getX((MouseEvent) event);
-				y=platjeu[0].getY((MouseEvent) event);
-				if(ileDuJeu.mouvement(x,y,Explo1)){
-					Explo1.setCoordonnées(x, y);
-					for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
-						for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
-							plateauAffichage[i][j] = ileDuJeu.getPlateau()[j][i].getId();
+			event=  platjeu[0].waitEvent();
+			if (event instanceof MouseEvent) {
+				x=platjeu[0].getX((MouseEvent) event) ;
+				y=platjeu[0].getY((MouseEvent) event) ;
+			}
+			if(x==Explo1.getX() && y==Explo1.getY()){
 
+				event=platjeu[0].waitEvent();
+				if(event instanceof MouseEvent){
+					x=platjeu[0].getX((MouseEvent) event);
+					y=platjeu[0].getY((MouseEvent) event);
+					if(ileDuJeu.mouvement(x,y,Explo1)){
+						for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
+							for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
+								plateauAffichage[i][j] = ileDuJeu.getPlateau()[j][i].getId();
+
+							}
 						}
+						platjeu[0].setJeu(plateauAffichage);
 					}
-					platjeu[0].setJeu(plateauAffichage);
 				}
+			}else if(x==ileDuJeu.getNavJ1() && y==1){//Marche pas si l'explorateur est déjà à l'intérieur du Bateau
+				ileDuJeu.getPlateau()[ileDuJeu.getNavJ1()][1].sortieBateau();
 			}
 
 		}while(findujeu!=true);

@@ -102,7 +102,7 @@ public class ile {
 
 	}
 	
-	void setPersonnage1(Personnage v){//A faire en récursif si approuvé
+	void setPersonnage1(Personnage v){//A faire en récursif et dans toutes les directions afin de généraliser (Ajout int x,y dans les paramètres)
 		if(plateau[NavJ1+1][1].getId()==0){
 			plateau[NavJ1+1][1].setPersonnageCourant(v);
 			v.setCoordonnées(NavJ1+1, 1);
@@ -125,7 +125,15 @@ public class ile {
 		if((x==p.getX()+1&& y==p.getY()&& plateau[x][y].getId()==0)||(x==p.getX()&& y==p.getY()+1&& plateau[x][y].getId()==0)||(x==p.getX()-1&& y==p.getY()&& plateau[x][y].getId()==0)||(x==p.getX()&& y==p.getY()-1&& plateau[x][y].getId()==0)){
 			plateau[x][y].setPersonnageCourant(p);
 			plateau[p.getX()][p.getY()].removePersonnageCourant();
+			p.setCoordonnées(x, y);
 			return true;
+		}else if((x==p.getX()+1&& y==p.getY()&& plateau[x][y].getId()==2)||(x==p.getX()&& y==p.getY()+1&& plateau[x][y].getId()==2)||(x==p.getX()-1&& y==p.getY()&& plateau[x][y].getId()==2)||(x==p.getX()&& y==p.getY()-1&& plateau[x][y].getId()==2)){
+			//permet a l'explorateur de monter à bord du bateau (Mais pas d'en sortir)
+			if(plateau[x][y].retourBateau(p)){
+				plateau[p.getX()][p.getY()].removePersonnageCourant();
+				p.setCoordonnées(x, y);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -200,6 +208,7 @@ public class ile {
 			return false;
 		}
 	}
+
 	/**
 	 * Rï¿½initialise tous les boolï¿½ens accessible a false
 	 */
