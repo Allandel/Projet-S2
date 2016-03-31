@@ -17,13 +17,16 @@ public class CaseVierge extends Case {
 	 */
 	public void setPersonnageCourant(Personnage p){
 		this.personnageCourant = p;
+		this.setId(6);
+	}
+	
+	public void removePersonnageCourant(){
+		this.personnageCourant = null;
+		this.setId(0);
 	}
 	/**
 	 * Jalon2: permet de supprimer le personnage contenu dans la case
 	 */
-	public void removePersonnageCourant(){
-		this.personnageCourant = null;
-	}
 	
 	public Personnage getPersonnageCourant(){
 		return personnageCourant;
