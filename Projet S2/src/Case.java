@@ -56,4 +56,5 @@ public class Case {
 		}
 		return personnageCourant.toString();
 	}
+	public void interactionRocher(Personnage p){}
 }

@@ -10,7 +10,6 @@ public class Personnage{
 	void setNom(String nom){
 		this.nom=nom;
 	}
-	
 	public void setId(int id){
 		this.id=id;
 	}
@@ -21,5 +20,11 @@ public class Personnage{
 	
 	void deplacer(int x, int y){
 	
+	}
+	public void setcle(){
+		inventaire.add("Cle");
+	}
+	public ArrayList getInventaire(){
+		return this.inventaire;
 	}
 }

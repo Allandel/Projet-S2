@@ -13,10 +13,11 @@ public class main {
 	public static void main(String[] args) {
 		JOptionPane entreeTaille= new JOptionPane();
 		boolean nb = false;
-		String taille, proportion ;
+		String taille, proportion;
 		int taillenb, proportionNb;
 		InputEvent event;
 		boolean findujeu=false;//temporaire afin de faire tourner les d�placements.
+		
 		do{
 
 			taille = entreeTaille.showInputDialog("Choisir la taille du plateau, 10 minimum : ");
@@ -82,10 +83,15 @@ public class main {
 					yEvent2=platjeu.getY((MouseEvent) event);
 				}
 				System.out.println("3");
-			}while((xEvent1-xEvent2)>1 || (yEvent1-yEvent2)>1 || (xEvent2-xEvent1)>1 || (yEvent2-yEvent1)>1 || plateauAffichage[yEvent2][xEvent2]!=0);
+			}while((xEvent1-xEvent2)>1 || (yEvent1-yEvent2)>1 || (xEvent2-xEvent1)>1 || (yEvent2-yEvent1)>1);
 			System.out.println("4");
+				if(plateauAffichage[yEvent2][xEvent2] == 1 ){
+					ileDuJeu.getPlateau()[xEvent2][yEvent2].interactionRocher(ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
+				}else if(plateauAffichage[yEvent2][xEvent2] == 0){
 			ileDuJeu.mouvement(xEvent1,yEvent1,xEvent2, yEvent2, ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
+			System.out.println((ileDuJeu.getPlateau()[xEvent2][yEvent2].getPersonnageCourant()).getInventaire());
 
+				}
 			for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
 				for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
 					plateauAffichage[i][j] = ileDuJeu.getPlateau()[j][i].getId();

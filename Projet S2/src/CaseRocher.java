@@ -38,5 +38,12 @@ public class CaseRocher extends Case{
 		this.chest =setter;
 		hidden = true;
 	}
-
+	public void interactionRocher(Personnage p){
+		if(this.key){
+			p.setcle();
+			this.key = false;
+		}else if(this.chest){
+			this.setId(4);
+		}
+	}
 }
