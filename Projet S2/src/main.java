@@ -3,6 +3,7 @@
  * @author Allan
  * @version 1.0
  */
+import java.awt.Color;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 
@@ -53,6 +54,7 @@ public class main {
 
 
 		Plateau platjeu = new Plateau(gifs,taillenb);
+		platjeu.setTitle("Chasse au trésor");
 		platjeu.setJeu(plateauAffichage);
 		platjeu.affichage();
 
@@ -64,12 +66,13 @@ public class main {
 			xEvent2=0;
 			yEvent2=0;
 			do{
+				platjeu.resetHighlight(xEvent1, yEvent1);
 				event=  platjeu.waitEvent();
 				if (event instanceof MouseEvent) {
 					xEvent1=platjeu.getX((MouseEvent) event) ;
 					yEvent1=platjeu.getY((MouseEvent) event) ;
 				}
-
+				platjeu.setHighlight(xEvent1, yEvent1, Color.BLUE);
 				System.out.print("1");
 				System.out.println(" - "+plateauAffichage[yEvent1][xEvent1]);
 			}while(plateauAffichage[yEvent1][xEvent1]==0 || plateauAffichage[yEvent1][xEvent1]==1 || plateauAffichage[yEvent1][xEvent1]==5);
@@ -81,6 +84,14 @@ public class main {
 			}
 
 			if(plateauAffichage[yEvent1][xEvent1]==6){
+				if(plateauAffichage[yEvent1+1][xEvent1]==0)
+					platjeu.setHighlight(xEvent1, yEvent1+1, Color.blue);
+				if(plateauAffichage[yEvent1-1][xEvent1]==0)
+					platjeu.setHighlight(xEvent1, yEvent1-1, Color.blue);
+				if(plateauAffichage[yEvent1][xEvent1+1]==0)
+					platjeu.setHighlight(xEvent1+1, yEvent1, Color.blue);
+				if(plateauAffichage[yEvent1][xEvent1-1]==0)
+					platjeu.setHighlight(xEvent1-1, yEvent1, Color.blue);
 				do{	
 					event=platjeu.waitEvent();
 
