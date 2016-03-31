@@ -17,11 +17,13 @@ public class CaseNavire extends Case {
 		this.setId(id);
 		stockNavire.add(new Explorateur());
 	}
-	public void entreeBateau(Personnage p){
+	public boolean entreeBateau(Personnage p){
 		decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
 			this.stockNavire.add(p);
+			return true;
 		}
+		return false;
 	}
 	public void sortieBateau(){
 		if(!stockNavire.isEmpty()){

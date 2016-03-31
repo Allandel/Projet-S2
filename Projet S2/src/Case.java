@@ -47,7 +47,8 @@ public class Case {
 		this.setId(0);
 	}
 
-	public void entreeBateau(Personnage p){
+	public boolean entreeBateau(Personnage p){
+		return false;
 	}
 	public void sortieBateau(){
 

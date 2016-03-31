@@ -109,8 +109,8 @@ public class main {
 				if(plateauAffichage[yEvent2][xEvent2] == 1 )
 					ileDuJeu.getPlateau()[xEvent2][yEvent2].interactionRocher(ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
 				if(plateauAffichage[yEvent2][xEvent2]==2){
-					ileDuJeu.getPlateau()[xEvent2][yEvent2].entreeBateau(ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
-					ileDuJeu.getPlateau()[xEvent1][yEvent1].removePersonnageCourant();
+					if(ileDuJeu.getPlateau()[xEvent2][yEvent2].entreeBateau(ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant()))
+						ileDuJeu.getPlateau()[xEvent1][yEvent1].removePersonnageCourant();
 				}
 				for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
 					for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
