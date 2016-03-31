@@ -1,3 +1,4 @@
+
 /**
  * Classe repr�sentant une case
  * @author Allan
@@ -44,6 +45,12 @@ public class Case {
 	public void removePersonnageCourant(){
 		this.personnageCourant = null;
 		this.setId(0);
+	}
+	public boolean retourBateau(Personnage p){
+		return false;
+	}
+	public void sortieBateau(){
+
 	}
 
 	public Personnage getPersonnageCourant(){

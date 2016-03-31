@@ -10,6 +10,9 @@ public class Personnage{
 	void setNom(String nom){
 		this.nom=nom;
 	}
+	public String getNom(){
+		return this.nom;
+	}
 	
 	public void setId(int id){
 		this.id=id;

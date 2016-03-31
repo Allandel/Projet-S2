@@ -51,6 +51,7 @@ public class main {
 			}
 		}
 
+
 		Plateau platjeu = new Plateau(gifs,taillenb);
 		platjeu.setJeu(plateauAffichage);
 		platjeu.affichage();

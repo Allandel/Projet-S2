@@ -104,6 +104,7 @@ public class ile {
 
 	}
 
+
 	void setPersonnage1(Personnage v){
 		int signe, xPlus, yPlus=0;	
 		boolean vivant=false;
@@ -203,6 +204,7 @@ public class ile {
 			return false;
 		}
 	}
+
 	/**
 	 * R�initialise tous les bool�ens accessible a false
 	 */
