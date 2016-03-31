@@ -116,7 +116,7 @@ public class ile {
 			
 			if(signe==0){
 				if(plateauIle[NavJ1-xPlus][1+yPlus].getId()==0){
-					plateauIle[NavJ1+xPlus][1+yPlus].setPersonnageCourant(v);
+					plateauIle[NavJ1-xPlus][1+yPlus].setPersonnageCourant(v);
 					vivant=true;
 				}
 			}else{
