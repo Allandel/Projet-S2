@@ -6,26 +6,30 @@
 import java.util.*;
 import javax.swing.*;
 public class CaseNavire extends Case {
-	ArrayList<Personnage>stockNavire=new ArrayList<Personnage>();
-	int decision;
+	private ArrayList<Personnage>stockNavire=new ArrayList<Personnage>();
+	private int decision;
+	private String persoSortant;
 	/**
 	 * Construit un navire en lui attribuant l'ID donnï¿½
 	 * @param id
 	 */
 	public CaseNavire(int id){
 		this.setId(id);
+		stockNavire.add(new Explorateur());
 	}
-	public boolean retourBateau(Personnage p){
+	public void entreeBateau(Personnage p){
 		decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
 			this.stockNavire.add(p);
-			return true;
 		}
-		return false;
 	}
 	public void sortieBateau(){
 		if(!stockNavire.isEmpty()){
-			// Créer une liste graphique ou selectionner l'un des personnages présent dans stockNavire
+			String listePerso="";
+			for(Personnage perso : stockNavire){
+				listePerso=listePerso+"- "+perso.getType()+" "+perso.getNom()+"\n";
+			}
+			persoSortant=JOptionPane.showInputDialog(listePerso+"\n Choisir le personnage Ã  faire sortir :");
 		}else{
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Il n'y a pas de personnages dans le Navire", "Attention",

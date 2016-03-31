@@ -72,8 +72,14 @@ public class main {
 
 				System.out.print("1");
 				System.out.println(" - "+plateauAffichage[yEvent1][xEvent1]);
-			}while(plateauAffichage[yEvent1][xEvent1]!=6);
+			}while(plateauAffichage[yEvent1][xEvent1]==0 || plateauAffichage[yEvent1][xEvent1]==1 || plateauAffichage[yEvent1][xEvent1]==5);
+
 			System.out.println("2");
+
+			if(plateauAffichage[yEvent1][xEvent1]==2){
+				ileDuJeu.getPlateau()[xEvent1][yEvent1].sortieBateau();
+			}
+
 			if(plateauAffichage[yEvent1][xEvent1]==6){
 				do{	
 					event=platjeu.waitEvent();
@@ -83,10 +89,15 @@ public class main {
 						yEvent2=platjeu.getY((MouseEvent) event);
 					}
 					System.out.println("3");
-				}while((xEvent1-xEvent2)>1 || (yEvent1-yEvent2)>1 || (xEvent2-xEvent1)>1 || (yEvent2-yEvent1)>1 || plateauAffichage[yEvent2][xEvent2]!=0);
+				}while((xEvent1-xEvent2)>1 || (yEvent1-yEvent2)>1 || (xEvent2-xEvent1)>1 || (yEvent2-yEvent1)>1);
 				System.out.println("4");
-				ileDuJeu.mouvement(xEvent1,yEvent1,xEvent2, yEvent2, ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
-
+				
+				if(plateauAffichage[yEvent2][xEvent2]==0)
+					ileDuJeu.mouvement(xEvent1,yEvent1,xEvent2, yEvent2, ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
+				if(plateauAffichage[yEvent2][xEvent2]==2){
+					ileDuJeu.getPlateau()[xEvent2][yEvent2].entreeBateau(ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
+					ileDuJeu.getPlateau()[xEvent1][yEvent1].removePersonnageCourant();
+				}
 				for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
 					for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
 						plateauAffichage[i][j] = ileDuJeu.getPlateau()[j][i].getId();

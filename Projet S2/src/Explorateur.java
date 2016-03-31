@@ -8,7 +8,8 @@ public class Explorateur extends Personnage{
 	 * Jalon2: Construit un Explorateur avec 100 energie
 	 */
 	public Explorateur(){
-		setNom("Explorateur");
+		setNom("Bob");
+		setType("Explorateur");
 		setId(6);
 	}
 	public String toString(){

@@ -46,8 +46,8 @@ public class Case {
 		this.personnageCourant = null;
 		this.setId(0);
 	}
-	public boolean retourBateau(Personnage p){
-		return false;
+
+	public void entreeBateau(Personnage p){
 	}
 	public void sortieBateau(){
 
