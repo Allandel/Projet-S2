@@ -1,7 +1,8 @@
 
 public class Voleur extends Personnage {
 	public Voleur(){
-		this.setNom("Voleur");
+		setNom("Bill");
+		setType("Voleur");
 	}
 	public String toString(){
 		return "V";

@@ -46,4 +46,8 @@ public class CaseRocher extends Case{
 			this.setId(4);
 		}
 	}
+	public void checkRocher(){
+		
+	}
+
 }

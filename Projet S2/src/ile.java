@@ -104,6 +104,7 @@ public class ile {
 
 	}
 
+
 	void setPersonnage1(Personnage v){
 		int signe, xPlus, yPlus=0;	
 		boolean vivant=false;
@@ -131,7 +132,6 @@ public class ile {
 	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Personnage p){//Mouvement provisoire (Peut �tre � d�placer dans Personnage.java si possible)
 		plateauIle[xAvant][yAvant].removePersonnageCourant();
 		plateauIle[xApres][yApres].setPersonnageCourant(p);
-		
 	}
 	/**
 	 * @return the caseCoffre
@@ -204,6 +204,7 @@ public class ile {
 			return false;
 		}
 	}
+
 	/**
 	 * R�initialise tous les bool�ens accessible a false
 	 */
