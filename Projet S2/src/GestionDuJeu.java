@@ -72,10 +72,8 @@ public class GestionDuJeu {
 			event=  plateauDuJeu.waitEvent();	
 		}while(!(event instanceof MouseEvent));
 
-		if (event instanceof MouseEvent) {
-			res[0]=plateauDuJeu.getX((MouseEvent) event) ;
-			res[1]=plateauDuJeu.getY((MouseEvent) event) ;
-		}
+		res[0]=plateauDuJeu.getX((MouseEvent) event) ;
+		res[1]=plateauDuJeu.getY((MouseEvent) event) ;
 		return res;
 	}
 
@@ -93,6 +91,7 @@ public class GestionDuJeu {
 		plateauDuJeu.affichage();
 		
 		if(tableauAffichage[yEvent1][xEvent1]==6){
+		
 		}
 	}
 
