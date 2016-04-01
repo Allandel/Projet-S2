@@ -6,7 +6,7 @@
 import java.util.Random;
 public class ile {
 
-	private Case[][] plateauIle;
+	private Case[][] tableauIle;
 	private Case CaseCoffre, CaseCle;
 	private Random random = new Random();
 	private int taille, nbRocher;
@@ -27,7 +27,7 @@ public class ile {
 			estAccessible(NavJ1, 1);
 			accesNav1 = accessible();
 			resetAcces();
-			estAccessible(NavJ2, plateauIle.length-2);
+			estAccessible(NavJ2, tableauIle.length-2);
 			accesNav2 = accessible();
 		}while(!accesNav1 || !accesNav2 );
 		this.setPersonnage1(new Explorateur());
@@ -36,15 +36,15 @@ public class ile {
 	 * Cr�e un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
 	 */
 	void initialiser(){
-		plateauIle = new Case[taille][taille];
+		tableauIle = new Case[taille][taille];
 
 		setZero();
 		setMer();
 
-		NavJ1= random.nextInt(plateauIle.length-2)+1;
-		NavJ2= random.nextInt(plateauIle.length-2)+1;
-		plateauIle[NavJ1][1]= new CaseNavire(2);
-		plateauIle[NavJ2][plateauIle.length-2]= new CaseNavire(3);
+		NavJ1= random.nextInt(tableauIle.length-2)+1;
+		NavJ2= random.nextInt(tableauIle.length-2)+1;
+		tableauIle[NavJ1][1]= new CaseNavire(2);
+		tableauIle[NavJ2][tableauIle.length-2]= new CaseNavire(3);
 
 		setRocher(taille,proportion);
 		setKeyCoffre();	
@@ -56,17 +56,17 @@ public class ile {
 	void setKeyCoffre(){
 		int cpt=0;
 		do{
-			Rocherx = random.nextInt(plateauIle.length-2)+1;
-			Rochery = random.nextInt(plateauIle.length-2)+1;
-			if(plateauIle[Rocherx][Rochery].getId()==0){
-				plateauIle[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
+			Rocherx = random.nextInt(tableauIle.length-2)+1;
+			Rochery = random.nextInt(tableauIle.length-2)+1;
+			if(tableauIle[Rocherx][Rochery].getId()==0){
+				tableauIle[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
 				if(cpt==0){
-					((CaseRocher) plateauIle[Rocherx][Rochery]).setChest(true);
-					CaseCoffre = plateauIle[Rocherx][Rochery];
+					((CaseRocher) tableauIle[Rocherx][Rochery]).setChest(true);
+					CaseCoffre = tableauIle[Rocherx][Rochery];
 				}
 				if(cpt==1){
-					((CaseRocher) plateauIle[Rocherx][Rochery]).setKey(true);
-					CaseCle = plateauIle[Rocherx][Rochery];
+					((CaseRocher) tableauIle[Rocherx][Rochery]).setKey(true);
+					CaseCle = tableauIle[Rocherx][Rochery];
 				}
 				cpt++;
 			}
@@ -74,19 +74,19 @@ public class ile {
 	}
 
 	void setZero(){
-		for(int i = 0;i<plateauIle.length;i++){
-			for(int j = 0;j<plateauIle.length;j++){
-				plateauIle[i][j]= new Case();
+		for(int i = 0;i<tableauIle.length;i++){
+			for(int j = 0;j<tableauIle.length;j++){
+				tableauIle[i][j]= new Case();
 			}
 		}
 	}
 
 	void setMer(){
-		for(int i = 0; i<plateauIle.length;i++){
-			plateauIle[0][i].setId(5);
-			plateauIle[plateauIle.length-1][i].setId(5);
-			plateauIle[i][0].setId(5);
-			plateauIle[i][plateauIle.length-1].setId(5);
+		for(int i = 0; i<tableauIle.length;i++){
+			tableauIle[0][i].setId(5);
+			tableauIle[tableauIle.length-1][i].setId(5);
+			tableauIle[i][0].setId(5);
+			tableauIle[i][tableauIle.length-1].setId(5);
 		}
 	}
 
@@ -94,10 +94,10 @@ public class ile {
 		int cpt=0;
 		nbRocher = (int)((taille)*(taille-2)*proportion)/100;
 		while(cpt<nbRocher){
-			Rocherx = random.nextInt(plateauIle.length-2)+1;
-			Rochery = random.nextInt(plateauIle.length-2)+1;
-			if(plateauIle[Rocherx][Rochery].getId() == 0){
-				plateauIle[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
+			Rocherx = random.nextInt(tableauIle.length-2)+1;
+			Rochery = random.nextInt(tableauIle.length-2)+1;
+			if(tableauIle[Rocherx][Rochery].getId() == 0){
+				tableauIle[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
 				cpt++;
 			}
 		}
@@ -116,13 +116,13 @@ public class ile {
 				yPlus=1;
 			
 			if(signe==0){
-				if(plateauIle[NavJ1-xPlus][1+yPlus].getId()==0){
-					plateauIle[NavJ1-xPlus][1+yPlus].setPersonnageCourant(v);
+				if(tableauIle[NavJ1-xPlus][1+yPlus].getId()==0){
+					tableauIle[NavJ1-xPlus][1+yPlus].setPersonnageCourant(v);
 					vivant=true;
 				}
 			}else{
-				if(plateauIle[NavJ1+xPlus][1+yPlus].getId()==0){
-					plateauIle[NavJ1+xPlus][1+yPlus].setPersonnageCourant(v);
+				if(tableauIle[NavJ1+xPlus][1+yPlus].getId()==0){
+					tableauIle[NavJ1+xPlus][1+yPlus].setPersonnageCourant(v);
 					vivant=true;
 				}
 			}
@@ -130,8 +130,14 @@ public class ile {
 	}
 
 	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Personnage p){//Mouvement provisoire (Peut �tre � d�placer dans Personnage.java si possible)
-		plateauIle[xAvant][yAvant].removePersonnageCourant();
-		plateauIle[xApres][yApres].setPersonnageCourant(p);
+		tableauIle[xAvant][yAvant].removePersonnageCourant();
+		tableauIle[xApres][yApres].setPersonnageCourant(p);
+	}
+	
+	public void sortieBateau(int x1, int y1, int x2, int y2, String perso){
+		for(Personnage p: tableauIle[x1][y1].getStockNavire()){
+			
+		}
 	}
 	/**
 	 * @return the caseCoffre
@@ -163,33 +169,33 @@ public class ile {
 	 * @param y
 	 */
 	void estAccessible(int x, int y){
-		plateauIle[x][y].setAccessible(true);
+		tableauIle[x][y].setAccessible(true);
 		if(x>0){
-			if(plateauIle[x-1][y].getId()==0 && !plateauIle[x-1][y].isAccessible()){
+			if(tableauIle[x-1][y].getId()==0 && !tableauIle[x-1][y].isAccessible()){
 				estAccessible(x-1,y);
 			}else{
-				plateauIle[x-1][y].setAccessible(true);
+				tableauIle[x-1][y].setAccessible(true);
 			}
 		}
-		if(y<plateauIle.length-1){
-			if(plateauIle[x][y+1].getId()==0 && !plateauIle[x][y+1].isAccessible()){
+		if(y<tableauIle.length-1){
+			if(tableauIle[x][y+1].getId()==0 && !tableauIle[x][y+1].isAccessible()){
 				estAccessible(x,y+1);
 			}else{
-				plateauIle[x][y+1].setAccessible(true);
+				tableauIle[x][y+1].setAccessible(true);
 			}
 		}
-		if(x<plateauIle.length-1){
-			if(plateauIle[x+1][y].getId()==0 && !plateauIle[x+1][y].isAccessible()){
+		if(x<tableauIle.length-1){
+			if(tableauIle[x+1][y].getId()==0 && !tableauIle[x+1][y].isAccessible()){
 				estAccessible(x+1,y);
 			}else{
-				plateauIle[x+1][y].setAccessible(true);
+				tableauIle[x+1][y].setAccessible(true);
 			}
 		}
 		if(y>0){
-			if(plateauIle[x][y-1].getId()==0 && !plateauIle[x][y-1].isAccessible()){
+			if(tableauIle[x][y-1].getId()==0 && !tableauIle[x][y-1].isAccessible()){
 				estAccessible(x,y-1);
 			}else{
-				plateauIle[x][y-1].setAccessible(true);
+				tableauIle[x][y-1].setAccessible(true);
 			}
 		}
 	}
@@ -209,30 +215,30 @@ public class ile {
 	 * R�initialise tous les bool�ens accessible a false
 	 */
 	void resetAcces(){
-		for(int i=0;i<plateauIle.length-1;i++){
-			for(int j =0;j<plateauIle.length-1;j++){
-				plateauIle[i][j].setAccessible(false);
+		for(int i=0;i<tableauIle.length-1;i++){
+			for(int j =0;j<tableauIle.length-1;j++){
+				tableauIle[i][j].setAccessible(false);
 			}
 		}
 		CaseCoffre.setAccessible(false);
 		CaseCle.setAccessible(false);
 	}
 
-	Case[][] getPlateau(){
-		return plateauIle;
+	Case[][] getTableau(){
+		return tableauIle;
 	}
 
 	public String toString(){
 		String borne ="";
-		for(int i =0;i<plateauIle.length;i++){
+		for(int i =0;i<tableauIle.length;i++){
 			borne+="+---";
 		}
 		borne+="+";
 		String res="";
-		for(int i = 0;i<plateauIle.length;i++){
+		for(int i = 0;i<tableauIle.length;i++){
 			res+=borne+"\n";
-			for(int j = 0;j<plateauIle[0].length;j++){
-				res+= "| "+plateauIle[i][j]+" ";
+			for(int j = 0;j<tableauIle[0].length;j++){
+				res+= "| "+tableauIle[i][j]+" ";
 			}
 			res+="|\n";
 		}

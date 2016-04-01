@@ -1,14 +1,15 @@
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 /**
  * Classe h�rit�e de Case repr�sentant les navires
  * @author Allan
  * @version 1.0
  */
-import java.util.*;
-import javax.swing.*;
 public class CaseNavire extends Case {
 	private ArrayList<Personnage>stockNavire=new ArrayList<Personnage>();
 	private int decision;
-	private String persoSortant=" ";
 	/**
 	 * Construit un navire en lui attribuant l'ID donn�
 	 * @param id
@@ -17,6 +18,11 @@ public class CaseNavire extends Case {
 		this.setId(id);
 		stockNavire.add(new Explorateur());
 	}
+
+	public ArrayList getStocknavire(){
+		return stockNavire;
+	}
+	
 	public boolean entreeBateau(Personnage p){
 		decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
@@ -25,7 +31,10 @@ public class CaseNavire extends Case {
 		}
 		return false;
 	}
-	public void sortieBateau(){
+	
+	public String choisirSortieBateau(){
+		String persoSortant=" ";
+		
 		if(!stockNavire.isEmpty()){
 			int cpt=0;
 			JOptionPane pane=new JOptionPane();
@@ -43,7 +52,9 @@ public class CaseNavire extends Case {
 			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 			null, options, options[0]);
 		}
+		return persoSortant;
 	}
+	
 	public String toString(){
 		return "N";
 	}

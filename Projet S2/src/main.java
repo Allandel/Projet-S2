@@ -12,6 +12,10 @@ import javax.swing.JOptionPane;
 public class main {
 
 	public static void main(String[] args) {
+		GestionDuJeu gestion=new GestionDuJeu();
+		gestion.tourDuJoueur();
+		
+		/*
 		JOptionPane entreeTaille= new JOptionPane();
 		boolean nb = false;
 		String taille, proportion;
@@ -43,13 +47,13 @@ public class main {
 		proportionNb = Integer.parseInt(proportion);
 		ile ileDuJeu = new ile(taillenb, proportionNb);
 
-		int[][] plateauAffichage = new int[ileDuJeu.getPlateau().length][ileDuJeu.getPlateau().length];
+		int[][] plateauAffichage = new int[ileDuJeu.getTableau().length][ileDuJeu.getTableau().length];
 		String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png","img/1.explorateur.png"};
 
 		System.out.println(ileDuJeu.toString());
-		for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
-			for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
-				plateauAffichage[i][j] = ileDuJeu.getPlateau()[j][i].getId();
+		for(int i= 0; i<ileDuJeu.getTableau().length;i++){
+			for(int j = 0; j<ileDuJeu.getTableau()[0].length;j++){
+				plateauAffichage[i][j] = ileDuJeu.getTableau()[j][i].getId();
 			}
 		}
 
@@ -58,9 +62,9 @@ public class main {
 		platjeu.setTitle("Chasse au trésor");
 		platjeu.setJeu(plateauAffichage);
 		platjeu.affichage();
-
+		
 		int xEvent1,yEvent1, xEvent2, yEvent2, cpt=0;
-
+		String persoSortant;
 		do{
 			xEvent1=0;
 			yEvent1=0;
@@ -81,7 +85,19 @@ public class main {
 			System.out.println("2");
 
 			if(plateauAffichage[yEvent1][xEvent1]==2){
-				ileDuJeu.getPlateau()[xEvent1][yEvent1].sortieBateau();
+				persoSortant=ileDuJeu.getTableau()[xEvent1][yEvent1].choisirSortieBateau();
+				if(!persoSortant.equals(" ")){
+					do{	
+						event=platjeu.waitEvent();
+
+						if(event instanceof MouseEvent){
+							xEvent2=platjeu.getX((MouseEvent) event);
+							yEvent2=platjeu.getY((MouseEvent) event);
+						}
+						System.out.println("3");
+					}while((xEvent1-xEvent2)>1 || (yEvent1-yEvent2)>1 || (xEvent2-xEvent1)>1 || (yEvent2-yEvent1)>1 || plateauAffichage[yEvent1][xEvent1]==0);
+					ileDuJeu.sortieBateau(xEvent1, yEvent1, xEvent2,yEvent2, persoSortant);
+				}
 			}
 
 			if(plateauAffichage[yEvent1][xEvent1]==6){
@@ -105,16 +121,16 @@ public class main {
 				System.out.println("4");
 				
 				if(plateauAffichage[yEvent2][xEvent2]==0)
-					ileDuJeu.mouvement(xEvent1,yEvent1,xEvent2, yEvent2, ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
+					ileDuJeu.mouvement(xEvent1,yEvent1,xEvent2, yEvent2, ileDuJeu.getTableau()[xEvent1][yEvent1].getPersonnageCourant());
 				if(plateauAffichage[yEvent2][xEvent2] == 1 )
-					ileDuJeu.getPlateau()[xEvent2][yEvent2].interactionRocher(ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant());
+					ileDuJeu.getTableau()[xEvent2][yEvent2].interactionRocher(ileDuJeu.getTableau()[xEvent1][yEvent1].getPersonnageCourant());
 				if(plateauAffichage[yEvent2][xEvent2]==2){
-					if(ileDuJeu.getPlateau()[xEvent2][yEvent2].entreeBateau(ileDuJeu.getPlateau()[xEvent1][yEvent1].getPersonnageCourant()))
-						ileDuJeu.getPlateau()[xEvent1][yEvent1].removePersonnageCourant();
+					if(ileDuJeu.getTableau()[xEvent2][yEvent2].entreeBateau(ileDuJeu.getTableau()[xEvent1][yEvent1].getPersonnageCourant()))
+						ileDuJeu.getTableau()[xEvent1][yEvent1].removePersonnageCourant();
 				}
-				for(int i= 0; i<ileDuJeu.getPlateau().length;i++){
-					for(int j = 0; j<ileDuJeu.getPlateau()[0].length;j++){
-						plateauAffichage[i][j] = ileDuJeu.getPlateau()[j][i].getId();
+				for(int i= 0; i<ileDuJeu.getTableau().length;i++){
+					for(int j = 0; j<ileDuJeu.getTableau()[0].length;j++){
+						plateauAffichage[i][j] = ileDuJeu.getTableau()[j][i].getId();
 					}
 				}
 				platjeu.setJeu(plateauAffichage);
@@ -123,5 +139,6 @@ public class main {
 				cpt++;
 			}
 		}while(cpt!=10);
+	*/
 	}
 }

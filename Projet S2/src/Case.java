@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 /**
  * Classe repr�sentant une case
@@ -27,6 +29,10 @@ public class Case {
 		return accessible;
 	}
 	
+	public ArrayList getStockNavire(){
+		return new ArrayList();
+	}
+	
 	public void setAccessible(boolean accessible) {
 		this.accessible = accessible;
 	}
@@ -50,8 +56,8 @@ public class Case {
 	public boolean entreeBateau(Personnage p){
 		return false;
 	}
-	public void sortieBateau(){
-
+	public String choisirSortieBateau(){
+		return " ";
 	}
 
 	public Personnage getPersonnageCourant(){
