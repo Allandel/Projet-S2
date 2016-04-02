@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
  */
 public class CaseRocher extends Case{
 	private int x,y;
-	private boolean hidden, key, chest;
+	private boolean hidden, key, chest, keyTaken=false, chestTaken=false;
 	
 	/**
 	 * Constructeur permettant d'attribuer l'ID du rocher ainsi que ses coordonn�es
@@ -42,42 +42,48 @@ public class CaseRocher extends Case{
 	public void interactionRocher(Personnage p){
 		if(key){
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Vous avez trouv� la cl� ! Rendez vous au tr�sor afin de vous emparer de ses richesses !", "FELICITATION",
+			JOptionPane.showOptionDialog(null, "Vous avez trouve la cle ! Rendez vous au tresor afin de vous emparer de ses richesses !", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
-			p.setObjetInventaire("clé");
+			p.setObjetInventaire("cle");
+			keyTaken=true;
 			key = false;
-		}else if(chest && !p.getObjetInventaire("clé")&& hidden){
+		}else if(keyTaken){
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Vous avez trouv� le coffre ! Il sera d�sormais visible par votre �quipe !", "FELICITATION",
+			JOptionPane.showOptionDialog(null, "Autrefois ici se trouvait la cle. Vous devriez surveiller le coffre... Mais peut etre est il deja trop tard", "PRENEZ GARDE...",
+			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+			null, options, options[0]);
+		}else if(chestTaken){
+			Object[] options = { "OK" };
+			JOptionPane.showOptionDialog(null, "Une trace consequente indique l'ancienne presence du coffre. Volez vite le coffre a l'adversaire !", "PRENEZ GARDE...",
+			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+			null, options, options[0]);
+		}else if(chest && !p.getObjetInventaire("cle")&& hidden){
+			Object[] options = { "OK" };
+			JOptionPane.showOptionDialog(null, "Vous avez trouve le coffre ! Il sera desormais visible par votre equipe !", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 			setId(4);
 			hidden=false;
-			chest=false;
-			p.setObjetInventaire("trésor");
-		}else if(chest && p.getObjetInventaire("clé")){
+			p.setObjetInventaire("tresor");
+		}else if(chest && p.getObjetInventaire("cle")){
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Vous avez trouv� le coffre et vous avez la cl� ! Vous avez donc ouvert le coffre avec succ�s et poss�dez maintenant ses richesses dans votre inventaire ! Gare au Voleurs !", "FELICITATION",
+			JOptionPane.showOptionDialog(null, "Vous avez trouve le coffre et vous avez la cle ! Vous avez donc ouvert le coffre avec succes et possedez maintenant ses richesses dans votre inventaire ! Gare au Voleurs !", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
-			setId(4);
+			setId(1);
 			hidden=false;
 			chest=false;
-			p.setObjetInventaire("trésor");
-		}else if(chest && !p.getObjetInventaire("clé") && !hidden){
+			chestTaken=true;
+			p.setObjetInventaire("tresor");
+		}else if(chest && !p.getObjetInventaire("cle") && !hidden){
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Vous avez d�j� trouv� le coffre... Ne restez pas ici ! Cherchez la cl� avant que les adversaires la trouvent", "FELICITATION",
-			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-			null, options, options[0]);
-		}else if(!chest && !hidden && !p.getObjetInventaire("trésor")){
-			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Quelqu'un a déjà trouvé le trésor ! Vite, dépeches toi d'aller lui voler avant qu'il ne se sauve avec !", "ATTENTION",
+			JOptionPane.showOptionDialog(null, "Vous avez deja trouve le coffre... Ne restez pas ici ! Cherchez la cle avant que les adversaires la trouvent", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 		}else{
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Rien ne se trouve sous ce Rocher... Continuez votre recherche !", "Qu'y � t'il sous ce rocher ?",
+			JOptionPane.showOptionDialog(null, "Rien ne se trouve sous ce Rocher... Continuez votre recherche !", "Qu'y a t'il sous ce rocher ?",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 		}

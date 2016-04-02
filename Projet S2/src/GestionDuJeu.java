@@ -53,7 +53,7 @@ public class GestionDuJeu {
 
 	private void setPlateauDujeu(){
 		plateauDuJeu = new Plateau(gifs,ileDuJeu.getTableau().length);
-		plateauDuJeu.setTitle("Chasse au tr�sor");
+		plateauDuJeu.setTitle("Chasse au tresor");
 		plateauDuJeu.setJeu(tableauAffichage);
 	}
 
@@ -134,7 +134,7 @@ public class GestionDuJeu {
 				coordonnees=this.getCoordonneesClic();
 				xEvent=coordonnees[0];
 				yEvent=coordonnees[1];
-			}while((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=2));
+			}while((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=2 && tableauAffichage[yEvent][xEvent]<5));
 		}
 
 		if(tableauAffichage[yEvent][xEvent]==0)
@@ -142,6 +142,8 @@ public class GestionDuJeu {
 		else if(tableauAffichage[yEvent][xEvent]==2){
 			if(ileDuJeu.getTableau()[xEvent][yEvent].entreeBateau(perso))
 				ileDuJeu.getTableau()[x][y].removePersonnageCourant();
+		}else if(tableauAffichage[yEvent][xEvent]>5){
+			ileDuJeu.getTableau()[x][y].getPersonnageCourant().volerObjet(ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant());
 		}
 
 		for(int i=y-1;i<y+2;i++){

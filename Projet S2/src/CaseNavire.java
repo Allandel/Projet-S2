@@ -16,7 +16,6 @@ public class CaseNavire extends Case {
 	 */
 	public CaseNavire(int id){
 		this.setId(id);
-		stockNavire.add(new Explorateur(true));
 	}
 
 	public ArrayList getStocknavire(){

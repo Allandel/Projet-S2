@@ -10,11 +10,13 @@ public class Explorateur extends Personnage{
 	public Explorateur(boolean equipe1){
 		setNom("Bob");
 		setType("Explorateur");
-		if(equipe1)
+		if(equipe1){
 			setId(6);
-		else
-			setId(8);
-		setEquipe(equipe1);
+			setEquipe(equipe1);
+		}else{
+			setId(9);
+			setEquipe(equipe1);
+		}
 	}
 	public String toString(){
 		return "E";
