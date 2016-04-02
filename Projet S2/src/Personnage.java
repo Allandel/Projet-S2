@@ -39,18 +39,16 @@ public class Personnage{
 		return id;
 	}
 	
-	public void setcle(){
-		inventaire.add("Cle");
+	public void setObjetInventaire(String objet){
+		inventaire.add(objet);
 	}
-	public void setTresor(){
-		inventaire.add("Tresor");
-	}
+
 	public ArrayList getInventaire(){
 		return this.inventaire;
 	}
-	public boolean getInventaireKey(){
-		for (String cle : inventaire) {
-			if (cle.compareTo("Cle")==0){
+	public boolean getObjetInventaire(String objet){
+		for (String test: inventaire) {
+			if (test.compareTo(objet)==0){
 				return true;
 			}
 		}
