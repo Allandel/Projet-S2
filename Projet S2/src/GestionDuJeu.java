@@ -53,7 +53,7 @@ public class GestionDuJeu {
 
 	private void setPlateauDujeu(){
 		plateauDuJeu = new Plateau(gifs,ileDuJeu.getTableau().length);
-		plateauDuJeu.setTitle("Chasse au trÃ©sor");
+		plateauDuJeu.setTitle("Chasse au trésor");
 		plateauDuJeu.setJeu(tableauAffichage);
 	}
 
