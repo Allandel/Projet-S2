@@ -17,5 +17,6 @@ public class main {
 		while(true){
 			gestion.tourDuJoueur();
 		}
+	
 	}
 }
