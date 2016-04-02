@@ -5,12 +5,20 @@ public class Personnage{
 	private String nom, type;
 	private int id;
 	private ArrayList <String> inventaire=new ArrayList<String>();
+	private boolean equipe1;
 	
 	
 	void setNom(String nom){
 		this.nom=nom;
 	}
 
+	public void setEquipe(boolean equipe){
+		equipe1=equipe;
+	}
+	
+	public boolean getEquipe(){
+		return equipe1;
+	}
 	
 	void setType(String type){
 		this.type=type;

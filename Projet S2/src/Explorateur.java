@@ -7,10 +7,14 @@ public class Explorateur extends Personnage{
 	/**
 	 * Jalon2: Construit un Explorateur avec 100 energie
 	 */
-	public Explorateur(){
+	public Explorateur(boolean equipe1){
 		setNom("Bob");
 		setType("Explorateur");
-		setId(6);
+		if(equipe1)
+			setId(6);
+		else
+			setId(8);
+		setEquipe(equipe1);
 	}
 	public String toString(){
 		return "E";
