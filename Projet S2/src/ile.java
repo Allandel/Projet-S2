@@ -30,8 +30,14 @@ public class ile {
 			estAccessible(NavJ2, tableauIle.length-2);
 			accesNav2 = accessible();
 		}while(!accesNav1 || !accesNav2 );
-		this.setPersonnage1(new Voleur());
-		this.setPersonnage1(new Explorateur());
+		this.setPersonnage(new Voleur(true),true);
+		this.setPersonnage(new Voleur(true),true);
+		this.setPersonnage(new Explorateur(true),true);
+		this.setPersonnage(new Explorateur(true),true);
+		this.setPersonnage(new Voleur(false),false);
+		this.setPersonnage(new Voleur(false),false);
+		this.setPersonnage(new Explorateur(false),false);
+		this.setPersonnage(new Explorateur(false),false);
 	}
 	/**
 	 * Cr�e un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
@@ -49,7 +55,7 @@ public class ile {
 
 		setRocher(taille,proportion);
 		setKeyCoffre();	
-		
+
 	}
 
 
@@ -106,35 +112,51 @@ public class ile {
 	}
 
 
-	void setPersonnage1(Personnage v){
-		int signe, xPlus, yPlus=0;	
+	void setPersonnage(Personnage v, boolean equipe1){
+		int signe, xPlus, yPlus, cpt=0;	
 		boolean vivant=false;
-	
+
 		do{
+			yPlus=0;
 			signe=random.nextInt(2);
 			xPlus=random.nextInt(2);
 			if(xPlus==0)
 				yPlus=1;
-			
-			if(signe==0){
-				if(tableauIle[NavJ1-xPlus][1+yPlus].getId()==0){
-					tableauIle[NavJ1-xPlus][1+yPlus].setPersonnageCourant(v);
-					vivant=true;
+
+			if(equipe1){
+				if(signe==0){
+					if(tableauIle[NavJ1-xPlus][1+yPlus].getId()==0){
+						tableauIle[NavJ1-xPlus][1+yPlus].setPersonnageCourant(v);
+						vivant=true;
+					}
+				}else{
+					if(tableauIle[NavJ1+xPlus][1+yPlus].getId()==0){
+						tableauIle[NavJ1+xPlus][1+yPlus].setPersonnageCourant(v);
+						vivant=true;
+					}
 				}
 			}else{
-				if(tableauIle[NavJ1+xPlus][1+yPlus].getId()==0){
-					tableauIle[NavJ1+xPlus][1+yPlus].setPersonnageCourant(v);
-					vivant=true;
+				if(signe==0){
+					if(tableauIle[NavJ2-xPlus][taille-2-yPlus].getId()==0){
+						tableauIle[NavJ2-xPlus][taille-2-yPlus].setPersonnageCourant(v);
+						vivant=true;
+					}
+				}else{
+					if(tableauIle[NavJ2+xPlus][taille-2-yPlus].getId()==0){
+						tableauIle[NavJ2+xPlus][taille-2-yPlus].setPersonnageCourant(v);
+						vivant=true;
+					}
 				}
 			}
-		}while(!vivant);
+			cpt++;
+		}while(!vivant && cpt<10);
 	}
-	
+
 	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Personnage p){//Mouvement provisoire (Peut �tre � d�placer dans Personnage.java si possible)
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(p);
 	}
-	
+
 	/**
 	 * @return the caseCoffre
 	 */

@@ -6,9 +6,9 @@ import javax.swing.JOptionPane;
 public class GestionDuJeu {
 	private ile ileDuJeu;
 	private int[][] tableauAffichage;
-	private String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png","img/1.explorateur.png","img/1.voleur.png"};
+	private String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png","img/1.explorateur.png","img/1.voleur.png","img/1.piegeur.png","img/2.explorateur.png","img/2.voleur.png","img/2.piegeur.png"};
 	private Plateau plateauDuJeu;
-
+	
 	public GestionDuJeu(){
 		int longueurLigne, proportionNb;
 		JOptionPane selectionTaille= new JOptionPane();
@@ -53,7 +53,7 @@ public class GestionDuJeu {
 
 	private void setPlateauDujeu(){
 		plateauDuJeu = new Plateau(gifs,ileDuJeu.getTableau().length);
-		plateauDuJeu.setTitle("Chasse au trésor");
+		plateauDuJeu.setTitle("Chasse au trï¿½sor");
 		plateauDuJeu.setJeu(tableauAffichage);
 	}
 
