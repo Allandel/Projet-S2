@@ -103,9 +103,9 @@ public class GestionDuJeu {
 		for(int i=y-1;i<y+2;i++){
 			for(int j=x-1;j<x+2;j++){
 				if(perso instanceof Explorateur){
-					if((tableauAffichage[i][j]<3 && (((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y))))
+					if(((tableauAffichage[i][j]<5) && (((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y))))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
-				}else if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==2 || tableauAffichage[i][j]>5)
+				}else if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==2 || tableauAffichage[i][j]>6)
 					plateauDuJeu.setHighlight(j, i, Color.BLUE);
 			}
 		}
@@ -115,9 +115,9 @@ public class GestionDuJeu {
 				coordonnees=this.getCoordonneesClic();
 				xEvent=coordonnees[0];
 				yEvent=coordonnees[1];
-			}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)) || tableauAffichage[yEvent][xEvent]>2);
-
-			if(tableauAffichage[yEvent][xEvent] == 1 )
+			}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)) || tableauAffichage[yEvent][xEvent]>5);
+			System.out.println("1");
+			if(tableauAffichage[yEvent][xEvent] == 1 || tableauAffichage[yEvent][xEvent] == 4)
 				ileDuJeu.getTableau()[xEvent][yEvent].interactionRocher(perso);
 
 		}else if(perso instanceof Voleur){

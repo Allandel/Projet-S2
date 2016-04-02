@@ -48,12 +48,13 @@ public class CaseRocher extends Case{
 			null, options, options[0]);
 			p.setcle();
 			this.key = false;
-		}else if(this.chest && !p.getInventaireKey()){
+		}else if(this.chest && !p.getInventaireKey()&& this.hidden==true){
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Vous avez trouvé le coffre ! Il sera désormais visible par votre équipe !", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 			this.setId(4);
+			this.hidden=false;
 		}else if(this.chest && p.getInventaireKey()){
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Vous avez trouvé le coffre et vous avez la clé ! Vous avez donc ouvert le coffre avec succès et possédez maintenant ses richesses dans votre inventaire ! Gare au Voleurs !", "FELICITATION",
@@ -61,6 +62,11 @@ public class CaseRocher extends Case{
 			null, options, options[0]);
 			this.setId(1);
 			this.chest=false;
+		}else if(this.chest && !p.getInventaireKey() && this.hidden==false){
+			Object[] options = { "OK" };
+			JOptionPane.showOptionDialog(null, "Vous avez déjà trouvé le coffre... Ne restez pas ici ! Cherchez la clé avant que les adversaires la trouvent", "FELICITATION",
+			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+			null, options, options[0]);
 		}else{
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Rien ne se trouve sous ce Rocher... Continuez votre recherche !", "Qu'y à t'il sous ce rocher ?",
