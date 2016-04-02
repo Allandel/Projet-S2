@@ -7,7 +7,6 @@ public class Personnage{
 	private ArrayList <String> inventaire=new ArrayList<String>();
 	private boolean equipe1;
 	
-	
 	void setNom(String nom){
 		this.nom=nom;
 	}
@@ -40,9 +39,6 @@ public class Personnage{
 		return id;
 	}
 	
-	void deplacer(int x, int y){
-	
-	}
 	public void setcle(){
 		inventaire.add("Cle");
 	}

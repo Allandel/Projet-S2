@@ -8,7 +8,7 @@ public class GestionDuJeu {
 	private int[][] tableauAffichage;
 	private String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png","img/1.explorateur.png","img/1.voleur.png","img/1.piegeur.png","img/2.explorateur.png","img/2.voleur.png","img/2.piegeur.png"};
 	private Plateau plateauDuJeu;
-	
+
 	public GestionDuJeu(){
 		int longueurLigne, proportionNb;
 		JOptionPane selectionTaille= new JOptionPane();
@@ -98,26 +98,35 @@ public class GestionDuJeu {
 
 	private void actionPerso(int x, int y, Personnage perso){
 		int[] coordonnees = new int[2];
-		int xEvent=0,yEvent=0;
+		int xEvent=0,yEvent=0, bateau;
+
+		if(perso.getEquipe())
+			bateau=2;
+		else
+			bateau=3;
 
 		for(int i=y-1;i<y+2;i++){
 			for(int j=x-1;j<x+2;j++){
-				if(perso instanceof Explorateur){
-					if((tableauAffichage[i][j]<3 && (((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y))))
+				if(perso instanceof Voleur){
+					if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==bateau || tableauAffichage[i][j]>5)
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
+				}else if(tableauAffichage[i][j]<2 || tableauAffichage[i][j]==bateau || tableauAffichage[i][j]==4){
+					if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
-				}else if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==2 || tableauAffichage[i][j]>5)
-					plateauDuJeu.setHighlight(j, i, Color.BLUE);
+				}
 			}
 		}
 
 		if(perso instanceof Explorateur){
 			do{
-				coordonnees=this.getCoordonneesClic();
-				xEvent=coordonnees[0];
-				yEvent=coordonnees[1];
-			}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)) || tableauAffichage[yEvent][xEvent]>2);
-
-			if(tableauAffichage[yEvent][xEvent] == 1 )
+				do{
+					coordonnees=this.getCoordonneesClic();
+					xEvent=coordonnees[0];
+					yEvent=coordonnees[1];
+				}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)));
+			}while((tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=bateau && tableauAffichage[yEvent][xEvent]!=4));
+			
+			if(tableauAffichage[yEvent][xEvent] == 1 || tableauAffichage[yEvent][xEvent] == 4 )
 				ileDuJeu.getTableau()[xEvent][yEvent].interactionRocher(perso);
 
 		}else if(perso instanceof Voleur){
