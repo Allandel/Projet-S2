@@ -134,11 +134,6 @@ public class ile {
 		tableauIle[xApres][yApres].setPersonnageCourant(p);
 	}
 	
-	public void sortieBateau(int x1, int y1, int x2, int y2, String perso){
-		for(Personnage p: tableauIle[x1][y1].getStockNavire()){
-			
-		}
-	}
 	/**
 	 * @return the caseCoffre
 	 */

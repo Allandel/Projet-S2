@@ -114,18 +114,21 @@ public class GestionDuJeu {
 				xEvent=coordonnees[0];
 				yEvent=coordonnees[1];
 			}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)) || tableauAffichage[yEvent][xEvent]>2);
-			
+
 			if(tableauAffichage[yEvent][xEvent]==0)
 				ileDuJeu.mouvement(x,y,xEvent, yEvent, ileDuJeu.getTableau()[x][y].getPersonnageCourant());
 			if(tableauAffichage[yEvent][xEvent] == 1 )
 				ileDuJeu.getTableau()[xEvent][yEvent].interactionRocher(ileDuJeu.getTableau()[x][y].getPersonnageCourant());
+			if(tableauAffichage[yEvent][xEvent]==2){
+				if(ileDuJeu.getTableau()[xEvent][yEvent].entreeBateau(ileDuJeu.getTableau()[x][y].getPersonnageCourant()))
+					ileDuJeu.getTableau()[x][y].removePersonnageCourant();
+			}
 
 			for(int i=y-1;i<y+2;i++){
 				for(int j=x-1;j<x+2;j++){
 					plateauDuJeu.resetHighlight(j, i);
 				}
 			}
-
 		}
 	}
 }
