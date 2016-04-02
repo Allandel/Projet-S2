@@ -58,7 +58,7 @@ public class GestionDuJeu {
 	}
 
 	private void affichageDuJeu(){
-		System.out.println(ileDuJeu.toString());
+		System.out.println("\n"+ileDuJeu.toString());
 		this.updateTableauAffichage();
 		plateauDuJeu.setJeu(tableauAffichage);
 		plateauDuJeu.affichage();
@@ -78,24 +78,54 @@ public class GestionDuJeu {
 	}
 
 	public void tourDuJoueur(){
-		int[] coordonnees1 =new int[2], coordonnees2 = new int[2];
-		int xEvent1,yEvent1, xEvent2, yEvent2;
+		int[] coordonnees =new int[2];
+		int xEvent,yEvent;
 
 		do{
-			coordonnees1=this.getCoordonneesClic();
-			xEvent1=coordonnees1[0];
-			yEvent1=coordonnees1[1];
-		}while(tableauAffichage[yEvent1][xEvent1]<2 || tableauAffichage[yEvent1][xEvent1]==5);
-		
-		plateauDuJeu.setHighlight(xEvent1, yEvent1, Color.BLUE);
-		plateauDuJeu.affichage();
-		
-		if(tableauAffichage[yEvent1][xEvent1]==6){
-		
+			coordonnees=this.getCoordonneesClic();
+			xEvent=coordonnees[0];
+			yEvent=coordonnees[1];
+		}while(tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5);
+
+		plateauDuJeu.setHighlight(xEvent, yEvent, Color.BLUE);
+
+		if(tableauAffichage[yEvent][xEvent]==6){ //ajouter l'id du voleur quand on aura fini le voleur
+			this.actionPerso(xEvent,yEvent);
 		}
+
+		this.affichageDuJeu();
 	}
 
-	private void deplacement(){
-		
+	private void actionPerso(int x, int y){
+		int[] coordonnees = new int[2];
+		int xEvent,yEvent;
+
+		if(ileDuJeu.getTableau()[x][y].getPersonnageCourant() instanceof Explorateur){
+
+			for(int i=y-1;i<y+2;i++){
+				for(int j=x-1;j<x+2;j++){
+					if(tableauAffichage[i][j]<3 && (((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)))
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);
+				}
+			}
+
+			do{
+				coordonnees=this.getCoordonneesClic();
+				xEvent=coordonnees[0];
+				yEvent=coordonnees[1];
+			}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)) || tableauAffichage[yEvent][xEvent]>2);
+			
+			if(tableauAffichage[yEvent][xEvent]==0)
+				ileDuJeu.mouvement(x,y,xEvent, yEvent, ileDuJeu.getTableau()[x][y].getPersonnageCourant());
+			if(tableauAffichage[yEvent][xEvent] == 1 )
+				ileDuJeu.getTableau()[xEvent][yEvent].interactionRocher(ileDuJeu.getTableau()[x][y].getPersonnageCourant());
+
+			for(int i=y-1;i<y+2;i++){
+				for(int j=x-1;j<x+2;j++){
+					plateauDuJeu.resetHighlight(j, i);
+				}
+			}
+
+		}
 	}
 }

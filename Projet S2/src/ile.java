@@ -108,7 +108,7 @@ public class ile {
 	void setPersonnage1(Personnage v){
 		int signe, xPlus, yPlus=0;	
 		boolean vivant=false;
-
+	
 		do{
 			signe=random.nextInt(2);
 			xPlus=random.nextInt(2);
@@ -128,7 +128,7 @@ public class ile {
 			}
 		}while(!vivant);
 	}
-
+	
 	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Personnage p){//Mouvement provisoire (Peut �tre � d�placer dans Personnage.java si possible)
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(p);

@@ -13,8 +13,10 @@ public class main {
 
 	public static void main(String[] args) {
 		GestionDuJeu gestion=new GestionDuJeu();
-		gestion.tourDuJoueur();
 		
+		while(true){
+		gestion.tourDuJoueur();
+		}
 		/*
 		JOptionPane entreeTaille= new JOptionPane();
 		boolean nb = false;
