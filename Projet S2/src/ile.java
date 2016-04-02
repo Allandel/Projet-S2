@@ -35,6 +35,7 @@ public class ile {
 		this.setPersonnage(new Voleur(false),false);
 		this.setPersonnage(new Explorateur(false),false);
 	}
+	
 	/**
 	 * Cr�e un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
 	 */
