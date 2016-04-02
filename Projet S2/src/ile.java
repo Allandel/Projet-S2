@@ -30,6 +30,7 @@ public class ile {
 			estAccessible(NavJ2, tableauIle.length-2);
 			accesNav2 = accessible();
 		}while(!accesNav1 || !accesNav2 );
+		this.setPersonnage1(new Voleur());
 		this.setPersonnage1(new Explorateur());
 	}
 	/**
