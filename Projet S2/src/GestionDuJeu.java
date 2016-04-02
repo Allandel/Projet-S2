@@ -39,7 +39,7 @@ public class GestionDuJeu {
 		tableauAffichage = new int[ileDuJeu.getTableau().length][ileDuJeu.getTableau().length];
 
 		this.updateTableauAffichage();
-		this.setPlateau();
+		this.setPlateauDujeu();
 		this.affichageDuJeu();
 	}
 
@@ -51,7 +51,7 @@ public class GestionDuJeu {
 		}
 	}
 
-	private void setPlateau(){
+	private void setPlateauDujeu(){
 		plateauDuJeu = new Plateau(gifs,ileDuJeu.getTableau().length);
 		plateauDuJeu.setTitle("Chasse au trésor");
 		plateauDuJeu.setJeu(tableauAffichage);
@@ -105,7 +105,7 @@ public class GestionDuJeu {
 				if(perso instanceof Explorateur){
 					if((tableauAffichage[i][j]<3 && (((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y))))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
-				}else
+				}else if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==2 || tableauAffichage[i][j]>5)
 					plateauDuJeu.setHighlight(j, i, Color.BLUE);
 			}
 		}
@@ -131,8 +131,8 @@ public class GestionDuJeu {
 		if(tableauAffichage[yEvent][xEvent]==0)
 			ileDuJeu.mouvement(x,y,xEvent, yEvent, perso);
 		else if(tableauAffichage[yEvent][xEvent]==2){
-			if(ileDuJeu.getTableau()[xEvent][yEvent].entreeBateau(perso));
-			ileDuJeu.getTableau()[x][y].removePersonnageCourant();
+			if(ileDuJeu.getTableau()[xEvent][yEvent].entreeBateau(perso))
+				ileDuJeu.getTableau()[x][y].removePersonnageCourant();
 		}
 
 		for(int i=y-1;i<y+2;i++){
