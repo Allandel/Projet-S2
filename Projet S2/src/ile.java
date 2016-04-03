@@ -1,5 +1,5 @@
 /**
- * Classe permettant de gï¿½nï¿½rer le plateau de jeu
+ * Classe permettant de generer le plateau de jeu
  * @author Allan
  * @version 1.0
  */
@@ -37,7 +37,7 @@ public class ile {
 	}
 	
 	/**
-	 * Crï¿½e un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
+	 * Cree un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
 	 */
 	void initialiser(){
 		tableauIle = new Case[taille][taille];
@@ -56,7 +56,9 @@ public class ile {
 	}
 
 
-
+	/**
+	 * Initialise la clé et le coffre sur le plateau de jeu
+	 */
 	void setKeyCoffre(){
 		int cpt=0;
 		do{
@@ -76,7 +78,9 @@ public class ile {
 			}
 		}while(cpt<2);
 	}
-
+	/**
+	 * Initialise les Case Neutres
+	 */
 	void setZero(){
 		for(int i = 0;i<tableauIle.length;i++){
 			for(int j = 0;j<tableauIle.length;j++){
@@ -84,7 +88,9 @@ public class ile {
 			}
 		}
 	}
-
+	/**
+	 * Initialise la mer
+	 */
 	void setMer(){
 		for(int i = 0; i<tableauIle.length;i++){
 			tableauIle[0][i].setId(5);
@@ -93,7 +99,11 @@ public class ile {
 			tableauIle[i][tableauIle.length-1].setId(5);
 		}
 	}
-
+	/**
+	 * Initialise les Rochers
+	 * @param taille
+	 * @param proportion
+	 */
 	void setRocher(int taille, float proportion){
 		int cpt=0;
 		nbRocher = (int)((taille)*(taille-2)*proportion)/100;
@@ -108,7 +118,11 @@ public class ile {
 
 	}
 
-
+	/**
+	 * Initialise un Personnage aux cotés du Bateau de son équipe
+	 * @param v
+	 * @param equipe1
+	 */
 	void setPersonnage(Personnage v, boolean equipe1){
 		int signe, xPlus, yPlus, cpt=0;	
 		boolean vivant=false;
@@ -148,7 +162,14 @@ public class ile {
 			cpt++;
 		}while(!vivant && cpt<10);
 	}
-
+	/**
+	 * Permet les deplacement des personnages
+	 * @param p
+	 * @param yApres
+	 * @param xApres
+	 * @param yAvant
+	 * @param xAvant
+	 */
 	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Personnage p){//Mouvement provisoire (Peut ï¿½tre ï¿½ dï¿½placer dans Personnage.java si possible)
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(p);
@@ -179,7 +200,7 @@ public class ile {
 		return NavJ2;
 	}
 	/**
-	 * Dï¿½fini  si le coffre et la clï¿½ sont accessibles depuis les coordonnï¿½es donnï¿½es
+	 * Defini  si le coffre et la cle sont accessibles depuis les coordonnees donnees
 	 * @param x
 	 * @param y
 	 */
@@ -215,7 +236,7 @@ public class ile {
 		}
 	}
 	/**
-	 * Retourne un boolï¿½en en fonction de l'accessibilitï¿½ du coffre et de la clï¿½
+	 * Retourne un booleen en fonction de l'accessibilite du coffre et de la cle
 	 * @return
 	 */
 	boolean accessible(){
@@ -227,7 +248,7 @@ public class ile {
 	}
 
 	/**
-	 * Rï¿½initialise tous les boolï¿½ens accessible a false
+	 * Reinitialise tous les booleens accessible a false
 	 */
 	void resetAcces(){
 		for(int i=0;i<tableauIle.length-1;i++){
@@ -238,7 +259,9 @@ public class ile {
 		CaseCoffre.setAccessible(false);
 		CaseCle.setAccessible(false);
 	}
-
+	/**
+	 * @return the tableauIle
+	 */
 	Case[][] getTableau(){
 		return tableauIle;
 	}

@@ -1,7 +1,7 @@
 import javax.swing.JOptionPane;
 
 /**
- * Classe h�rit�e de Case repr�sentant les Rochers
+ * Classe heritee de Case representant les Rochers
  * @author Allan
  * @version 1.0
  */
@@ -10,7 +10,7 @@ public class CaseRocher extends Case{
 	private boolean hidden, key, chest, keyTaken=false, chestTaken=false;
 	
 	/**
-	 * Constructeur permettant d'attribuer l'ID du rocher ainsi que ses coordonn�es
+	 * Constructeur permettant d'attribuer l'ID du rocher ainsi que ses coordonnees
 	 * @param x
 	 * @param y
 	 */
@@ -32,13 +32,25 @@ public class CaseRocher extends Case{
 			return "R";
 		}
 	}
+	/**
+	 * Setter de Key
+	 * @param setter
+	 */
 	public void setKey(boolean setter){
 		this.key = setter; 
 	}
+	/**
+	 * Setter de Chest
+	 * @param setter
+	 */
 	public void setChest(boolean setter){
 		chest =setter;
 		hidden = true;
 	}
+	/**
+	 * Permet d'interagir avec un rocher
+	 * @param p
+	 */
 	public void interactionRocher(Personnage p){
 		if(key){
 			Object[] options = { "OK" };
@@ -65,7 +77,6 @@ public class CaseRocher extends Case{
 			null, options, options[0]);
 			setId(4);
 			hidden=false;
-			p.setObjetInventaire("tresor");
 		}else if(chest && p.getObjetInventaire("cle")){
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Vous avez trouve le coffre et vous avez la cle ! Vous avez donc ouvert le coffre avec succes et possedez maintenant ses richesses dans votre inventaire ! Gare au Voleurs !", "FELICITATION",

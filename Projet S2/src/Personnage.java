@@ -1,4 +1,9 @@
 import java.util.ArrayList;
+/**
+ * Classe permettant de créer des Personnages (Explorateurs / Voleurs / Piegeurs [prochainement])
+ * @author Valentin
+ * @version 1.1 
+ */
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -9,46 +14,71 @@ public class Personnage{
 	private int id;
 	private ArrayList <String> inventaire=new ArrayList<String>();
 	private boolean equipe1;
-	
+	/**
+	 * @param nom the nom to set
+	 */
 	void setNom(String nom){
 		this.nom=nom;
 	}
-
+	/**
+	 * @param equipe the equipe1 to set
+	 */
 	public void setEquipe(boolean equipe){
 		equipe1=equipe;
 	}
-	
+	/**
+	 * @return the equipe1
+	 */
 	public boolean getEquipe(){
 		return equipe1;
 	}
-	
+	/**
+	 * @param type the type to set
+	 */
 	void setType(String type){
 		this.type=type;
 	}
-	
+	/**
+	 * @return the type
+	 */
 	public String getType(){
 		return type;
 	}
-	
+	/**
+	 * @return the nom
+	 */
 	public String getNom(){
 		return nom;
 	}
-	
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id){
 		this.id=id;
 	}
-
+	/**
+	 * @return the id
+	 */
 	public int getId(){
 		return id;
 	}
-	
+	/**
+	 * Ajoute un objet à l'inventaire
+	 * @param objet
+	 */
 	public void setObjetInventaire(String objet){
 		inventaire.add(objet);
 	}
-
+	/**
+	 * @return the inventaire
+	 */
 	public ArrayList getInventaire(){
 		return this.inventaire;
 	}
+	/**
+	 * Explore l'inventaire a la recherche d'un objet precis
+	 * @param objet
+	 */
 	public boolean getObjetInventaire(String objet){
 		for (String test: inventaire) {
 			if (test.compareTo(objet)==0){
@@ -57,6 +87,10 @@ public class Personnage{
 		}
 		return false;
 	}
+	/**
+	 * Permet au voleur de dérober un objet a l'équipe adverse
+	 * @param p
+	 */
 	public void volerObjet(Personnage p){
 		Random random=new Random();
 		if (this.equipe1!=p.equipe1){

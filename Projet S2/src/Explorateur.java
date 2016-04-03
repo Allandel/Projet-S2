@@ -1,11 +1,11 @@
 /**
- * Classe hï¿½ritï¿½e de personnage reprï¿½sentant un explorateur
+ * Classe heritee de personnage representant un explorateur
  * @author Allan
  * @version 1.0
  */
 public class Explorateur extends Personnage{
 	/**
-	 * Jalon2: Construit un Explorateur avec 100 energie
+	 * Constructeur d'Explorateur lui attribuant un nom, un id et une équipe
 	 */
 	public Explorateur(boolean equipe1){
 		setNom("Bob");

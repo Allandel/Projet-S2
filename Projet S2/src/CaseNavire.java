@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- * Classe h�rit�e de Case repr�sentant les navires
+ * Classe heritee de Case representant les navires
  * @author Allan
  * @version 1.0
  */
@@ -11,17 +11,22 @@ public class CaseNavire extends Case {
 	private ArrayList<Personnage>stockNavire=new ArrayList<Personnage>();
 	private int decision;
 	/**
-	 * Construit un navire en lui attribuant l'ID donn�
+	 * Construit un navire en lui attribuant l'ID donnee
 	 * @param id
 	 */
 	public CaseNavire(int id){
 		this.setId(id);
 	}
-
+	/**
+	 * Retourne la liste de Personnage du Navire
+	 */
 	public ArrayList getStocknavire(){
 		return stockNavire;
 	}
-	
+	/**
+	 * Permet a un personnage d'entrer dans le bateau
+	 * @param p
+	 */
 	public boolean entreeBateau(Personnage p){
 		decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
@@ -30,7 +35,9 @@ public class CaseNavire extends Case {
 		}
 		return false;
 	}
-	
+	/**
+	 * Permet a un personnage de sortir du bateau dans le bateau
+	 */
 	public String choisirSortieBateau(){
 		String persoSortant=" ";
 		
