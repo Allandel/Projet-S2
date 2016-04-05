@@ -57,7 +57,7 @@ public class CaseRocher extends Case{
 			JOptionPane.showOptionDialog(null, "Vous avez trouve la cle ! Rendez vous au tresor afin de vous emparer de ses richesses !", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
-			p.setObjetInventaire("cle");
+			p.setObjetInventaire("Cle");
 			keyTaken=true;
 			key = false;
 		}else if(keyTaken){
@@ -70,14 +70,14 @@ public class CaseRocher extends Case{
 			JOptionPane.showOptionDialog(null, "Une trace consequente indique l'ancienne presence du coffre. Volez vite le coffre a l'adversaire !", "PRENEZ GARDE...",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 			null, options, options[0]);
-		}else if(chest && !p.getObjetInventaire("cle")&& hidden){
+		}else if(chest && !p.getObjetInventaire("Cle")&& hidden){
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Vous avez trouve le coffre ! Il sera desormais visible par votre equipe !", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 			setId(4);
 			hidden=false;
-		}else if(chest && p.getObjetInventaire("cle")){
+		}else if(chest && p.getObjetInventaire("Cle")){
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Vous avez trouve le coffre et vous avez la cle ! Vous avez donc ouvert le coffre avec succes et possedez maintenant ses richesses dans votre inventaire ! Gare au Voleurs !", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -86,8 +86,8 @@ public class CaseRocher extends Case{
 			hidden=false;
 			chest=false;
 			chestTaken=true;
-			p.setObjetInventaire("tresor");
-		}else if(chest && !p.getObjetInventaire("cle") && !hidden){
+			p.setObjetInventaire("Tresor");
+		}else if(chest && !p.getObjetInventaire("Cle") && !hidden){
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Vous avez deja trouve le coffre... Ne restez pas ici ! Cherchez la cle avant que les adversaires la trouvent", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,

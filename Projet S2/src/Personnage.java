@@ -110,10 +110,28 @@ public class Personnage{
 				null, options, options[0]);
 			}
 		}else{
-			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "On ne vole pas d'objet a son equipe ! Concentrez vous sur les personnages adverses !", "TRAITRE !",
-			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-			null, options, options[0]);
+			int decision;
+			String itemEchange;
+			decision=JOptionPane.showConfirmDialog(null,"Désirez vous effectuer un échange avec ce membre de votre équipe ?", "Effectuer un echange ?", JOptionPane.YES_NO_OPTION);
+			if (decision==0){
+				if(!this.inventaire.isEmpty()){
+					int cpt=0;
+					String rang="";
+					String [] listeItem= new String[inventaire.size()];
+					for(String item : inventaire){
+						listeItem[cpt]=inventaire.get(cpt);
+						cpt++;
+					}
+					itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?", "Boite d'échanges", JOptionPane.QUESTION_MESSAGE, null, listeItem, listeItem[0]);
+					p.inventaire.add(itemEchange);
+					this.inventaire.remove(itemEchange);
+				}else{
+					Object[] options = { "OK" };
+					JOptionPane.showOptionDialog(null, "Votre inventaire est vide, impossible de faire un échange", "ECHANGE IMPOSSIBLE",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, options, options[0]);
+				}
+			}	
 		}
 	}
 	public void perteEnergie(int nrj){
