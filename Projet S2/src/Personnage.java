@@ -14,6 +14,7 @@ public class Personnage{
 	private int id;
 	private ArrayList <String> inventaire=new ArrayList<String>();
 	private boolean equipe1;
+	private boolean death=false;
 	/**
 	 * @param nom the nom to set
 	 */
@@ -115,4 +116,20 @@ public class Personnage{
 			null, options, options[0]);
 		}
 	}
+	public void perteEnergie(int nrj){
+		this.energie-=nrj;
+	}
+	public void addEnergie(){
+		if(this.energie<100){
+			this.energie+=10;
+		}
+	}
+	public int getEnergie(){
+		return energie;
+	}
+	public void setEnergie(int nrj){
+		this.energie=nrj;
+	}
+	public void setDeath(){this.death=true;}
+	public boolean getDeath(){return this.death;}
 }
