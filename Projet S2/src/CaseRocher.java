@@ -40,6 +40,12 @@ public class CaseRocher extends Case{
 		this.key = setter; 
 	}
 	/**
+	 * @param hidden the hidden to set
+	 */
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
+	/**
 	 * Setter de Chest
 	 * @param setter
 	 */
@@ -47,6 +53,41 @@ public class CaseRocher extends Case{
 		chest =setter;
 		hidden = true;
 	}
+	
+	/**
+	 * @param keyTaken the keyTaken to set
+	 */
+	public void setKeyTaken(boolean keyTaken) {
+		this.keyTaken = keyTaken;
+		key=!keyTaken;
+	}
+	/**
+	 * @param chestTaken the chestTaken to set
+	 */
+	public void setChestTaken(boolean chestTaken) {
+		this.chestTaken = chestTaken;
+		chest=!chestTaken;
+	}
+	public boolean getHidden(){
+		return hidden;
+	}
+	
+	public boolean getKey(){
+		return key;
+	}
+	
+	public boolean getChest(){
+		return chest;
+	}
+	
+	public boolean getKeyTaken(){
+		return keyTaken;
+	}
+	
+	public boolean getChestTaken(){
+		return chestTaken;
+	}
+	
 	/**
 	 * Permet d'interagir avec un rocher
 	 * @param p
@@ -101,8 +142,4 @@ public class CaseRocher extends Case{
 		
 		//p.perteEnergie(5);
 	}
-	public void checkRocher(){
-		
-	}
-
 }
