@@ -150,7 +150,7 @@ public class GestionDuJeu {
 			}while(tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=12);
 
 			if(tableauAffichage[yEvent][xEvent] == 1 || tableauAffichage[yEvent][xEvent] == 4){
-				perso.interactionRocher(xEvent, yEvent, ileDuJeu.getTableau());
+				((Explorateur)perso).interactionRocher(xEvent, yEvent, ileDuJeu.getTableau());
 			}
 		}else if(perso instanceof Voleur){
 			do{
