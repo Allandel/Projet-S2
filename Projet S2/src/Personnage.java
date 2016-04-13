@@ -11,11 +11,10 @@ public class Personnage{
 
 	private int energie=100;
 	private String nom, type;
-	private int id;
+	private int id, idBateau;
 	protected ArrayList <String> inventaire=new ArrayList<String>();
 	protected boolean equipe1;
 	private boolean death=false;
-	private int idBateau;
 
 	Personnage(boolean equipe){
 		this.equipe1=equipe;
@@ -143,7 +142,7 @@ public class Personnage{
 	public void entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
 		int decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
-			tableauIle[xApres][yApres].addPersoNavire(this);
+			((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
 			tableauIle[xAvant][yAvant].removePersonnageCourant();
 		}
 	}

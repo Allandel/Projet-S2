@@ -121,47 +121,47 @@ public class GestionDuJeu {
 		int[] coordonnees = new int[2];
 		int xEvent=0,yEvent=0;
 
-		if (!perso.getDeath()){
-			for(int i=y-1;i<y+2;i++){
-				for(int j=x-1;j<x+2;j++){
-					if(perso instanceof Voleur){
-						if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]>5)
-							plateauDuJeu.setHighlight(j, i, Color.BLUE);	
-					}else if(tableauAffichage[i][j]<2 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==4 || tableauAffichage[i][j]==12){
-						if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y))
-							plateauDuJeu.setHighlight(j, i, Color.BLUE);
-					}
+		//	if (!perso.getDeath()){
+		for(int i=y-1;i<y+2;i++){
+			for(int j=x-1;j<x+2;j++){
+				if(perso instanceof Voleur){
+					if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]>5)
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
+				}else if(tableauAffichage[i][j]<2 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==4 || tableauAffichage[i][j]==12){
+					if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y))
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}
-			}
-
-			/*
-			 * || ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe()
-			 * retourne un null pointer exception si il n'y a pas de perso dans la case
-			 */
-			
-			
-			if(perso instanceof Explorateur){
-				do{
-					do{
-						coordonnees=this.getCoordonneesClic();
-						xEvent=coordonnees[0];
-						yEvent=coordonnees[1];
-					}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)));
-				}while(tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=12);
-
-				if(tableauAffichage[yEvent][xEvent] == 1 || tableauAffichage[yEvent][xEvent] == 4){
-					ileDuJeu.getTableau()[xEvent][yEvent].interactionRocher(perso);
-				}
-			}else if(perso instanceof Voleur){
-				do{
-					do{
-						coordonnees=this.getCoordonneesClic();
-						xEvent=coordonnees[0];
-						yEvent=coordonnees[1];
-					}while((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (x==xEvent && y==yEvent));
-				}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<5 && tableauAffichage[yEvent][xEvent]!=12);
 			}
 		}
+
+		/*
+		 * || ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe()
+		 * retourne un null pointer exception si il n'y a pas de perso dans la case
+		 */
+
+
+		if(perso instanceof Explorateur){
+			do{
+				do{
+					coordonnees=this.getCoordonneesClic();
+					xEvent=coordonnees[0];
+					yEvent=coordonnees[1];
+				}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)));
+			}while(tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=12);
+
+			if(tableauAffichage[yEvent][xEvent] == 1 || tableauAffichage[yEvent][xEvent] == 4){
+				((CaseRocher) ileDuJeu.getTableau()[xEvent][yEvent]).interactionRocher(perso);
+			}
+		}else if(perso instanceof Voleur){
+			do{
+				do{
+					coordonnees=this.getCoordonneesClic();
+					xEvent=coordonnees[0];
+					yEvent=coordonnees[1];
+				}while((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (x==xEvent && y==yEvent));
+			}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<5 && tableauAffichage[yEvent][xEvent]!=12);
+		}
+		//}
 
 		if(tableauAffichage[yEvent][xEvent]==0){
 			perso.mouvement(x, y, xEvent, yEvent, ileDuJeu.getTableau());

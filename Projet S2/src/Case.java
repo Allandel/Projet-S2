@@ -32,12 +32,7 @@ public class Case {
 	public boolean isAccessible() {
 		return accessible;
 	}
-	/**
-	 * @return the stockNavire
-	 */
-	public ArrayList getStockNavire(){
-		return new ArrayList();
-	}
+
 	/**
 	 * @param accessible the accessible to set
 	 */
@@ -66,28 +61,6 @@ public class Case {
 		this.setId(0);
 	}
 	
-	/*public void epuisement(int nrj){
-		if((getPersonnageCourant().getEnergie())-nrj<=0){
-			setId(12);
-			getPersonnageCourant().setDeath();
-			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Votre personnage �tait � bout de force... Cette ultime action lui a cout� la vie. Son inventaire se trouve d�sormais au sol et peut �tre r�cup�rer par n'importe quel personne", "VOTRE PERSONNE EST MORT",
-			JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
-			null, options, options[0]);
-		}else{
-			getPersonnageCourant().perteEnergie(nrj);
-		}
-	}*/
-	/**
-	 * Permet a un personnage d'entrer dans un bateau
-	 * @param p
-	 */
-	public boolean entreeBateau(Personnage p){
-		return false;
-	}
-	public String choisirSortieBateau(){
-		return " ";
-	}
 	/**
 	 * Donne le Personnage Courant affili� a une case
 	 */
@@ -102,11 +75,6 @@ public class Case {
 		return personnageCourant.toString();
 	}
 
-	public void addPersoNavire(Personnage p){	}
-
-	
-	public void interactionRocher(Personnage p){}
-	
 	public void recuperationStuff(Personnage p){
 		if(this.getPersonnageCourant().getInventaire().isEmpty()){
 			removePersonnageCourant();
