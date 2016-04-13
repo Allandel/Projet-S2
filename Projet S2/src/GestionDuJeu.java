@@ -166,8 +166,7 @@ public class GestionDuJeu {
 		if(tableauAffichage[yEvent][xEvent]==0){
 			perso.mouvement(x, y, xEvent, yEvent, ileDuJeu.getTableau());
 		}else if(tableauAffichage[yEvent][xEvent]==perso.getIdBateau()){
-			if(ileDuJeu.getTableau()[xEvent][yEvent].entreeBateau(perso))
-				ileDuJeu.getTableau()[x][y].removePersonnageCourant();
+			perso.entreeBateau(x, y, xEvent, yEvent, ileDuJeu.getTableau());
 		}else if(tableauAffichage[yEvent][xEvent]==12){
 			ileDuJeu.getTableau()[xEvent][yEvent].recuperationStuff(ileDuJeu.getTableau()[x][y].getPersonnageCourant());
 			ileDuJeu.getTableau()[x][y].removePersonnageCourant();

@@ -101,6 +101,9 @@ public class Case {
 		}
 		return personnageCourant.toString();
 	}
+
+	public void addPersoNavire(Personnage p){	}
+
 	
 	public void interactionRocher(Personnage p){}
 	

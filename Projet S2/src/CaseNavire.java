@@ -23,18 +23,15 @@ public class CaseNavire extends Case {
 	public ArrayList getStocknavire(){
 		return stockNavire;
 	}
+
 	/**
 	 * Permet a un personnage d'entrer dans le bateau
 	 * @param p
 	 */
-	public boolean entreeBateau(Personnage p){
-		decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
-		if (decision==0){
-			this.stockNavire.add(p);
-			return true;
-		}
-		return false;
+	public void addPersoNavire(Personnage p){
+		stockNavire.add(p);
 	}
+
 	/**
 	 * Permet a un personnage de sortir du bateau dans le bateau
 	 */
