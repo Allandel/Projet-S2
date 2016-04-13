@@ -98,6 +98,8 @@ public class CaseRocher extends Case{
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 		}
+		
+		//p.perteEnergie(5);
 	}
 	public void checkRocher(){
 		

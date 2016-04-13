@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 /**
- * Classe permettant de créer des Personnages (Explorateurs / Voleurs / Piegeurs [prochainement])
+ * Classe permettant de crï¿½er des Personnages (Explorateurs / Voleurs / Piegeurs [prochainement])
  * @author Valentin
  * @version 1.1 
  */
@@ -8,24 +8,32 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 public class Personnage{
-	
+
 	private int energie=100;
 	private String nom, type;
 	private int id;
-	private ArrayList <String> inventaire=new ArrayList<String>();
-	private boolean equipe1;
+	protected ArrayList <String> inventaire=new ArrayList<String>();
+	protected boolean equipe1;
 	private boolean death=false;
+	private int idBateau;
+
+	Personnage(boolean equipe){
+		this.equipe1=equipe;
+		if(equipe1)
+			idBateau=2;
+		else
+			idBateau=3;
+	}
+
 	/**
 	 * @param nom the nom to set
 	 */
 	void setNom(String nom){
 		this.nom=nom;
 	}
-	/**
-	 * @param equipe the equipe1 to set
-	 */
-	public void setEquipe(boolean equipe){
-		equipe1=equipe;
+
+	public int getIdBateau(){
+		return idBateau;
 	}
 	/**
 	 * @return the equipe1
@@ -64,7 +72,7 @@ public class Personnage{
 		return id;
 	}
 	/**
-	 * Ajoute un objet à l'inventaire
+	 * Ajoute un objet ï¿½ l'inventaire
 	 * @param objet
 	 */
 	public void setObjetInventaire(String objet){
@@ -89,65 +97,71 @@ public class Personnage{
 		return false;
 	}
 	/**
-	 * Permet au voleur de dérober un objet a l'équipe adverse
+	 * Permet au voleur de dï¿½rober un objet a l'ï¿½quipe adverse
 	 * @param p
 	 */
-	public void volerObjet(Personnage p){
-		Random random=new Random();
-		if (this.equipe1!=p.equipe1){
-			if(!p.inventaire.isEmpty() && random.nextInt(4)==2 ){
-				int objetVole=random.nextInt(p.inventaire.size());
-				inventaire.add(p.inventaire.get(objetVole));
-				p.inventaire.remove(objetVole);
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Vous avez volé : "+inventaire.get(inventaire.size()-1)+" avec un franc succès ! Vous êtes un fin voleur !", "VOL REUSSI",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-				null, options, options[0]);
+	public void echangeObjet(Personnage p){
+		int decision;
+		String itemEchange;
+		decision=JOptionPane.showConfirmDialog(null,"DÃ©sirez vous effectuer un Ã©change avec ce membre de votre Ã©quipe ?", "Effectuer un echange ?", JOptionPane.YES_NO_OPTION);
+		if (decision==0){
+			if(!this.inventaire.isEmpty()){
+				int cpt=0;
+				String rang="";
+				String [] listeItem= new String[inventaire.size()];
+				for(String item : inventaire){
+					listeItem[cpt]=inventaire.get(cpt);
+					cpt++;
+				}
+				itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?", "Boite d'ï¿½changes", JOptionPane.QUESTION_MESSAGE, null, listeItem, listeItem[0]);
+				p.inventaire.add(itemEchange);
+				this.inventaire.remove(itemEchange);
 			}else{
 				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Vous avez échoué votre vol... Peut etre aurez vous plus de chance la prochaine fois", "VOL ECHEC",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-				null, options, options[0]);
+				JOptionPane.showOptionDialog(null, "Votre inventaire est vide, impossible de faire un ï¿½change", "ECHANGE IMPOSSIBLE",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+						null, options, options[0]);
 			}
-		}else{
-			int decision;
-			String itemEchange;
-			decision=JOptionPane.showConfirmDialog(null,"Désirez vous effectuer un échange avec ce membre de votre équipe ?", "Effectuer un echange ?", JOptionPane.YES_NO_OPTION);
-			if (decision==0){
-				if(!this.inventaire.isEmpty()){
-					int cpt=0;
-					String rang="";
-					String [] listeItem= new String[inventaire.size()];
-					for(String item : inventaire){
-						listeItem[cpt]=inventaire.get(cpt);
-						cpt++;
-					}
-					itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?", "Boite d'échanges", JOptionPane.QUESTION_MESSAGE, null, listeItem, listeItem[0]);
-					p.inventaire.add(itemEchange);
-					this.inventaire.remove(itemEchange);
-				}else{
-					Object[] options = { "OK" };
-					JOptionPane.showOptionDialog(null, "Votre inventaire est vide, impossible de faire un échange", "ECHANGE IMPOSSIBLE",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+		}	
+	}
+
+
+	/**
+	 * Permet les deplacement des personnages
+	 * @param yApres
+	 * @param xApres
+	 * @param yAvant
+	 * @param xAvant
+	 * @param tableauIle
+	 */
+	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
+		tableauIle[xAvant][yAvant].removePersonnageCourant();
+		tableauIle[xApres][yApres].setPersonnageCourant(this);
+		perteEnergie(1, xApres,yApres, tableauIle);
+	}
+
+	private void perteEnergie(int nrj, int x, int y, Case[][] tableauIle){
+		if(energie-nrj<=0){
+			tableauIle[x][y].setId(12);
+			death=true;
+			Object[] options = { "OK" };
+			JOptionPane.showOptionDialog(null, "Votre personnage ï¿½tait ï¿½ bout de force... Cette ultime action lui a coutï¿½ la vie. Son inventaire se trouve dï¿½sormais au sol et peut ï¿½tre rï¿½cupï¿½rer par n'importe quel personne", "VOTRE PERSONNE EST MORT",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
 					null, options, options[0]);
-				}
-			}	
+		}else{
+			energie-=nrj;
 		}
 	}
-	public void perteEnergie(int nrj){
-		this.energie-=nrj;
-	}
+
 	public void addEnergie(){
-		if(this.energie<100){
-			this.energie+=10;
+		if(energie<100){
+			energie+=10;
 		}
 	}
+
 	public int getEnergie(){
 		return energie;
 	}
-	public void setEnergie(int nrj){
-		this.energie=nrj;
-	}
-	public void setDeath(){this.death=true;}
-	public boolean getDeath(){return this.death;}
+
+	public boolean getDeath(){return death;}
 }

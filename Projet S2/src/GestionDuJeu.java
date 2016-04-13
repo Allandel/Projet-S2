@@ -49,7 +49,7 @@ public class GestionDuJeu {
 		this.affichageDuJeu();
 	}
 	/**
-	 * Met à jour le TableauAffichage
+	 * Met ï¿½ jour le TableauAffichage
 	 */
 	private void updateTableauAffichage(){
 		for(int i= 0; i<ileDuJeu.getTableau().length;i++){
@@ -119,25 +119,27 @@ public class GestionDuJeu {
 	 */
 	private void actionPerso(int x, int y, Personnage perso){
 		int[] coordonnees = new int[2];
-		int xEvent=0,yEvent=0, bateau;
+		int xEvent=0,yEvent=0;
 
-		if(perso.getEquipe())
-			bateau=2;
-		else
-			bateau=3;
 		if (!perso.getDeath()){
 			for(int i=y-1;i<y+2;i++){
 				for(int j=x-1;j<x+2;j++){
 					if(perso instanceof Voleur){
-						if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==bateau || tableauAffichage[i][j]>5)
+						if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]>5)
 							plateauDuJeu.setHighlight(j, i, Color.BLUE);	
-					}else if(tableauAffichage[i][j]<2 || tableauAffichage[i][j]==bateau || tableauAffichage[i][j]==4 || tableauAffichage[i][j]==12){
+					}else if(tableauAffichage[i][j]<2 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==4 || tableauAffichage[i][j]==12){
 						if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y))
 							plateauDuJeu.setHighlight(j, i, Color.BLUE);
 					}
 				}
 			}
 
+			/*
+			 * || ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe()
+			 * retourne un null pointer si il n'y a pas de perso dans la case
+			 */
+			
+			
 			if(perso instanceof Explorateur){
 				do{
 					do{
@@ -145,43 +147,34 @@ public class GestionDuJeu {
 						xEvent=coordonnees[0];
 						yEvent=coordonnees[1];
 					}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)));
-				}while((tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=bateau && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=12));
+				}while(tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=12);
 
 				if(tableauAffichage[yEvent][xEvent] == 1 || tableauAffichage[yEvent][xEvent] == 4){
 					ileDuJeu.getTableau()[xEvent][yEvent].interactionRocher(perso);
-					ileDuJeu.getTableau()[x][y].epuisement(5);
-					System.out.println(ileDuJeu.getTableau()[x][y].getPersonnageCourant().getEnergie());
 				}
 			}else if(perso instanceof Voleur){
 				do{
-					coordonnees=this.getCoordonneesClic();
-					xEvent=coordonnees[0];
-					yEvent=coordonnees[1];
-				}while((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=2 && tableauAffichage[yEvent][xEvent]<5 && tableauAffichage[yEvent][xEvent]!=12));
+					do{
+						coordonnees=this.getCoordonneesClic();
+						xEvent=coordonnees[0];
+						yEvent=coordonnees[1];
+					}while((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (x==xEvent && y==yEvent));
+				}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<5 && tableauAffichage[yEvent][xEvent]!=12);
 			}
 		}
 
 		if(tableauAffichage[yEvent][xEvent]==0){
-			ileDuJeu.mouvement(x,y,xEvent, yEvent, perso);
-			ileDuJeu.getTableau()[xEvent][yEvent].epuisement(1);
-		}else if(tableauAffichage[yEvent][xEvent]==2){
+			perso.mouvement(x, y, xEvent, yEvent, ileDuJeu.getTableau());
+		}else if(tableauAffichage[yEvent][xEvent]==perso.getIdBateau()){
 			if(ileDuJeu.getTableau()[xEvent][yEvent].entreeBateau(perso))
 				ileDuJeu.getTableau()[x][y].removePersonnageCourant();
 		}else if(tableauAffichage[yEvent][xEvent]==12){
-			System.out.println("1");
 			ileDuJeu.getTableau()[xEvent][yEvent].recuperationStuff(ileDuJeu.getTableau()[x][y].getPersonnageCourant());
 			ileDuJeu.getTableau()[x][y].removePersonnageCourant();
-		}else if(tableauAffichage[yEvent][xEvent]>5 && tableauAffichage[yEvent][xEvent]<12){
-			System.out.println("2");
-			ileDuJeu.getTableau()[x][y].getPersonnageCourant().volerObjet(ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant());
-			ileDuJeu.getTableau()[x][y].epuisement(10);
-
-			for(int i=y-1;i<y+2;i++){
-				for(int j=x-1;j<x+2;j++){
-					plateauDuJeu.resetHighlight(j, i);
-				}
-			}
-
+		}else if(tableauAffichage[yEvent][xEvent]>5 && tableauAffichage[yEvent][xEvent]<12 && perso.getEquipe()==ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()){
+			perso.echangeObjet(ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant());
 		}
+		
+		System.out.println(perso.getEnergie());
 	}
 }

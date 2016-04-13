@@ -1,25 +1,49 @@
-	/**
-	 * Classe heritee de Personnage creant un personnage de type voleur
-	 * @author Valentin
-	 * @version 1.1
-	 */
+import java.util.Random;
+
+import javax.swing.JOptionPane;
+
+/**
+ * Classe heritee de Personnage creant un personnage de type voleur
+ * @author Valentin
+ * @version 1.1
+ */
 public class Voleur extends Personnage {
 	/**
-	 * Constructeur créant un voleur avec un nom, un type, un ID en fonction du parametre equipe1 determinant son equipe.
+	 * Constructeur crï¿½ant un voleur avec un nom, un type, un ID en fonction du parametre equipe1 determinant son equipe.
 	 * @param equipe1
 	 */
 	public Voleur(boolean equipe1){
+		super(equipe1);
 		setNom("Bill");
 		setType("Voleur");
-		if(equipe1){
+		if(equipe1)
 			setId(7);
-			setEquipe(equipe1);
-		}else{
+		else
 			setId(10);
-			setEquipe(equipe1);
-		}
 	}
+
 	public String toString(){
 		return "V";
 	}
+
+	public void volerObjet(Personnage p){
+		Random random=new Random();
+		if (this.equipe1!=p.equipe1){
+			if(!p.getInventaire().isEmpty() && random.nextInt(4)==2 ){
+				int objetVole=random.nextInt(p.getInventaire().size());
+				getInventaire().add(p.getInventaire().get(objetVole));
+				p.getInventaire().remove(objetVole);
+				Object[] options = { "OK" };
+				JOptionPane.showOptionDialog(null, "Vous avez volï¿½ : "+getInventaire().get(getInventaire().size()-1)+" avec un franc succï¿½s ! Vous ï¿½tes un fin voleur !", "VOL REUSSI",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+						null, options, options[0]);
+			}else{
+				Object[] options = { "OK" };
+				JOptionPane.showOptionDialog(null, "Vous avez ï¿½chouï¿½ votre vol... Peut etre aurez vous plus de chance la prochaine fois", "VOL ECHEC",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+						null, options, options[0]);
+			}
+		}
+	}
+
 }

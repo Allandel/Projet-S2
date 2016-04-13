@@ -9,9 +9,7 @@ public class ile {
 	private Case[][] tableauIle;
 	private Case CaseCoffre, CaseCle;
 	private Random random = new Random();
-	private int taille, nbRocher;
-	private int Rocherx, Rochery;
-	private int NavJ1, NavJ2;
+	private int taille, nbRocher, Rocherx, Rochery, NavJ1, NavJ2;
 	private float proportion;
 	private boolean accesNav1, accesNav2;
 	/**
@@ -57,7 +55,7 @@ public class ile {
 
 
 	/**
-	 * Initialise la clé et le coffre sur le plateau de jeu
+	 * Initialise la clï¿½ et le coffre sur le plateau de jeu
 	 */
 	void setKeyCoffre(){
 		int cpt=0;
@@ -119,7 +117,7 @@ public class ile {
 	}
 
 	/**
-	 * Initialise un Personnage aux cotés du Bateau de son équipe
+	 * Initialise un Personnage aux cotï¿½s du Bateau de son ï¿½quipe
 	 * @param v
 	 * @param equipe1
 	 */
@@ -161,18 +159,6 @@ public class ile {
 			}
 			cpt++;
 		}while(!vivant && cpt<10);
-	}
-	/**
-	 * Permet les deplacement des personnages
-	 * @param p
-	 * @param yApres
-	 * @param xApres
-	 * @param yAvant
-	 * @param xAvant
-	 */
-	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Personnage p){//Mouvement provisoire (Peut ï¿½tre ï¿½ dï¿½placer dans Personnage.java si possible)
-		tableauIle[xAvant][yAvant].removePersonnageCourant();
-		tableauIle[xApres][yApres].setPersonnageCourant(p);
 	}
 
 	/**

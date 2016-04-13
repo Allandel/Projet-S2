@@ -66,18 +66,18 @@ public class Case {
 		this.setId(0);
 	}
 	
-	public void epuisement(int nrj){
+	/*public void epuisement(int nrj){
 		if((getPersonnageCourant().getEnergie())-nrj<=0){
 			setId(12);
 			getPersonnageCourant().setDeath();
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Votre personnage était à bout de force... Cette ultime action lui a couté la vie. Son inventaire se trouve désormais au sol et peut être récupérer par n'importe quel personne", "VOTRE PERSONNE EST MORT",
+			JOptionPane.showOptionDialog(null, "Votre personnage ï¿½tait ï¿½ bout de force... Cette ultime action lui a coutï¿½ la vie. Son inventaire se trouve dï¿½sormais au sol et peut ï¿½tre rï¿½cupï¿½rer par n'importe quel personne", "VOTRE PERSONNE EST MORT",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
 			null, options, options[0]);
 		}else{
 			getPersonnageCourant().perteEnergie(nrj);
 		}
-	}
+	}*/
 	/**
 	 * Permet a un personnage d'entrer dans un bateau
 	 * @param p
@@ -89,7 +89,7 @@ public class Case {
 		return " ";
 	}
 	/**
-	 * Donne le Personnage Courant affilié a une case
+	 * Donne le Personnage Courant affiliï¿½ a une case
 	 */
 	public Personnage getPersonnageCourant(){
 		return personnageCourant;
@@ -103,6 +103,7 @@ public class Case {
 	}
 	
 	public void interactionRocher(Personnage p){}
+	
 	public void recuperationStuff(Personnage p){
 		if(this.getPersonnageCourant().getInventaire().isEmpty()){
 			removePersonnageCourant();
@@ -120,7 +121,7 @@ public class Case {
 			removePersonnageCourant();
 			setPersonnageCourant(p);
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Vous avez récuperer des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort",
+			JOptionPane.showOptionDialog(null, "Vous avez rï¿½cuperer des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 			System.out.println(getPersonnageCourant().getInventaire());
