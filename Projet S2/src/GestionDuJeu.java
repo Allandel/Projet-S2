@@ -136,7 +136,7 @@ public class GestionDuJeu {
 
 			/*
 			 * || ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe()
-			 * retourne un null pointer si il n'y a pas de perso dans la case
+			 * retourne un null pointer exception si il n'y a pas de perso dans la case
 			 */
 			
 			
@@ -173,8 +173,9 @@ public class GestionDuJeu {
 			ileDuJeu.getTableau()[x][y].removePersonnageCourant();
 		}else if(tableauAffichage[yEvent][xEvent]>5 && tableauAffichage[yEvent][xEvent]<12 && perso.getEquipe()==ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()){
 			perso.echangeObjet(ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant());
+		}else if(tableauAffichage[yEvent][xEvent]>5 && tableauAffichage[yEvent][xEvent]<12 && perso.getEquipe()!=ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
+			((Voleur) perso).volerObjet(ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant());
 		}
-		
 		System.out.println(perso.getEnergie());
 	}
 }
