@@ -210,11 +210,30 @@ public class Personnage{
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 		}
-		
-		//p.perteEnergie(5);
 	}
 
-	
+	public void recuperationStuff(int x, int y, int xApres, int yApres, Case[][] tableauIle){
+		if(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().isEmpty()){
+			Object[] options = { "OK" };
+			JOptionPane.showOptionDialog(null, "Ce cadavre n'avait rien d'interessant...", "Rencontre avec un mort",
+			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+			null, options, options[0]);
+		}else{
+			String res="\n\n";
+			for (int i=0; i<tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().size();i++){
+				this.getInventaire().add(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i));
+				res+="+ "+tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i)+"\n";
+			}
+			Object[] options = { "OK" };
+			JOptionPane.showOptionDialog(null, "Vous avez r�cuperer des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort",
+			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+			null, options, options[0]);
+			System.out.println(this.getInventaire());
+		}
+		tableauIle[xApres][yApres].removePersonnageCourant();
+		tableauIle[x][y].removePersonnageCourant();
+		tableauIle[xApres][yApres].setPersonnageCourant(this);
+	}	
 	
 	public void addEnergie(){
 		if(energie<100){

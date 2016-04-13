@@ -74,28 +74,4 @@ public class Case {
 		}
 		return personnageCourant.toString();
 	}
-
-	public void recuperationStuff(Personnage p){
-		if(this.getPersonnageCourant().getInventaire().isEmpty()){
-			removePersonnageCourant();
-			setPersonnageCourant(p);
-			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Ce cadavre n'avait rien d'interessant...", "Rencontre avec un mort",
-			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-			null, options, options[0]);
-		}else{
-			String res="\n\n";
-			for (int i=0; i<getPersonnageCourant().getInventaire().size();i++){
-				p.getInventaire().add(this.getPersonnageCourant().getInventaire().get(i));
-				res+="+ "+this.getPersonnageCourant().getInventaire().get(i)+"\n";
-			}
-			removePersonnageCourant();
-			setPersonnageCourant(p);
-			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Vous avez r�cuperer des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort",
-			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-			null, options, options[0]);
-			System.out.println(getPersonnageCourant().getInventaire());
-		}
-	}
 }

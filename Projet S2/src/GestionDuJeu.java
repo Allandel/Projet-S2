@@ -168,8 +168,7 @@ public class GestionDuJeu {
 		}else if(tableauAffichage[yEvent][xEvent]==perso.getIdBateau()){
 			perso.entreeBateau(x, y, xEvent, yEvent, ileDuJeu.getTableau());
 		}else if(tableauAffichage[yEvent][xEvent]==12){
-			ileDuJeu.getTableau()[xEvent][yEvent].recuperationStuff(ileDuJeu.getTableau()[x][y].getPersonnageCourant());
-			ileDuJeu.getTableau()[x][y].removePersonnageCourant();
+			perso.recuperationStuff(x,y,xEvent,yEvent, ileDuJeu.getTableau());
 		}else if(tableauAffichage[yEvent][xEvent]>5 && tableauAffichage[yEvent][xEvent]<12 && perso.getEquipe()==ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()){
 			perso.echangeObjet(ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant());
 		}else if(tableauAffichage[yEvent][xEvent]>5 && tableauAffichage[yEvent][xEvent]<12 && perso.getEquipe()!=ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
