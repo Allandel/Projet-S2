@@ -143,11 +143,7 @@ public class GestionDuJeu {
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
 				}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)));
-			}while(tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=12 && !(tableauAffichage[yEvent][xEvent]>5 || ileDuJeu.getTableau()[yEvent][xEvent].getPersonnageCourant().getEquipe()==perso.getEquipe()));
-
-			if(tableauAffichage[yEvent][xEvent] == 1 || tableauAffichage[yEvent][xEvent] == 4){
-				((Explorateur)perso).interactionRocher(xEvent, yEvent, ileDuJeu.getTableau());
-			}
+			}while(tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=12 && !(tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()==perso.getEquipe()));
 		}else if(perso instanceof Voleur){
 			do{
 				do{
@@ -155,11 +151,12 @@ public class GestionDuJeu {
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
 				}while((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (x==xEvent && y==yEvent));
-			}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<5 && tableauAffichage[yEvent][xEvent]!=12);
+			}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=12);
 		}
 		//}
-
-		if(tableauAffichage[yEvent][xEvent]==0){
+		if(perso instanceof Explorateur && tableauAffichage[yEvent][xEvent] == 1 || tableauAffichage[yEvent][xEvent] == 4){
+			((Explorateur)perso).interactionRocher(xEvent, yEvent, ileDuJeu.getTableau());
+		}else if(tableauAffichage[yEvent][xEvent]==0){
 			perso.mouvement(x, y, xEvent, yEvent, ileDuJeu.getTableau());
 		}else if(tableauAffichage[yEvent][xEvent]==perso.getIdBateau()){
 			perso.entreeBateau(x, y, xEvent, yEvent, ileDuJeu.getTableau());
