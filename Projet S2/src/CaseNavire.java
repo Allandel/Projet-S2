@@ -35,19 +35,16 @@ public class CaseNavire extends Case {
 	/**
 	 * Permet a un personnage de sortir du bateau dans le bateau
 	 */
-	public String choisirSortieBateau(){
-		String persoSortant=" ";
+	public Personnage choisirSortieBateau(){
+		Personnage persoSortant = null;
 		
 		if(!stockNavire.isEmpty()){
-			int cpt=0;
 			JOptionPane pane=new JOptionPane();
-			String rang="";
-			String [] listePerso= new String[stockNavire.size()];
-			for(Personnage perso : stockNavire){
-				listePerso[cpt]=perso.getType()+" "+perso.getNom();
-				cpt++;
+			Personnage [] listePerso= new Personnage[stockNavire.size()];
+			for(int cpt=0; cpt<stockNavire.size();cpt++){
+				listePerso[cpt]=stockNavire.get(cpt);
 			}
-			persoSortant=(String) JOptionPane.showInputDialog(null,"Quels personnage voulez-vous faire sortir du navire ?", "Sortie du navire", JOptionPane.QUESTION_MESSAGE, null, listePerso, listePerso[0]);
+			persoSortant=(Personnage) JOptionPane.showInputDialog(null,"Quels personnage voulez-vous faire sortir du navire ?", "Sortie du navire", JOptionPane.QUESTION_MESSAGE, null, listePerso, listePerso[0]);
 			System.out.println(persoSortant);
 		}else{
 			Object[] options = { "OK" };

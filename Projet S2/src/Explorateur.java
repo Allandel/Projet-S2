@@ -71,7 +71,7 @@ public class Explorateur extends Personnage{
 	}
 
 	
-	public String toString(){
+	public String toString(boolean console){
 		return "E";
-	}
+	}	
 }

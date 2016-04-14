@@ -262,7 +262,7 @@ public class ile {
 		for(int i = 0;i<tableauIle.length;i++){
 			res+=borne+"\n";
 			for(int j = 0;j<tableauIle[0].length;j++){
-				res+= "| "+tableauIle[i][j]+" ";
+				res+= "| "+tableauIle[i][j].toString()+" ";
 			}
 			res+="|\n";
 		}

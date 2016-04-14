@@ -22,7 +22,7 @@ public class Voleur extends Personnage {
 			setId(10);
 	}
 
-	public String toString(){
+	public String toString(boolean console){
 		return "V";
 	}
 

@@ -72,6 +72,6 @@ public class Case {
 		if(personnageCourant ==null){
 			return  " ";
 		}
-		return personnageCourant.toString();
+		return personnageCourant.toString(true);
 	}
 }

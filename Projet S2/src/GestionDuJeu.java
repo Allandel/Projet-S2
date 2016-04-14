@@ -102,12 +102,13 @@ public class GestionDuJeu {
 			xEvent=coordonnees[0];
 			yEvent=coordonnees[1];
 		}while(tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || tableauAffichage[yEvent][xEvent]==12);
-
+		
 		plateauDuJeu.setHighlight(xEvent, yEvent, Color.BLUE);
-
-		if(tableauAffichage[yEvent][xEvent]>=6){ //ajouter l'id du voleur quand on aura fini le voleur
+		Personnage perso;
+		if(tableauAffichage[yEvent][xEvent]>=6)
 			this.actionPerso(xEvent,yEvent,ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant());
-		}
+		else if(tableauAffichage[yEvent][xEvent]==2 || tableauAffichage[yEvent][xEvent]==3)
+			perso=((CaseNavire)ileDuJeu.getTableau()[xEvent][yEvent]).choisirSortieBateau();
 
 		this.affichageDuJeu();
 	}

@@ -9,9 +9,8 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 public class Personnage{
 
-	private int energie=100;
+	private int energie=100, id, idBateau;
 	private String nom, type;
-	private int id, idBateau;
 	protected ArrayList <String> inventaire=new ArrayList<String>();
 	protected boolean equipe1;
 	private boolean death=false;
@@ -105,12 +104,9 @@ public class Personnage{
 		decision=JOptionPane.showConfirmDialog(null,"Désirez vous effectuer un échange avec ce membre de votre équipe ?", "Effectuer un echange ?", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
 			if(!this.inventaire.isEmpty()){
-				int cpt=0;
-				String rang="";
 				String [] listeItem= new String[inventaire.size()];
-				for(String item : inventaire){
+				for(int cpt=0; cpt<inventaire.size(); cpt++){
 					listeItem[cpt]=inventaire.get(cpt);
-					cpt++;
 				}
 				itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?", "Boite d'�changes", JOptionPane.QUESTION_MESSAGE, null, listeItem, listeItem[0]);
 				p.inventaire.add(itemEchange);
@@ -123,7 +119,6 @@ public class Personnage{
 			}
 		}	
 	}
-
 
 	/**
 	 * Permet les deplacement des personnages
@@ -194,4 +189,12 @@ public class Personnage{
 	}
 
 	public boolean getDeath(){return death;}
+	
+	public String toString(){
+		return ""+this.getType()+" "+this.getNom();
+	}
+	
+	public String toString(boolean console){
+		return "";
+	}
 }
