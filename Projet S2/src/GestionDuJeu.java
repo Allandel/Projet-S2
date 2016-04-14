@@ -143,7 +143,7 @@ public class GestionDuJeu {
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
 				}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)));
-			}while(tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=12);
+			}while(tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=12 && !(tableauAffichage[yEvent][xEvent]>5 || ileDuJeu.getTableau()[yEvent][xEvent].getPersonnageCourant().getEquipe()==perso.getEquipe()));
 
 			if(tableauAffichage[yEvent][xEvent] == 1 || tableauAffichage[yEvent][xEvent] == 4){
 				((Explorateur)perso).interactionRocher(xEvent, yEvent, ileDuJeu.getTableau());
