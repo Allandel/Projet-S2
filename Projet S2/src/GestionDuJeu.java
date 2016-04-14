@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
  * @version 1.1 
  */
 public class GestionDuJeu {
+	private ActionJoueur action =new ActionJoueur();
 	private ile ileDuJeu;
 	private int[][] tableauAffichage;
 	private String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png","img/1.explorateur.png","img/1.voleur.png","img/1.piegeur.png","img/2.explorateur.png","img/2.voleur.png","img/2.piegeur.png","img/cadavre.png"};
@@ -76,39 +77,17 @@ public class GestionDuJeu {
 		plateauDuJeu.affichage();
 	}
 	/**
-	 * Recupere les coordonnees de clic 
-	 */
-	private int [] getCoordonneesClic(){
-		int [] res= new int[2];
-		InputEvent event;
-
-		do{
-			event=  plateauDuJeu.waitEvent();	
-		}while(!(event instanceof MouseEvent));
-
-		res[0]=plateauDuJeu.getX((MouseEvent) event) ;
-		res[1]=plateauDuJeu.getY((MouseEvent) event) ;
-		return res;
-	}
-	/**
 	 * Organise la succession d'action possible pour le joueur
 	 */
 	public void tourDuJoueur(){
-		int[] coordonnees =new int[2];
-		int xEvent,yEvent;
+		int [] cordonnees=action.choixCase(plateauDuJeu, tableauAffichage);
 
-		do{
-			coordonnees=this.getCoordonneesClic();
-			xEvent=coordonnees[0];
-			yEvent=coordonnees[1];
-		}while(tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || tableauAffichage[yEvent][xEvent]==12);
-		
-		plateauDuJeu.setHighlight(xEvent, yEvent, Color.BLUE);
+		plateauDuJeu.setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
 		Personnage perso;
-		if(tableauAffichage[yEvent][xEvent]>=6)
-			this.actionPerso(xEvent,yEvent,ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant());
-		else if(tableauAffichage[yEvent][xEvent]==2 || tableauAffichage[yEvent][xEvent]==3)
-			perso=((CaseNavire)ileDuJeu.getTableau()[xEvent][yEvent]).choisirSortieBateau();
+		if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6)
+			this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
+		else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==2 || tableauAffichage[cordonnees[1]][cordonnees[0]]==3)
+			perso=((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).choisirSortieBateau();
 
 		this.affichageDuJeu();
 	}
@@ -119,10 +98,7 @@ public class GestionDuJeu {
 	 * @param y
 	 */
 	private void actionPerso(int x, int y, Personnage perso){
-		int[] coordonnees = new int[2];
-		int xEvent=0,yEvent=0;
 
-		//	if (!perso.getDeath()){
 		for(int i=y-1;i<y+2;i++){
 			for(int j=x-1;j<x+2;j++){
 				if(perso instanceof Voleur){
@@ -137,36 +113,20 @@ public class GestionDuJeu {
 			}
 		}
 
-		if(perso instanceof Explorateur){
-			do{
-				do{
-					coordonnees=this.getCoordonneesClic();
-					xEvent=coordonnees[0];
-					yEvent=coordonnees[1];
-				}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)));
-			}while(tableauAffichage[yEvent][xEvent]>1 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=12 && !(tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()==perso.getEquipe()));
-		}else if(perso instanceof Voleur){
-			do{
-				do{
-					coordonnees=this.getCoordonneesClic();
-					xEvent=coordonnees[0];
-					yEvent=coordonnees[1];
-				}while((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (x==xEvent && y==yEvent));
-			}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=12);
-		}
-		//}
-		if(perso instanceof Explorateur && tableauAffichage[yEvent][xEvent] == 1 || tableauAffichage[yEvent][xEvent] == 4){
-			((Explorateur)perso).interactionRocher(xEvent, yEvent, ileDuJeu.getTableau());
-		}else if(tableauAffichage[yEvent][xEvent]==0){
-			perso.mouvement(x, y, xEvent, yEvent, ileDuJeu.getTableau());
-		}else if(tableauAffichage[yEvent][xEvent]==perso.getIdBateau()){
-			perso.entreeBateau(x, y, xEvent, yEvent, ileDuJeu.getTableau());
-		}else if(tableauAffichage[yEvent][xEvent]==12){
-			perso.recuperationStuff(x,y,xEvent,yEvent, ileDuJeu.getTableau());
-		}else if(tableauAffichage[yEvent][xEvent]>5 && tableauAffichage[yEvent][xEvent]<12 && perso.getEquipe()==ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()){
-			perso.echangeObjet(ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant());
-		}else if(tableauAffichage[yEvent][xEvent]>5 && tableauAffichage[yEvent][xEvent]<12 && perso.getEquipe()!=ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
-			((Voleur) perso).volerObjet(ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant());
+		int[] coordonnees = action.choixCase(ileDuJeu, plateauDuJeu, tableauAffichage, x, y, perso);
+		
+		if(perso instanceof Explorateur && tableauAffichage[coordonnees[1]][coordonnees[0]] == 1 || tableauAffichage[coordonnees[1]][coordonnees[0]] == 4){
+			((Explorateur)perso).interactionRocher(coordonnees[0], coordonnees[1], ileDuJeu.getTableau());
+		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==0){
+			perso.mouvement(x, y, coordonnees[0], coordonnees[1], ileDuJeu.getTableau());
+		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==perso.getIdBateau()){
+			perso.entreeBateau(x, y, coordonnees[0], coordonnees[1], ileDuJeu.getTableau());
+		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==12){
+			perso.recuperationStuff(x,y,coordonnees[0],coordonnees[1], ileDuJeu.getTableau());
+		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]>5 && tableauAffichage[coordonnees[1]][coordonnees[0]]<12 && perso.getEquipe()==ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant().getEquipe()){
+			perso.echangeObjet(ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant());
+		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]>5 && tableauAffichage[coordonnees[1]][coordonnees[0]]<12 && perso.getEquipe()!=ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
+			((Voleur) perso).volerObjet(ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant());
 		}
 		System.out.println(perso.getEnergie());
 	}
