@@ -127,18 +127,14 @@ public class GestionDuJeu {
 				if(perso instanceof Voleur){
 					if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]>5)
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
-				}else if(tableauAffichage[i][j]<2 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==4 || tableauAffichage[i][j]==12){
-					if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y))
+				}else if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
+					if(tableauAffichage[i][j]<2 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==4 || tableauAffichage[i][j]==12)
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);
+					else if(tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe())
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}
 			}
 		}
-
-		/*
-		 * || ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe()
-		 * retourne un null pointer exception si il n'y a pas de perso dans la case
-		 */
-
 
 		if(perso instanceof Explorateur){
 			do{
