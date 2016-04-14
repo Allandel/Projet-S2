@@ -154,7 +154,7 @@ public class Personnage{
 		}
 	}
 	
-	public void recuperationStuff(int x, int y, int xApres, int yApres, Case[][] tableauIle){
+	public void recuperationStuff(boolean sortieBateau, int x, int y, int xApres, int yApres, Case[][] tableauIle){
 		if(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().isEmpty()){
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Ce cadavre n'avait rien d'interessant...", "Rencontre avec un mort",
@@ -172,8 +172,10 @@ public class Personnage{
 			null, options, options[0]);
 			System.out.println(this.getInventaire());
 		}
+		
 		tableauIle[xApres][yApres].removePersonnageCourant();
-		tableauIle[x][y].removePersonnageCourant();
+		if(!sortieBateau)
+			tableauIle[x][y].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(this);
 	}	
 	

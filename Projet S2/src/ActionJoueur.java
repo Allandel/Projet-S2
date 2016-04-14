@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 
@@ -24,6 +25,20 @@ public class ActionJoueur {
 		int[] coordonnees =new int[2];
 		int xEvent,yEvent;
 		
+		for(int i=y-1;i<y+2;i++){
+			for(int j=x-1;j<x+2;j++){
+				if(perso instanceof Voleur){
+					if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]>5)
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
+				}else if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
+					if(tableauAffichage[i][j]<2 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==4 || tableauAffichage[i][j]==12)
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);
+					else if(tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe())
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);
+				}
+			}
+		}
+		
 		if(perso instanceof Explorateur){
 			do{
 				do{
@@ -43,6 +58,43 @@ public class ActionJoueur {
 		}
 		return coordonnees;
 	}
+	
+	public int [] choixCaseSortie(Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Personnage perso){
+		int[] coordonnees =new int[2];
+		int xEvent,yEvent;
+		
+		for(int i=y-1;i<y+2;i++){
+			for(int j=x-1;j<x+2;j++){
+				if(perso instanceof Voleur){
+					if(tableauAffichage[i][j]==0 || tableauAffichage[i][j]==12)
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
+				}else if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
+					if(tableauAffichage[i][j]==0 || tableauAffichage[i][j]==12)
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);
+				}
+			}
+		}
+		
+		if(perso instanceof Explorateur){
+			do{
+				do{
+					coordonnees=this.getCoordonneesClic(plateauDuJeu);
+					xEvent=coordonnees[0];
+					yEvent=coordonnees[1];
+				}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)));
+			}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=12 );
+		}else if(perso instanceof Voleur){
+			do{
+				do{
+					coordonnees=this.getCoordonneesClic(plateauDuJeu);
+					xEvent=coordonnees[0];
+					yEvent=coordonnees[1];
+				}while((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (x==xEvent && y==yEvent));
+			}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=12);
+		}
+		return coordonnees;
+	}
+	
 	/**
 	 * Recupere les coordonnees de clic 
 	 */

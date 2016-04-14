@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 /**
  * Classe permettant la gestion du jeu en organisant les tours de jeu et les possibilites
@@ -83,11 +81,11 @@ public class GestionDuJeu {
 		int [] cordonnees=action.choixCase(plateauDuJeu, tableauAffichage);
 
 		plateauDuJeu.setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
-		Personnage perso;
+
 		if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6)
 			this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
 		else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==2 || tableauAffichage[cordonnees[1]][cordonnees[0]]==3)
-			perso=((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).choisirSortieBateau();
+			((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, plateauDuJeu, tableauAffichage, cordonnees[0], cordonnees[1]);
 
 		this.affichageDuJeu();
 	}
@@ -99,20 +97,6 @@ public class GestionDuJeu {
 	 */
 	private void actionPerso(int x, int y, Personnage perso){
 
-		for(int i=y-1;i<y+2;i++){
-			for(int j=x-1;j<x+2;j++){
-				if(perso instanceof Voleur){
-					if(tableauAffichage[i][j]==0 ||tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]>5)
-						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
-				}else if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
-					if(tableauAffichage[i][j]<2 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==4 || tableauAffichage[i][j]==12)
-						plateauDuJeu.setHighlight(j, i, Color.BLUE);
-					else if(tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe())
-						plateauDuJeu.setHighlight(j, i, Color.BLUE);
-				}
-			}
-		}
-
 		int[] coordonnees = action.choixCase(ileDuJeu, plateauDuJeu, tableauAffichage, x, y, perso);
 		
 		if(perso instanceof Explorateur && tableauAffichage[coordonnees[1]][coordonnees[0]] == 1 || tableauAffichage[coordonnees[1]][coordonnees[0]] == 4){
@@ -122,7 +106,7 @@ public class GestionDuJeu {
 		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==perso.getIdBateau()){
 			perso.entreeBateau(x, y, coordonnees[0], coordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==12){
-			perso.recuperationStuff(x,y,coordonnees[0],coordonnees[1], ileDuJeu.getTableau());
+			perso.recuperationStuff(false,x,y,coordonnees[0],coordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]>5 && tableauAffichage[coordonnees[1]][coordonnees[0]]<12 && perso.getEquipe()==ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant().getEquipe()){
 			perso.echangeObjet(ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant());
 		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]>5 && tableauAffichage[coordonnees[1]][coordonnees[0]]<12 && perso.getEquipe()!=ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Voleur){

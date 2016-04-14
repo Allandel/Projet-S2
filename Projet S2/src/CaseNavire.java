@@ -35,8 +35,9 @@ public class CaseNavire extends Case {
 	/**
 	 * Permet a un personnage de sortir du bateau dans le bateau
 	 */
-	public Personnage choisirSortieBateau(){
+	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y){
 		Personnage persoSortant = null;
+		ActionJoueur action= new ActionJoueur();
 		
 		if(!stockNavire.isEmpty()){
 			Personnage [] listePerso= new Personnage[stockNavire.size()];
@@ -51,7 +52,14 @@ public class CaseNavire extends Case {
 			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 			null, options, options[0]);
 		}
-		return persoSortant;
+
+		int[] cordonnees = action.choixCaseSortie(plateauDuJeu, tableauAffichage, x, y, persoSortant);
+		
+		if(tableauAffichage[x][y]==0)
+			ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
+		else
+			persoSortant.recuperationStuff(true, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau());
+		stockNavire.remove(persoSortant);
 	}
 	
 	public String toString(){
