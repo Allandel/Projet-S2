@@ -101,7 +101,7 @@ public class GestionDuJeu {
 			coordonnees=this.getCoordonneesClic();
 			xEvent=coordonnees[0];
 			yEvent=coordonnees[1];
-		}while(tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5);
+		}while(tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || tableauAffichage[yEvent][xEvent]==12);
 
 		plateauDuJeu.setHighlight(xEvent, yEvent, Color.BLUE);
 
