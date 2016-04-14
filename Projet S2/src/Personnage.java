@@ -4,7 +4,6 @@ import java.util.ArrayList;
  * @author Valentin
  * @version 1.1 
  */
-import java.util.Random;
 
 import javax.swing.JOptionPane;
 public class Personnage{
@@ -79,7 +78,7 @@ public class Personnage{
 	/**
 	 * @return the inventaire
 	 */
-	public ArrayList getInventaire(){
+	public ArrayList<String> getInventaire(){
 		return this.inventaire;
 	}
 	/**

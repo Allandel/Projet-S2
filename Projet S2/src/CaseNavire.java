@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  */
 public class CaseNavire extends Case {
 	private ArrayList<Personnage>stockNavire=new ArrayList<Personnage>();
-	private int decision;
+
 	/**
 	 * Construit un navire en lui attribuant l'ID donnee
 	 * @param id
@@ -20,7 +20,7 @@ public class CaseNavire extends Case {
 	/**
 	 * Retourne la liste de Personnage du Navire
 	 */
-	public ArrayList getStocknavire(){
+	public ArrayList<Personnage> getStocknavire(){
 		return stockNavire;
 	}
 
@@ -39,7 +39,6 @@ public class CaseNavire extends Case {
 		Personnage persoSortant = null;
 		
 		if(!stockNavire.isEmpty()){
-			JOptionPane pane=new JOptionPane();
 			Personnage [] listePerso= new Personnage[stockNavire.size()];
 			for(int cpt=0; cpt<stockNavire.size();cpt++){
 				listePerso[cpt]=stockNavire.get(cpt);

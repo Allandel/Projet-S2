@@ -1,4 +1,3 @@
-import javax.swing.JOptionPane;
 
 /**
  * Classe heritee de Case representant les Rochers

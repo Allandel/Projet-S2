@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
-
 
 /**
  * Classe representant une case
