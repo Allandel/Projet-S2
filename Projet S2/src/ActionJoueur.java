@@ -16,15 +16,15 @@ public class ActionJoueur {
 			xEvent=coordonnees[0];
 			yEvent=coordonnees[1];
 		}while(tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || tableauAffichage[yEvent][xEvent]==12);
-		
+
 		return coordonnees;
 	}
-	
-	
+
+
 	public int [] choixCase(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Personnage perso){
 		int[] coordonnees =new int[2];
 		int xEvent,yEvent;
-		
+
 		for(int i=y-1;i<y+2;i++){
 			for(int j=x-1;j<x+2;j++){
 				if(perso instanceof Voleur){
@@ -38,7 +38,7 @@ public class ActionJoueur {
 				}
 			}
 		}
-		
+
 		if(perso instanceof Explorateur){
 			do{
 				do{
@@ -58,11 +58,11 @@ public class ActionJoueur {
 		}
 		return coordonnees;
 	}
-	
+
 	public int [] choixCaseSortie(Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Personnage perso){
 		int[] coordonnees =new int[2];
 		int xEvent,yEvent;
-		
+
 		for(int i=y-1;i<y+2;i++){
 			for(int j=x-1;j<x+2;j++){
 				if(perso instanceof Voleur){
@@ -74,7 +74,7 @@ public class ActionJoueur {
 				}
 			}
 		}
-		
+
 		if(perso instanceof Explorateur){
 			do{
 				do{
@@ -94,7 +94,7 @@ public class ActionJoueur {
 		}
 		return coordonnees;
 	}
-	
+
 	/**
 	 * Recupere les coordonnees de clic 
 	 */
