@@ -77,17 +77,19 @@ public class GestionDuJeu {
 	/**
 	 * Organise la succession d'action possible pour le joueur
 	 */
-	public void tourDuJoueur(){
+	public boolean tourDuJoueur(){
+		boolean gagner=false;
 		int [] cordonnees=action.choixCase(plateauDuJeu, tableauAffichage);
-
+		
 		plateauDuJeu.setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
 
 		if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6)
-			this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
+			gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
 		else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==2 || tableauAffichage[cordonnees[1]][cordonnees[0]]==3)
 			((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, plateauDuJeu, tableauAffichage, cordonnees[0], cordonnees[1]);
 
 		this.affichageDuJeu();
+		return gagner;
 	}
 	/**
 	 * Permet a un personnage d'entrer dans le bateau
@@ -95,8 +97,8 @@ public class GestionDuJeu {
 	 * @param x
 	 * @param y
 	 */
-	private void actionPerso(int x, int y, Personnage perso){
-
+	private boolean actionPerso(int x, int y, Personnage perso){
+		boolean gagner=false;
 		int[] coordonnees = action.choixCase(ileDuJeu, plateauDuJeu, tableauAffichage, x, y, perso);
 		
 		if(perso instanceof Explorateur && tableauAffichage[coordonnees[1]][coordonnees[0]] == 1 || tableauAffichage[coordonnees[1]][coordonnees[0]] == 4){
@@ -104,7 +106,7 @@ public class GestionDuJeu {
 		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==0){
 			perso.mouvement(x, y, coordonnees[0], coordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==perso.getIdBateau()){
-			perso.entreeBateau(x, y, coordonnees[0], coordonnees[1], ileDuJeu.getTableau());
+			gagner=perso.entreeBateau(x, y, coordonnees[0], coordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==12){
 			perso.recuperationStuff(false,x,y,coordonnees[0],coordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]>5 && tableauAffichage[coordonnees[1]][coordonnees[0]]<12 && perso.getEquipe()==ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant().getEquipe()){
@@ -113,5 +115,7 @@ public class GestionDuJeu {
 			((Voleur) perso).volerObjet(ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant());
 		}
 		System.out.println(perso.getEnergie());
+		
+		return gagner;
 	}
 }

@@ -133,12 +133,15 @@ public class Personnage{
 		perteEnergie(1, xApres,yApres, tableauIle);
 	}
 
-	public void entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
+	public boolean entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
 		int decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
 			((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
 			tableauIle[xAvant][yAvant].removePersonnageCourant();
+			if(inventaire.contains("Tresor"))
+				return true;
 		}
+		return false;
 	}
 
 	private void perteEnergie(int nrj, int x, int y, Case[][] tableauIle){

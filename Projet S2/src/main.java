@@ -7,10 +7,10 @@ public class main {
 
 	public static void main(String[] args) {
 		GestionDuJeu gestion=new GestionDuJeu();
-
-		while(true){
-			gestion.tourDuJoueur();
-		}
+		boolean gagner;
+		do{
+			gagner=gestion.tourDuJoueur();
+		}while(!gagner);
 	
 	}
 }
