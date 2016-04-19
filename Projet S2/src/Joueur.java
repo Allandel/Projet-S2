@@ -1,14 +1,26 @@
+import java.util.ArrayList;
+
 /**
  * Classe 
  * @author Allan
  * @version 1.0
  */
 public class Joueur {
-	Personnage[] equipe;
+	private ArrayList<Personnage> equipe;
+	private int id;
 	/**
 	 * Jalon2: Construit un tableau de personnage
 	 */
-	Joueur(){
-		this.equipe = new Personnage[3];
+	Joueur(int id){
+		this.id=id;
 	}
+	
+	public int getId(){
+		return id;
+	}
+
+	public void addPerso(Personnage perso){
+		equipe.add(perso);
+	}
+	
 }
