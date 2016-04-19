@@ -38,30 +38,46 @@ public class CaseNavire extends Case {
 	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y){
 		Personnage persoSortant = null;
 		ActionJoueur action= new ActionJoueur();
-		
-		if(!stockNavire.isEmpty()){
-			Personnage [] listePerso= new Personnage[stockNavire.size()];
-			for(int cpt=0; cpt<stockNavire.size();cpt++){
-				listePerso[cpt]=stockNavire.get(cpt);
+		int nbrVivant=0, i=0;
+		for(int cpt=0; cpt<stockNavire.size();cpt++){
+			if(!stockNavire.get(cpt).getDeath())
+				nbrVivant++;
+		}
+		if(!stockNavire.isEmpty() && nbrVivant>0){
+
+			Personnage [] listePerso= new Personnage[nbrVivant];
+			for(Personnage perso: stockNavire){
+				if(!perso.getDeath()){
+					listePerso[i]=perso;
+					i++;
+				}
 			}
 			persoSortant=(Personnage) JOptionPane.showInputDialog(null,"Quels personnage voulez-vous faire sortir du navire ?", "Sortie du navire", JOptionPane.QUESTION_MESSAGE, null, listePerso, listePerso[0]);
-			System.out.println(persoSortant);
+			if(persoSortant!=null){
+				int[] cordonnees = action.choixCaseSortie(plateauDuJeu, tableauAffichage, x, y, persoSortant);
+
+				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==0)
+					ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
+				else
+					persoSortant.recuperationStuff(true,false, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau());
+				stockNavire.remove(persoSortant);
+			}
 		}else{
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Il n'y a pas de personnages dans le Navire", "Attention",
-			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-			null, options, options[0]);
+					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+					null, options, options[0]);
 		}
-
-		int[] cordonnees = action.choixCaseSortie(plateauDuJeu, tableauAffichage, x, y, persoSortant);
-		
-		if(tableauAffichage[cordonnees[1]][cordonnees[0]]==0)
-			ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
-		else
-			persoSortant.recuperationStuff(true, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau());
-		stockNavire.remove(persoSortant);
 	}
-	
+
+	public boolean persoMort(){
+		for(Personnage perso : stockNavire){
+			if(perso.getDeath())
+				return true;
+		}
+		return false;
+	}
+
 	public String toString(){
 		return "N";
 	}

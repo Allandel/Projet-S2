@@ -109,7 +109,7 @@ public class GestionDuJeu {
 		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
 			gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==12){
-			perso.recuperationStuff(false,x,y,cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
+			perso.recuperationStuff(false,false, x,y,cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<12 && perso.getEquipe()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe()){
 			perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
 		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<12 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
