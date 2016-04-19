@@ -11,6 +11,7 @@ public class main {
 		do{
 			gagner=gestion.tourDuJoueur();
 		}while(!gagner);
-	
+		
+		System.exit(0);
 	}
 }
