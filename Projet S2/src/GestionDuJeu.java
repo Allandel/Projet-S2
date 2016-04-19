@@ -15,6 +15,7 @@ public class GestionDuJeu {
 	 * Constructeur initialisant le plateau de jeu de base
 	 */
 	public GestionDuJeu(){
+		Joueur [] joueur = {new Joueur(1), new Joueur(2)};
 		int longueurLigne, proportionNb;
 		JOptionPane selectionTaille= new JOptionPane();
 		String ligne, proportion;
@@ -99,20 +100,20 @@ public class GestionDuJeu {
 	 */
 	private boolean actionPerso(int x, int y, Personnage perso){
 		boolean gagner=false;
-		int[] coordonnees = action.choixCase(ileDuJeu, plateauDuJeu, tableauAffichage, x, y, perso);
+		int[] cordonnees = action.choixCase(ileDuJeu, plateauDuJeu, tableauAffichage, x, y, perso);
 		
-		if(perso instanceof Explorateur && tableauAffichage[coordonnees[1]][coordonnees[0]] == 1 || tableauAffichage[coordonnees[1]][coordonnees[0]] == 4){
-			((Explorateur)perso).interactionRocher(coordonnees[0], coordonnees[1], ileDuJeu.getTableau());
-		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==0){
-			perso.mouvement(x, y, coordonnees[0], coordonnees[1], ileDuJeu.getTableau());
-		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==perso.getIdBateau()){
-			gagner=perso.entreeBateau(x, y, coordonnees[0], coordonnees[1], ileDuJeu.getTableau());
-		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]==12){
-			perso.recuperationStuff(false,x,y,coordonnees[0],coordonnees[1], ileDuJeu.getTableau());
-		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]>5 && tableauAffichage[coordonnees[1]][coordonnees[0]]<12 && perso.getEquipe()==ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant().getEquipe()){
-			perso.echangeObjet(ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant());
-		}else if(tableauAffichage[coordonnees[1]][coordonnees[0]]>5 && tableauAffichage[coordonnees[1]][coordonnees[0]]<12 && perso.getEquipe()!=ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
-			((Voleur) perso).volerObjet(ileDuJeu.getTableau()[coordonnees[0]][coordonnees[1]].getPersonnageCourant());
+		if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
+			((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==0){
+			perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
+			gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==12){
+			perso.recuperationStuff(false,x,y,cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
+		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<12 && perso.getEquipe()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe()){
+			perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
+		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<12 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
+			((Voleur) perso).volerObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
 		}
 		System.out.println(perso.getEnergie());
 		

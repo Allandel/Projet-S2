@@ -26,7 +26,7 @@ public class Voleur extends Personnage {
 		return "V";
 	}
 
-	public void volerObjet(Personnage p){
+	public void volerObjet(Personnage p, int x, int y, Case[][] tableauIle){
 		Random random=new Random();
 		if (this.equipe1!=p.equipe1){
 			if(!p.getInventaire().isEmpty() && random.nextInt(4)==2 ){
@@ -43,6 +43,7 @@ public class Voleur extends Personnage {
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 						null, options, options[0]);
 			}
+			super.perteEnergie(10, x,y, tableauIle);
 		}
 	}
 

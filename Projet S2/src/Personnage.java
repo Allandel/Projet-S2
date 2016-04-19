@@ -13,7 +13,7 @@ public class Personnage{
 	protected ArrayList <String> inventaire=new ArrayList<String>();
 	protected boolean equipe1;
 	private boolean death=false;
-
+	
 	Personnage(boolean equipe){
 		this.equipe1=equipe;
 		if(equipe1)
@@ -135,6 +135,7 @@ public class Personnage{
 
 	public boolean entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
 		int decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
+		perteEnergie(1, xApres,yApres, tableauIle);
 		if (decision==0){
 			((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
 			tableauIle[xAvant][yAvant].removePersonnageCourant();
@@ -144,9 +145,10 @@ public class Personnage{
 		return false;
 	}
 
-	private void perteEnergie(int nrj, int x, int y, Case[][] tableauIle){
+	protected void perteEnergie(int nrj, int x, int y, Case[][] tableauIle){
 		if(energie-nrj<=0){
-			tableauIle[x][y].setId(12);
+			if(tableauIle[x][y].getId()==0)
+				tableauIle[x][y].setId(12);
 			death=true;
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Votre personnage �tait � bout de force... Cette ultime action lui a cout� la vie. Son inventaire se trouve d�sormais au sol et peut �tre r�cup�rer par n'importe quel personne", "VOTRE PERSONNE EST MORT",
