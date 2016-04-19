@@ -130,7 +130,7 @@ public class Personnage{
 	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(this);
-		perteEnergie(99, xApres,yApres, tableauIle);
+		perteEnergie(1, xApres,yApres, tableauIle);
 	}
 
 	public boolean entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
