@@ -36,9 +36,6 @@ class GraphicPane extends JPanel {
 	 */
 	public GraphicPane(String[] gif,int taille){
 		jeu = null ;
-		// TODO Rendre la spécification de taille optionnelle (la calculer à partir du tableau d'entier)
-		// TODO Affichage d'un message d'erreur si fichier non trouvé.
-		// TODO Vérifier l'uniformité de taille des images	
 		nbLig = taille ;
 		nbCol = taille ;
 		dimImage = 15 ; // Taille par défaut d'une case.
