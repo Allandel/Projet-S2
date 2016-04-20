@@ -34,8 +34,8 @@ public class Personnage{
 		return action;
 	}
 	
-	public void resetAction(){
-		action=true;
+	public void setAction(Boolean action){
+		this.action=action;
 	}
 	
 	public int getIdBateau(){
@@ -227,7 +227,10 @@ public class Personnage{
 	public boolean getDeath(){return death;}
 
 	public String toString(){
-		return ""+this.getType()+" "+this.getNom();
+		if(inventaire.contains("Cle"))
+				return ""+this.getType()+" "+this.getNom()+"  - Cle";
+		else
+			return ""+this.getType()+" "+this.getNom();
 	}
 
 	public String toString(boolean console){

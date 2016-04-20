@@ -38,16 +38,16 @@ public class CaseNavire extends Case {
 	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y){
 		Personnage persoSortant = null;
 		ActionJoueur action= new ActionJoueur();
-		int nbrVivant=0, i=0;
-		for(int cpt=0; cpt<stockNavire.size();cpt++){
-			if(!stockNavire.get(cpt).getDeath())
-				nbrVivant++;
+		int nbrVivantJouable=0, i=0;
+		for(Personnage perso : stockNavire){
+			if(!perso.getDeath() && perso.getAction())
+				nbrVivantJouable++;
 		}
-		if(!stockNavire.isEmpty() && nbrVivant>0){
+		if(!stockNavire.isEmpty() && nbrVivantJouable>0){
 
-			Personnage [] listePerso= new Personnage[nbrVivant];
+			Personnage [] listePerso= new Personnage[nbrVivantJouable];
 			for(Personnage perso: stockNavire){
-				if(!perso.getDeath()){
+				if(!perso.getDeath() && perso.getAction()){
 					listePerso[i]=perso;
 					i++;
 				}
@@ -60,11 +60,12 @@ public class CaseNavire extends Case {
 					ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
 				else
 					persoSortant.recuperationStuff(true,false, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau());
+				persoSortant.setAction(false);
 				stockNavire.remove(persoSortant);
 			}
 		}else{
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Il n'y a pas de personnages dans le Navire", "Attention",
+			JOptionPane.showOptionDialog(null, "Il n'y a pas de personnages jouables dans le Navire", "Attention",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 					null, options, options[0]);
 		}

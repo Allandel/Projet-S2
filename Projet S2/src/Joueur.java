@@ -33,7 +33,7 @@ public class Joueur {
 
 	public void resetAction(){
 		for(Personnage perso : equipe){
-			perso.resetAction();
+			perso.setAction(true);
 		}
 	}
 }
