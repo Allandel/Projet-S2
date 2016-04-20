@@ -8,6 +8,7 @@ public class Case {
 	private int id=0;
 	private boolean accessible;
 	private Personnage personnageCourant=null;
+	private boolean piege=false;
 	
 	/**
 	 * @return the id
@@ -62,6 +63,10 @@ public class Case {
 	 */
 	public Personnage getPersonnageCourant(){
 		return personnageCourant;
+	}
+	
+	public void setPiege(boolean res){
+		piege=res;
 	}
 
 	public String toString(){

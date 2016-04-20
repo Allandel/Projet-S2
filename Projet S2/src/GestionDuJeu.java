@@ -104,6 +104,8 @@ public class GestionDuJeu {
 		
 		if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
 			((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+		}else if(perso instanceof Piegeur && tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getId()){
+			((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==0){
 			perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
