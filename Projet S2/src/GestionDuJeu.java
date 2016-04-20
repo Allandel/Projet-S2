@@ -80,7 +80,7 @@ public class GestionDuJeu {
 	 */
 	public boolean tourDuJoueur(){
 		boolean gagner=false;
-		int equipe=1, cpt=0;
+		int equipe=0, cpt=0;
 
 		while(cpt<4){
 			joueur[equipe].resetAction();
