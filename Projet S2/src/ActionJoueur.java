@@ -20,7 +20,6 @@ public class ActionJoueur {
 		return coordonnees;
 	}
 
-
 	public int [] choixCase(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Personnage perso){
 		int[] coordonnees =new int[2];
 		int xEvent,yEvent;
