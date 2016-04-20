@@ -9,8 +9,8 @@ public class Explorateur extends Personnage{
 	/**
 	 * Constructeur d'Explorateur lui attribuant un nom, un id et une �quipe
 	 */
-	public Explorateur(boolean equipe1){
-		super(equipe1);
+	public Explorateur(boolean equipe1, Joueur joueur){
+		super(equipe1, joueur);
 		setNom("Bob");
 		setType("Explorateur");
 		if(equipe1)
