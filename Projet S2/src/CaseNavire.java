@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
  */
 public class CaseNavire extends Case {
 	private ArrayList<Personnage>stockNavire=new ArrayList<Personnage>();
+	
 
 	/**
 	 * Construit un navire en lui attribuant l'ID donnee
@@ -16,6 +17,17 @@ public class CaseNavire extends Case {
 	 */
 	public CaseNavire(int id){
 		this.setId(id);
+		if (id==2){
+			this.addPersoNavire(new Voleur(true));
+			this.addPersoNavire(new Explorateur(true));
+			this.addPersoNavire(new Guerrier(true));
+			this.addPersoNavire(new Piegeur(true));
+		}else{
+			this.addPersoNavire(new Voleur(false));
+			this.addPersoNavire(new Explorateur(false));
+			this.addPersoNavire(new Guerrier(false));
+			this.addPersoNavire(new Piegeur(false));
+		}
 	}
 	/**
 	 * Retourne la liste de Personnage du Navire

@@ -28,12 +28,12 @@ public class ile {
 			estAccessible(NavJ2, tableauIle.length-2);
 			accesNav2 = accessible();
 		}while(!accesNav1 || !accesNav2 );
-		this.setPersonnage(new Voleur(true),true);
+		/*this.setPersonnage(new Voleur(true),true);
 		this.setPersonnage(new Explorateur(true),true);
-		this.setPersonnage(new Piegeur(true),true);
+		this.setPersonnage(new Guerrier(true),true);
 		this.setPersonnage(new Voleur(false),false);
 		this.setPersonnage(new Explorateur(false),false);
-		this.setPersonnage(new Piegeur(false),false);
+		this.setPersonnage(new Guerrier(false),false);*/
 	}
 	
 	/**

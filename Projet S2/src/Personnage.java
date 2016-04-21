@@ -149,10 +149,10 @@ public class Personnage{
 	protected void perteEnergie(int nrj, int x, int y, Case[][] tableauIle){
 		if(energie-nrj<=0){
 			if(tableauIle[x][y].getId()!=2 && tableauIle[x][y].getId()!=3)
-				tableauIle[x][y].setId(12);
+				tableauIle[x][y].setId(14);
 			death=true;
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Votre personnage �tait � bout de force... Cette ultime action lui a cout� la vie. Son inventaire se trouve d�sormais au sol et peut �tre r�cup�rer par n'importe quel personne", "VOTRE PERSONNE EST MORT",
+			JOptionPane.showOptionDialog(null, "Votre personnage etait a bout de force... Cette ultime action lui a coute la vie. Son inventaire se trouve desormais au sol et peut etre recuperer par n'importe quel personne", "VOTRE PERSONNAGE EST MORT",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
 					null, options, options[0]);
 		}else{

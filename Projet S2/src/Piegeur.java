@@ -11,7 +11,7 @@ public class Piegeur extends Personnage{
 		if(equipe1)
 			setId(8);
 		else
-			setId(11);
+			setId(12);
 	}
 	
 	public String toString(boolean console){
@@ -24,6 +24,7 @@ public class Piegeur extends Personnage{
 		decision=JOptionPane.showConfirmDialog(null,"Voulez vous pieger cette case ?","Poser un piege", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
 			tableauIle[x][y].setPiege(true);
+			super.perteEnergie(20, x,y, tableauIle);
 		}
 	}
 	

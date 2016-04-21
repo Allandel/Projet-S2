@@ -19,7 +19,7 @@ public class Voleur extends Personnage {
 		if(equipe1)
 			setId(7);
 		else
-			setId(10);
+			setId(11);
 	}
 
 	public String toString(boolean console){
@@ -29,7 +29,7 @@ public class Voleur extends Personnage {
 	public void volerObjet(Personnage p, int x, int y, Case[][] tableauIle){
 		Random random=new Random();
 		if (this.equipe1!=p.equipe1){
-			if(p.getInventaire().isEmpty() && random.nextInt(4)==2 ){
+			if(p.getInventaire().isEmpty() && random.nextInt(3)==2 ){
 				Object[] options = { "OK" };
 				JOptionPane.showOptionDialog(null, "Votre cible ne possede rien dans son inventaire...", "VOL IMPOSSIBLE",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,

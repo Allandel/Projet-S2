@@ -16,7 +16,7 @@ public class Explorateur extends Personnage{
 		if(equipe1)
 			setId(6);
 		else
-			setId(9);
+			setId(10);
 	}
 	
 	public void interactionRocher(int x, int y, Case[][] tableauIle){
