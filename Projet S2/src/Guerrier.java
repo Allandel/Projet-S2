@@ -37,6 +37,6 @@ public class Guerrier extends Personnage{
 					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, options, options[0]);
 		}
-		
+		super.perteEnergie(10, x,y, tableauIle);
 	}
 }

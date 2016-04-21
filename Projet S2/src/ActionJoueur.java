@@ -76,13 +76,16 @@ public class ActionJoueur {
 
 		for(int i=y-1;i<y+2;i++){
 			for(int j=x-1;j<x+2;j++){
-				if(perso instanceof Voleur){
-					if(tableauAffichage[i][j]==0 || tableauAffichage[i][j]==14)
-						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
-				}else if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
+				if(perso instanceof Explorateur){
+					if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
+						if(tableauAffichage[i][j]==0 || tableauAffichage[i][j]==14)
+							plateauDuJeu.setHighlight(j, i, Color.BLUE);
+					}
+				}else{
 					if(tableauAffichage[i][j]==0 || tableauAffichage[i][j]==14)
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}
+
 			}
 		}
 
@@ -94,7 +97,7 @@ public class ActionJoueur {
 					yEvent=coordonnees[1];
 				}while(!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y)));
 			}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=14 );
-		}else if(perso instanceof Voleur){
+		}else{
 			do{
 				do{
 					coordonnees=this.getCoordonneesClic(plateauDuJeu);
