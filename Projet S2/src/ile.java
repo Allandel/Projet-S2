@@ -17,7 +17,7 @@ public class ile {
 	 * @param taille
 	 * @param proportion
 	 */
-	ile(int taille, int proportion){
+	ile(int taille, int proportion, Joueur [] joueur){
 		this.proportion = proportion;
 		this.taille= taille;
 		do{
@@ -28,12 +28,10 @@ public class ile {
 			estAccessible(NavJ2, tableauIle.length-2);
 			accesNav2 = accessible();
 		}while(!accesNav1 || !accesNav2 );
-		/*this.setPersonnage(new Voleur(true),true);
-		this.setPersonnage(new Explorateur(true),true);
-		this.setPersonnage(new Guerrier(true),true);
-		this.setPersonnage(new Voleur(false),false);
-		this.setPersonnage(new Explorateur(false),false);
-		this.setPersonnage(new Guerrier(false),false);*/
+		this.setPersonnage(new Voleur(true, joueur[0]),true);
+		this.setPersonnage(new Explorateur(true, joueur[0]),true);
+		this.setPersonnage(new Voleur(false, joueur[1]),false);
+		this.setPersonnage(new Explorateur(false, joueur[1]),false);
 	}
 	
 	/**

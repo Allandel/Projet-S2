@@ -12,8 +12,8 @@ public class Voleur extends Personnage {
 	 * Constructeur cr�ant un voleur avec un nom, un type, un ID en fonction du parametre equipe1 determinant son equipe.
 	 * @param equipe1
 	 */
-	public Voleur(boolean equipe1){
-		super(equipe1);
+	public Voleur(boolean equipe1, Joueur joueur){
+		super(equipe1, joueur);
 		setNom("Bill");
 		setType("Voleur");
 		if(equipe1)

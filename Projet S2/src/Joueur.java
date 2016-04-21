@@ -6,21 +6,34 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class Joueur {
-	private ArrayList<Personnage> equipe;
-	private int id;
+	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
+	private boolean equipe1;
 	/**
 	 * Jalon2: Construit un tableau de personnage
 	 */
-	Joueur(int id){
-		this.id=id;
+	Joueur(boolean equipe1){
+		this.equipe1=equipe1;
 	}
-	
-	public int getId(){
-		return id;
+
+	public boolean getEquipe(){
+		return equipe1;
 	}
 
 	public void addPerso(Personnage perso){
 		equipe.add(perso);
 	}
-	
+
+	public boolean actionPossible(){
+		for(Personnage perso : equipe){
+			if(perso.getAction())
+				return true;
+		}
+		return false;
+	}
+
+	public void resetAction(){
+		for(Personnage perso : equipe){
+			perso.setAction(true);
+		}
+	}
 }

@@ -4,8 +4,8 @@ import javax.swing.JOptionPane;
 
 public class Piegeur extends Personnage{
 	
-	public Piegeur(boolean equipe1){
-		super(equipe1);
+	public Piegeur(boolean equipe1, Joueur joueur){
+		super(equipe1, joueur);
 		setNom("Paul");
 		setType("Piegeur");
 		if(equipe1)

@@ -4,8 +4,8 @@ import javax.swing.JOptionPane;
 
 public class Guerrier extends Personnage{
 	
-	public Guerrier(boolean equipe1){
-		super(equipe1);
+	public Guerrier(boolean equipe1, Joueur joueur){
+		super(equipe1, joueur);
 		setNom("Hans");
 		setType("Guerrier");
 		setObjetInventaire("Epee");

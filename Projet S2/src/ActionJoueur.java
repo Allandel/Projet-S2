@@ -7,19 +7,19 @@ public class ActionJoueur {
 
 	ActionJoueur(){}
 
-	public int [] choixCase(Plateau plateauDuJeu, int[][] tableauAffichage){
+	public int [] choixCase(Plateau plateauDuJeu, int[][] tableauAffichage, Boolean equipe, ile ileDuJeu){
 		int[] coordonnees =new int[2];
 		int xEvent,yEvent;
-
 		do{
-			coordonnees=this.getCoordonneesClic(plateauDuJeu);
-			xEvent=coordonnees[0];
-			yEvent=coordonnees[1];
-		}while(tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || tableauAffichage[yEvent][xEvent]==14);
 
+			do{
+				coordonnees=this.getCoordonneesClic(plateauDuJeu);
+				xEvent=coordonnees[0];
+				yEvent=coordonnees[1];
+			}while(tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || tableauAffichage[yEvent][xEvent]==12);
+		}while(tableauAffichage[yEvent][xEvent]!=2 && tableauAffichage[yEvent][xEvent]!=3 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()!=equipe);
 		return coordonnees;
 	}
-
 
 	public int [] choixCase(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Personnage perso){
 		int[] coordonnees =new int[2];

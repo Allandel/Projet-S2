@@ -12,14 +12,15 @@ public class Personnage{
 	private String nom, type;
 	protected ArrayList <String> inventaire=new ArrayList<String>();
 	protected boolean equipe1;
-	private boolean death=false;
+	private boolean death=false, action=true;
 
-	Personnage(boolean equipe){
+	Personnage(boolean equipe, Joueur joueur){
 		this.equipe1=equipe;
-		if(equipe1)
+		if(equipe1)		
 			idBateau=2;
 		else
 			idBateau=3;
+		joueur.addPerso(this);
 	}
 
 	/**
@@ -29,6 +30,14 @@ public class Personnage{
 		this.nom=nom;
 	}
 
+	public boolean getAction(){
+		return action;
+	}
+	
+	public void setAction(Boolean action){
+		this.action=action;
+	}
+	
 	public int getIdBateau(){
 		return idBateau;
 	}
@@ -116,6 +125,7 @@ public class Personnage{
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 						null, options, options[0]);
 			}
+			action=false;
 		}	
 	}
 
@@ -158,6 +168,7 @@ public class Personnage{
 		}else{
 			energie-=nrj;
 		}
+		action=false;
 	}
 
 	public void recuperationStuff(boolean sortieBateau, boolean entreeBateau, int x, int y, int xApres, int yApres, Case[][] tableauIle){
@@ -216,7 +227,10 @@ public class Personnage{
 	public boolean getDeath(){return death;}
 
 	public String toString(){
-		return ""+this.getType()+" "+this.getNom();
+		if(inventaire.contains("Cle"))
+				return ""+this.getType()+" "+this.getNom()+"  - Cle";
+		else
+			return ""+this.getType()+" "+this.getNom();
 	}
 
 	public String toString(boolean console){
