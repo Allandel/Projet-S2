@@ -9,6 +9,7 @@ public class Case {
 	private boolean accessible;
 	private Personnage personnageCourant=null;
 	private boolean piege=false;
+	private int piegeteam;
 	
 	/**
 	 * @return the id
@@ -68,11 +69,28 @@ public class Case {
 	public void setPiege(boolean res){
 		piege=res;
 	}
+	
+	public boolean getPiege(){
+		return piege;
+	}
 
 	public String toString(){
-		if(personnageCourant ==null){
+		if(personnageCourant==null){
 			return  " ";
 		}
 		return personnageCourant.toString(true);
 	}
+	
+	public void setTeamPiege(int x){
+		this.piegeteam=x;
+	}
+	
+	public boolean getTeamPiege(){
+		if(piegeteam==0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 }

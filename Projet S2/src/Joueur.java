@@ -33,7 +33,12 @@ public class Joueur {
 
 	public void resetAction(){
 		for(Personnage perso : equipe){
-			perso.setAction(true);
+			if(perso.getCompteur()==0){
+				perso.setAction(true);
+			}else{
+				perso.setCompteur();
+				System.out.println(perso.getCompteur());
+			}
 		}
 	}
 	
