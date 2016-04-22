@@ -8,11 +8,16 @@ import java.util.ArrayList;
 public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
 	private boolean equipe1;
+	int idBateau;
 	/**
 	 * Jalon2: Construit un tableau de personnage
 	 */
 	Joueur(boolean equipe1){
 		this.equipe1=equipe1;
+		if(equipe1)
+			idBateau=2;
+		else
+			idBateau=3;
 	}
 
 	public boolean getEquipe(){
@@ -47,5 +52,9 @@ public class Joueur {
 				return true;
 		}
 		return false;
+	}
+
+	public int getIdBateau() {
+		return idBateau;
 	}
 }

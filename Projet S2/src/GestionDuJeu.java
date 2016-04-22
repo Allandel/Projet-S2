@@ -9,8 +9,7 @@ public class GestionDuJeu {
 	private ActionJoueur action =new ActionJoueur();
 	private ile ileDuJeu;
 	private int[][] tableauAffichage;
-	private String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png","img/1.explorateur.png","img/1.voleur.png","img/1.piegeur.png","img/1.guerrier.png","img/2.explorateur.png","img/2.voleur.png","img/2.piegeur.png","img/2.guerrier.png","img/cadavre.png"};
-	private Plateau plateauDuJeu;
+	private Affichage affichage;
 	private Joueur [] joueur = {new Joueur(true), new Joueur(false)};
 	/**
 	 * Constructeur initialisant le plateau de jeu de base
@@ -43,38 +42,12 @@ public class GestionDuJeu {
 		proportionNb = Integer.parseInt(proportion);
 		ileDuJeu = new ile(longueurLigne, proportionNb, joueur);
 		tableauAffichage = new int[ileDuJeu.getTableau().length][ileDuJeu.getTableau().length];
-
-		this.updateTableauAffichage();
-		this.setPlateauDujeu();
-		this.affichageDuJeu();
+		affichage= new Affichage(tableauAffichage, ileDuJeu, joueur);
+		affichage.affichageDuJeuJoueur(ileDuJeu,tableauAffichage, joueur[0], 0);
 	}
-	/**
-	 * Met � jour le TableauAffichage
-	 */
-	private void updateTableauAffichage(){
-		for(int i= 0; i<ileDuJeu.getTableau().length;i++){
-			for(int j = 0; j<ileDuJeu.getTableau()[0].length;j++){
-				tableauAffichage[i][j] = ileDuJeu.getTableau()[j][i].getId();
-			}
-		}
-	}
-	/**
-	 * Initialise le Plateau de jeu avec son nom et le tableau de gifs associes au gifs presents sur le terrain
-	 */
-	private void setPlateauDujeu(){
-		plateauDuJeu = new Plateau(gifs,ileDuJeu.getTableau().length);
-		plateauDuJeu.setTitle("Chasse au tresor");
-		plateauDuJeu.setJeu(tableauAffichage);
-	}
-	/**
-	 * Permet l'affichage du plateau de Jeu
-	 */
-	private void affichageDuJeu(){
-		System.out.println("\n"+ileDuJeu.toString());
-		this.updateTableauAffichage();
-		plateauDuJeu.setJeu(tableauAffichage);
-		plateauDuJeu.affichage();
-	}
+	
+	
+	
 	/**
 	 * Organise la succession d'action possible pour le joueur
 	 */
@@ -84,17 +57,18 @@ public class GestionDuJeu {
 
 		while(!gagner){
 			joueur[equipe].resetAction();
+			affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 			while(joueur[equipe].actionPossible()){
-				int [] cordonnees=action.choixCase(plateauDuJeu, tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
+				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
 
-				plateauDuJeu.setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
-
+				affichage.setHighlight(cordonnees, equipe);
+				
 				if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getAction())
-					gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
+					gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe);
 				else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-					((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, plateauDuJeu, tableauAffichage, cordonnees[0], cordonnees[1]);
+					((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1]);
 
-				this.affichageDuJeu();
+				affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 			}
 			this.soinBateau(joueur[equipe]);
 			equipe=1-equipe;
@@ -109,9 +83,9 @@ public class GestionDuJeu {
 	 * @param x
 	 * @param y
 	 */
-	private boolean actionPerso(int x, int y, Personnage perso){
+	private boolean actionPerso(int x, int y, Personnage perso, int equipe){
 		boolean gagner=false;
-		int[] cordonnees = action.choixCase(ileDuJeu, plateauDuJeu, tableauAffichage, x, y, perso);
+		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
 		if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
 			((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
 		}else if(perso instanceof Piegeur && tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getId()){
