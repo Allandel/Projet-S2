@@ -80,9 +80,9 @@ public class GestionDuJeu {
 	 */
 	public boolean tourDuJoueur(){
 		boolean gagner=false;
-		int equipe=0, cpt=0;
+		int equipe=0;
 
-		while(cpt<4){
+		while(!gagner){
 			joueur[equipe].resetAction();
 			while(joueur[equipe].actionPossible()){
 				int [] cordonnees=action.choixCase(plateauDuJeu, tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
@@ -97,7 +97,8 @@ public class GestionDuJeu {
 				this.affichageDuJeu();
 			}
 			equipe=1-equipe;
-			cpt++;
+			if(!gagner)
+				gagner=this.equipeMorte();
 		}
 		return gagner;
 	}
@@ -134,5 +135,12 @@ public class GestionDuJeu {
 		}
 		System.out.println(perso.getEnergie());
 		return gagner;
+	}
+	
+	private boolean equipeMorte(){
+		if(joueur[0].persoVivant())
+			if(joueur[1].persoVivant())
+				return false;
+		return true;
 	}
 }

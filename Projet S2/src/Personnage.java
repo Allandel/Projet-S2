@@ -151,10 +151,10 @@ public class Personnage{
 			((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
 			tableauIle[xAvant][yAvant].removePersonnageCourant();
 			this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle);
+			perteEnergie(1, xApres,yApres, tableauIle);
 			if(inventaire.contains("Tresor"))
 				return true;
 		}
-		perteEnergie(1, xApres,yApres, tableauIle);
 		return false;
 	}
 

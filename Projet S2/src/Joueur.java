@@ -41,4 +41,12 @@ public class Joueur {
 			}
 		}
 	}
+	
+	public boolean persoVivant(){
+		for(Personnage perso: equipe){
+			if(!perso.getDeath())
+				return true;
+		}
+		return false;
+	}
 }
