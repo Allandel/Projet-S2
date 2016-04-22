@@ -34,11 +34,11 @@ public class Personnage{
 	public boolean getAction(){
 		return action;
 	}
-	
+
 	public void setAction(Boolean action){
 		this.action=action;
 	}
-	
+
 	public int getIdBateau(){
 		return idBateau;
 	}
@@ -216,7 +216,7 @@ public class Personnage{
 		}
 		System.out.println(this.getInventaire());
 	}
-	
+
 	public void immobilisation(){
 		Object[] options = { "OK" };
 		JOptionPane.showOptionDialog(null, "Votre personnage est tomber dans un piege adverse ! Il sera immobilise durant les 3 tours suivants et ne pourra effectuer aucune action !", "C'ETAIT UN PIEGE !",
@@ -224,13 +224,14 @@ public class Personnage{
 				null, options, options[0]);
 		this.compteur=3;
 	}
-	
+
 
 	public void addEnergie(){
 		if(energie<100){
-			energie+=10;
-		}else if(energie<100 && energie+10>100){
-			energie=100;
+			if(energie+10<=100){
+				energie+=10;
+			}else
+				energie+=(100-energie);
 		}
 	}
 
@@ -242,11 +243,12 @@ public class Personnage{
 	}
 
 	public boolean getDeath(){return death;}
+	
 	public int getCompteur(){return compteur;}
 
 	public String toString(){
 		if(inventaire.contains("Cle"))
-				return ""+this.getType()+" "+this.getNom()+"  [Energie:"+this.energie+"]  - Cle";
+			return ""+this.getType()+" "+this.getNom()+"  [Energie:"+this.energie+"]  - Cle";
 		else
 			return ""+this.getType()+" "+this.getNom()+"  [Energie:"+this.energie+"]";
 	}

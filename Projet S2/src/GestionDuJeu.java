@@ -96,6 +96,7 @@ public class GestionDuJeu {
 
 				this.affichageDuJeu();
 			}
+			this.soinBateau(joueur[equipe]);
 			equipe=1-equipe;
 			if(!gagner)
 				gagner=this.equipeMorte();
@@ -142,5 +143,12 @@ public class GestionDuJeu {
 			if(joueur[1].persoVivant())
 				return false;
 		return true;
+	}
+	
+	private void soinBateau(Joueur joueur){
+		if(joueur.getEquipe())
+			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getNavJ1()][1]).recupEnergie();
+		else
+			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getNavJ2()][tableauAffichage.length-2]).recupEnergie();
 	}
 }
