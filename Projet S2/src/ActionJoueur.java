@@ -65,7 +65,7 @@ public class ActionJoueur {
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
 				}while((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1);
-			}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=14 || (tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()==perso.getEquipe()));
+			}while(tableauAffichage[yEvent][xEvent]!=0 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=14 && (tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()==perso.getEquipe()));
 		}
 		return coordonnees;
 	}
