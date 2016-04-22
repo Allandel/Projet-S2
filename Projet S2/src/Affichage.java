@@ -7,7 +7,7 @@ public class Affichage {
 	private int[][] tableauAffichageJ1, tableauAffichageJ2;
 	private ArrayList<int[][]> tableaux=new ArrayList<>();
 	private ArrayList<Plateau> plateaux=new ArrayList<>();
-	private String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png","img/1.explorateur.png","img/1.voleur.png","img/1.piegeur.png","img/1.guerrier.png","img/2.explorateur.png","img/2.voleur.png","img/2.piegeur.png","img/2.guerrier.png","img/cadavre.png"};
+	private String[] gifs = new String[]{"img/rocher.jpg","img/1.navire.jpg","img/2.navire.jpg","img/coffre.jpg","img/mer.jpg","img/1.explorateur.jpg","img/1.voleur.jpg","img/1.piegeur.jpg","img/1.guerrier.jpg","img/2.explorateur.jpg","img/2.voleur.jpg","img/2.piegeur.jpg","img/2.guerrier.jpg","img/cadavre.png"};
 	private Plateau plateauDuJeuJ1, plateauDuJeuJ2;
 
 	public Affichage(int [][] tableauAffichage, ile ileDuJeu, Joueur[] joueur){
