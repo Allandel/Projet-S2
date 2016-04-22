@@ -203,6 +203,7 @@ public class Personnage{
 			tableauIle[xApres][yApres].removePersonnageCourant();
 			if(!sortieBateau)
 				tableauIle[x][y].removePersonnageCourant();
+			this.perteEnergie(1, xApres, yApres, tableauIle, false);				
 			tableauIle[xApres][yApres].setPersonnageCourant(this);
 		}else{
 			if(((CaseNavire)tableauIle[xApres][yApres]).persoMort()){
