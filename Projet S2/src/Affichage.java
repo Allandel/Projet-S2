@@ -15,18 +15,19 @@ public class Affichage {
 		tableauAffichageJ2=new int [tableauAffichage.length][tableauAffichage.length];
 		tableaux.add(tableauAffichageJ1);
 		tableaux.add(tableauAffichageJ2);
-		
-		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
-		this.updateTableauAffichageJoueur(ileDuJeu,joueur[0], tableauAffichageJ1);
-		this.updateTableauAffichageJoueur(ileDuJeu,joueur[1], tableauAffichageJ2);
-		
+
 		plateauDuJeuJ1= new Plateau(gifs,ileDuJeu.getTableau().length);
 		plateauDuJeuJ2= new Plateau(gifs,ileDuJeu.getTableau().length);
 		plateauDuJeuJ1.setTitle("Chasse au tresor");
 		plateauDuJeuJ2.setTitle("Chasse au tresor");
-		
+
 		plateaux.add(plateauDuJeuJ1);
 		plateaux.add(plateauDuJeuJ2);
+		
+		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
+		this.updateTableauAffichageJoueur(ileDuJeu,joueur[0], tableauAffichageJ1, 0);
+		this.updateTableauAffichageJoueur(ileDuJeu,joueur[1], tableauAffichageJ2, 1);
+
 		plateaux.get(0).setJeu(tableauAffichageJ1);
 		plateaux.get(1).setJeu(tableauAffichageJ2);
 	}
@@ -42,9 +43,10 @@ public class Affichage {
 		}
 	}
 
-	private void updateTableauAffichageJoueur(ile ileDuJeu, Joueur joueur, int[][] tableau){
+	private void updateTableauAffichageJoueur(ile ileDuJeu, Joueur joueur, int[][] tableau, int equipe){
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
+				
 				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
@@ -55,23 +57,34 @@ public class Affichage {
 			}
 		}
 	} 
-
-	/**
-	 * Permet l'affichage du plateau de Jeu
-	 */
-	public void affichageDuJeu(ile ileDuJeu, int[][] tableauAffichage){
-		System.out.println("\n"+ileDuJeu.toString());
-		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
-		plateaux.get(0).setJeu(tableauAffichage);
-		plateaux.get(0).affichage();
+	
+	private void brouillard(ile ileDuJeu, int equipe, Joueur joueur){
+		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
+			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
+				plateaux.get(equipe).setHighlight(i, j, Color.BLACK);
+			}
+		}
+		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
+			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
+					for(int x=i-1;x<i+2;x++){
+						for(int y=j-1;y<j+2;y++){
+							plateaux.get(equipe).resetHighlight(y, x);
+						}
+					}
+				}
+			}
+		}
+	
 	}
-
+	
 	public void affichageDuJeuJoueur(ile ileDuJeu, int[][] tableauAffichage, Joueur joueur, int equipe){
 		System.out.println("\n"+ileDuJeu.toString());
-		this.updateTableauAffichageJoueur(ileDuJeu,joueur, tableaux.get(equipe));
+		this.updateTableauAffichageJoueur(ileDuJeu,joueur, tableaux.get(equipe),equipe);
 		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
 		plateaux.get(equipe).setJeu(tableaux.get(equipe));
 		plateaux.get(equipe).affichage();
+		this.brouillard(ileDuJeu, equipe, joueur);
 	}
 
 	public Plateau getPlateau(int equipe){
@@ -81,5 +94,4 @@ public class Affichage {
 	public void setHighlight(int[]cordonnees, int equipe){
 		plateaux.get(equipe).setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
 	}
-
 }
