@@ -9,7 +9,7 @@ public class GestionDuJeu {
 	private ActionJoueur action =new ActionJoueur();
 	private ile ileDuJeu;
 	private int[][] tableauAffichage;
-	private String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png","img/1.explorateur.png","img/1.voleur.png","img/1.piegeur.png","img/1.guerrier.png","img/2.explorateur.png","img/2.voleur.png","img/2.piegeur.png","2.guerrier.png","img/cadavre.png"};
+	private String[] gifs = new String[]{"img/rocher.png","img/1.navire.png","img/2.navire.png","img/coffre.png","img/mer.png","img/1.explorateur.png","img/1.voleur.png","img/1.piegeur.png","img/1.guerrier.png","img/2.explorateur.png","img/2.voleur.png","img/2.piegeur.png","img/2.guerrier.png","img/cadavre.png"};
 	private Plateau plateauDuJeu;
 	private Joueur [] joueur = {new Joueur(true), new Joueur(false)};
 	/**

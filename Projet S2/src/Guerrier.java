@@ -21,7 +21,7 @@ public class Guerrier extends Personnage{
 
 	public void attaque(Personnage p, int x, int y, Case[][] tableauIle){
 		Random random=new Random();
-		if (this.equipe1!=p.equipe1 && this.getObjetInventaire("Epee")){
+		if (this.getObjetInventaire("Epee")){
 			int degat=5*random.nextInt(7);
 			p.perteEnergie(degat, x, y, tableauIle);
 			Object[] options = { "OK" };
@@ -29,6 +29,14 @@ public class Guerrier extends Personnage{
 					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, options, options[0]);
 
+		}else{
+			int degat=random.nextInt(7);
+			p.perteEnergie(degat, x, y, tableauIle);
+			Object[] options = { "OK" };
+			JOptionPane.showOptionDialog(null, "Vous combattez à main nues... Vous avez infliger "+degat+" points de degats a votre cible", "ATTAQUE",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, options, options[0]);
 		}
+		super.perteEnergie(10, x,y, tableauIle);
 	}
 }

@@ -25,7 +25,7 @@ public class Joueur {
 
 	public boolean actionPossible(){
 		for(Personnage perso : equipe){
-			if(perso.getAction())
+			if(perso.getAction() && !perso.getDeath())
 				return true;
 		}
 		return false;
