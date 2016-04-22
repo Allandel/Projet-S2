@@ -114,22 +114,35 @@ public class Personnage{
 		decision=JOptionPane.showConfirmDialog(null,"Désirez vous effectuer un échange avec ce membre de votre équipe ?", "Effectuer un echange ?", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
 			if(!this.inventaire.isEmpty()){
+				//=======DONS========
 				String [] listeItem= new String[inventaire.size()];
 				for(int cpt=0; cpt<inventaire.size(); cpt++){
 					listeItem[cpt]=inventaire.get(cpt);
 				}
-				itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?", "Boite d'�changes", JOptionPane.QUESTION_MESSAGE, null, listeItem, listeItem[0]);
+				itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "DONNER ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem, listeItem[0]);
 				p.inventaire.add(itemEchange);
 				this.inventaire.remove(itemEchange);
-			}else{
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Votre inventaire est vide, impossible de faire un �change", "ECHANGE IMPOSSIBLE",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-						null, options, options[0]);
+				action=false;
+			}
+			if(!p.inventaire.isEmpty()){
+				//=======PRENDRE ITEM=======
+				String [] listeItem2= new String[p.inventaire.size()];
+				for(int cpt=0; cpt<p.inventaire.size(); cpt++){
+					listeItem2[cpt]=p.inventaire.get(cpt);
+				}
+				itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem2, listeItem2[0]);
+				this.inventaire.add(itemEchange);
+				p.inventaire.remove(itemEchange);
 			}
 			action=false;
-		}	
-	}
+		}else{
+		Object[] options = { "OK" };
+		JOptionPane.showOptionDialog(null, "Votre inventaire et celui de votre coequipier sont vides, impossible de faire un echange", "ECHANGE IMPOSSIBLE",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+				null, options, options[0]);
+		}
+
+	}	
 
 	/**
 	 * Permet les deplacement des personnages
