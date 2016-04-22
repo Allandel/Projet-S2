@@ -142,6 +142,7 @@ public class Personnage{
 	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(this);
+		tableauIle[xApres][yApres].setPiege(false);
 		perteEnergie(1, xApres,yApres, tableauIle);
 	}
 
@@ -228,6 +229,8 @@ public class Personnage{
 	public void addEnergie(){
 		if(energie<100){
 			energie+=10;
+		}else if(energie<100 && energie+10>100){
+			energie=100;
 		}
 	}
 

@@ -20,7 +20,6 @@ public class Piegeur extends Personnage{
 	
 	public void pieger(int x, int y, Case[][] tableauIle){
 		int decision;
-		String piegage;
 		decision=JOptionPane.showConfirmDialog(null,"Voulez vous pieger cette case ?","Poser un piege", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
 			tableauIle[x][y].setPiege(true);

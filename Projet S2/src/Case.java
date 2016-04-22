@@ -66,8 +66,8 @@ public class Case {
 		return personnageCourant;
 	}
 	
-	public void setPiege(boolean res){
-		piege=res;
+	public void setPiege(boolean x){
+		piege=x;
 	}
 	
 	public boolean getPiege(){

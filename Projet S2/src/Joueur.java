@@ -37,7 +37,6 @@ public class Joueur {
 				perso.setAction(true);
 			}else{
 				perso.setCompteur();
-				System.out.println(perso.getCompteur());
 			}
 		}
 	}
