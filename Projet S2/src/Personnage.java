@@ -230,7 +230,7 @@ public class Personnage{
 			if(energie+10<=100){
 				energie+=10;
 			}else
-				energie+=(energie-100);
+				energie+=(100-energie);
 		}
 	}
 
@@ -242,6 +242,7 @@ public class Personnage{
 	}
 
 	public boolean getDeath(){return death;}
+	
 	public int getCompteur(){return compteur;}
 
 	public String toString(){

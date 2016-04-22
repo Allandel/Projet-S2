@@ -83,4 +83,11 @@ public class CaseNavire extends Case {
 	public String toString(){
 		return "N";
 	}
+
+	public void recupEnergie(){
+		for(Personnage perso: stockNavire){
+			if(!perso.getDeath())
+				perso.addEnergie();
+		}
+	}
 }
