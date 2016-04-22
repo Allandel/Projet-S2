@@ -28,7 +28,7 @@ public class ile {
 			estAccessible(NavJ2, tableauIle.length-2);
 			accesNav2 = accessible();
 		}while(!accesNav1 || !accesNav2 );
-		this.setPersonnage(new Guerrier(true, joueur[0]),true);
+		this.setPersonnage(new Piegeur(true, joueur[0]),true);
 		this.setPersonnage(new Piegeur(true, joueur[0]),true);
 		this.setPersonnage(new Guerrier(false, joueur[1]),false);
 		this.setPersonnage(new Piegeur(false, joueur[1]),false);
