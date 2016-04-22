@@ -13,6 +13,7 @@ public class Personnage{
 	protected ArrayList <String> inventaire=new ArrayList<String>();
 	protected boolean equipe1;
 	private boolean death=false, action=true;
+	private int compteur=0;
 
 	Personnage(boolean equipe, Joueur joueur){
 		this.equipe1=equipe;
@@ -102,6 +103,7 @@ public class Personnage{
 		}
 		return false;
 	}
+
 	/**
 	 * Permet au voleur de d�rober un objet a l'�quipe adverse
 	 * @param p
@@ -213,6 +215,15 @@ public class Personnage{
 		}
 		System.out.println(this.getInventaire());
 	}
+	
+	public void immobilisation(){
+		Object[] options = { "OK" };
+		JOptionPane.showOptionDialog(null, "Votre personnage est tomber dans un piege adverse ! Il sera immobilise durant les 3 tours suivants et ne pourra effectuer aucune action !", "C'ETAIT UN PIEGE !",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+				null, options, options[0]);
+		this.compteur=3;
+	}
+	
 
 	public void addEnergie(){
 		if(energie<100){
@@ -223,14 +234,18 @@ public class Personnage{
 	public int getEnergie(){
 		return energie;
 	}
+	public void setCompteur(){
+		compteur--;
+	}
 
 	public boolean getDeath(){return death;}
+	public int getCompteur(){return compteur;}
 
 	public String toString(){
 		if(inventaire.contains("Cle"))
-				return ""+this.getType()+" "+this.getNom()+"  - Cle";
+				return ""+this.getType()+" "+this.getNom()+"  [Energie:"+this.energie+"]  - Cle";
 		else
-			return ""+this.getType()+" "+this.getNom();
+			return ""+this.getType()+" "+this.getNom()+"  [Energie:"+this.energie+"]";
 	}
 
 	public String toString(boolean console){

@@ -24,6 +24,11 @@ public class Piegeur extends Personnage{
 		decision=JOptionPane.showConfirmDialog(null,"Voulez vous pieger cette case ?","Poser un piege", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
 			tableauIle[x][y].setPiege(true);
+			if(this.equipe1){
+				tableauIle[x][y].setTeamPiege(0);
+			}else{
+				tableauIle[x][y].setTeamPiege(1);
+			}
 			super.perteEnergie(20, x,y, tableauIle);
 		}
 	}

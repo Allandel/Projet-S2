@@ -110,13 +110,17 @@ public class GestionDuJeu {
 	private boolean actionPerso(int x, int y, Personnage perso){
 		boolean gagner=false;
 		int[] cordonnees = action.choixCase(ileDuJeu, plateauDuJeu, tableauAffichage, x, y, perso);
-
 		if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
 			((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
 		}else if(perso instanceof Piegeur && tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getId()){
 			((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==0){
-			perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+			if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=perso.getEquipe()){
+				perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+				perso.immobilisation();
+			}else{
+				perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+			}
 		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
 			gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==14){
