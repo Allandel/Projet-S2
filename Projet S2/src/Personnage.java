@@ -33,11 +33,11 @@ public class Personnage{
 	public boolean getAction(){
 		return action;
 	}
-	
+
 	public void setAction(Boolean action){
 		this.action=action;
 	}
-	
+
 	public int getIdBateau(){
 		return idBateau;
 	}
@@ -216,7 +216,10 @@ public class Personnage{
 
 	public void addEnergie(){
 		if(energie<100){
-			energie+=10;
+			if(energie+10<=100){
+				energie+=10;
+			}else
+				energie+=(energie-100);
 		}
 	}
 
@@ -228,7 +231,7 @@ public class Personnage{
 
 	public String toString(){
 		if(inventaire.contains("Cle"))
-				return ""+this.getType()+" "+this.getNom()+"  - Cle";
+			return ""+this.getType()+" "+this.getNom()+"  - Cle";
 		else
 			return ""+this.getType()+" "+this.getNom();
 	}
