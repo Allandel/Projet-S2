@@ -88,7 +88,7 @@ public class GestionDuJeu {
 		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
 		if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
 			((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
-		}else if(perso instanceof Piegeur && tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getId()){
+		}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
 			((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
 		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==0){
 			if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=perso.getEquipe()){
