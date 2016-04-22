@@ -28,10 +28,10 @@ public class ile {
 			estAccessible(NavJ2, tableauIle.length-2);
 			accesNav2 = accessible();
 		}while(!accesNav1 || !accesNav2 );
-		this.setPersonnage(new Piegeur(true, joueur[0]),true);
-		this.setPersonnage(new Voleur(true, joueur[0]),true);
-		this.setPersonnage(new Guerrier(false, joueur[1]),false);
-		this.setPersonnage(new Guerrier(false, joueur[1]),false);
+		this.setPersonnage(new Explorateur(true, joueur[0]),true);
+		this.setPersonnage(new Explorateur(true, joueur[0]),true);
+		this.setPersonnage(new Explorateur(false, joueur[1]),false);
+		this.setPersonnage(new Explorateur(false, joueur[1]),false);
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class ile {
 		do{
 			Rocherx = random.nextInt(tableauIle.length-2)+1;
 			Rochery = random.nextInt(tableauIle.length-2)+1;
-			if(tableauIle[Rocherx][Rochery].getId()==0){
+			if(tableauIle[Rocherx][Rochery].getId()==15){
 				tableauIle[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
 				if(cpt==0){
 					((CaseRocher) tableauIle[Rocherx][Rochery]).setChest(true);
@@ -108,7 +108,7 @@ public class ile {
 		while(cpt<nbRocher){
 			Rocherx = random.nextInt(tableauIle.length-2)+1;
 			Rochery = random.nextInt(tableauIle.length-2)+1;
-			if(tableauIle[Rocherx][Rochery].getId() == 0){
+			if(tableauIle[Rocherx][Rochery].getId() == 15){
 				tableauIle[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
 				cpt++;
 			}
@@ -134,24 +134,24 @@ public class ile {
 
 			if(equipe1){
 				if(signe==0){
-					if(tableauIle[NavJ1-xPlus][1+yPlus].getId()==0){
+					if(tableauIle[NavJ1-xPlus][1+yPlus].getId()==15){
 						tableauIle[NavJ1-xPlus][1+yPlus].setPersonnageCourant(v);
 						vivant=true;
 					}
 				}else{
-					if(tableauIle[NavJ1+xPlus][1+yPlus].getId()==0){
+					if(tableauIle[NavJ1+xPlus][1+yPlus].getId()==15){
 						tableauIle[NavJ1+xPlus][1+yPlus].setPersonnageCourant(v);
 						vivant=true;
 					}
 				}
 			}else{
 				if(signe==0){
-					if(tableauIle[NavJ2-xPlus][taille-2-yPlus].getId()==0){
+					if(tableauIle[NavJ2-xPlus][taille-2-yPlus].getId()==15){
 						tableauIle[NavJ2-xPlus][taille-2-yPlus].setPersonnageCourant(v);
 						vivant=true;
 					}
 				}else{
-					if(tableauIle[NavJ2+xPlus][taille-2-yPlus].getId()==0){
+					if(tableauIle[NavJ2+xPlus][taille-2-yPlus].getId()==15){
 						tableauIle[NavJ2+xPlus][taille-2-yPlus].setPersonnageCourant(v);
 						vivant=true;
 					}
@@ -193,28 +193,28 @@ public class ile {
 	void estAccessible(int x, int y){
 		tableauIle[x][y].setAccessible(true);
 		if(x>0){
-			if(tableauIle[x-1][y].getId()==0 && !tableauIle[x-1][y].isAccessible()){
+			if(tableauIle[x-1][y].getId()==15 && !tableauIle[x-1][y].isAccessible()){
 				estAccessible(x-1,y);
 			}else{
 				tableauIle[x-1][y].setAccessible(true);
 			}
 		}
 		if(y<tableauIle.length-1){
-			if(tableauIle[x][y+1].getId()==0 && !tableauIle[x][y+1].isAccessible()){
+			if(tableauIle[x][y+1].getId()==15 && !tableauIle[x][y+1].isAccessible()){
 				estAccessible(x,y+1);
 			}else{
 				tableauIle[x][y+1].setAccessible(true);
 			}
 		}
 		if(x<tableauIle.length-1){
-			if(tableauIle[x+1][y].getId()==0 && !tableauIle[x+1][y].isAccessible()){
+			if(tableauIle[x+1][y].getId()==15 && !tableauIle[x+1][y].isAccessible()){
 				estAccessible(x+1,y);
 			}else{
 				tableauIle[x+1][y].setAccessible(true);
 			}
 		}
 		if(y>0){
-			if(tableauIle[x][y-1].getId()==0 && !tableauIle[x][y-1].isAccessible()){
+			if(tableauIle[x][y-1].getId()==15 && !tableauIle[x][y-1].isAccessible()){
 				estAccessible(x,y-1);
 			}else{
 				tableauIle[x][y-1].setAccessible(true);

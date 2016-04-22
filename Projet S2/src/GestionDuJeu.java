@@ -90,7 +90,7 @@ public class GestionDuJeu {
 			((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
 		}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
 			((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
-		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==0){
+		}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
 			if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=perso.getEquipe()){
 				perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
 				perso.immobilisation();

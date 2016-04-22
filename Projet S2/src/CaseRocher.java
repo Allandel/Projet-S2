@@ -5,7 +5,6 @@
  * @version 1.0
  */
 public class CaseRocher extends Case{
-	private int x,y;
 	private boolean hidden, key, chest, keyTaken=false, chestTaken=false;
 
 	/**
@@ -16,8 +15,6 @@ public class CaseRocher extends Case{
 	public CaseRocher(int x, int y){
 		super();
 		this.setId(1);
-		this.x = x;
-		this.y = y;
 	}
 	/**
 	 * Retourne l'initiale de l'objet contenu dans la case

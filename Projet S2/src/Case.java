@@ -5,7 +5,7 @@
  * @version 1.0
  */
 public class Case {
-	private int id=0;
+	private int id=15;
 	private boolean accessible;
 	private Personnage personnageCourant=null;
 	private boolean piege=false;
@@ -56,7 +56,7 @@ public class Case {
 	 */
 	public void removePersonnageCourant(){
 		this.personnageCourant = null;
-		this.setId(0);
+		this.setId(15);
 	}
 	
 	/**

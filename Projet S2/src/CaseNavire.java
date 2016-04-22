@@ -57,7 +57,7 @@ public class CaseNavire extends Case {
 			if(persoSortant!=null){
 				int[] cordonnees = action.choixCaseSortie(plateauDuJeu, tableauAffichage, x, y, persoSortant);
 
-				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==0)
+				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15)
 					ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
 				else
 					persoSortant.recuperationStuff(true,false, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau());

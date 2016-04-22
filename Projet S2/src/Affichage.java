@@ -7,7 +7,10 @@ public class Affichage {
 	private int[][] tableauAffichageJ1, tableauAffichageJ2;
 	private ArrayList<int[][]> tableaux=new ArrayList<>();
 	private ArrayList<Plateau> plateaux=new ArrayList<>();
-	private String[] gifs = new String[]{"img/rocher.jpg","img/1.navire.jpg","img/2.navire.jpg","img/coffre.jpg","img/mer.jpg","img/1.explorateur.jpg","img/1.voleur.jpg","img/1.piegeur.jpg","img/1.guerrier.jpg","img/2.explorateur.jpg","img/2.voleur.jpg","img/2.piegeur.jpg","img/2.guerrier.jpg","img/cadavre.png"};
+	private String[] images = new String[]{"img/rocher.jpg","img/1.navire.jpg","img/2.navire.jpg","img/coffre.jpg","img/mer.jpg",
+										"img/1.explorateur.jpg","img/1.voleur.jpg","img/1.piegeur.jpg","img/1.guerrier.jpg",
+										"img/2.explorateur.jpg","img/2.voleur.jpg","img/2.piegeur.jpg","img/2.guerrier.jpg",
+										"img/cadavre.png","herbe.jpg"};
 	private Plateau plateauDuJeuJ1, plateauDuJeuJ2;
 
 	public Affichage(int [][] tableauAffichage, ile ileDuJeu, Joueur[] joueur){
@@ -16,8 +19,8 @@ public class Affichage {
 		tableaux.add(tableauAffichageJ1);
 		tableaux.add(tableauAffichageJ2);
 
-		plateauDuJeuJ1= new Plateau(gifs,ileDuJeu.getTableau().length);
-		plateauDuJeuJ2= new Plateau(gifs,ileDuJeu.getTableau().length);
+		plateauDuJeuJ1= new Plateau(images,ileDuJeu.getTableau().length);
+		plateauDuJeuJ2= new Plateau(images,ileDuJeu.getTableau().length);
 		plateauDuJeuJ1.setTitle("Chasse au tresor");
 		plateauDuJeuJ2.setTitle("Chasse au tresor");
 
@@ -47,7 +50,7 @@ public class Affichage {
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
 				
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
 							tableau[x][y] = ileDuJeu.getTableau()[y][x].getId();
@@ -66,7 +69,7 @@ public class Affichage {
 		}
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()>5 &&ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
 							plateaux.get(equipe).resetHighlight(y, x);
