@@ -143,7 +143,7 @@ public class Personnage{
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(this);
 		tableauIle[xApres][yApres].setPiege(false);
-		perteEnergie(1, xApres,yApres, tableauIle);
+		perteEnergie(1, xApres,yApres, tableauIle, false);
 	}
 
 	public boolean entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
@@ -152,26 +152,32 @@ public class Personnage{
 			((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
 			tableauIle[xAvant][yAvant].removePersonnageCourant();
 			this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle);
-			perteEnergie(1, xApres,yApres, tableauIle);
+			perteEnergie(1, xApres,yApres, tableauIle, false);
 			if(inventaire.contains("Tresor"))
 				return true;
 		}
 		return false;
 	}
 
-	protected void perteEnergie(int nrj, int x, int y, Case[][] tableauIle){
+	protected boolean perteEnergie(int nrj, int x, int y, Case[][] tableauIle, boolean attaque){
 		if(energie-nrj<=0){
 			if(tableauIle[x][y].getId()!=2 && tableauIle[x][y].getId()!=3)
 				tableauIle[x][y].setId(14);
 			death=true;
-			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Votre personnage etait a bout de force... Cette ultime action lui a coute la vie. Son inventaire se trouve desormais au sol et peut etre recuperer par n'importe quel personne", "VOTRE PERSONNAGE EST MORT",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
-					null, options, options[0]);
+			if(!attaque){
+				Object[] options = { "OK" };
+				JOptionPane.showOptionDialog(null, "Votre personnage etait a bout de force... Cette ultime action lui a coute la vie. Son inventaire se trouve desormais au sol et peut etre recuperer par n'importe quel personne", "VOTRE PERSONNAGE EST MORT",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
+						null, options, options[0]);
+			}
+			action=false;
+			return true;
 		}else{
 			energie-=nrj;
+			action=false;
+			return false;
 		}
-		action=false;
+
 	}
 
 	public void recuperationStuff(boolean sortieBateau, boolean entreeBateau, int x, int y, int xApres, int yApres, Case[][] tableauIle){
@@ -243,7 +249,7 @@ public class Personnage{
 	}
 
 	public boolean getDeath(){return death;}
-	
+
 	public int getCompteur(){return compteur;}
 
 	public String toString(){

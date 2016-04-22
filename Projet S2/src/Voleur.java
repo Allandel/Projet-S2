@@ -49,7 +49,7 @@ public class Voleur extends Personnage {
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 						null, options, options[0]);
 			}
-			super.perteEnergie(10, x,y, tableauIle);
+			super.perteEnergie(10, x,y, tableauIle, false);
 		}
 	}
 
