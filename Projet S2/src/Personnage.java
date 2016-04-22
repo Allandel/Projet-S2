@@ -133,13 +133,14 @@ public class Personnage{
 				itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem2, listeItem2[0]);
 				this.inventaire.add(itemEchange);
 				p.inventaire.remove(itemEchange);
+				action=false;
+
+			}else{
+				Object[] options = { "OK" };
+				JOptionPane.showOptionDialog(null, "Votre inventaire et celui de votre coequipier sont vides, impossible de faire un echange", "ECHANGE IMPOSSIBLE",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+						null, options, options[0]);
 			}
-			action=false;
-		}else{
-		Object[] options = { "OK" };
-		JOptionPane.showOptionDialog(null, "Votre inventaire et celui de votre coequipier sont vides, impossible de faire un echange", "ECHANGE IMPOSSIBLE",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-				null, options, options[0]);
 		}
 
 	}	
