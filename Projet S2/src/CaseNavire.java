@@ -79,14 +79,6 @@ public class CaseNavire extends Case {
 		}
 		return false;
 	}
-	
-	public void restorePV(){
-		if(!this.stockNavire.isEmpty()){
-			for(Personnage perso : stockNavire){
-				perso.addEnergie();
-			}
-		}
-	}
 
 	public String toString(){
 		return "N";
