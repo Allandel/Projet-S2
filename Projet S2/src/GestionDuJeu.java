@@ -97,6 +97,8 @@ public class GestionDuJeu {
 		if(cordonnees[0]==999){
 			perso.setAction(false);
 			perso.setDeplacement(false);
+		}else if(cordonnees[0]==888){
+			joueur.abandon();
 		}else{
 			if(perso.getDeplacement()){
 				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
