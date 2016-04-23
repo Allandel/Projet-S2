@@ -100,7 +100,7 @@ public class GestionDuJeu {
 			}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
 				((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
 			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
-				if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=perso.getEquipe()){
+				if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=equipe){
 					perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
 					perso.immobilisation();
 				}else{

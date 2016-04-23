@@ -85,12 +85,8 @@ public class Case {
 		this.piegeteam=x;
 	}
 	
-	public boolean getTeamPiege(){
-		if(piegeteam==0){
-			return true;
-		}else{
-			return false;
-		}
+	public int getTeamPiege(){
+		return piegeteam;
 	}
 	
 }

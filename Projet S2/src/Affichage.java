@@ -10,7 +10,7 @@ public class Affichage {
 	private String[] images = new String[]{"img/rocher.jpg","img/1.navire.jpg","img/2.navire.jpg","img/coffre.jpg","img/mer.jpg",
 										"img/1.explorateur.jpg","img/1.voleur.jpg","img/1.piegeur.jpg","img/1.guerrier.jpg",
 										"img/2.explorateur.jpg","img/2.voleur.jpg","img/2.piegeur.jpg","img/2.guerrier.jpg",
-										"img/cadavre.png","img/herbe.jpg"};
+										"img/cadavre.png","img/herbe.jpg","img/piege.jpg"};
 	private Plateau plateauDuJeuJ1, plateauDuJeuJ2;
 
 	public Affichage(int [][] tableauAffichage, ile ileDuJeu, Joueur[] joueur){
@@ -55,6 +55,8 @@ public class Affichage {
 						for(int y=j-1;y<j+2;y++){
 							if(ileDuJeu.getTableau()[y][x].getId()==4 && !joueur.getCoffreTrouve())
 								tableau[x][y] = 1;
+							else if(ileDuJeu.getTableau()[y][x].getPiege() && ileDuJeu.getTableau()[y][x].getId()==15 && ileDuJeu.getTableau()[y][x].getTeamPiege()==equipe)
+								tableau[x][y]=16;
 							else
 								tableau[x][y] = ileDuJeu.getTableau()[y][x].getId();
 						}

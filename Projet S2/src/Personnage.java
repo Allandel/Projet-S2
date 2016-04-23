@@ -91,6 +91,21 @@ public class Personnage{
 	public ArrayList<String> getInventaire(){
 		return this.inventaire;
 	}
+	/**
+	 * Explore l'inventaire a la recherche d'un objet precis
+	 * @param objet
+	 */
+	public boolean getObjetInventaire(String objet){
+		for (String test: inventaire) {
+			if(test==null){
+				return false;
+			}
+			if (test.compareTo(objet)==0){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Permet au voleur de d�rober un objet a l'�quipe adverse
