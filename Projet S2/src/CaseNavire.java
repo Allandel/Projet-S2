@@ -107,6 +107,7 @@ public class CaseNavire extends Case {
 	private void actionImpossible(){
 		for(Personnage perso:stockNavire){
 			perso.setAction(false);
+			perso.setDeplacement(false);
 		}
 	}
 
@@ -123,7 +124,7 @@ public class CaseNavire extends Case {
 	public boolean sortieImpossible(int i, int j, ile ileDuJeu){
 		for(int x=i-1;x<i+2;x++){
 			for(int y=j-1;y<j+2;y++){
-				if(ileDuJeu.getTableau()[y][x].getId()==15 || (ileDuJeu.getTableau()[y][x].getId()>5 && ileDuJeu.getTableau()[y][x].getId()<15 && ileDuJeu.getTableau()[y][x].getPersonnageCourant().getAction()))
+				if(ileDuJeu.getTableau()[y][x].getId()==15 || (ileDuJeu.getTableau()[y][x].getId()>5 && ileDuJeu.getTableau()[y][x].getId()<15 && ileDuJeu.getTableau()[y][x].getPersonnageCourant().getDeplacement()))
 					return false;
 			}
 		}

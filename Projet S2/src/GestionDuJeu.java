@@ -67,7 +67,7 @@ public class GestionDuJeu {
 				else{
 					affichage.setHighlight(cordonnees, equipe);
 
-					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getAction())
+					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement())
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe]);
 					else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
 						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1]);
@@ -92,30 +92,36 @@ public class GestionDuJeu {
 		boolean gagner=false;
 		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
 
-		if(cordonnees[0]==999)
+		if(cordonnees[0]==999){
 			perso.setAction(false);
-		else{
-			if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
-				((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), joueur);
-			}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
-				((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
-			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
-				if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=equipe){
-					perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
-					perso.immobilisation();
-				}else{
-					perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+			perso.setDeplacement(false);
+		}else{
+			if(perso.getDeplacement()){
+				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
+					if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=equipe){
+						perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+						perso.immobilisation();
+					}else{
+						perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+					}
+				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
+					gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), joueur);
+				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==14){
+					perso.recuperationStuff(false,false, x,y,cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
 				}
-			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
-				gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), joueur);
-			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==14){
-				perso.recuperationStuff(false,false, x,y,cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
-			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe()){
-				perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
-			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Guerrier){
-				((Guerrier) perso).attaque(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(),x,y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
-			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
-				((Voleur) perso).volerObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), x, y, ileDuJeu.getTableau());
+			}
+			if(perso.getAction()){
+				if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
+					((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), joueur);
+				}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
+					((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
+				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe()){
+					perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
+				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Guerrier){
+					((Guerrier) perso).attaque(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(),x,y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
+					((Voleur) perso).volerObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), x, y, ileDuJeu.getTableau());
+				}
 			}
 		}
 		return gagner;
@@ -140,12 +146,12 @@ public class GestionDuJeu {
 		Piegeur marc =new Piegeur(true, joueur[0]);
 		Voleur jean = new Voleur(true, joueur[0]);
 		Guerrier mar=new Guerrier(true, joueur[0]);
-		
+
 		Explorateur pierre=new Explorateur(false, joueur[1]);
 		Piegeur mli=new Piegeur(false, joueur[1]);
 		Voleur jacque=new Voleur(false, joueur[1]);
 		Guerrier mar2=new Guerrier(false, joueur[1]);
-		
+
 		for(Joueur player: joueur){
 			player.setBateau(ileDuJeu);
 			for(Personnage perso: player.getPersos()){

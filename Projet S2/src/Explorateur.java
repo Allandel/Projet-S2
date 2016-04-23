@@ -68,7 +68,7 @@ public class Explorateur extends Personnage{
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 		}
-		super.perteEnergie(5, x,y, tableauIle, false);
+		super.perteEnergie(5, x,y, tableauIle, false,false);
 	}
 
 	

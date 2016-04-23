@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 public class Personnage{
 
-	private int energie=100, id, idBateau;
+	private int energie=100, id, idBateau,compteur=0;
 	private String nom, type;
+	private boolean death=false, action=true, deplacement=true;
 	protected ArrayList <String> inventaire=new ArrayList<String>();
 	protected boolean equipe1;
-	private boolean death=false, action=true;
-	private int compteur=0;
 
 	Personnage(boolean equipe, Joueur joueur){
 		this.equipe1=equipe;
@@ -24,6 +23,20 @@ public class Personnage{
 		joueur.addPerso(this);
 	}
 
+	public boolean getDeplacement(){
+		return deplacement;
+	}
+	
+	public void setDeplacement(boolean deplacement){
+		this.deplacement=deplacement;
+	}
+	
+	public boolean actionOuDeplacement(){
+		if(action || deplacement)
+			return true;
+		return false;
+	}
+	
 	/**
 	 * @param nom the nom to set
 	 */
@@ -174,7 +187,7 @@ public class Personnage{
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(this);
 		tableauIle[xApres][yApres].setPiege(false);
-		perteEnergie(1, xApres,yApres, tableauIle, false);
+		perteEnergie(1, xApres,yApres, tableauIle, false, true);
 	}
 
 	public boolean entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Joueur joueur){
@@ -185,7 +198,7 @@ public class Personnage{
 				((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
 				tableauIle[xAvant][yAvant].removePersonnageCourant();
 				this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle);
-				perteEnergie(1, xApres,yApres, tableauIle, false);
+				perteEnergie(1, xApres,yApres, tableauIle, false,false);
 				if(inventaire.contains("Tresor"))
 					return true;
 				if(this instanceof Guerrier && !inventaire.contains("Epee")){
@@ -203,7 +216,7 @@ public class Personnage{
 		return false;
 	}
 
-	protected boolean perteEnergie(int nrj, int x, int y, Case[][] tableauIle, boolean attaque){
+	protected boolean perteEnergie(int nrj, int x, int y, Case[][] tableauIle, boolean attaque, boolean deplacement){
 		if(energie-nrj<=0){
 			if(tableauIle[x][y].getId()!=2 && tableauIle[x][y].getId()!=3)
 				tableauIle[x][y].setId(14);
@@ -214,11 +227,17 @@ public class Personnage{
 						JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
 						null, options, options[0]);
 			}
-			action=false;
+			if(deplacement)
+				this.deplacement=false;
+			else
+				action=false;
 			return true;
 		}else{
 			energie-=nrj;
-			action=false;
+			if(deplacement)
+				this.deplacement=false;
+			else
+				action=false;
 			return false;
 		}
 
@@ -247,7 +266,7 @@ public class Personnage{
 			tableauIle[xApres][yApres].removePersonnageCourant();
 			if(!sortieBateau)
 				tableauIle[x][y].removePersonnageCourant();
-			this.perteEnergie(1, xApres, yApres, tableauIle, false);				
+			this.perteEnergie(1, xApres, yApres, tableauIle, false, true);				
 			tableauIle[xApres][yApres].setPersonnageCourant(this);
 		}else{
 			if(((CaseNavire)tableauIle[xApres][yApres]).persoMort()){
@@ -281,18 +300,18 @@ public class Personnage{
 			if(!(this instanceof Explorateur)){
 				for(int x=i-1;x<i+2;x++){
 					for(int y=j-1;y<j+2;y++){
-						if(ileDuJeu.getTableau()[y][x].getId()==15)
+						if(ileDuJeu.getTableau()[y][x].getId()==15 || (ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getDeplacement()))
 							return true;
 					}
 				}
 			}else{
-				if(ileDuJeu.getTableau()[j-1][i].getId()==15){
+				if(ileDuJeu.getTableau()[j-1][i].getId()==15 || (ileDuJeu.getTableau()[j-1][i].getId()>5 && ileDuJeu.getTableau()[j-1][i].getPersonnageCourant().getDeplacement())){
 					return true;
-				}else if(ileDuJeu.getTableau()[j+1][i].getId()==15){
+				}else if(ileDuJeu.getTableau()[j+1][i].getId()==15 || (ileDuJeu.getTableau()[j+1][i].getId()>5 && ileDuJeu.getTableau()[j+1][i].getPersonnageCourant().getDeplacement())){
 					return true;
-				} else if(ileDuJeu.getTableau()[j][i-1].getId()==15){
+				} else if(ileDuJeu.getTableau()[j][i-1].getId()==15 || (ileDuJeu.getTableau()[j][i-1].getId()>5 && ileDuJeu.getTableau()[j][i-1].getPersonnageCourant().getDeplacement())){
 					return true;
-				}else if(ileDuJeu.getTableau()[j][i+1].getId()==15){
+				}else if(ileDuJeu.getTableau()[j][i+1].getId()==15 || (ileDuJeu.getTableau()[j][i+1].getId()>5 && ileDuJeu.getTableau()[j][i+1].getPersonnageCourant().getDeplacement())){
 					return true;
 				}
 			}

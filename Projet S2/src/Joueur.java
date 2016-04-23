@@ -66,7 +66,7 @@ public class Joueur {
 
 	public boolean actionPossible(){
 		for(Personnage perso : equipe){
-			if(perso.getAction() && !perso.getDeath())
+			if(perso.actionOuDeplacement() && !perso.getDeath())
 				return true;
 		}
 		return false;
@@ -76,6 +76,7 @@ public class Joueur {
 		for(Personnage perso : equipe){
 			if(perso.getCompteur()==0){
 				perso.setAction(true);
+				perso.setDeplacement(true);
 			}else{
 				perso.setCompteur();
 			}
@@ -85,6 +86,7 @@ public class Joueur {
 	public void passerTour(){
 		for(Personnage perso : equipe){
 			perso.setAction(false);
+			perso.setDeplacement(false);
 		}
 	}
 

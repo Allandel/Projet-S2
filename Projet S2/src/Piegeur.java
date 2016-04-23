@@ -28,7 +28,7 @@ public class Piegeur extends Personnage{
 			}else{
 				tableauIle[x][y].setTeamPiege(1);
 			}
-			super.perteEnergie(20, x,y, tableauIle, false);
+			super.perteEnergie(20, x,y, tableauIle, false, false);
 		}
 	}
 	

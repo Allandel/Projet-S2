@@ -28,10 +28,14 @@ public class ActionJoueur {
 		for(int i=y-1;i<y+2;i++){
 			for(int j=x-1;j<x+2;j++){
 				if(perso instanceof Voleur || perso instanceof Guerrier){
-					if(tableauAffichage[i][j]==15 ||tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]>5)
+					if(tableauAffichage[i][j]==15 && perso.getDeplacement())
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
+					if(perso.getAction() && (tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]>5))
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}else if(perso instanceof Piegeur){
-					if(tableauAffichage[i][j]==15 ||tableauAffichage[i][j]==perso.getIdBateau() || (tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe()))
+					if(perso.getDeplacement() && tableauAffichage[i][j]==15)
+						plateauDuJeu.setHighlight(j, i, Color.BLUE);
+					if(perso.getAction() && (tableauAffichage[i][j]==perso.getIdBateau() || (tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe())))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}else if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
 					if(tableauAffichage[i][j]==1 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==4 || tableauAffichage[i][j]>=14)
