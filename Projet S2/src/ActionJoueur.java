@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 
@@ -16,8 +17,8 @@ public class ActionJoueur {
 				coordonnees=this.getCoordonneesClic(plateauDuJeu);
 				xEvent=coordonnees[0];
 				yEvent=coordonnees[1];
-			}while(tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || tableauAffichage[yEvent][xEvent]>=14);
-		}while(tableauAffichage[yEvent][xEvent]!=2 && tableauAffichage[yEvent][xEvent]!=3 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()!=equipe);
+			}while(coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || tableauAffichage[yEvent][xEvent]>=14));
+		}while(coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=2 && tableauAffichage[yEvent][xEvent]!=3 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()!=equipe));
 		return coordonnees;
 	}
 
@@ -69,7 +70,7 @@ public class ActionJoueur {
 
 		}
 		return coordonnees;
-		
+
 	}
 
 	public int [] choixCaseSortie(Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Personnage perso){
@@ -124,14 +125,22 @@ public class ActionJoueur {
 	 */
 	public int [] getCoordonneesClic(Plateau plateauDuJeu){
 		int [] res= new int[2];
+		int keyCode = 0;
 		InputEvent event;
 
 		do{
 			event=  plateauDuJeu.waitEvent();	
-		}while(!(event instanceof MouseEvent));
+			if(event instanceof KeyEvent)
+				keyCode=((KeyEvent) event).getKeyCode() ;
+		}while(!(event instanceof MouseEvent) && keyCode!=32);
 
-		res[0]=plateauDuJeu.getX((MouseEvent) event) ;
-		res[1]=plateauDuJeu.getY((MouseEvent) event) ;
+		if(event instanceof MouseEvent){
+			res[0]=plateauDuJeu.getX((MouseEvent) event) ;
+			res[1]=plateauDuJeu.getY((MouseEvent) event) ;
+		}else if(event instanceof KeyEvent){
+			res[0]=999;
+			res[1]=999;
+		}
 		return res;
 	}
 

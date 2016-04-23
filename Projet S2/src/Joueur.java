@@ -45,16 +45,22 @@ public class Joueur {
 			}
 		}
 	}
-	
-	public boolean persoVivant(){
-		for(Personnage perso: equipe){
-			if(!perso.getDeath())
-				return true;
+
+	public void passerTour(){
+		for(Personnage perso : equipe){
+			perso.setAction(false);
 		}
-		return false;
 	}
 
-	public int getIdBateau() {
-		return idBateau;
+public boolean persoVivant(){
+	for(Personnage perso: equipe){
+		if(!perso.getDeath())
+			return true;
 	}
+	return false;
+}
+
+public int getIdBateau() {
+	return idBateau;
+}
 }

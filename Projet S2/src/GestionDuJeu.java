@@ -45,9 +45,9 @@ public class GestionDuJeu {
 		affichage= new Affichage(tableauAffichage, ileDuJeu, joueur);
 		affichage.affichageDuJeuJoueur(ileDuJeu,tableauAffichage, joueur[0], 0);
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Organise la succession d'action possible pour le joueur
 	 */
@@ -61,14 +61,18 @@ public class GestionDuJeu {
 			while(joueur[equipe].actionPossible()){
 				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
 
-				affichage.setHighlight(cordonnees, equipe);
-				
-				if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getAction())
-					gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe);
-				else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-					((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1]);
+				if(cordonnees[0]==999){
+					joueur[equipe].passerTour();
+				}else{
+					affichage.setHighlight(cordonnees, equipe);
 
-				affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
+					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getAction())
+						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe);
+					else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
+						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1]);
+
+					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
+				}
 			}
 			this.soinBateau(joueur[equipe]);
 			equipe=1-equipe;
@@ -111,14 +115,14 @@ public class GestionDuJeu {
 		System.out.println(perso.getEnergie());
 		return gagner;
 	}
-	
+
 	private boolean equipeMorte(){
 		if(joueur[0].persoVivant())
 			if(joueur[1].persoVivant())
 				return false;
 		return true;
 	}
-	
+
 	private void soinBateau(Joueur joueur){
 		if(joueur.getEquipe())
 			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getNavJ1()][1]).recupEnergie();
