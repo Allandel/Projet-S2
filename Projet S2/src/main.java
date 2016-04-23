@@ -6,6 +6,11 @@
 public class main {
 
 	public static void main(String[] args) {
+		Launcher menu = new Launcher();
+		
+		while(Launcher.getetat()){
+			System.out.flush();
+		}
 		GestionDuJeu gestion=new GestionDuJeu();
 		boolean fin;
 		do{

@@ -1,78 +1,118 @@
-import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-@SuppressWarnings("serial")
 public class Launcher extends JFrame{
-	boolean finLauncher;
-	JTextField taille, pourcentage;
-	int tailleCarte, pourcentageRocher;
-	
-	public Launcher() {	
+	static int tailleCarte, pourcentageRocher;
+	static boolean etat = true;
+
+	public Launcher(){
+		JPanel onglet1 =  new ImagePanel(new ImageIcon("img/carte.jpg").getImage());
+		JPanel onglet2 = new JPanel();
+		//Image fond = ;
+		JTabbedPane menuOnglet = new JTabbedPane();
+		GridLayout g = new GridLayout(3,3);
+		onglet2.setLayout(g);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setTitle("Launcher");
+		this.setPreferredSize(new Dimension(500,250));
+		this.setTitle("Treasure Hunt");
 		this.setUndecorated(true);
-		this.setSize(404, 286);
-		this.setLayout(null);
-		this.setVisible(true);
-		this.getContentPane().setBackground(Color.BLUE);
-		
-		JLabel imageFond = new JLabel(new ImageIcon("ressource/launcher.png"));
-		imageFond.setBounds(2, 2, 400, 225);
-		this.add(imageFond);
-		
-		JButton jouer = new JButton("Jouer");
-		jouer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					tailleCarte = Integer.valueOf(taille.getText());
-					pourcentageRocher = Integer.valueOf(pourcentage.getText());
-					finLauncher = true;
-				} catch (Exception e) {
-					erreur();
-				}
+		this.pack();
+		this.setLocationRelativeTo(null);
+		//		this.setLayout(g);
+		JButton BJouer = new JButton("Jouer");
+		JButton Bquitter = new JButton("Quitter");
+		JLabel LBTaille = new JLabel("Taille du plateau:");
+		JLabel LBPourcent = new JLabel("Pourcentage de rochers:"
+				+ "");
+		final JSlider slidertaille = new JSlider();
+		slidertaille.setMaximum(30);
+		slidertaille.setMinimum(10);
+		slidertaille.setValue(10);
+		slidertaille.setPaintTicks(true);
+		slidertaille.setPaintLabels(true);
+		slidertaille.setMajorTickSpacing(5);
+		slidertaille.setMinorTickSpacing(5);
+		slidertaille.setSnapToTicks(true);
+		slidertaille.setPreferredSize(new Dimension(200,25));
+		final JSlider sliderpourcent = new JSlider();
+		sliderpourcent.setMaximum(50);
+		sliderpourcent.setMinimum(10);
+		sliderpourcent.setValue(10);
+		sliderpourcent.setPaintTicks(true);
+		sliderpourcent.setPaintLabels(true);
+		sliderpourcent.setMinorTickSpacing(5);
+		sliderpourcent.setMajorTickSpacing(5);
+		sliderpourcent.setSnapToTicks(true);
+		onglet2.add(LBTaille);
+		onglet2.add(slidertaille);
+		onglet2.add(LBPourcent);
+		onglet2.add(sliderpourcent);
+		onglet1.add(BJouer);
+		onglet1.add(Bquitter);
+
+		menuOnglet.add("Menu", onglet1);
+		menuOnglet.add("Paramètres", onglet2);
+		this.getContentPane().add(menuOnglet);
+		this.pack();
+		this.setVisible(true);		
+		BJouer.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent arg0){
+				tailleCarte = slidertaille.getValue();
+				pourcentageRocher = sliderpourcent.getValue();
+				etat = false;
+				dispose();
 			}
 		});
-		jouer.setBounds(2, this.getHeight() - 34, (this.getWidth() - 4) / 2, 32);
-		this.add(jouer);
-		
-		JButton quitter = new JButton("Quitter");
-		quitter.addActionListener(new ActionListener() {
+		Bquitter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}
 		});
-		quitter.setBounds( (this.getWidth() / 2), this.getHeight() - 34, (this.getWidth() - 4) / 2, 32);
-		this.add(quitter);
-		
-		JLabel label1 = new JLabel("Taille de la carte :");
-		label1.setBounds(10, this.getHeight() - 56, 100, 20);
-		label1.setForeground(Color.WHITE);
-		this.add(label1);
-		taille = new JTextField();
-		taille.setText("15");
-		taille.setBounds(120, this.getHeight() - 56, 20, 20);
-		this.add(taille);
-		
-		
-		JLabel label2 = new JLabel("Pourcentage de rocher :");
-		label2.setBounds(160, this.getHeight() - 56, 140, 20);
-		label2.setForeground(Color.WHITE);
-		this.add(label2);
-		pourcentage = new JTextField();
-		pourcentage.setText("10");
-		pourcentage.setBounds(307, this.getHeight() - 56, 20, 20);
-		this.add(pourcentage);
 	}
-	
-	private void erreur(){
-		JOptionPane.showMessageDialog(this, "Erreur dans les argument (la taille et le pourcentage doit ï¿½tre un nombre).");
+
+	public static int getTaille(){
+		return tailleCarte;
 	}
+	public static int getPourcent(){
+		return pourcentageRocher;
+	}
+	public static boolean getetat(){
+		return etat;
+	}
+	class ImagePanel extends JPanel {
+
+		private Image img;
+
+		public ImagePanel(String img) {
+			this(new ImageIcon(img).getImage());
+		}
+
+		public ImagePanel(Image img) {
+			this.img = img;
+			Dimension size = new Dimension(300,200);
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+		}
+		public void paintComponent(Graphics g) {
+			g.drawImage(img, 0, 0, null);
+		}
+
+	}
+
 }
