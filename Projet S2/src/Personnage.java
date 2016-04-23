@@ -91,21 +91,6 @@ public class Personnage{
 	public ArrayList<String> getInventaire(){
 		return this.inventaire;
 	}
-	/**
-	 * Explore l'inventaire a la recherche d'un objet precis
-	 * @param objet
-	 */
-	public boolean getObjetInventaire(String objet){
-		for (String test: inventaire) {
-			if(test==null){
-				return false;
-			}
-			if (test.compareTo(objet)==0){
-				return true;
-			}
-		}
-		return false;
-	}
 
 	/**
 	 * Permet au voleur de d�rober un objet a l'�quipe adverse
@@ -113,39 +98,50 @@ public class Personnage{
 	 */
 	public void echangeObjet(Personnage p){
 		int decision;
+		Object[] options = { "OK" };
 		String itemEchange;
 		decision=JOptionPane.showConfirmDialog(null,"Désirez vous effectuer un échange avec ce membre de votre équipe ?", "Effectuer un echange ?", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
-			if(!this.inventaire.isEmpty()){
-				//=======DONS========
-				String [] listeItem= new String[inventaire.size()];
-				for(int cpt=0; cpt<inventaire.size(); cpt++){
-					listeItem[cpt]=inventaire.get(cpt);
+			if(!this.inventaire.isEmpty() || !p.inventaire.isEmpty()){
+				if(!this.inventaire.isEmpty()){
+					//=======DONS========
+					String [] listeItem= new String[inventaire.size()];
+					for(int cpt=0; cpt<inventaire.size(); cpt++){
+						listeItem[cpt]=inventaire.get(cpt);
+					}
+					itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "DONNER ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem, listeItem[0]);
+					if(itemEchange!=null){
+						p.inventaire.add(itemEchange);
+						this.inventaire.remove(itemEchange);
+						action=false;
+					}
+				}else{
+					JOptionPane.showOptionDialog(null, "Votre inventaire est vide, impossible de lui donner un objet", "ECHANGE IMPOSSIBLE",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+							null, options, options[0]);
 				}
-				itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "DONNER ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem, listeItem[0]);
-				if(this.getObjetInventaire(itemEchange)){
-				p.inventaire.add(itemEchange);
-				this.inventaire.remove(itemEchange);
-				action=false;
-				}
-			}
-			if(!p.inventaire.isEmpty()){
-				//=======PRENDRE ITEM=======
-				String [] listeItem2= new String[p.inventaire.size()];
-				for(int cpt=0; cpt<p.inventaire.size(); cpt++){
-					listeItem2[cpt]=p.inventaire.get(cpt);
-				}
-				itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem2, listeItem2[0]);
-				if(p.getObjetInventaire(itemEchange)){
-				this.inventaire.add(itemEchange);
-				p.inventaire.remove(itemEchange);
-				action=false;
+				if(!p.inventaire.isEmpty()){
+					//=======PRENDRE ITEM=======
+					String [] listeItem2= new String[p.inventaire.size()];
+					for(int cpt=0; cpt<p.inventaire.size(); cpt++){
+						listeItem2[cpt]=p.inventaire.get(cpt);
+					}
+					itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem2, listeItem2[0]);
+					if(itemEchange!=null){
+						this.inventaire.add(itemEchange);
+						p.inventaire.remove(itemEchange);
+						action=false;
+					}
+				}else{
+					JOptionPane.showOptionDialog(null, "L'inventaire de votre coequipier est vide, impossible de lui prendre un objet", "ECHANGE IMPOSSIBLE",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+							null, options, options[0]);
 				}
 			}else{
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Votre inventaire et celui de votre coequipier sont vides, impossible de faire un echange", "ECHANGE IMPOSSIBLE",
+				JOptionPane.showOptionDialog(null, "Vos inventaires sont vides, impossible de faire des échanges", "ECHANGE IMPOSSIBLE",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 						null, options, options[0]);
+
 			}
 		}
 
@@ -177,7 +173,7 @@ public class Personnage{
 				perteEnergie(1, xApres,yApres, tableauIle, false);
 				if(inventaire.contains("Tresor"))
 					return true;
-				if(this instanceof Guerrier && !this.getObjetInventaire("Epee")){
+				if(this instanceof Guerrier && !inventaire.contains("Epee")){
 					this.setObjetInventaire("Epee");;
 					JOptionPane.showOptionDialog(null, "En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
