@@ -138,8 +138,13 @@ public class GestionDuJeu {
 	private void initialisationEquipe(ile ileDuJeu){
 		Explorateur paul =new Explorateur(true, joueur[0]);
 		Piegeur marc =new Piegeur(true, joueur[0]);
+		Voleur jean = new Voleur(true, joueur[0]);
+		Guerrier mar=new Guerrier(true, joueur[0]);
+		
 		Explorateur pierre=new Explorateur(false, joueur[1]);
 		Piegeur mli=new Piegeur(false, joueur[1]);
+		Voleur jacque=new Voleur(false, joueur[1]);
+		Guerrier mar2=new Guerrier(false, joueur[1]);
 		
 		for(Joueur player: joueur){
 			player.setBateau(ileDuJeu);
