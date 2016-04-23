@@ -72,13 +72,14 @@ public class CaseNavire extends Case {
 				persoSortant=(Personnage)  JOptionPane.showInputDialog(null,"Quels personnage voulez-vous faire sortir du navire ?", "Sortie du navire", JOptionPane.QUESTION_MESSAGE, null, listePerso, listePerso[0]);
 				if(persoSortant!=null){
 					int[] cordonnees = action.choixCaseSortie(plateauDuJeu, tableauAffichage, x, y, persoSortant);
-
-					if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15)
-						ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
-					else
-						persoSortant.recuperationStuff(true,false, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau());
-					persoSortant.setAction(false);
-					stockNavire.remove(persoSortant);
+					if(cordonnees[0]!=777){
+						if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15)
+							ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
+						else
+							persoSortant.recuperationStuff(true,false, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau());
+						persoSortant.setAction(false);
+						stockNavire.remove(persoSortant);
+					}
 				}
 				if(this.sortieImpossible(y, x, ileDuJeu))
 					this.actionImpossible();

@@ -99,7 +99,7 @@ public class GestionDuJeu {
 			perso.setDeplacement(false);
 		}else if(cordonnees[0]==888){
 			joueur.abandon();
-		}else{
+		}else if(cordonnees[0]!=777){
 			if(perso.getDeplacement()){
 				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
 					if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=equipe){
