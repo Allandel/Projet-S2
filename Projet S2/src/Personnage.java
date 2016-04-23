@@ -276,6 +276,29 @@ public class Personnage{
 		this.compteur=3;
 	}
 
+	public boolean sortiePossible(int i, int j, ile ileDuJeu){
+		if(!death && action){
+			if(!(this instanceof Explorateur)){
+				for(int x=i-1;x<i+2;x++){
+					for(int y=j-1;y<j+2;y++){
+						if(ileDuJeu.getTableau()[y][x].getId()==15)
+							return true;
+					}
+				}
+			}else{
+				if(ileDuJeu.getTableau()[j-1][i].getId()==15){
+					return true;
+				}else if(ileDuJeu.getTableau()[j+1][i].getId()==15){
+					return true;
+				} else if(ileDuJeu.getTableau()[j][i-1].getId()==15){
+					return true;
+				}else if(ileDuJeu.getTableau()[j][i+1].getId()==15){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	public void addEnergie(){
 		if(energie<100){

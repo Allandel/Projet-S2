@@ -53,14 +53,14 @@ public class CaseNavire extends Case {
 			ActionJoueur action= new ActionJoueur();
 			int nbrVivantJouable=0, i=0;
 			for(Personnage perso : stockNavire){
-				if(!perso.getDeath() && perso.getAction())
+				if(perso.sortiePossible(y, x, ileDuJeu))
 					nbrVivantJouable++;
 			}
 			if(!stockNavire.isEmpty() && nbrVivantJouable>0){
 
 				Personnage [] listePerso= new Personnage[nbrVivantJouable];
 				for(Personnage perso: stockNavire){
-					if(!perso.getDeath() && perso.getAction()){
+					if(perso.sortiePossible(y, x, ileDuJeu)){
 						listePerso[i]=perso;
 						i++;
 					}
