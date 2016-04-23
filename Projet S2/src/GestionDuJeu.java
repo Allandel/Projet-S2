@@ -16,30 +16,11 @@ public class GestionDuJeu {
 	 */
 	public GestionDuJeu(){
 		int longueurLigne, proportionNb;
-		JOptionPane selectionTaille= new JOptionPane();
 		String ligne, proportion;
-		boolean choisi=false;
 
-		do{
-			ligne= selectionTaille.showInputDialog("Choisir la taille du plateau, 10 minimum : ");
-			if(ligne.matches("[0-9]+")){
-				longueurLigne= Integer.parseInt(ligne);
-				if(longueurLigne>=10)
-					choisi = true;
-			}
-		}while(!choisi);
 
-		choisi=false;
-
-		do{
-			proportion = selectionTaille.showInputDialog("Entrez la proportion de rochers: ");
-			if(proportion.matches("[0-9]+")){
-				choisi = true;
-			}	
-		}while(!choisi);
-
-		longueurLigne = Integer.parseInt(ligne);
-		proportionNb = Integer.parseInt(proportion);
+		longueurLigne = Launcher.getTaille();
+		proportionNb = Launcher.getPourcent();
 		ileDuJeu = new ile(longueurLigne, proportionNb);
 		this.initialisationEquipe(ileDuJeu);
 		tableauAffichage = new int[ileDuJeu.getTableau().length][ileDuJeu.getTableau().length];
