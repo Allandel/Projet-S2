@@ -162,7 +162,7 @@ public class Personnage{
 
 	public boolean entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Joueur joueur){
 		Object[] options = { "OK" };
-		if(joueur.nbrVivant()>((CaseNavire)tableauIle[xApres][yApres]).getStocknavire().size()+1){
+		if(joueur.nbrVivant()>((CaseNavire)tableauIle[xApres][yApres]).nbrVivantStock()+1){
 			int decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
 			if (decision==0){
 				((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);

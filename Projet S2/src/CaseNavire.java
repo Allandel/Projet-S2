@@ -24,7 +24,16 @@ public class CaseNavire extends Case {
 	public ArrayList<Personnage> getStocknavire(){
 		return stockNavire;
 	}
-
+	
+	public int nbrVivantStock(){
+		int cpt=0;
+		for(Personnage perso:stockNavire){
+			if(!perso.getDeath())
+				cpt++;
+		}
+		return cpt;
+	}
+	
 	/**
 	 * Permet a un personnage d'entrer dans le bateau
 	 * @param p
