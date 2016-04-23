@@ -48,7 +48,11 @@ public class CaseNavire extends Case {
 	 */
 	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y){
 		Object[] options = { "OK" };
-		if(this.placeLibre(y, x, ileDuJeu)){
+		if(stockNavire.isEmpty()){
+			JOptionPane.showOptionDialog(null, "Il n'y a pas de personnages dans le Navire", "Attention",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+					null, options, options[0]);
+		}else if(this.placeLibre(y, x, ileDuJeu)){
 			Personnage persoSortant = null;
 			ActionJoueur action= new ActionJoueur();
 			int nbrVivantJouable=0, i=0;
@@ -56,7 +60,7 @@ public class CaseNavire extends Case {
 				if(perso.sortiePossible(y, x, ileDuJeu))
 					nbrVivantJouable++;
 			}
-			if(!stockNavire.isEmpty() && nbrVivantJouable>0){
+			if(nbrVivantJouable>0){
 
 				Personnage [] listePerso= new Personnage[nbrVivantJouable];
 				for(Personnage perso: stockNavire){
