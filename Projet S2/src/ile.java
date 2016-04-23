@@ -263,6 +263,17 @@ public class ile {
 		return tableauIle;
 	}
 
+	public boolean placeLibre(int i, int j){
+		for(int x=i-1;x<i+2;x++){
+			for(int y=j-1;y<j+2;y++){
+				if(tableauIle[y][x].getId()==15)
+					return true;
+			}
+		}
+		return false;
+
+	}
+
 	public String toString(){
 		String borne ="";
 		for(int i =0;i<tableauIle.length;i++){
