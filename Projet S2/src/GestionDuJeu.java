@@ -95,7 +95,7 @@ public class GestionDuJeu {
 			perso.setAction(false);
 		else{
 			if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
-				((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+				((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), joueur);
 			}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
 				((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
 			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
-	private boolean equipe1;
+	private boolean equipe1, coffreTrouve=false;
 	int idBateau;
 	/**
 	 * Jalon2: Construit un tableau de personnage
@@ -27,7 +27,15 @@ public class Joueur {
 	public void addPerso(Personnage perso){
 		equipe.add(perso);
 	}
-
+	
+	public void coffreTrouve(){
+		coffreTrouve=true;
+	}
+	
+	public boolean getCoffreTrouve(){
+		return coffreTrouve;
+	}
+	
 	public boolean actionPossible(){
 		for(Personnage perso : equipe){
 			if(perso.getAction() && !perso.getDeath())

@@ -5,7 +5,7 @@
  * @version 1.0
  */
 public class CaseRocher extends Case{
-	private boolean hidden, key, chest, keyTaken=false, chestTaken=false;
+	private boolean key, chest, keyTaken=false, chestTaken=false;
 
 	/**
 	 * Constructeur permettant d'attribuer l'ID du rocher ainsi que ses coordonnees
@@ -36,18 +36,11 @@ public class CaseRocher extends Case{
 		this.key = setter; 
 	}
 	/**
-	 * @param hidden the hidden to set
-	 */
-	public void setHidden(boolean hidden) {
-		this.hidden = hidden;
-	}
-	/**
 	 * Setter de Chest
 	 * @param setter
 	 */
 	public void setChest(boolean setter){
 		chest =setter;
-		hidden = true;
 	}
 
 	/**
@@ -63,9 +56,6 @@ public class CaseRocher extends Case{
 	public void setChestTaken(boolean chestTaken) {
 		this.chestTaken = chestTaken;
 		chest=!chestTaken;
-	}
-	public boolean getHidden(){
-		return hidden;
 	}
 
 	public boolean getKey(){

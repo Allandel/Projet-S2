@@ -19,8 +19,8 @@ public class Explorateur extends Personnage{
 			setId(10);
 	}
 	
-	public void interactionRocher(int x, int y, Case[][] tableauIle){
-		boolean key=((CaseRocher)tableauIle[x][y]).getKey(), hidden=((CaseRocher)tableauIle[x][y]).getHidden();
+	public void interactionRocher(int x, int y, Case[][] tableauIle, Joueur joueur){
+		boolean key=((CaseRocher)tableauIle[x][y]).getKey();
 		boolean chest=((CaseRocher)tableauIle[x][y]).getChest(), chestTaken=((CaseRocher)tableauIle[x][y]).getChestTaken();
 		boolean keyTaken=((CaseRocher)tableauIle[x][y]).getKeyTaken();
 				
@@ -41,23 +41,23 @@ public class Explorateur extends Personnage{
 			JOptionPane.showOptionDialog(null, "Une trace consequente indique l'ancienne presence du coffre. Volez vite le coffre a l'adversaire !", "PRENEZ GARDE...",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 			null, options, options[0]);
-		}else if(chest && !this.getObjetInventaire("Cle")&& hidden){
+		}else if(chest && !this.getObjetInventaire("Cle")&& !joueur.getCoffreTrouve()){
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Vous avez trouve le coffre ! Il sera desormais visible par votre equipe !", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 			tableauIle[x][y].setId(4);
-			((CaseRocher)tableauIle[x][y]).setHidden(false);
+			joueur.coffreTrouve();
 		}else if(chest && this.getObjetInventaire("Cle")){
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Vous avez trouve le coffre et vous avez la cle ! Vous avez donc ouvert le coffre avec succes et possedez maintenant ses richesses dans votre inventaire ! Gare au Voleurs !", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			null, options, options[0]);
 			tableauIle[x][y].setId(4);
-			((CaseRocher)tableauIle[x][y]).setHidden(false);
 			((CaseRocher)tableauIle[x][y]).setChestTaken(true);
+			joueur.coffreTrouve();
 			this.setObjetInventaire("Tresor");
-		}else if(chest && !this.getObjetInventaire("Cle") && !hidden){
+		}else if(chest && !this.getObjetInventaire("Cle") && joueur.getCoffreTrouve()){
 			Object[] options = { "OK" };
 			JOptionPane.showOptionDialog(null, "Vous avez deja trouve le coffre... Ne restez pas ici ! Cherchez la cle avant que les adversaires la trouvent", "FELICITATION",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,

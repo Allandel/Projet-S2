@@ -53,7 +53,10 @@ public class Affichage {
 				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
-							tableau[x][y] = ileDuJeu.getTableau()[y][x].getId();
+							if(ileDuJeu.getTableau()[y][x].getId()==4 && !joueur.getCoffreTrouve())
+								tableau[x][y] = 1;
+							else
+								tableau[x][y] = ileDuJeu.getTableau()[y][x].getId();
 						}
 					}
 				}

@@ -12,7 +12,6 @@ public class ActionJoueur {
 		int[] coordonnees =new int[2];
 		int xEvent,yEvent;
 		do{
-
 			do{
 				coordonnees=this.getCoordonneesClic(plateauDuJeu);
 				xEvent=coordonnees[0];
