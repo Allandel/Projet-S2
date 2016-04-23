@@ -9,7 +9,7 @@ public class ile {
 	private Case[][] tableauIle;
 	private Case CaseCoffre, CaseCle;
 	private Random random = new Random();
-	private int taille, nbRocher, Rocherx, Rochery, NavJ1, NavJ2;
+	private int taille, nbRocher, Rocherx, Rochery, colonneNavJ1=1, colonneNavJ2, ligneNavJ1, ligneNavJ2;
 	private float proportion;
 	private boolean accesNav1, accesNav2;
 	/**
@@ -17,23 +17,20 @@ public class ile {
 	 * @param taille
 	 * @param proportion
 	 */
-	ile(int taille, int proportion, Joueur [] joueur){
+	ile(int taille, int proportion){
 		this.proportion = proportion;
 		this.taille= taille;
+		colonneNavJ2=taille-2;
 		do{
 			initialiser();
-			estAccessible(NavJ1, 1);
+			estAccessible(ligneNavJ1, 1);
 			accesNav1 = accessible();
 			resetAcces();
-			estAccessible(NavJ2, tableauIle.length-2);
+			estAccessible(ligneNavJ2, tableauIle.length-2);
 			accesNav2 = accessible();
 		}while(!accesNav1 || !accesNav2 );
-		this.setPersonnage(new Explorateur(true, joueur[0]),true);
-		this.setPersonnage(new Piegeur(true, joueur[0]),true);
-		this.setPersonnage(new Explorateur(false, joueur[1]),false);
-		this.setPersonnage(new Piegeur(false, joueur[1]),false);
 	}
-	
+
 	/**
 	 * Cree un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
 	 */
@@ -43,10 +40,10 @@ public class ile {
 		setZero();
 		setMer();
 
-		NavJ1= random.nextInt(tableauIle.length-2)+1;
-		NavJ2= random.nextInt(tableauIle.length-2)+1;
-		tableauIle[NavJ1][1]= new CaseNavire(2);
-		tableauIle[NavJ2][tableauIle.length-2]= new CaseNavire(3);
+		ligneNavJ1= random.nextInt(tableauIle.length-2)+1;
+		ligneNavJ2= random.nextInt(tableauIle.length-2)+1;
+		tableauIle[ligneNavJ1][1]= new CaseNavire(2);
+		tableauIle[ligneNavJ2][tableauIle.length-2]= new CaseNavire(3);
 
 		setRocher(taille,proportion);
 		setKeyCoffre();	
@@ -134,25 +131,25 @@ public class ile {
 
 			if(equipe1){
 				if(signe==0){
-					if(tableauIle[NavJ1-xPlus][1+yPlus].getId()==15){
-						tableauIle[NavJ1-xPlus][1+yPlus].setPersonnageCourant(v);
+					if(tableauIle[ligneNavJ1-xPlus][1+yPlus].getId()==15){
+						tableauIle[ligneNavJ1-xPlus][1+yPlus].setPersonnageCourant(v);
 						vivant=true;
 					}
 				}else{
-					if(tableauIle[NavJ1+xPlus][1+yPlus].getId()==15){
-						tableauIle[NavJ1+xPlus][1+yPlus].setPersonnageCourant(v);
+					if(tableauIle[ligneNavJ1+xPlus][1+yPlus].getId()==15){
+						tableauIle[ligneNavJ1+xPlus][1+yPlus].setPersonnageCourant(v);
 						vivant=true;
 					}
 				}
 			}else{
 				if(signe==0){
-					if(tableauIle[NavJ2-xPlus][taille-2-yPlus].getId()==15){
-						tableauIle[NavJ2-xPlus][taille-2-yPlus].setPersonnageCourant(v);
+					if(tableauIle[ligneNavJ2-xPlus][taille-2-yPlus].getId()==15){
+						tableauIle[ligneNavJ2-xPlus][taille-2-yPlus].setPersonnageCourant(v);
 						vivant=true;
 					}
 				}else{
-					if(tableauIle[NavJ2+xPlus][taille-2-yPlus].getId()==15){
-						tableauIle[NavJ2+xPlus][taille-2-yPlus].setPersonnageCourant(v);
+					if(tableauIle[ligneNavJ2+xPlus][taille-2-yPlus].getId()==15){
+						tableauIle[ligneNavJ2+xPlus][taille-2-yPlus].setPersonnageCourant(v);
 						vivant=true;
 					}
 				}
@@ -174,17 +171,31 @@ public class ile {
 		return CaseCle;
 	}
 	/**
-	 * @return the navJ1
+	 * @return the ligneNavJ1
 	 */
-	public int getNavJ1() {
-		return NavJ1;
+	public int getLigneNavJ1() {
+		return ligneNavJ1;
 	}
 	/**
-	 * @return the navJ2
+	 * @return the colonneNavJ1
 	 */
-	public int getNavJ2() {
-		return NavJ2;
+	public int getColonneNavJ1() {
+		return colonneNavJ1;
 	}
+
+	/**
+	 * @return the ligneNavJ2
+	 */
+	public int getLigneNavJ2() {
+		return ligneNavJ2;
+	}
+	/**
+	 * @return the colonneNavJ2
+	 */
+	public int getColonneNavJ2() {
+		return colonneNavJ2;
+	}
+
 	/**
 	 * Defini  si le coffre et la cle sont accessibles depuis les coordonnees donnees
 	 * @param x

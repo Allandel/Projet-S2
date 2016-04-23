@@ -40,7 +40,8 @@ public class GestionDuJeu {
 
 		longueurLigne = Integer.parseInt(ligne);
 		proportionNb = Integer.parseInt(proportion);
-		ileDuJeu = new ile(longueurLigne, proportionNb, joueur);
+		ileDuJeu = new ile(longueurLigne, proportionNb);
+		this.initialisationEquipe(ileDuJeu);
 		tableauAffichage = new int[ileDuJeu.getTableau().length][ileDuJeu.getTableau().length];
 		affichage= new Affichage(tableauAffichage, ileDuJeu, joueur);
 		affichage.affichageDuJeuJoueur(ileDuJeu,tableauAffichage, joueur[0], 0);
@@ -117,20 +118,34 @@ public class GestionDuJeu {
 				((Voleur) perso).volerObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), x, y, ileDuJeu.getTableau());
 			}
 		}
-			return gagner;
-		}
+		return gagner;
+	}
 
-		private boolean equipeMorte(){
-			if(joueur[0].persoVivant())
-				if(joueur[1].persoVivant())
-					return false;
-			return true;
-		}
+	private boolean equipeMorte(){
+		if(joueur[0].persoVivant())
+			if(joueur[1].persoVivant())
+				return false;
+		return true;
+	}
 
-		private void soinBateau(Joueur joueur){
-			if(joueur.getEquipe())
-				((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getNavJ1()][1]).recupEnergie();
-			else
-				((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getNavJ2()][tableauAffichage.length-2]).recupEnergie();
+	private void soinBateau(Joueur joueur){
+		if(joueur.getEquipe())
+			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getLigneNavJ1()][1]).recupEnergie();
+		else
+			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getLigneNavJ2()][tableauAffichage.length-2]).recupEnergie();
+	}
+
+	private void initialisationEquipe(ile ileDuJeu){
+		Explorateur paul =new Explorateur(true, joueur[0]);
+		Piegeur marc =new Piegeur(true, joueur[0]);
+		Explorateur pierre=new Explorateur(false, joueur[1]);
+		Piegeur mli=new Piegeur(false, joueur[1]);
+		
+		for(Joueur player: joueur){
+			player.setBateau(ileDuJeu);
+			for(Personnage perso: player.getPersos()){
+				((CaseNavire)ileDuJeu.getTableau()[player.getLigneBateau()][player.getColonneBateau()]).addPersoNavire(perso);
+			}
 		}
 	}
+}

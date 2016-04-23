@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
 	private boolean equipe1, coffreTrouve=false;
-	int idBateau;
+	private int idBateau, ligneBateau, colonneBateau;
 	/**
 	 * Jalon2: Construit un tableau de personnage
 	 */
@@ -20,6 +20,34 @@ public class Joueur {
 			idBateau=3;
 	}
 
+	public ArrayList<Personnage> getPersos(){
+		return equipe;
+	}
+
+	/**
+	 * @return the ligneBateau
+	 */
+	public int getLigneBateau() {
+		return ligneBateau;
+	}
+
+	/**
+	 * @return the colonneBateau
+	 */
+	public int getColonneBateau() {
+		return colonneBateau;
+	}
+
+	public void setBateau(ile ileDuJeu){
+		if(equipe1){
+			ligneBateau=ileDuJeu.getLigneNavJ1();
+			colonneBateau=ileDuJeu.getColonneNavJ1();
+		}else{
+			ligneBateau=ileDuJeu.getLigneNavJ2();
+			colonneBateau=ileDuJeu.getColonneNavJ2();
+		}
+	}
+	
 	public boolean getEquipe(){
 		return equipe1;
 	}
@@ -27,15 +55,15 @@ public class Joueur {
 	public void addPerso(Personnage perso){
 		equipe.add(perso);
 	}
-	
+
 	public void coffreTrouve(){
 		coffreTrouve=true;
 	}
-	
+
 	public boolean getCoffreTrouve(){
 		return coffreTrouve;
 	}
-	
+
 	public boolean actionPossible(){
 		for(Personnage perso : equipe){
 			if(perso.getAction() && !perso.getDeath())
@@ -67,10 +95,10 @@ public class Joueur {
 		}
 		return false;
 	}
-	
+
 	public int nbrVivant(){
 		int nbrVivant=0;
-		
+
 		for(Personnage perso: equipe){
 			if(!perso.getDeath())
 				nbrVivant++;
@@ -81,4 +109,5 @@ public class Joueur {
 	public int getIdBateau() {
 		return idBateau;
 	}
+
 }
