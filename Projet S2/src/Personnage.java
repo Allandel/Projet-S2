@@ -97,6 +97,9 @@ public class Personnage{
 	 */
 	public boolean getObjetInventaire(String objet){
 		for (String test: inventaire) {
+			if(test==null){
+				return false;
+			}
 			if (test.compareTo(objet)==0){
 				return true;
 			}
@@ -120,9 +123,11 @@ public class Personnage{
 					listeItem[cpt]=inventaire.get(cpt);
 				}
 				itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "DONNER ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem, listeItem[0]);
+				if(this.getObjetInventaire(itemEchange)){
 				p.inventaire.add(itemEchange);
 				this.inventaire.remove(itemEchange);
 				action=false;
+				}
 			}
 			if(!p.inventaire.isEmpty()){
 				//=======PRENDRE ITEM=======
@@ -131,10 +136,11 @@ public class Personnage{
 					listeItem2[cpt]=p.inventaire.get(cpt);
 				}
 				itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem2, listeItem2[0]);
+				if(p.getObjetInventaire(itemEchange)){
 				this.inventaire.add(itemEchange);
 				p.inventaire.remove(itemEchange);
 				action=false;
-
+				}
 			}else{
 				Object[] options = { "OK" };
 				JOptionPane.showOptionDialog(null, "Votre inventaire et celui de votre coequipier sont vides, impossible de faire un echange", "ECHANGE IMPOSSIBLE",
