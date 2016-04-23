@@ -169,10 +169,10 @@ public class Personnage{
 			perteEnergie(1, xApres,yApres, tableauIle, false);
 			if(inventaire.contains("Tresor"))
 				return true;
-			if((this.type=="Guerrier" && !this.getObjetInventaire("Epee"))){
+			if(this instanceof Guerrier && !this.getObjetInventaire("Epee")){
 				this.setObjetInventaire("Epee");;
 				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "En retournant au Navire, votre Guerrier à récupérer une épée ! Au combat !", "Recuperation d'une arme",
+				JOptionPane.showOptionDialog(null, "En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 						null, options, options[0]);
 			}
