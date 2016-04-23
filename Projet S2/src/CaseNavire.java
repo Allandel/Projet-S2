@@ -48,7 +48,7 @@ public class CaseNavire extends Case {
 	 */
 	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y){
 		Object[] options = { "OK" };
-		if(ileDuJeu.placeLibre(y, x)){
+		if(this.placeLibre(y, x, ileDuJeu)){
 			Personnage persoSortant = null;
 			ActionJoueur action= new ActionJoueur();
 			int nbrVivantJouable=0, i=0;
@@ -76,6 +76,8 @@ public class CaseNavire extends Case {
 					persoSortant.setAction(false);
 					stockNavire.remove(persoSortant);
 				}
+				if(this.sortieImpossible(y, x, ileDuJeu))
+					this.actionImpossible();
 			}else{
 				JOptionPane.showOptionDialog(null, "Il n'y a pas de personnages jouables dans le Navire", "Attention",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
@@ -85,7 +87,7 @@ public class CaseNavire extends Case {
 			JOptionPane.showOptionDialog(null, "Il n'y a pas de place libre pour pouvoir placer un personnage", "Attention",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 					null, options, options[0]);
-			this.sortieImpossible();
+			this.actionImpossible();
 		}
 
 	}
@@ -102,12 +104,32 @@ public class CaseNavire extends Case {
 		return "N";
 	}
 
-	private void sortieImpossible(){
+	private void actionImpossible(){
 		for(Personnage perso:stockNavire){
 			perso.setAction(false);
 		}
 	}
-	
+
+	private boolean placeLibre(int i, int j, ile ileDuJeu){
+		for(int x=i-1;x<i+2;x++){
+			for(int y=j-1;y<j+2;y++){
+				if(ileDuJeu.getTableau()[y][x].getId()==15)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean sortieImpossible(int i, int j, ile ileDuJeu){
+		for(int x=i-1;x<i+2;x++){
+			for(int y=j-1;y<j+2;y++){
+				if(ileDuJeu.getTableau()[y][x].getId()==15 || (ileDuJeu.getTableau()[y][x].getId()>5 && ileDuJeu.getTableau()[y][x].getId()<15 && ileDuJeu.getTableau()[y][x].getPersonnageCourant().getAction()))
+					return false;
+			}
+		}
+		return true;
+	}
+
 	public void recupEnergie(){
 		for(Personnage perso: stockNavire){
 			if(!perso.getDeath())
