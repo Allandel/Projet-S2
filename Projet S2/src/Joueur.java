@@ -112,4 +112,10 @@ public class Joueur {
 		return idBateau;
 	}
 
+	public void abandon(){
+		for(Personnage perso: equipe){
+			perso.setDeath(true);
+		}
+	}
+	
 }

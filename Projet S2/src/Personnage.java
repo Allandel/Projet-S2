@@ -31,6 +31,10 @@ public class Personnage{
 		this.deplacement=deplacement;
 	}
 	
+	public void setDeath(boolean death){
+		this.death=death;
+	}
+	
 	public boolean actionOuDeplacement(){
 		if(action || deplacement)
 			return true;

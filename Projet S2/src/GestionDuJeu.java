@@ -64,7 +64,9 @@ public class GestionDuJeu {
 
 				if(cordonnees[0]==999)
 					joueur[equipe].passerTour();
-				else{
+				else if(cordonnees[0]==888){
+					joueur[equipe].abandon();
+				}else{
 					affichage.setHighlight(cordonnees, equipe);
 
 					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement())
