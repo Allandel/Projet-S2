@@ -160,22 +160,28 @@ public class Personnage{
 		perteEnergie(1, xApres,yApres, tableauIle, false);
 	}
 
-	public boolean entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
-		int decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
-		if (decision==0){
-			((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
-			tableauIle[xAvant][yAvant].removePersonnageCourant();
-			this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle);
-			perteEnergie(1, xApres,yApres, tableauIle, false);
-			if(inventaire.contains("Tresor"))
-				return true;
-			if(this instanceof Guerrier && !this.getObjetInventaire("Epee")){
-				this.setObjetInventaire("Epee");;
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-						null, options, options[0]);
+	public boolean entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Joueur joueur){
+		Object[] options = { "OK" };
+		if(joueur.nbrVivant()>((CaseNavire)tableauIle[xApres][yApres]).getStocknavire().size()+1){
+			int decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
+			if (decision==0){
+				((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
+				tableauIle[xAvant][yAvant].removePersonnageCourant();
+				this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle);
+				perteEnergie(1, xApres,yApres, tableauIle, false);
+				if(inventaire.contains("Tresor"))
+					return true;
+				if(this instanceof Guerrier && !this.getObjetInventaire("Epee")){
+					this.setObjetInventaire("Epee");;
+					JOptionPane.showOptionDialog(null, "En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+							null, options, options[0]);
+				}
 			}
+		}else{
+			JOptionPane.showOptionDialog(null, "Il faut au moins un personnage sur l'ile pour pouvoir rentrer au bateau.", "Entree impossible",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, options, options[0]);
 		}
 		return false;
 	}

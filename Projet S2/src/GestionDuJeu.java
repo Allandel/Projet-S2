@@ -67,7 +67,7 @@ public class GestionDuJeu {
 					affichage.setHighlight(cordonnees, equipe);
 
 					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getAction())
-						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe);
+						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe]);
 					else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
 						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1]);
 
@@ -87,7 +87,7 @@ public class GestionDuJeu {
 	 * @param x
 	 * @param y
 	 */
-	private boolean actionPerso(int x, int y, Personnage perso, int equipe){
+	private boolean actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur){
 		boolean gagner=false;
 		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
 
@@ -106,7 +106,7 @@ public class GestionDuJeu {
 					perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
 				}
 			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
-				gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
+				gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), joueur);
 			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==14){
 				perso.recuperationStuff(false,false, x,y,cordonnees[0],cordonnees[1], ileDuJeu.getTableau());
 			}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe()){

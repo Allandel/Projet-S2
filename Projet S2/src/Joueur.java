@@ -52,15 +52,25 @@ public class Joueur {
 		}
 	}
 
-public boolean persoVivant(){
-	for(Personnage perso: equipe){
-		if(!perso.getDeath())
-			return true;
+	public boolean persoVivant(){
+		for(Personnage perso: equipe){
+			if(!perso.getDeath())
+				return true;
+		}
+		return false;
 	}
-	return false;
-}
+	
+	public int nbrVivant(){
+		int nbrVivant=0;
+		
+		for(Personnage perso: equipe){
+			if(!perso.getDeath())
+				nbrVivant++;
+		}
+		return nbrVivant;
+	}
 
-public int getIdBateau() {
-	return idBateau;
-}
+	public int getIdBateau() {
+		return idBateau;
+	}
 }
