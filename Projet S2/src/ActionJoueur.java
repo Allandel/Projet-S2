@@ -30,7 +30,7 @@ public class ActionJoueur {
 				if(perso instanceof Voleur || perso instanceof Guerrier){
 					if(tableauAffichage[i][j]==15 && perso.getDeplacement())
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
-					if(perso.getAction() && (tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]>5))
+					if(perso.getAction() && (tableauAffichage[i][j]==perso.getIdBateau() || (tableauAffichage[i][j]>5 && tableauAffichage[i][j]<14)))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}else if(perso instanceof Piegeur){
 					if(perso.getDeplacement() && tableauAffichage[i][j]==15)
@@ -38,9 +38,9 @@ public class ActionJoueur {
 					if(perso.getAction() && (tableauAffichage[i][j]==perso.getIdBateau() || (tableauAffichage[i][j]>5 && tableauAffichage[i][j]<15 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe())))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}else if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
-					if(tableauAffichage[i][j]==1 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==4 || tableauAffichage[i][j]>=14)
+					if(perso.getAction() && (tableauAffichage[i][j]==1 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==4 || (tableauAffichage[i][j]<14 && tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe())))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
-					else if(tableauAffichage[i][j]>5 && tableauAffichage[i][j]<15 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe())
+					else if(perso.getDeplacement() && (tableauAffichage[i][j]==15 || tableauAffichage[i][j]==14 ))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}
 			}
