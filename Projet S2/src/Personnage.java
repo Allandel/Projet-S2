@@ -26,21 +26,21 @@ public class Personnage{
 	public boolean getDeplacement(){
 		return deplacement;
 	}
-	
+
 	public void setDeplacement(boolean deplacement){
 		this.deplacement=deplacement;
 	}
-	
+
 	public void setDeath(boolean death){
 		this.death=death;
 	}
-	
+
 	public boolean actionOuDeplacement(){
 		if(action || deplacement)
 			return true;
 		return false;
 	}
-	
+
 	/**
 	 * @param nom the nom to set
 	 */
@@ -190,7 +190,8 @@ public class Personnage{
 	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(this);
-		tableauIle[xApres][yApres].setPiege(false);
+		if(tableauIle[xApres][yApres].getTeamPiege()!=(this.getIdBateau()-2))
+				tableauIle[xApres][yApres].setPiege(false);
 		perteEnergie(1, xApres,yApres, tableauIle, false, true);
 	}
 
