@@ -455,4 +455,12 @@ public class Personnage{
 	public String toString(boolean console){
 		return "";
 	}
+	
+	public String inventaireToString(){
+		String stringInventaire="";
+			for(String objet:inventaire){
+				stringInventaire+="- "+objet;
+			}
+		return stringInventaire;
+	}
 }

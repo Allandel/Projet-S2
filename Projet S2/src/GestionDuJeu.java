@@ -140,7 +140,7 @@ public class GestionDuJeu {
 		if(perso.getInventaire().isEmpty())
 			plateau.refreshinfo(""+perso.getEnergie(), "Vide");
 		else
-			plateau.refreshinfo(""+perso.getEnergie(), ""+perso.getInventaire());
+			plateau.refreshinfo(""+perso.getEnergie(), ""+perso.inventaireToString());
 	}
 	/**
 	 * Soigne les personnages dans le bateau du joueur dont c'est le tour
