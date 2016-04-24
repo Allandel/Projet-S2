@@ -228,7 +228,7 @@ public class Personnage{
 			tableauIle[xApres][yApres].setPiege(false);
 		perteEnergie(1, xApres,yApres, tableauIle, false, true);
 	}
-	
+
 	/**
 	 * Permet a un personnage de rentrer dans le bateau
 	 * @param xAvant
@@ -239,7 +239,9 @@ public class Personnage{
 	 * @param joueur
 	 * @return true si le personnage possède le tresor
 	 */
-	public boolean entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Joueur joueur){
+	public boolean[] entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Joueur joueur){
+		boolean victoire[]={false,false};
+
 		Object[] options = { "OK" };
 		if(joueur.nbrVivant()>((CaseNavire)tableauIle[xApres][yApres]).nbrVivantStock()+1){
 			int decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
@@ -248,8 +250,10 @@ public class Personnage{
 				tableauIle[xAvant][yAvant].removePersonnageCourant();
 				this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle);
 				perteEnergie(1, xApres,yApres, tableauIle, false,false);
-				if(inventaire.contains("Tresor"))
-					return true;
+				if(inventaire.contains("Tresor")){
+					victoire[0]=true;
+					victoire[1]=this.getEquipe();
+				}
 				if(this instanceof Guerrier && !inventaire.contains("Epee")){
 					this.setObjetInventaire("Epee");;
 					JOptionPane.showOptionDialog(null, "En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme",
@@ -262,7 +266,7 @@ public class Personnage{
 					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, options, options[0]);
 		}
-		return false;
+		return victoire;
 	}
 	/**
 	 * Fait perdre de l'energie au personnage
@@ -280,7 +284,7 @@ public class Personnage{
 				tableauIle[x][y].setId(14);
 			death=true;
 			if(!attaque){
-			//test pour eviter d'afficher du texte inutile	
+				//test pour eviter d'afficher du texte inutile	
 				Object[] options = { "OK" };
 				JOptionPane.showOptionDialog(null, "Votre personnage etait a bout de force... Cette ultime action lui a coute la vie. Son inventaire se trouve desormais au sol et peut etre recuperer par n'importe quel personne", "VOTRE PERSONNAGE EST MORT",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
@@ -301,7 +305,7 @@ public class Personnage{
 		}
 
 	}
-	
+
 	/**
 	 * Permet a un personnage de recuperer l'inventaire laisse au sol ou laisse dans le bateau par un personnage mort
 	 * @param sortieBateau
@@ -417,14 +421,14 @@ public class Personnage{
 	public int getEnergie(){
 		return energie;
 	}
-	
+
 	/**
 	 * Diminue le compteur de tour immobilise
 	 */
 	public void setCompteur(){
 		compteur--;
 	}
-	
+
 	/**
 	 * 
 	 * @return true si le personnage est mort
@@ -446,7 +450,7 @@ public class Personnage{
 		else
 			return ""+this.getType()+" "+this.getNom()+"  [Energie:"+this.energie+"]";
 	}
-	
+
 	/**
 	 * ToString pour l'affichage dans la console
 	 * @param console
@@ -455,12 +459,12 @@ public class Personnage{
 	public String toString(boolean console){
 		return "";
 	}
-	
+
 	public String inventaireToString(){
 		String stringInventaire="";
-			for(String objet:inventaire){
-				stringInventaire+="- "+objet;
-			}
+		for(String objet:inventaire){
+			stringInventaire+="- "+objet;
+		}
 		return stringInventaire;
 	}
 }

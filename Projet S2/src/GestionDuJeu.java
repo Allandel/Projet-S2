@@ -32,14 +32,14 @@ public class GestionDuJeu {
 	 * ou quand un joueur n'a plus de personnage vivant
 	 * ou quand un joueur decide d'abandonner
 	 */
-	public boolean tourDuJoueur(){
-		boolean gagner=false;
+	public boolean [] tourDuJoueur(){
+		boolean [] gagner={false,false};
 		int equipe=0;
 
-		while(!gagner){
+		while(!gagner[0]){
 			joueur[equipe].resetAction();
 			affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
-			while(joueur[equipe].actionPossible() && !gagner){
+			while(joueur[equipe].actionPossible() && !gagner[0]){
 				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
 
 				if(cordonnees[0]==999)
@@ -63,7 +63,7 @@ public class GestionDuJeu {
 			}
 			this.soinBateau(joueur[equipe]);
 			equipe=1-equipe;
-			if(!gagner)
+			if(!gagner[0])
 				gagner=this.equipeMorte();
 		}
 		return gagner;
@@ -78,8 +78,8 @@ public class GestionDuJeu {
 	 * @param joueur
 	 * @return vrai si le personnage rentre dans le bateau avec le tresor
 	 */
-	private boolean actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur){
-		boolean gagner=false;
+	private boolean [] actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur){
+		boolean []gagner={false,false};
 		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
 
 		if(cordonnees[0]==999){
@@ -130,11 +130,16 @@ public class GestionDuJeu {
 	 * Verifie si l'equipe du joueur est morte
 	 * @return vrai si l'equipe est morte
 	 */
-	private boolean equipeMorte(){
-		if(joueur[0].persoVivant())
-			if(joueur[1].persoVivant())
-				return false;
-		return true;
+	private boolean [] equipeMorte(){
+		boolean [] gagner={false,!joueur[0].getEquipe()};
+		if(!joueur[0].persoVivant()){
+			gagner[0]=true;
+			gagner[1]=joueur[1].getEquipe();
+		}else if(!joueur[1].persoVivant()){
+			gagner[0]=true;	
+			gagner[1]=joueur[0].getEquipe();
+		}
+		return gagner;
 	}
 	public void refreshinfo(Personnage perso, Plateau plateau){
 		if(perso.getInventaire().isEmpty())

@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -20,6 +21,19 @@ public class Affichage {
 			"img/death.jpg","img/herbe.jpg","img/piege.jpg"};
 	private Plateau plateauDuJeuJ1, plateauDuJeuJ2;
 
+	
+	public Affichage(boolean [] gagner){
+		String gagnant="";
+		if(gagner[1])
+			gagnant="Joueur 1 ";
+		else
+			gagnant="Joueur 2 ";
+		Object[] options = { "OK" };
+		JOptionPane.showOptionDialog(null, "Bravo ! Le "+gagnant+"a gagne la partie", "Victoire",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+				null, options, options[0]);
+	
+	}
 	
 	/**
 	 * Initialise et permet l'affichage du plateau de jeu pour chaque joueur

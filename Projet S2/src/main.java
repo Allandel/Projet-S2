@@ -11,10 +11,12 @@ public class main {
 			System.out.flush();
 		}
 		GestionDuJeu gestion=new GestionDuJeu();
-		boolean fin;
+		boolean [] fin;
 		do{
 			fin=gestion.tourDuJoueur();
-		}while(!fin);
+		}while(!fin[0]);
+		
+		Affichage victoire=new Affichage(fin);
 		
 		System.exit(0);
 	}
