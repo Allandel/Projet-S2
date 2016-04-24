@@ -39,12 +39,13 @@ public class Case {
 	}
 	
 	/**
-	 * Construit une case initialisant l'attribut accessible, key et chest a false
+	 * Construit une case initialisant l'attribut accessible a false
 	 */
 	public Case(){
 		accessible =false;
 	}
 	/**
+	 * met un personnge dans une case et change l'id de la case
 	 * @param PersonnageCourant the PersonnageCourant to set
 	 */
 	public void setPersonnageCourant(Personnage p){
@@ -52,7 +53,7 @@ public class Case {
 		this.setId(p.getId());
 	}
 	/**
-	 * Supprime un Personnage qui se trouve sur une Case
+	 * Supprime un Personnage qui se trouve sur une Case et remet l'id d'une case vide
 	 */
 	public void removePersonnageCourant(){
 		this.personnageCourant = null;
@@ -60,20 +61,31 @@ public class Case {
 	}
 	
 	/**
-	 * Donne le Personnage Courant affili� a une case
+	 * Donne le Personnage Courant affilie a une case
 	 */
 	public Personnage getPersonnageCourant(){
 		return personnageCourant;
 	}
 	
+	/**
+	 * Change la valeur de piege
+	 * @param x
+	 */
 	public void setPiege(boolean x){
 		piege=x;
 	}
 	
+	/**
+	 * 
+	 * @return si la case est piege ou non
+	 */
 	public boolean getPiege(){
 		return piege;
 	}
-
+	
+	/**
+	 * return un string vide ou celui specifique au personnage si la case est occupe
+	 */
 	public String toString(){
 		if(personnageCourant==null){
 			return  " ";
@@ -81,10 +93,18 @@ public class Case {
 		return personnageCourant.toString(true);
 	}
 	
+	/**
+	 * Met la valeur de piegeteam suivant l'equipe qui piege la case
+	 * @param x
+	 */
 	public void setTeamPiege(int x){
 		this.piegeteam=x;
 	}
 	
+	/**
+	 * 
+	 * @return la valeur de l'equipe qui a piege la case
+	 */
 	public int getTeamPiege(){
 		return piegeteam;
 	}

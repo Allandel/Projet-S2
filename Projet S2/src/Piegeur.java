@@ -1,9 +1,17 @@
-import java.util.Random;
-
 import javax.swing.JOptionPane;
 
+/**
+ * Classe heritee de Personnage creant un personnage de type piegeur
+ * @author louis
+ *
+ */
 public class Piegeur extends Personnage{
 	
+	/**
+	 * Constructeur creant un piegeur avec un nom, un type, un ID en fonction du parametre equipe1 determinant son equipe.
+	 * @param equipe1
+	 * @param joueur
+	 */
 	public Piegeur(boolean equipe1, Joueur joueur){
 		super(equipe1, joueur);
 		setNom("Paul");
@@ -18,6 +26,12 @@ public class Piegeur extends Personnage{
 		return "P";
 	}
 	
+	/**
+	 * Permet au personnage de pieger une case
+	 * @param x
+	 * @param y
+	 * @param tableauIle
+	 */
 	public void pieger(int x, int y, Case[][] tableauIle){
 		int decision;
 		decision=JOptionPane.showConfirmDialog(null,"Voulez vous pieger cette case ?","Poser un piege", JOptionPane.YES_NO_OPTION);

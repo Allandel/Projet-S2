@@ -3,11 +3,23 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-
+/**
+ * Classe qui permet la recuperation des clics et des touches que le joueur presse
+ * @author louis
+ *
+ */
 public class ActionJoueur {
 
 	ActionJoueur(){}
-
+	
+	/**
+	 * Permet de choisir la 1ere case ou faire une action. N'accepte que des cases avec un personnage ou un bateau
+	 * @param plateauDuJeu
+	 * @param tableauAffichage
+	 * @param equipe
+	 * @param ileDuJeu
+	 * @return le tableau contenant le x et le y des coordonnees selectionnees
+	 */
 	public int [] choixCase(Plateau plateauDuJeu, int[][] tableauAffichage, Boolean equipe, ile ileDuJeu){
 		int[] coordonnees =new int[2];
 		int xEvent,yEvent;
@@ -20,7 +32,19 @@ public class ActionJoueur {
 		}while(coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]==5 && (tableauAffichage[yEvent][xEvent]!=2 && tableauAffichage[yEvent][xEvent]!=3 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()!=equipe)));
 		return coordonnees;
 	}
-
+	
+	/**
+	 * Permet de choisir la 2eme case pour une action, une fois un personnage selectionné
+	 * Met en couleur les cases ou l'action est faisable suivant le type de personnage a deplace
+	 * N'accepte que des deplacements specifiques a chaque perso
+	 * @param ileDuJeu
+	 * @param plateauDuJeu
+	 * @param tableauAffichage
+	 * @param x
+	 * @param y
+	 * @param perso
+	 * @return  le tableau contenant le x et le y des coordonnees selectionnees
+	 */
 	public int [] choixCase(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Personnage perso){
 		int[] coordonnees =new int[2];
 		int xEvent,yEvent;
@@ -76,6 +100,16 @@ public class ActionJoueur {
 
 	}
 
+	/**
+	 * Permet de choisir la case ou placer le personnage qui sort du bateau
+	 * Met en couleur les cases ou c'est possible en fonction du type de personnage choisie
+	 * @param plateauDuJeu
+	 * @param tableauAffichage
+	 * @param x
+	 * @param y
+	 * @param perso
+	 * @return  le tableau contenant le x et le y des coordonnees selectionnees
+	 */
 	public int [] choixCaseSortie(Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Personnage perso){
 		int[] coordonnees =new int[2];
 		int xEvent,yEvent;
@@ -124,7 +158,9 @@ public class ActionJoueur {
 	}
 
 	/**
-	 * Recupere les coordonnees de clic 
+	 * boucle tant que l'action ne correspond pas à certaines touchent avec une action particuliere dans le jeu
+	 * @param plateauDuJeu
+	 * @return un tableau de coordonnees
 	 */
 	public int [] getCoordonneesClic(Plateau plateauDuJeu){
 		int [] res= new int[2];

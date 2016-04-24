@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
  */
 public class Explorateur extends Personnage{
 	/**
-	 * Constructeur d'Explorateur lui attribuant un nom, un id et une �quipe
+	 * Constructeur d'Explorateur lui attribuant un nom, un id, une equipe et l'ajoute dans l'equipe du joueur correspondant
 	 */
 	public Explorateur(boolean equipe1, Joueur joueur){
 		super(equipe1, joueur);
@@ -19,6 +19,13 @@ public class Explorateur extends Personnage{
 			setId(10);
 	}
 	
+	/**
+	 * Interaction de l'explorateur et des rocher suivant le contenu du rocher
+	 * @param x
+	 * @param y
+	 * @param tableauIle
+	 * @param joueur
+	 */
 	public void interactionRocher(int x, int y, Case[][] tableauIle, Joueur joueur){
 		boolean key=((CaseRocher)tableauIle[x][y]).getKey();
 		boolean chest=((CaseRocher)tableauIle[x][y]).getChest(), chestTaken=((CaseRocher)tableauIle[x][y]).getChestTaken();

@@ -1,7 +1,11 @@
 import java.awt.Color;
 import java.util.ArrayList;
 
-
+/**
+ * Sert a l'affichage du jeu
+ * @author louis
+ *
+ */
 public class Affichage {
 
 	private int[][] tableauAffichageJ1, tableauAffichageJ2;
@@ -13,6 +17,13 @@ public class Affichage {
 			"img/death.jpg","img/herbe.jpg","img/piege.jpg"};
 	private Plateau plateauDuJeuJ1, plateauDuJeuJ2;
 
+	
+	/**
+	 * Initialise et permet l'affichage du plateau de jeu pour chaque joueur
+	 * @param tableauAffichage
+	 * @param ileDuJeu
+	 * @param joueur
+	 */
 	public Affichage(int [][] tableauAffichage, ile ileDuJeu, Joueur[] joueur){
 		tableauAffichageJ1=new int [tableauAffichage.length][tableauAffichage.length];
 		tableauAffichageJ2=new int [tableauAffichage.length][tableauAffichage.length];
@@ -36,7 +47,9 @@ public class Affichage {
 	}
 
 	/**
-	 * Met � jour le TableauAffichage
+	 * Met a jour le TableauAffichage
+	 * @param ileDuJeu
+	 * @param tableauAffichage
 	 */
 	private void updateTableauAffichage(ile ileDuJeu,int[][] tableauAffichage){
 		for(int i= 0; i<ileDuJeu.getTableau().length;i++){
@@ -46,6 +59,14 @@ public class Affichage {
 		}
 	}
 
+	/**
+	 * Met à jour le tableau d'affichage specifique au joueur
+	 * Ne met a jour que ce qui est dans le champ de vision d'un personnage du joueur
+	 * @param ileDuJeu
+	 * @param joueur
+	 * @param tableau
+	 * @param equipe
+	 */
 	private void updateTableauAffichageJoueur(ile ileDuJeu, Joueur joueur, int[][] tableau, int equipe){
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
@@ -65,7 +86,14 @@ public class Affichage {
 			}
 		}
 	} 
-
+ 
+	/**
+	 * Brouillard de gueurre
+	 * Grise les cases qui ne sont pas dans le champ de vision du joueur
+	 * @param ileDuJeu
+	 * @param equipe
+	 * @param joueur
+	 */
 	private void brouillard(ile ileDuJeu, int equipe, Joueur joueur){
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
@@ -86,6 +114,12 @@ public class Affichage {
 
 	}
 
+	/**
+	 * Highlight les personnages du joueur qui ont encore la possibilite de se deplacer ou faire une action
+	 * @param ileDuJeu
+	 * @param equipe
+	 * @param joueur
+	 */
 	private void affichagePersoActionnable(ile ileDuJeu, int equipe, Joueur joueur){
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
@@ -95,7 +129,14 @@ public class Affichage {
 			}
 		}
 	}
-
+	
+	/**
+	 * Affiche le tableau de jeu specifique au joueur
+	 * @param ileDuJeu
+	 * @param tableauAffichage
+	 * @param joueur
+	 * @param equipe
+	 */
 	public void affichageDuJeuJoueur(ile ileDuJeu, int[][] tableauAffichage, Joueur joueur, int equipe){
 		System.out.println("\n"+ileDuJeu.toString());
 		this.updateTableauAffichageJoueur(ileDuJeu,joueur, tableaux.get(equipe),equipe);
@@ -105,11 +146,20 @@ public class Affichage {
 		this.brouillard(ileDuJeu, equipe, joueur);
 		this.affichagePersoActionnable(ileDuJeu, equipe, joueur);
 	}
-
+	/**
+	 * retourne le plateau specifique au joueur
+	 * @param equipe
+	 * @return
+	 */
 	public Plateau getPlateau(int equipe){
 		return plateaux.get(equipe);
 	}
 
+	/**
+	 * Highlight la coordonnees du plateau du joueur
+	 * @param cordonnees
+	 * @param equipe
+	 */
 	public void setHighlight(int[]cordonnees, int equipe){
 		plateaux.get(equipe).setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
 	}

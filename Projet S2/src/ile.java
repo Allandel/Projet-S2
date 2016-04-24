@@ -52,7 +52,7 @@ public class ile {
 
 
 	/**
-	 * Initialise la cl� et le coffre sur le plateau de jeu
+	 * Initialise la cle et le coffre sur le plateau de jeu
 	 */
 	void setKeyCoffre(){
 		int cpt=0;
@@ -60,7 +60,7 @@ public class ile {
 			Rocherx = random.nextInt(tableauIle.length-2)+1;
 			Rochery = random.nextInt(tableauIle.length-2)+1;
 			if(tableauIle[Rocherx][Rochery].getId()==15){
-				tableauIle[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
+				tableauIle[Rocherx][Rochery]= new CaseRocher();
 				if(cpt==0){
 					((CaseRocher) tableauIle[Rocherx][Rochery]).setChest(true);
 					CaseCoffre = tableauIle[Rocherx][Rochery];
@@ -106,56 +106,11 @@ public class ile {
 			Rocherx = random.nextInt(tableauIle.length-2)+1;
 			Rochery = random.nextInt(tableauIle.length-2)+1;
 			if(tableauIle[Rocherx][Rochery].getId() == 15){
-				tableauIle[Rocherx][Rochery]= new CaseRocher(Rocherx,Rochery);
+				tableauIle[Rocherx][Rochery]= new CaseRocher();
 				cpt++;
 			}
 		}
 
-	}
-
-	/**
-	 * Initialise un Personnage aux cot�s du Bateau de son �quipe
-	 * @param v
-	 * @param equipe1
-	 */
-	void setPersonnage(Personnage v, boolean equipe1){
-		int signe, xPlus, yPlus, cpt=0;	
-		boolean vivant=false;
-
-		do{
-			yPlus=0;
-			signe=random.nextInt(2);
-			xPlus=random.nextInt(2);
-			if(xPlus==0)
-				yPlus=1;
-
-			if(equipe1){
-				if(signe==0){
-					if(tableauIle[ligneNavJ1-xPlus][1+yPlus].getId()==15){
-						tableauIle[ligneNavJ1-xPlus][1+yPlus].setPersonnageCourant(v);
-						vivant=true;
-					}
-				}else{
-					if(tableauIle[ligneNavJ1+xPlus][1+yPlus].getId()==15){
-						tableauIle[ligneNavJ1+xPlus][1+yPlus].setPersonnageCourant(v);
-						vivant=true;
-					}
-				}
-			}else{
-				if(signe==0){
-					if(tableauIle[ligneNavJ2-xPlus][taille-2-yPlus].getId()==15){
-						tableauIle[ligneNavJ2-xPlus][taille-2-yPlus].setPersonnageCourant(v);
-						vivant=true;
-					}
-				}else{
-					if(tableauIle[ligneNavJ2+xPlus][taille-2-yPlus].getId()==15){
-						tableauIle[ligneNavJ2+xPlus][taille-2-yPlus].setPersonnageCourant(v);
-						vivant=true;
-					}
-				}
-			}
-			cpt++;
-		}while(!vivant && cpt<10);
 	}
 
 	/**

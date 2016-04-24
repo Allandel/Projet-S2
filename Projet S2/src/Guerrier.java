@@ -1,9 +1,18 @@
 import java.util.Random;
 
 import javax.swing.JOptionPane;
-
+/**
+ * Classe heritee de personnage representant un explorateur
+ * @author louis
+ *
+ */
 public class Guerrier extends Personnage{
-
+	
+	/**
+	 * Constructeur lui attribuant le nom, type, son epee, son equipe et son id
+	 * @param equipe1
+	 * @param joueur
+	 */
 	public Guerrier(boolean equipe1, Joueur joueur){
 		super(equipe1, joueur);
 		setNom("Hans");
@@ -19,11 +28,22 @@ public class Guerrier extends Personnage{
 		return "G";
 	}
 
+	/**
+	 * Permet d'attaquer un autre personnage
+	 * @param p
+	 * @param x
+	 * @param y
+	 * @param xApres
+	 * @param yApres
+	 * @param tableauIle
+	 */
 	public void attaque(Personnage p,int x, int y, int xApres, int yApres, Case[][] tableauIle){
 		Random random=new Random();
 		if (this.getObjetInventaire("Epee")){
+		//il fait plus de dommage s'il a une epee	
 			int degat=5*random.nextInt(7);
 			if(!p.perteEnergie(degat, xApres, yApres, tableauIle, true, false)){
+			//Verifie que le personnage ne meurt pas de la perte d'energie
 				Object[] options = { "OK" };
 				JOptionPane.showOptionDialog(null, "Vous avez inflige "+degat+" points de degats a votre cible", "ATTAQUE",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -35,8 +55,10 @@ public class Guerrier extends Personnage{
 						null, options, options[0]);
 			}
 		}else{
+		//fait moins de dommage comme le guerrier se bat avec ses poings	
 			int degat=random.nextInt(7);
 			if(!p.perteEnergie(degat, xApres, yApres, tableauIle, true, false)){
+			//Verifie que le personnage ne meurt pas de la perte d'energie
 				Object[] options = { "OK" };
 				JOptionPane.showOptionDialog(null, "Vous combattez à main nues... Vous avez infliger "+degat+" points de degats a votre cible", "ATTAQUE",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,

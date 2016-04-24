@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+
 /**
- * Classe permettant de cr�er des Personnages (Explorateurs / Voleurs / Piegeurs [prochainement])
+ * Classe permettant de creer des Personnages (Explorateurs / Voleurs / Piegeurs [prochainement])
  * @author Valentin
  * @version 1.1 
  */
@@ -14,6 +15,11 @@ public class Personnage{
 	protected ArrayList <String> inventaire=new ArrayList<String>();
 	protected boolean equipe1;
 
+	/**
+	 * Cree un personnage et lui specifie son equipe et l'id de son bateau suivant l'equipe
+	 * @param equipe
+	 * @param joueur
+	 */
 	Personnage(boolean equipe, Joueur joueur){
 		this.equipe1=equipe;
 		if(equipe1)		
@@ -23,18 +29,34 @@ public class Personnage{
 		joueur.addPerso(this);
 	}
 
+	/**
+	 * 
+	 * @return s'il peut encore se deplacer
+	 */
 	public boolean getDeplacement(){
 		return deplacement;
 	}
 
+	/**
+	 * Change la valeur de deplacement
+	 * @param deplacement
+	 */
 	public void setDeplacement(boolean deplacement){
 		this.deplacement=deplacement;
 	}
 
+	/**
+	 * Change la valeur de death
+	 * @param death
+	 */
 	public void setDeath(boolean death){
 		this.death=death;
 	}
 
+	/**
+	 * 
+	 * @return vrai si le personnage peut faire une action ou un deplacement
+	 */
 	public boolean actionOuDeplacement(){
 		if(action || deplacement)
 			return true;
@@ -48,14 +70,26 @@ public class Personnage{
 		this.nom=nom;
 	}
 
+	/**
+	 * 
+	 * @return true si le personnage peut encore faire une action
+	 */
 	public boolean getAction(){
 		return action;
 	}
 
+	/**
+	 * Change la valeur d'action
+	 * @param action
+	 */
 	public void setAction(Boolean action){
 		this.action=action;
 	}
 
+	/**
+	 * 
+	 * @return l'id du bateau du personnage
+	 */
 	public int getIdBateau(){
 		return idBateau;
 	}
@@ -125,7 +159,7 @@ public class Personnage{
 	}
 
 	/**
-	 * Permet au voleur de d�rober un objet a l'�quipe adverse
+	 * Permet a un personnage de faire un echange avec un personnage de son equipe
 	 * @param p
 	 */
 	public void echangeObjet(Personnage p){
@@ -191,10 +225,20 @@ public class Personnage{
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(this);
 		if(tableauIle[xApres][yApres].getTeamPiege()!=(this.getIdBateau()-2))
-				tableauIle[xApres][yApres].setPiege(false);
+			tableauIle[xApres][yApres].setPiege(false);
 		perteEnergie(1, xApres,yApres, tableauIle, false, true);
 	}
-
+	
+	/**
+	 * Permet a un personnage de rentrer dans le bateau
+	 * @param xAvant
+	 * @param yAvant
+	 * @param xApres
+	 * @param yApres
+	 * @param tableauIle
+	 * @param joueur
+	 * @return true si le personnage possède le tresor
+	 */
 	public boolean entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Joueur joueur){
 		Object[] options = { "OK" };
 		if(joueur.nbrVivant()>((CaseNavire)tableauIle[xApres][yApres]).nbrVivantStock()+1){
@@ -220,13 +264,23 @@ public class Personnage{
 		}
 		return false;
 	}
-
+	/**
+	 * Fait perdre de l'energie au personnage
+	 * @param nrj
+	 * @param x
+	 * @param y
+	 * @param tableauIle
+	 * @param attaque
+	 * @param deplacement
+	 * @return true si le personnage meurt de la perte d'energie
+	 */
 	protected boolean perteEnergie(int nrj, int x, int y, Case[][] tableauIle, boolean attaque, boolean deplacement){
 		if(energie-nrj<=0){
 			if(tableauIle[x][y].getId()!=2 && tableauIle[x][y].getId()!=3)
 				tableauIle[x][y].setId(14);
 			death=true;
 			if(!attaque){
+			//test pour eviter d'afficher du texte inutile	
 				Object[] options = { "OK" };
 				JOptionPane.showOptionDialog(null, "Votre personnage etait a bout de force... Cette ultime action lui a coute la vie. Son inventaire se trouve desormais au sol et peut etre recuperer par n'importe quel personne", "VOTRE PERSONNAGE EST MORT",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
@@ -247,7 +301,17 @@ public class Personnage{
 		}
 
 	}
-
+	
+	/**
+	 * Permet a un personnage de recuperer l'inventaire laisse au sol ou laisse dans le bateau par un personnage mort
+	 * @param sortieBateau
+	 * @param entreeBateau
+	 * @param x
+	 * @param y
+	 * @param xApres
+	 * @param yApres
+	 * @param tableauIle
+	 */
 	public void recuperationStuff(boolean sortieBateau, boolean entreeBateau, int x, int y, int xApres, int yApres, Case[][] tableauIle){
 		String res="\n\n";
 
@@ -292,6 +356,9 @@ public class Personnage{
 		System.out.println(this.getInventaire());
 	}
 
+	/**
+	 * Immobilise un personnage a cause d'un piege
+	 */
 	public void immobilisation(){
 		Object[] options = { "OK" };
 		JOptionPane.showOptionDialog(null, "Votre personnage est tomber dans un piege adverse ! Il sera immobilise durant les 3 tours suivants et ne pourra effectuer aucune action !", "C'ETAIT UN PIEGE !",
@@ -300,6 +367,13 @@ public class Personnage{
 		this.compteur=3;
 	}
 
+	/**
+	 * Test si un personnage peut sortir du bateau
+	 * @param i
+	 * @param j
+	 * @param ileDuJeu
+	 * @return true s'il peut sortir du bateau
+	 */
 	public boolean sortiePossible(int i, int j, ile ileDuJeu){
 		if(!death && action){
 			if(!(this instanceof Explorateur)){
@@ -324,6 +398,9 @@ public class Personnage{
 		return false;
 	}
 
+	/**
+	 * augmente l'energie du personnage
+	 */
 	public void addEnergie(){
 		if(energie<100){
 			if(energie+10<=100){
@@ -333,24 +410,48 @@ public class Personnage{
 		}
 	}
 
+	/**
+	 * 
+	 * @return l'energie du personnage
+	 */
 	public int getEnergie(){
 		return energie;
 	}
+	
+	/**
+	 * Diminue le compteur de tour immobilise
+	 */
 	public void setCompteur(){
 		compteur--;
 	}
-
+	
+	/**
+	 * 
+	 * @return true si le personnage est mort
+	 */
 	public boolean getDeath(){return death;}
 
+	/**
+	 * 
+	 * @return le nombre de tour ou le personnage est encore immobilise
+	 */
 	public int getCompteur(){return compteur;}
 
+	/**
+	 * ToString pour l'affichage dans le menu de sortie de bateau
+	 */
 	public String toString(){
 		if(inventaire.contains("Cle"))
 			return ""+this.getType()+" "+this.getNom()+"  [Energie:"+this.energie+"]  - Cle";
 		else
 			return ""+this.getType()+" "+this.getNom()+"  [Energie:"+this.energie+"]";
 	}
-
+	
+	/**
+	 * ToString pour l'affichage dans la console
+	 * @param console
+	 * @return
+	 */
 	public String toString(boolean console){
 		return "";
 	}

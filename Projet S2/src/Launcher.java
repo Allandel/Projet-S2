@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -13,16 +12,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 
+/**
+ * Permet l'affichage du menu principal du jeu
+ */
 public class Launcher extends JFrame{
 	static int tailleCarte, pourcentageRocher;
 	static boolean etat = true;
 
+	/**
+	 * Affiche le menu principal du jeu
+	 * Permet de recuperer la taille et le pourcentage de rocher
+	 */
 	public Launcher(){
 		JPanel onglet1 =  new ImagePanel(new ImageIcon("img/carte.jpg").getImage());
 		JPanel onglet2 = new JPanel();
-		//Image fond = ;
 		JTabbedPane menuOnglet = new JTabbedPane();
 		GridLayout g = new GridLayout(3,3);
 		onglet2.setLayout(g);
@@ -32,7 +36,6 @@ public class Launcher extends JFrame{
 		this.setUndecorated(true);
 		this.pack();
 		this.setLocationRelativeTo(null);
-		//		this.setLayout(g);
 		JButton BJouer = new JButton("Jouer");
 		JButton Bquitter = new JButton("Quitter");
 		JLabel LBTaille = new JLabel("Taille du plateau:");
@@ -83,16 +86,31 @@ public class Launcher extends JFrame{
 			}
 		});
 	}
-
+	
+	/**
+	 * 
+	 * @return taille de la carte
+	 */
 	public static int getTaille(){
 		return tailleCarte;
 	}
+	
+	/**
+	 * 
+	 * @return le pourcentage de rocher
+	 */
 	public static int getPourcent(){
 		return pourcentageRocher;
 	}
+	
+	/**
+	 * 
+	 * @return l'etat
+	 */
 	public static boolean getetat(){
 		return etat;
 	}
+	
 	class ImagePanel extends JPanel {
 
 		private Image img;

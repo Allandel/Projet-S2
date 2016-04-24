@@ -25,7 +25,14 @@ public class Voleur extends Personnage {
 	public String toString(boolean console){
 		return "V";
 	}
-
+	
+	/**
+	 * Permet au voleur de voler un autre personnage
+	 * @param p
+	 * @param x
+	 * @param y
+	 * @param tableauIle
+	 */
 	public void volerObjet(Personnage p, int x, int y, Case[][] tableauIle){
 		Random random=new Random();
 		if (this.equipe1!=p.equipe1){
