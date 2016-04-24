@@ -1,6 +1,10 @@
 import javax.swing.JOptionPane;
 
-
+/**
+ * Permet le lancement de test des elements du jeu
+ * @author louis
+ *
+ */
 public class Test {
 	private ActionJoueur action =new ActionJoueur();
 	private ile ileDuJeu;
@@ -30,7 +34,11 @@ public class Test {
 		joueur[0].passerTour();
 		joueur[1].passerTour();
 	}
-
+	
+	/**
+	 * Lance le test concernant un personnage
+	 * @param perso
+	 */
 	public void testPerso(Personnage perso){
 		int [] cordonnees={0,0};
 		int equipe=0;

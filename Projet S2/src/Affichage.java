@@ -168,6 +168,12 @@ public class Affichage {
 		}
 	}
 	
+	/**
+	 * Highlight les personnages du test qui ont encore la possibilite de se deplacer ou faire une action
+	 * @param ileDuJeu
+	 * @param equipe
+	 * @param joueur
+	 */
 	private void affichagePersoActionnableTest(ile ileDuJeu, int equipe, Joueur joueur){
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
@@ -219,6 +225,10 @@ public class Affichage {
 		return plateaux.get(equipe);
 	}
 	
+	/**
+	 * 
+	 * @return le plateau de test
+	 */
 	public Plateau getPlateauTest(){
 		return plateauDuTest;
 	}
@@ -232,6 +242,11 @@ public class Affichage {
 		plateaux.get(equipe).setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
 	}
 	
+	/**
+	 * Highlight la coordonnees du plateau du joueur pour le test
+	 * @param cordonnees
+	 * @param equipe
+	 */
 	public void setHighlightTest(int[]cordonnees, int equipe){
 		plateauDuTest.setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
 	}
