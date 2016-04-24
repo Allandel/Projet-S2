@@ -104,8 +104,7 @@ public class Joueur {
 	public void resetAction(){
 		for(Personnage perso : equipe){
 			if(perso.getCompteur()==0){
-				perso.setAction(true);
-				perso.setDeplacement(true);
+				perso.setActionDeplacement(true);
 			}else{
 				perso.setCompteur();
 			}
@@ -117,8 +116,7 @@ public class Joueur {
 	 */
 	public void passerTour(){
 		for(Personnage perso : equipe){
-			perso.setAction(false);
-			perso.setDeplacement(false);
+			perso.setActionDeplacement(false);
 		}
 	}
 

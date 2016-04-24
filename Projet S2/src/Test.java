@@ -46,7 +46,7 @@ public class Test {
 		affichage=new Affichage(tableauAffichage, ileDuJeu, joueur, true);
 		GestionDuJeu gestion=new GestionDuJeu(ileDuJeu, tableauAffichage, affichage);
 		while(!quitter){
-			this.resetActionDeplacement(persoTest[equipe]);
+			persoTest[equipe].setActionDeplacement(true);
 			affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 			while(joueur[equipe].actionPossible() && !quitter){
 				cordonnees=action.choixCase(affichage.getPlateauTest(), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
@@ -75,8 +75,9 @@ public class Test {
 		}
 	}
 
-	private void resetActionDeplacement(Personnage perso){
-		perso.setAction(true);
-		perso.setDeplacement(true);
+
+
+	public void testIle(){
+		
 	}
 }

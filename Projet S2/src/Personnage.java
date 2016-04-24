@@ -467,4 +467,9 @@ public class Personnage{
 		}
 		return stringInventaire;
 	}
+	
+	public void setActionDeplacement(boolean setter){
+		this.setAction(setter);
+		this.setDeplacement(setter);
+	}
 }
