@@ -15,9 +15,9 @@ public class main {
 		do{
 			fin=gestion.tourDuJoueur();
 		}while(!fin[0]);
-		
+
 		Affichage victoire=new Affichage(fin);
-		
+
 		System.exit(0);
 	}
 }

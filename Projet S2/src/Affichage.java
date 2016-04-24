@@ -21,7 +21,7 @@ public class Affichage {
 			"img/death.jpg","img/herbe.jpg","img/piege.jpg"};
 	private Plateau plateauDuJeuJ1, plateauDuJeuJ2;
 
-	
+
 	public Affichage(boolean [] gagner){
 		String gagnant="";
 		if(gagner[1])
@@ -32,9 +32,9 @@ public class Affichage {
 		JOptionPane.showOptionDialog(null, "Bravo ! Le "+gagnant+"a gagne la partie", "Victoire",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 				null, options, options[0]);
-	
+
 	}
-	
+
 	/**
 	 * Initialise et permet l'affichage du plateau de jeu pour chaque joueur
 	 * @param tableauAffichage
@@ -103,7 +103,7 @@ public class Affichage {
 			}
 		}
 	} 
- 
+
 	/**
 	 * Brouillard de gueurre
 	 * Grise les cases qui ne sont pas dans le champ de vision du joueur
@@ -146,7 +146,7 @@ public class Affichage {
 			}
 		}
 	}
-	
+
 	/**
 	 * Affiche le tableau de jeu specifique au joueur
 	 * @param ileDuJeu
