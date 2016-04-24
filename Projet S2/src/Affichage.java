@@ -30,7 +30,7 @@ public class Affichage {
 			gagnant="Joueur 2 ";
 		Object[] options = { "OK" };
 		JOptionPane.showOptionDialog(null, "Bravo ! Le "+gagnant+"a gagne la partie", "Victoire",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+				JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 				null, options, options[0]);
 	
 	}
