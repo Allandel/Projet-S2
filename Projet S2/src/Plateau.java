@@ -349,8 +349,8 @@ public class Plateau {
 	public void setText(int x, int y, String msg) {
 		graphic.setText(x, y, msg) ;		
 	}
-	public void refreshinfo(String energie2, String inventaire2){
-		recupenergie.setText("test"+energie2);
-		recupInventaire.setText("test2"+ inventaire2);
+	public void refreshinfo(String energie, String inventaire){
+		recupenergie.setText(energie);
+		recupInventaire.setText(inventaire);
 	}
 }
