@@ -6,8 +6,7 @@
 public class main {
 
 	public static void main(String[] args) {
-		Launcher menu = new Launcher();
-		
+		Launcher menu = new Launcher();		
 		while(Launcher.getetat()){
 			System.out.flush();
 		}

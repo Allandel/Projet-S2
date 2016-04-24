@@ -7,14 +7,18 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * La classe Plateau permet d'afficher un plateau de Jeu carré
  * sur lequel sont disposés des images représentant les éléments du jeu
  * Les images sont toutes de même taille et carrées. Optionellement, on peut y associer 
  * une zone d'affichage de texte et caturer les entrées (souris / clavier) de l'utilisateur.
- * @author M2103-Team
+ * @author M2103-Team 
+ * 
  */
 public class Plateau {
 	private static boolean defaultVisibility = true ;
@@ -22,6 +26,12 @@ public class Plateau {
 	private JFrame window ;
 	private GraphicPane graphic ;
 	private ConsolePane console ;
+	JPanel infos;
+	 JLabel energie = new JLabel("Energie: ");
+	 static JLabel recupenergie = new JLabel("  ");
+	 JLabel inventaire  = new JLabel("Inventaire: ");
+	 static JLabel recupInventaire = new JLabel("  ");
+
 	/**
 	 *  Attribut ou est enregistré un événement observé. Cet attribut est
 	 * initialisé à null au début de la scrutation et rempli par l'événement observé 
@@ -101,10 +111,13 @@ public class Plateau {
 	 */
 	public Plateau(String[] gif,int taille, boolean withTextArea){
 		// Instancie la fenetre principale et et les deux composants.
+		infos = new JPanel();
+		infos.setLayout(new BoxLayout(infos, BoxLayout.PAGE_AXIS));
+
 		window = new JFrame() ;
 		graphic = new GraphicPane(gif, taille) ;
 		console = null ;
-
+		window.setPreferredSize(new Dimension(taille*46+70, taille*46));
 		// Caractéristiques initiales pour la fenetre.
 		window.setTitle("Plateau de jeu ("+taille+"X"+taille+")");
 		window.setLocationRelativeTo(null);
@@ -114,7 +127,12 @@ public class Plateau {
 		window.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 		// Ajout des deux composants à la fenetre
-		window.getContentPane().add(graphic, BorderLayout.NORTH);
+		infos.add(energie);
+		infos.add(recupenergie);
+		infos.add(inventaire);
+		infos.add(recupInventaire);
+		window.getContentPane().add(infos, BorderLayout.EAST);
+		window.getContentPane().add(graphic, BorderLayout.WEST);
 		if (withTextArea) {
 			console = new ConsolePane() ;
 			window.getContentPane().add(console) ;
@@ -330,5 +348,10 @@ public class Plateau {
 	 */
 	public void setText(int x, int y, String msg) {
 		graphic.setText(x, y, msg) ;		
+	}
+	public static void refreshinfo(String energie2, String inventaire2){
+		recupenergie.setText("test"+energie2);
+		recupInventaire.setText("test2"+ inventaire2);
+		System.out.println("test git");
 	}
 }
