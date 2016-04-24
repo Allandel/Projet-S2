@@ -47,7 +47,7 @@ public class Test {
 		GestionDuJeu gestion=new GestionDuJeu(ileDuJeu, tableauAffichage, affichage);
 		while(!quitter){
 			this.resetActionDeplacement(persoTest[equipe]);
-			affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[0], equipe);
+			affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 			while(joueur[equipe].actionPossible() && !quitter){
 				cordonnees=action.choixCase(affichage.getPlateauTest(), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
 
@@ -67,7 +67,7 @@ public class Test {
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
 						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(0), tableauAffichage, cordonnees[0], cordonnees[1]);
 
-					affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[0], equipe);
+					affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}
 			}
 			gestion.soinBateau(joueur[equipe]);
