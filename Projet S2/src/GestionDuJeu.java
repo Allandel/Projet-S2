@@ -46,7 +46,9 @@ public class GestionDuJeu {
 				if(cordonnees[0]==999)
 					joueur[equipe].passerTour();
 				else if(cordonnees[0]==888){
-					joueur[equipe].abandon();
+					int decision=JOptionPane.showConfirmDialog(null,"Désirez vous abandonner la partie ?", "Abandonner la partie ?", JOptionPane.YES_NO_OPTION);
+					if(decision==0)
+						joueur[equipe].abandon();
 				}else{
 					affichage.setHighlight(cordonnees, equipe);
 
@@ -79,7 +81,9 @@ public class GestionDuJeu {
 			perso.setAction(false);
 			perso.setDeplacement(false);
 		}else if(cordonnees[0]==888){
-			joueur.abandon();
+			int decision=JOptionPane.showConfirmDialog(null,"Désirez vous abandonner la partie ?", "Abandonner la partie ?", JOptionPane.YES_NO_OPTION);
+			if(decision==0)
+				joueur.abandon();
 		}else if(cordonnees[0]!=777){
 			if(perso.getDeplacement()){
 				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
