@@ -21,7 +21,10 @@ public class Affichage {
 			"img/death.jpg","img/herbe.jpg","img/piege.jpg"};
 	private Plateau plateauDuJeuJ1, plateauDuJeuJ2;
 
-
+	/**
+	 * Affiche un message disant le gagnant du jeu à la fin de la partie
+	 * @param gagner
+	 */
 	public Affichage(boolean [] gagner){
 		String gagnant="";
 		if(gagner[1])
@@ -35,6 +38,13 @@ public class Affichage {
 
 	}
 	
+	/**
+	 * Affichage du jeu dans le test
+	 * @param tableauAffichage
+	 * @param ileDuJeu
+	 * @param joueur
+	 * @param test
+	 */
 	public Affichage(int [][] tableauAffichage, ile ileDuJeu, Joueur[] joueur, boolean test){
 		tableauAffichageJ1=new int [tableauAffichage.length][tableauAffichage[1].length];
 		tableauAffichageJ2=new int [tableauAffichage.length][tableauAffichage[1].length];
@@ -188,6 +198,13 @@ public class Affichage {
 		this.affichagePersoActionnable(ileDuJeu, equipe, joueur);
 	}
 	
+	/**
+	 * Affichage du jeu pour les tests
+	 * @param ileDuJeu
+	 * @param tableauAffichage
+	 * @param joueur
+	 * @param equipe
+	 */
 	public void affichageDuJeu(ile ileDuJeu, int[][] tableauAffichage, Joueur joueur, int equipe){
 		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
 		System.out.println("\n"+ileDuJeu.toString());

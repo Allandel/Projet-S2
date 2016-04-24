@@ -9,6 +9,11 @@ public class Test {
 	private Joueur [] joueur = {new Joueur(true), new Joueur(false)};
 	private Personnage [] persoTest;
 
+	/**
+	 * Initialise une ile avec un perso de chaque type de chaque equipe de chaque cote
+	 * plus la mer en bas, des rocher en haut avec le coffre et la clé
+	 * plus le perso a tester au milieu
+	 */
 	Test(){
 		ileDuJeu=new ile(true);
 		tableauAffichage=new int[6][6];

@@ -6,8 +6,8 @@
 public class main {
 
 	public static void main(String[] args) {
-		//Test test=new Test();
-		
+		Test test=new Test();
+		/*
 		Launcher menu = new Launcher();		
 		while(Launcher.getetat()){
 			System.out.flush();
@@ -19,7 +19,7 @@ public class main {
 		}while(!fin[0]);
 
 		Affichage victoire=new Affichage(fin);
-		 
+		 */
 		System.exit(0);
 
 	}
