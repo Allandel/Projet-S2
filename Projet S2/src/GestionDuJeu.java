@@ -11,7 +11,7 @@ public class GestionDuJeu {
 	private int[][] tableauAffichage;
 	private Affichage affichage;
 	private Joueur [] joueur = {new Joueur(true), new Joueur(false)};
-	
+
 	/**
 	 * Constructeur initialisant le plateau de jeu de base
 	 */
@@ -43,10 +43,10 @@ public class GestionDuJeu {
 				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
 
 				if(cordonnees[0]==999)
-				//si le joueur decide de passer son tour
+					//si le joueur decide de passer son tour
 					joueur[equipe].passerTour();
 				else if(cordonnees[0]==888){
-				//si le joueur decide d'abandonner	
+					//si le joueur decide d'abandonner	
 					int decision=JOptionPane.showConfirmDialog(null,"Désirez vous abandonner la partie ?", "Abandonner la partie ?", JOptionPane.YES_NO_OPTION);
 					if(decision==0)
 						joueur[equipe].abandon();
@@ -83,18 +83,18 @@ public class GestionDuJeu {
 		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
 
 		if(cordonnees[0]==999){
-		//si le joueur decide de passer le tour du personnage selectionne
+			//si le joueur decide de passer le tour du personnage selectionne
 			perso.setAction(false);
 			perso.setDeplacement(false);
 		}else if(cordonnees[0]==888){
-		//si le joueur decide d'abandonner
+			//si le joueur decide d'abandonner
 			int decision=JOptionPane.showConfirmDialog(null,"Désirez vous abandonner la partie ?", "Abandonner la partie ?", JOptionPane.YES_NO_OPTION);
 			if(decision==0)
 				joueur.abandon();
 		}else if(cordonnees[0]!=777){
-		//si le joueur n'annule pas sa selection	
+			//si le joueur n'annule pas sa selection	
 			if(perso.getDeplacement()){
-			//si le perso peut se deplacer	
+				//si le perso peut se deplacer	
 				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
 					if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=equipe){
 						perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau());
@@ -109,7 +109,7 @@ public class GestionDuJeu {
 				}
 			}
 			if(perso.getAction()){
-			//si le perso peut faire une action	
+				//si le perso peut faire une action	
 				if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
 					((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), joueur);
 				}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
