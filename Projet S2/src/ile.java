@@ -36,30 +36,38 @@ public class ile {
 	 * @param test
 	 */
 	ile(boolean test){
-		tableauIle = new Case[6][6];
-		ligneNavJ1=4;
+		tableauIle = new Case[7][7];
+		ligneNavJ1=5;
 		colonneNavJ1=2;
-		ligneNavJ2=4;
-		colonneNavJ2=3;		
-		
-		for(int i = 0;i<6;i++){
-			for(int j = 0;j<6;j++){
+		ligneNavJ2=5;
+		colonneNavJ2=4;		
+
+		for(int i = 0;i<7;i++){
+			for(int j = 0;j<7;j++){
 				tableauIle[i][j]= new Case();
 			}
 		}
-		
-		for(int i = 0;i<6;i++){
+
+		for(int i = 0;i<7;i++){
 			tableauIle[0][i]= new CaseRocher();
 		}
-		
-		for(int i = 0;i<6;i++){
-			tableauIle[5][i].setId(5);
+
+		for(int i = 0;i<7;i++){
+			tableauIle[6][i].setId(5);
 		}
+
+		for(int j=0;j<7;j+=6){
+			for(int i = 1;i<7;i++){
+				tableauIle[i][j].setId(5);
+			}
+		}
+		tableauIle[5][1].setId(5);
+		tableauIle[5][5].setId(5);
+		tableauIle[5][2]=new CaseNavire(2);
+		tableauIle[5][4]=new CaseNavire(3);
 		
-		tableauIle[4][2]=new CaseNavire(2);
-		tableauIle[4][3]=new CaseNavire(3);
 	}
-	
+
 	/**
 	 * Cree un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
 	 */

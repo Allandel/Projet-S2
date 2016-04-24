@@ -7,35 +7,36 @@ public class Test {
 	private int[][] tableauAffichage;
 	private Affichage affichage;
 	private Joueur [] joueur = {new Joueur(true), new Joueur(false)};
-	private Personnage [] persoTest;
+	private Personnage [] persoTest = new Personnage [2];
 
 	/**
 	 * Initialise une ile avec un perso de chaque type de chaque equipe de chaque cote
 	 * plus la mer en bas, des rocher en haut avec le coffre et la clé
-	 * plus le perso a tester au milieu
 	 */
 	Test(){
 		ileDuJeu=new ile(true);
-		tableauAffichage=new int[6][6];
-		
-		int [] cordonnees={0,0};
-		int equipe=0;
-		boolean [] gagner;
-		boolean quitter=false;
-		
-		ileDuJeu.getTableau()[1][0].setPersonnageCourant(new Explorateur(true, joueur[0]));
-		ileDuJeu.getTableau()[2][0].setPersonnageCourant(new Guerrier(true, joueur[0]));
-		ileDuJeu.getTableau()[3][0].setPersonnageCourant(new Voleur(true, joueur[0]));
-		ileDuJeu.getTableau()[4][0].setPersonnageCourant(new Piegeur(true, joueur[0]));
-		
+		tableauAffichage=new int[7][7];
+
+		ileDuJeu.getTableau()[1][1].setPersonnageCourant(new Explorateur(true, joueur[0]));
+		ileDuJeu.getTableau()[2][1].setPersonnageCourant(new Guerrier(true, joueur[0]));
+		ileDuJeu.getTableau()[3][1].setPersonnageCourant(new Voleur(true, joueur[0]));
+		ileDuJeu.getTableau()[4][1].setPersonnageCourant(new Piegeur(true, joueur[0]));
+
 		ileDuJeu.getTableau()[1][5].setPersonnageCourant(new Explorateur(false, joueur[1]));
 		ileDuJeu.getTableau()[2][5].setPersonnageCourant(new Guerrier(false, joueur[1]));
 		ileDuJeu.getTableau()[3][5].setPersonnageCourant(new Voleur(false, joueur[1]));
 		ileDuJeu.getTableau()[4][5].setPersonnageCourant(new Piegeur(false, joueur[1]));
-		
+
 		joueur[0].passerTour();
 		joueur[1].passerTour();
-		
+	}
+	
+	public void testPerso(Personnage perso){
+		int [] cordonnees={0,0};
+		int equipe=0;
+		boolean [] gagner;
+		boolean quitter=false;
+
 		affichage=new Affichage(tableauAffichage, ileDuJeu, joueur, true);
 		GestionDuJeu gestion=new GestionDuJeu(ileDuJeu, tableauAffichage, affichage);
 		while(!quitter){
@@ -67,6 +68,7 @@ public class Test {
 			equipe=1-equipe;
 		}
 	
+
 	}
 
 }
