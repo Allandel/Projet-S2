@@ -34,7 +34,30 @@ public class Affichage {
 				null, options, options[0]);
 
 	}
+	
+	public Affichage(int [][] tableauAffichage, ile ileDuJeu, Joueur[] joueur, boolean test){
+		tableauAffichageJ1=new int [tableauAffichage.length][tableauAffichage[1].length];
+		tableauAffichageJ2=new int [tableauAffichage.length][tableauAffichage[1].length];
+		tableaux.add(tableauAffichageJ1);
+		tableaux.add(tableauAffichageJ2);
+		
+		plateauDuJeuJ1= new Plateau(images,ileDuJeu.getTableau().length);
+		plateauDuJeuJ2= new Plateau(images,ileDuJeu.getTableau().length);
+		plateauDuJeuJ2.close();
+		tableaux.add(tableauAffichageJ1);
+		tableaux.add(tableauAffichageJ2);
 
+		plateaux.add(plateauDuJeuJ1);
+		plateaux.add(plateauDuJeuJ2);
+
+		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
+		this.updateTableauAffichage(ileDuJeu, tableauAffichageJ1);
+		this.updateTableauAffichage(ileDuJeu, tableauAffichageJ2);
+		
+		plateaux.get(0).setJeu(tableauAffichage);
+		System.out.println("\n"+ileDuJeu.toString());
+	}
+	
 	/**
 	 * Initialise et permet l'affichage du plateau de jeu pour chaque joueur
 	 * @param tableauAffichage
@@ -42,8 +65,8 @@ public class Affichage {
 	 * @param joueur
 	 */
 	public Affichage(int [][] tableauAffichage, ile ileDuJeu, Joueur[] joueur){
-		tableauAffichageJ1=new int [tableauAffichage.length][tableauAffichage.length];
-		tableauAffichageJ2=new int [tableauAffichage.length][tableauAffichage.length];
+		tableauAffichageJ1=new int [tableauAffichage.length][tableauAffichage[1].length];
+		tableauAffichageJ2=new int [tableauAffichage.length][tableauAffichage[1].length];
 		tableaux.add(tableauAffichageJ1);
 		tableaux.add(tableauAffichageJ2);
 
@@ -70,7 +93,7 @@ public class Affichage {
 	 */
 	private void updateTableauAffichage(ile ileDuJeu,int[][] tableauAffichage){
 		for(int i= 0; i<ileDuJeu.getTableau().length;i++){
-			for(int j = 0; j<ileDuJeu.getTableau()[0].length;j++){
+			for(int j = 0; j<ileDuJeu.getTableau()[1].length;j++){
 				tableauAffichage[i][j] = ileDuJeu.getTableau()[j][i].getId();
 			}
 		}
@@ -155,12 +178,21 @@ public class Affichage {
 	 * @param equipe
 	 */
 	public void affichageDuJeuJoueur(ile ileDuJeu, int[][] tableauAffichage, Joueur joueur, int equipe){
-		System.out.println("\n"+ileDuJeu.toString());
+		plateaux.get(1-equipe).masquer();
 		this.updateTableauAffichageJoueur(ileDuJeu,joueur, tableaux.get(equipe),equipe);
 		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
+		System.out.println("\n"+ileDuJeu.toString());
 		plateaux.get(equipe).setJeu(tableaux.get(equipe));
 		plateaux.get(equipe).affichage();
 		this.brouillard(ileDuJeu, equipe, joueur);
+		this.affichagePersoActionnable(ileDuJeu, equipe, joueur);
+	}
+	
+	public void affichageDuJeu(ile ileDuJeu, int[][] tableauAffichage, Joueur joueur, int equipe){
+		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
+		System.out.println("\n"+ileDuJeu.toString());
+		plateaux.get(0).setJeu(tableauAffichage);
+		plateaux.get(0).affichage();
 		this.affichagePersoActionnable(ileDuJeu, equipe, joueur);
 	}
 	/**

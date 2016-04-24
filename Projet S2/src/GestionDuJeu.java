@@ -13,6 +13,16 @@ public class GestionDuJeu {
 	private Joueur [] joueur = {new Joueur(true), new Joueur(false)};
 
 	/**
+	 * Constructeur vide pour le test
+	 * @param test
+	 */
+	public GestionDuJeu(ile ileDujeu, int[][] tableauAffichage, Affichage affichage){
+		this.ileDuJeu=ileDujeu;
+		this.tableauAffichage=tableauAffichage;
+		this.affichage=affichage;
+	}
+	
+	/**
 	 * Constructeur initialisant le plateau de jeu de base
 	 */
 	public GestionDuJeu(){
@@ -34,11 +44,16 @@ public class GestionDuJeu {
 	 */
 	public boolean [] tourDuJoueur(){
 		boolean [] gagner={false,false};
-		int equipe=0;
+		int equipe=0, equipeAffichage;
 
 		while(!gagner[0]){
+			equipeAffichage=equipe+1;
 			joueur[equipe].resetAction();
 			affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
+			Object[] options = { "OK" };
+			JOptionPane.showOptionDialog(null, "Tour du Joueur "+equipeAffichage, "Changement de Joueur",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+					null, options, options[0]);
 			while(joueur[equipe].actionPossible() && !gagner[0]){
 				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
 
@@ -69,6 +84,7 @@ public class GestionDuJeu {
 		return gagner;
 	}
 
+	
 	/**
 	 * Donne le choix des actions possible pour le personnage selectionne
 	 * @param x
@@ -78,7 +94,7 @@ public class GestionDuJeu {
 	 * @param joueur
 	 * @return vrai si le personnage rentre dans le bateau avec le tresor
 	 */
-	private boolean [] actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur){
+	boolean [] actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur){
 		boolean []gagner={false,false};
 		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
 
@@ -151,11 +167,11 @@ public class GestionDuJeu {
 	 * Soigne les personnages dans le bateau du joueur dont c'est le tour
 	 * @param joueur
 	 */
-	private void soinBateau(Joueur joueur){
+	void soinBateau(Joueur joueur){
 		if(joueur.getEquipe())
-			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getLigneNavJ1()][1]).recupEnergie();
+			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getLigneNavJ1()][ileDuJeu.getColonneNavJ1()]).recupEnergie();
 		else
-			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getLigneNavJ2()][tableauAffichage.length-2]).recupEnergie();
+			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getLigneNavJ2()][ileDuJeu.getColonneNavJ2()]).recupEnergie();
 	}
 
 	/**
