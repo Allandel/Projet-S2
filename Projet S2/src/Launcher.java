@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -12,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 /**
  * Permet l'affichage du menu principal du jeu
@@ -19,6 +22,7 @@ import javax.swing.JTabbedPane;
 public class Launcher extends JFrame{
 	static int tailleCarte, pourcentageRocher;
 	static boolean etat = true;
+	static int id;
 	static int nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1;
 	static int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2;
 	/**
@@ -30,12 +34,14 @@ public class Launcher extends JFrame{
 		JPanel onglet2 = new JPanel();
 		JPanel onglet3 = new JPanel();
 		JPanel onglet4 = new JPanel();
+		JPanel onglet5 = new JPanel();
 		JTabbedPane menuOnglet = new JTabbedPane();
 		GridLayout g = new GridLayout(3,3);
 		GridLayout g2 = new GridLayout(4,3);
 		onglet2.setLayout(g);
 		onglet3.setLayout(g2);
 		onglet4.setLayout(g2);
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(500,250));
 		this.setTitle("Treasure Hunt");
@@ -45,6 +51,12 @@ public class Launcher extends JFrame{
 		
 		JButton BJouer = new JButton("Jouer");
 		JButton Bquitter = new JButton("Quitter");
+		JButton Bregles = new JButton("Règles");
+		JButton BTMove = new JButton("Deplacement");
+		JButton BTVoleur = new JButton("Voleur");
+		JButton BTGuerrier = new JButton("Guerrier");
+		JButton BTPiegeur = new JButton("Piegeur");
+		JButton BTEnergie = new JButton("Energie");
 		JLabel LBTaille = new JLabel("Taille du plateau:");
 		JLabel LBPourcent = new JLabel("Pourcentage de rochers:"
 				+ "");
@@ -180,12 +192,19 @@ public class Launcher extends JFrame{
 		onglet2.add(LBPourcent);
 		onglet2.add(sliderpourcent);
 		onglet1.add(BJouer);
+		onglet1.add(Bregles);
 		onglet1.add(Bquitter);
-
+		onglet5.add(BTEnergie);
+		onglet5.add(BTGuerrier);
+		onglet5.add(BTPiegeur);
+		onglet5.add(BTVoleur);
+		onglet5.add(BTMove);
+		
 		menuOnglet.add("Menu", onglet1);
 		menuOnglet.add("Parametres", onglet2);
 		menuOnglet.add("Parametres Joueur 1", onglet3);
 		menuOnglet.add("Parametres Joueur 2", onglet4);
+		menuOnglet.add("Tests", onglet5);
 		this.getContentPane().add(menuOnglet);
 		this.pack();
 		this.setVisible(true);		
@@ -210,8 +229,20 @@ public class Launcher extends JFrame{
 				System.exit(0);
 			}
 		});
+//		Bregles.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				ImageIcon img = new ImageIcon("img/regle.jpg");
+//				img.getImage();
+//				JLabel img2 = new JLabel();
+//				img2.add(img.getImage());
+//				JFrame regles = new JFrame();
+//				regles.add(img);
+//				regles.setVisible(true);
+//			}	
+//			
+//		});
 	}
-	
+		
 	/**
 	 * 
 	 * @return taille de la carte
@@ -235,6 +266,9 @@ public class Launcher extends JFrame{
 	public static boolean getetat(){
 		return etat;
 	}
+	public static int getid(){
+		return id;
+	}
 	
 	class ImagePanel extends JPanel {
 
@@ -255,6 +289,7 @@ public class Launcher extends JFrame{
 		public void paintComponent(Graphics g) {
 			g.drawImage(img, 0, 0, null);
 		}
+		
 
 	}
 
