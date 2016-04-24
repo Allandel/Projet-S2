@@ -229,6 +229,33 @@ public class Launcher extends JFrame{
 				System.exit(0);
 			}
 		});
+		BTEnergie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				id = 1;
+			}
+		});
+	
+	BTGuerrier.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			id = 2;
+		}
+	});
+	BTPiegeur.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			id = 3;
+		}
+	});
+	BTVoleur.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			id = 4;
+		}
+	});
+	BTMove.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			id = 5;
+		}
+	});
+}
 //		Bregles.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent arg0) {
 //				ImageIcon img = new ImageIcon("img/regle.jpg");
@@ -241,7 +268,7 @@ public class Launcher extends JFrame{
 //			}	
 //			
 //		});
-	}
+//	}
 		
 	/**
 	 * 
