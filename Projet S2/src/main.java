@@ -11,12 +11,9 @@ public class main {
 		
 		Launcher menu = new Launcher();		
 		while(Launcher.getetat()){
-			if(Launcher.getid() == 1){ /* test 1 */
+			if(Launcher.getid() >= 0 && Launcher.getid() <5){ /* test 1 */
 				Test test=new Test();
-				test.testPerso(null);
-			}
-			if(Launcher.getid() == 2) { /* test2 */
-				
+				test.testPerso(Launcher.getid());
 			}
 			System.out.flush();
 		}

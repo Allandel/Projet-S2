@@ -34,20 +34,33 @@ public class Test {
 		joueur[0].passerTour();
 		joueur[1].passerTour();
 	}
-	
+
 	/**
 	 * Lance le test concernant un personnage
 	 * @param perso
 	 */
-	public void testPerso(Personnage perso){
+	public void testPerso(int id){
 		int [] cordonnees={0,0};
 		int equipe=0;
 		boolean [] gagner;
 		boolean quitter=false;
 
-		ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Piegeur(true, joueur[0]));
-		ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Piegeur(false, joueur[1]));
+		if(id==0){
+			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Piegeur(true, joueur[0]));
+			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Piegeur(false, joueur[1]));
+		}else if(id==1){
+			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Guerrier(true, joueur[0]));
+			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Guerrier(false, joueur[1]));
 
+		}else if(id==2){
+			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Voleur(true, joueur[0]));
+			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Voleur(false, joueur[1]));
+
+		}else if(id==3){
+			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Explorateur(true, joueur[0]));
+			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Explorateur(false, joueur[1]));
+		}
+		
 		persoTest[0]=ileDuJeu.getTableau()[2][3].getPersonnageCourant();
 		persoTest[1]=ileDuJeu.getTableau()[3][3].getPersonnageCourant();
 
@@ -84,6 +97,6 @@ public class Test {
 	}
 
 	public void testIle(){
-		
+
 	}
 }
