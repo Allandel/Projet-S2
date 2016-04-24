@@ -14,6 +14,7 @@ public class main {
 			if(Launcher.getid() >= 0 && Launcher.getid() <5){ /* test 1 */
 				Test test=new Test();
 				test.testPerso(Launcher.getid());
+				Launcher.id=5;
 			}
 			System.out.flush();
 		}

@@ -71,7 +71,6 @@ public class Test {
 			affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 			while(joueur[equipe].actionPossible() && !quitter){
 				cordonnees=action.choixCase(affichage.getPlateauTest(), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
-
 				if(cordonnees[0]==999)
 					//si le joueur decide de passer son tour
 					joueur[equipe].passerTour();
