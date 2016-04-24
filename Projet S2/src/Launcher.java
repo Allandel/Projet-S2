@@ -65,7 +65,7 @@ public class Launcher extends JFrame{
 		onglet1.add(Bquitter);
 
 		menuOnglet.add("Menu", onglet1);
-		menuOnglet.add("Paramètres", onglet2);
+		menuOnglet.add("Parametres", onglet2);
 		this.getContentPane().add(menuOnglet);
 		this.pack();
 		this.setVisible(true);		
