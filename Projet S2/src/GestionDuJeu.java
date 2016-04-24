@@ -52,7 +52,6 @@ public class GestionDuJeu {
 						joueur[equipe].abandon();
 				}else{
 					affichage.setHighlight(cordonnees, equipe);
-
 					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement())
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe]);
 					else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
@@ -81,6 +80,7 @@ public class GestionDuJeu {
 	private boolean actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur){
 		boolean gagner=false;
 		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
+		refreshinfo(perso);
 
 		if(cordonnees[0]==999){
 			//si le joueur decide de passer le tour du personnage selectionne
@@ -136,7 +136,9 @@ public class GestionDuJeu {
 				return false;
 		return true;
 	}
-
+	public void refreshinfo(Personnage perso){
+		Plateau.refreshinfo(""+perso.getEnergie(), ""+perso.getInventaire());
+	}
 	/**
 	 * Soigne les personnages dans le bateau du joueur dont c'est le tour
 	 * @param joueur
@@ -185,5 +187,6 @@ public class GestionDuJeu {
 				((CaseNavire)ileDuJeu.getTableau()[player.getLigneBateau()][player.getColonneBateau()]).addPersoNavire(perso);
 			}
 		}
+		
 	}
 }
