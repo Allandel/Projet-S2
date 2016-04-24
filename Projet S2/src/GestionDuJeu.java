@@ -13,15 +13,17 @@ public class GestionDuJeu {
 	private Joueur [] joueur = {new Joueur(true), new Joueur(false)};
 
 	/**
-	 * Constructeur vide pour le test
-	 * @param test
+	 * Genere la gestion du jeu en intialisation l'ile, le tableau d'affichage et l'affichage
+	 * @param ileDujeu
+	 * @param tableauAffichage
+	 * @param affichage
 	 */
 	public GestionDuJeu(ile ileDujeu, int[][] tableauAffichage, Affichage affichage){
 		this.ileDuJeu=ileDujeu;
 		this.tableauAffichage=tableauAffichage;
 		this.affichage=affichage;
 	}
-	
+
 	/**
 	 * Constructeur initialisant le plateau de jeu de base
 	 */
@@ -84,7 +86,7 @@ public class GestionDuJeu {
 		return gagner;
 	}
 
-	
+
 	/**
 	 * Donne le choix des actions possible pour le personnage selectionne
 	 * @param x

@@ -203,9 +203,9 @@ public class Affichage {
 	}
 	
 	/**
-	 * Affichage du jeu pour les tests
+	 * 	 * Affichage du jeu pour les tests
 	 * @param ileDuJeu
-	 * @param tableauAffichage
+	 * @param tableauAffichageTest
 	 * @param joueur
 	 * @param equipe
 	 */
@@ -217,9 +217,9 @@ public class Affichage {
 		this.affichagePersoActionnableTest(ileDuJeu, equipe, joueur);
 	}
 	/**
-	 * retourne le plateau specifique au joueur
+	 * 
 	 * @param equipe
-	 * @return
+	 * @return le plateau specifique au joueur
 	 */
 	public Plateau getPlateau(int equipe){
 		return plateaux.get(equipe);

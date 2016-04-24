@@ -454,7 +454,7 @@ public class Personnage{
 	/**
 	 * ToString pour l'affichage dans la console
 	 * @param console
-	 * @return
+	 * @return un string
 	 */
 	public String toString(boolean console){
 		return "";

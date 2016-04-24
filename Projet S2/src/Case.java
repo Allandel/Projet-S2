@@ -46,7 +46,7 @@ public class Case {
 	}
 	/**
 	 * met un personnge dans une case et change l'id de la case
-	 * @param PersonnageCourant the PersonnageCourant to set
+	 * @param p the PersonnageCourant to set
 	 */
 	public void setPersonnageCourant(Personnage p){
 		this.personnageCourant = p;

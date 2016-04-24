@@ -88,7 +88,7 @@ public class Joueur {
 
 	/**
 	 * Dit si l'equipe vivante du joueur a encore une action ou un deplacement possible
-	 * @return
+	 * @return vrai si encore personnage avec une action
 	 */
 	public boolean actionPossible(){
 		for(Personnage perso : equipe){

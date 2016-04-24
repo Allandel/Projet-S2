@@ -226,8 +226,8 @@ public class ile {
 		}
 	}
 	/**
-	 * Retourne un booleen en fonction de l'accessibilite du coffre et de la cle
-	 * @return
+	 * 
+	 * @returnun booleen en fonction de l'accessibilite du coffre et de la cle
 	 */
 	boolean accessible(){
 		if(CaseCoffre.isAccessible() && CaseCle.isAccessible()){
