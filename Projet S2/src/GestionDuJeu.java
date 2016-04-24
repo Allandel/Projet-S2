@@ -153,15 +153,31 @@ public class GestionDuJeu {
 	 * @param ileDuJeu
 	 */
 	private void initialisationEquipe(ile ileDuJeu){
-		Explorateur paul =new Explorateur(true, joueur[0]);
+		for(int i=0;i<Launcher.nbrExplorateurJ1;i++){
+			Explorateur paul =new Explorateur(true, joueur[0]);
+		}
+		for(int i=0;i<Launcher.nbrGuerrierJ1;i++){
+			Guerrier mar=new Guerrier(true, joueur[0]);
+		}
+		for(int i=0;i<Launcher.nbrPiegeurJ1;i++){
 		Piegeur marc =new Piegeur(true, joueur[0]);
+		}
+		for(int i=0;i<Launcher.nbrVoleurJ1;i++){
 		Voleur jean = new Voleur(true, joueur[0]);
-		Guerrier mar=new Guerrier(true, joueur[0]);
+		}
 
-		Explorateur pierre=new Explorateur(false, joueur[1]);
-		Piegeur mli=new Piegeur(false, joueur[1]);
-		Voleur jacque=new Voleur(false, joueur[1]);
-		Guerrier mar2=new Guerrier(false, joueur[1]);
+		for(int i=0;i<Launcher.nbrExplorateurJ2;i++){
+			Explorateur paul =new Explorateur(false, joueur[1]);
+		}
+		for(int i=0;i<Launcher.nbrGuerrierJ2;i++){
+			Guerrier mar=new Guerrier(false, joueur[1]);
+		}
+		for(int i=0;i<Launcher.nbrPiegeurJ2;i++){
+		Piegeur marc =new Piegeur(false, joueur[1]);
+		}
+		for(int i=0;i<Launcher.nbrVoleurJ2;i++){
+		Voleur jean = new Voleur(false, joueur[1]);
+		}
 
 		for(Joueur player: joueur){
 			player.setBateau(ileDuJeu);
