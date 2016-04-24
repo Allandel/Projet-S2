@@ -65,7 +65,8 @@ public class ile {
 		tableauIle[5][5].setId(5);
 		tableauIle[5][2]=new CaseNavire(2);
 		tableauIle[5][4]=new CaseNavire(3);
-		
+		((CaseRocher)tableauIle[0][2]).setChest(true);
+		((CaseRocher)tableauIle[0][4]).setKey(true);
 	}
 
 	/**

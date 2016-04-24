@@ -96,7 +96,7 @@ public class GestionDuJeu {
 	 */
 	boolean [] actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur){
 		boolean []gagner={false,false};
-		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
+		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateauTest(), tableauAffichage, x, y, perso);
 
 		if(cordonnees[0]==999){
 			//si le joueur decide de passer le tour du personnage selectionne

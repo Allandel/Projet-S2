@@ -12,14 +12,14 @@ import javax.swing.JPanel;
  */
 public class Affichage {
 
-	private int[][] tableauAffichageJ1, tableauAffichageJ2;
+	private int[][] tableauAffichageJ1, tableauAffichageJ2, tableauAffichageTest;
 	private ArrayList<int[][]> tableaux=new ArrayList<>();
 	private ArrayList<Plateau> plateaux=new ArrayList<>();
 	private String[] images = new String[]{"img/rocher.jpg","img/1.navire.jpg","img/2.navire.jpg","img/coffre.jpg","img/mer.jpg",
 			"img/1.explorateur.jpg","img/1.voleur.jpg","img/1.piegeur.jpg","img/1.guerrier.jpg",
 			"img/2.explorateur.jpg","img/2.voleur.jpg","img/2.piegeur.jpg","img/2.guerrier.jpg",
 			"img/death.jpg","img/herbe.jpg","img/piege.jpg"};
-	private Plateau plateauDuJeuJ1, plateauDuJeuJ2;
+	private Plateau plateauDuJeuJ1, plateauDuJeuJ2, plateauDuTest;
 
 	/**
 	 * Affiche un message disant le gagnant du jeu à la fin de la partie
@@ -46,25 +46,13 @@ public class Affichage {
 	 * @param test
 	 */
 	public Affichage(int [][] tableauAffichage, ile ileDuJeu, Joueur[] joueur, boolean test){
-		tableauAffichageJ1=new int [tableauAffichage.length][tableauAffichage[1].length];
-		tableauAffichageJ2=new int [tableauAffichage.length][tableauAffichage[1].length];
-		tableaux.add(tableauAffichageJ1);
-		tableaux.add(tableauAffichageJ2);
+		tableauAffichageTest=new int [tableauAffichage.length][tableauAffichage[1].length];
 		
-		plateauDuJeuJ1= new Plateau(images,ileDuJeu.getTableau().length);
-		plateauDuJeuJ2= new Plateau(images,ileDuJeu.getTableau().length);
-		plateauDuJeuJ2.close();
-		tableaux.add(tableauAffichageJ1);
-		tableaux.add(tableauAffichageJ2);
+		plateauDuTest= new Plateau(images,ileDuJeu.getTableau().length);
 
-		plateaux.add(plateauDuJeuJ1);
-		plateaux.add(plateauDuJeuJ2);
-
-		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
-		this.updateTableauAffichage(ileDuJeu, tableauAffichageJ1);
-		this.updateTableauAffichage(ileDuJeu, tableauAffichageJ2);
+		this.updateTableauAffichage(ileDuJeu, tableauAffichageTest);
 		
-		plateaux.get(0).setJeu(tableauAffichage);
+		plateauDuTest.setJeu(tableauAffichageTest);
 		System.out.println("\n"+ileDuJeu.toString());
 	}
 	
@@ -179,6 +167,16 @@ public class Affichage {
 			}
 		}
 	}
+	
+	private void affichagePersoActionnableTest(ile ileDuJeu, int equipe, Joueur joueur){
+		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
+			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() && ileDuJeu.getTableau()[j][i].getPersonnageCourant().actionOuDeplacement()){
+					plateauDuTest.setHighlight(j, i, Color.YELLOW);
+				}
+			}
+		}
+	}
 
 	/**
 	 * Affiche le tableau de jeu specifique au joueur
@@ -205,12 +203,12 @@ public class Affichage {
 	 * @param joueur
 	 * @param equipe
 	 */
-	public void affichageDuJeu(ile ileDuJeu, int[][] tableauAffichage, Joueur joueur, int equipe){
-		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
+	public void affichageDuJeuTest(ile ileDuJeu, int[][] tableauAffichageTest, Joueur joueur, int equipe){
+		this.updateTableauAffichage(ileDuJeu, tableauAffichageTest);
 		System.out.println("\n"+ileDuJeu.toString());
-		plateaux.get(0).setJeu(tableauAffichage);
-		plateaux.get(0).affichage();
-		this.affichagePersoActionnable(ileDuJeu, equipe, joueur);
+		plateauDuTest.setJeu(tableauAffichageTest);
+		plateauDuTest.affichage();
+		this.affichagePersoActionnableTest(ileDuJeu, equipe, joueur);
 	}
 	/**
 	 * retourne le plateau specifique au joueur
@@ -220,6 +218,10 @@ public class Affichage {
 	public Plateau getPlateau(int equipe){
 		return plateaux.get(equipe);
 	}
+	
+	public Plateau getPlateauTest(){
+		return plateauDuTest;
+	}
 
 	/**
 	 * Highlight la coordonnees du plateau du joueur
@@ -228,5 +230,9 @@ public class Affichage {
 	 */
 	public void setHighlight(int[]cordonnees, int equipe){
 		plateaux.get(equipe).setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
+	}
+	
+	public void setHighlightTest(int[]cordonnees, int equipe){
+		plateauDuTest.setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
 	}
 }

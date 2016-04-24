@@ -7,6 +7,7 @@ public class main {
 
 	public static void main(String[] args) {
 		Test test=new Test();
+		test.testPerso(null);
 		/*
 		Launcher menu = new Launcher();		
 		while(Launcher.getetat()){
