@@ -26,11 +26,11 @@ public class Plateau {
 	private JFrame window ;
 	private GraphicPane graphic ;
 	private ConsolePane console ;
-	JPanel infos;
-	 JLabel energie = new JLabel("Energie: ");
-	 static JLabel recupenergie = new JLabel("  ");
-	 JLabel inventaire  = new JLabel("Inventaire: ");
-	 static JLabel recupInventaire = new JLabel("  ");
+	private JPanel infos;
+	private JLabel energie = new JLabel("Energie: ");
+	private JLabel recupenergie = new JLabel("  ");
+	private JLabel inventaire  = new JLabel("Inventaire: ");
+	private JLabel recupInventaire = new JLabel("  ");
 
 	/**
 	 *  Attribut ou est enregistré un événement observé. Cet attribut est
@@ -349,9 +349,8 @@ public class Plateau {
 	public void setText(int x, int y, String msg) {
 		graphic.setText(x, y, msg) ;		
 	}
-	public static void refreshinfo(String energie2, String inventaire2){
+	public void refreshinfo(String energie2, String inventaire2){
 		recupenergie.setText("test"+energie2);
 		recupInventaire.setText("test2"+ inventaire2);
-		System.out.println("test git");
 	}
 }

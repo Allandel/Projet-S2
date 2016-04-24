@@ -52,9 +52,10 @@ public class GestionDuJeu {
 						joueur[equipe].abandon();
 				}else{
 					affichage.setHighlight(cordonnees, equipe);
-					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement())
+					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
+						refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), affichage.getPlateau(equipe));
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe]);
-					else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
 						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1]);
 
 					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
@@ -80,7 +81,6 @@ public class GestionDuJeu {
 	private boolean actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur){
 		boolean gagner=false;
 		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
-		refreshinfo(perso);
 
 		if(cordonnees[0]==999){
 			//si le joueur decide de passer le tour du personnage selectionne
@@ -136,8 +136,8 @@ public class GestionDuJeu {
 				return false;
 		return true;
 	}
-	public void refreshinfo(Personnage perso){
-		Plateau.refreshinfo(""+perso.getEnergie(), ""+perso.getInventaire());
+	public void refreshinfo(Personnage perso, Plateau plateau){
+		plateau.refreshinfo(""+perso.getEnergie(), ""+perso.getInventaire());
 	}
 	/**
 	 * Soigne les personnages dans le bateau du joueur dont c'est le tour
@@ -162,10 +162,10 @@ public class GestionDuJeu {
 			Guerrier mar=new Guerrier(true, joueur[0]);
 		}
 		for(int i=0;i<Launcher.nbrPiegeurJ1;i++){
-		Piegeur marc =new Piegeur(true, joueur[0]);
+			Piegeur marc =new Piegeur(true, joueur[0]);
 		}
 		for(int i=0;i<Launcher.nbrVoleurJ1;i++){
-		Voleur jean = new Voleur(true, joueur[0]);
+			Voleur jean = new Voleur(true, joueur[0]);
 		}
 
 		for(int i=0;i<Launcher.nbrExplorateurJ2;i++){
@@ -175,10 +175,10 @@ public class GestionDuJeu {
 			Guerrier mar=new Guerrier(false, joueur[1]);
 		}
 		for(int i=0;i<Launcher.nbrPiegeurJ2;i++){
-		Piegeur marc =new Piegeur(false, joueur[1]);
+			Piegeur marc =new Piegeur(false, joueur[1]);
 		}
 		for(int i=0;i<Launcher.nbrVoleurJ2;i++){
-		Voleur jean = new Voleur(false, joueur[1]);
+			Voleur jean = new Voleur(false, joueur[1]);
 		}
 
 		for(Joueur player: joueur){
@@ -187,6 +187,6 @@ public class GestionDuJeu {
 				((CaseNavire)ileDuJeu.getTableau()[player.getLigneBateau()][player.getColonneBateau()]).addPersoNavire(perso);
 			}
 		}
-		
+
 	}
 }
