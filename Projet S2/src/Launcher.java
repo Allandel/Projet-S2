@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -255,20 +256,23 @@ public class Launcher extends JFrame{
 			id = 5;
 		}
 	});
-}
-//		Bregles.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				ImageIcon img = new ImageIcon("img/regle.jpg");
-//				img.getImage();
-//				JLabel img2 = new JLabel();
-//				img2.add(img.getImage());
-//				JFrame regles = new JFrame();
-//				regles.add(img);
-//				regles.setVisible(true);
-//			}	
-//			
-//		});
-//	}
+
+		Bregles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFrame regles = new JFrame();
+				regles.setTitle("Regles");
+				regles.setLocationRelativeTo(null);
+				Icon img = new ImageIcon("img/regles.jpg");
+				JLabel img2 = new JLabel();
+				
+				img2.setIcon(img);
+				regles.setSize(1000, 664);
+				regles.add(img2);
+				regles.setVisible(true);
+			}	
+			
+		});
+	}
 		
 	/**
 	 * 
