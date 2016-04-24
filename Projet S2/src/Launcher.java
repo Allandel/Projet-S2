@@ -23,7 +23,7 @@ import javax.swing.JTextPane;
 public class Launcher extends JFrame{
 	static int tailleCarte, pourcentageRocher;
 	static boolean etat = true;
-	static int id;
+	static int id=5;
 	static int nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1;
 	static int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2;
 	/**
@@ -52,12 +52,11 @@ public class Launcher extends JFrame{
 		
 		JButton BJouer = new JButton("Jouer");
 		JButton Bquitter = new JButton("Quitter");
-		JButton Bregles = new JButton("Règles");
-		JButton BTMove = new JButton("Deplacement");
+		JButton Bregles = new JButton("Regles");
 		JButton BTVoleur = new JButton("Voleur");
 		JButton BTGuerrier = new JButton("Guerrier");
 		JButton BTPiegeur = new JButton("Piegeur");
-		JButton BTEnergie = new JButton("Energie");
+		JButton BTExplorateur = new JButton("Explorateur");
 		JLabel LBTaille = new JLabel("Taille du plateau:");
 		JLabel LBPourcent = new JLabel("Pourcentage de rochers:"
 				+ "");
@@ -195,12 +194,10 @@ public class Launcher extends JFrame{
 		onglet1.add(BJouer);
 		onglet1.add(Bregles);
 		onglet1.add(Bquitter);
-		onglet5.add(BTEnergie);
 		onglet5.add(BTGuerrier);
 		onglet5.add(BTPiegeur);
 		onglet5.add(BTVoleur);
-		onglet5.add(BTMove);
-		
+		onglet5.add(BTExplorateur);
 		menuOnglet.add("Menu", onglet1);
 		menuOnglet.add("Parametres", onglet2);
 		menuOnglet.add("Parametres Joueur 1", onglet3);
@@ -230,30 +227,25 @@ public class Launcher extends JFrame{
 				System.exit(0);
 			}
 		});
-		BTEnergie.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				id = 1;
-			}
-		});
 	
 	BTGuerrier.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			id = 2;
+			id = 1;
 		}
 	});
 	BTPiegeur.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			id = 3;
+			id = 0;
 		}
 	});
 	BTVoleur.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			id = 4;
+			id = 2;
 		}
 	});
-	BTMove.addActionListener(new ActionListener() {
+	BTExplorateur.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			id = 5;
+			id = 3;
 		}
 	});
 
