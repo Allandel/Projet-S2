@@ -369,6 +369,7 @@ public class Personnage{
 				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 				null, options, options[0]);
 		this.compteur=3;
+		action=false;
 	}
 
 	/**
