@@ -168,15 +168,21 @@ public class ActionJoueur {
 		InputEvent event;
 
 		do{
-			event=  plateauDuJeu.waitEvent();	
+			event=  plateauDuJeu.waitEvent(2000);	
 			if(event instanceof KeyEvent)
 				keyCode=((KeyEvent) event).getKeyCode() ;
+			if(plateauDuJeu.getId()==1)
+				keyCode=32;
+			else if(plateauDuJeu.getId()==2)
+				keyCode=27;
+			else if(plateauDuJeu.getId()==3)
+				keyCode=127;
 		}while(!(event instanceof MouseEvent) && keyCode!=32 && keyCode!=27 && keyCode!=127);
 
 		if(event instanceof MouseEvent){
 			res[0]=plateauDuJeu.getX((MouseEvent) event) ;
 			res[1]=plateauDuJeu.getY((MouseEvent) event) ;
-		}else if(event instanceof KeyEvent){
+		}else if(event instanceof KeyEvent || plateauDuJeu.getId()>0){
 			if(keyCode==32){
 				res[0]=999;
 				res[1]=999;

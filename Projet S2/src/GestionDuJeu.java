@@ -57,6 +57,7 @@ public class GestionDuJeu {
 					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 					null, options, options[0]);
 			while(joueur[equipe].actionPossible() && !gagner[0]){
+				affichage.getPlateau(equipe).resetId();
 				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
 
 				if(cordonnees[0]==999)
@@ -70,7 +71,7 @@ public class GestionDuJeu {
 				}else{
 					affichage.setHighlight(cordonnees, equipe);
 					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
-						refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), affichage.getPlateau(equipe));
+						affichage.getPlateau(equipe).refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],false);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
 						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1]);
@@ -99,14 +100,19 @@ public class GestionDuJeu {
 	boolean [] actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur, boolean test){
 		boolean []gagner={false,false};
 		int[] cordonnees;
-		if(!test)
+
+		if(!test){
+			affichage.getPlateau(equipe).resetId();
+			affichage.getPlateau(equipe).setVisibleBouttonAnnuler(true);
 			cordonnees= action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
-		else
+		}else{
+			affichage.getPlateau(0).resetId();
+			affichage.getPlateau(0).setVisibleBouttonAnnuler(true);
 			cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(0), tableauAffichage, x, y, perso);
+		}
 		if(cordonnees[0]==999){
-			//si le joueur decide de passer le tour du personnage selectionne
-			perso.setAction(false);
-			perso.setDeplacement(false);
+			//si le joueur decide de passer son tour
+			joueur.passerTour();
 		}else if(cordonnees[0]==888){
 			//si le joueur decide d'abandonner
 			int decision=JOptionPane.showConfirmDialog(null,"Désirez vous abandonner la partie ?", "Abandonner la partie ?", JOptionPane.YES_NO_OPTION);
@@ -144,6 +150,13 @@ public class GestionDuJeu {
 				}
 			}
 		}
+		if(!test){
+			affichage.getPlateau(equipe).refreshinfo(perso);
+			affichage.getPlateau(equipe).setVisibleBouttonAnnuler(false);
+		}else{
+			affichage.getPlateau(0).refreshinfo(perso);
+			affichage.getPlateau(0).setVisibleBouttonAnnuler(false);
+		}	
 		return gagner;
 	}
 
@@ -161,12 +174,6 @@ public class GestionDuJeu {
 			gagner[1]=joueur[0].getEquipe();
 		}
 		return gagner;
-	}
-	public void refreshinfo(Personnage perso, Plateau plateau){
-		if(perso.getInventaire().isEmpty())
-			plateau.refreshinfo(""+perso.getEnergie(), "Vide");
-		else
-			plateau.refreshinfo(""+perso.getEnergie(), ""+perso.inventaireToString());
 	}
 	/**
 	 * Soigne les personnages dans le bateau du joueur dont c'est le tour

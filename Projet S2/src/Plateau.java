@@ -1,13 +1,16 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,12 +29,18 @@ public class Plateau {
 	private JFrame window ;
 	private GraphicPane graphic ;
 	private ConsolePane console ;
-	private JPanel infos;
-	private JLabel energie = new JLabel("Energie: ");
+	private JPanel infos, infosPerso, actionPartie;
+	private JLabel nomPerso = new JLabel("Nom : ");
+	private JLabel  recupNomPerso = new JLabel("  ");
+	private JLabel typePerso = new JLabel("Type : ");
+	private JLabel  recupTypePerso = new JLabel("  ");
+	private JLabel energie = new JLabel("Energie : ");
 	private JLabel recupenergie = new JLabel("  ");
-	private JLabel inventaire  = new JLabel("Inventaire: ");
+	private JLabel inventaire  = new JLabel("Inventaire : ");
 	private JLabel recupInventaire = new JLabel("  ");
-
+	private JButton passageDuTour=new JButton("Passer son tour"), abandon=new JButton("Abandonner la partie"), annulerSelection=new JButton("Retour");
+	private int id;
+	
 	/**
 	 *  Attribut ou est enregistré un événement observé. Cet attribut est
 	 * initialisé à null au début de la scrutation et rempli par l'événement observé 
@@ -112,12 +121,20 @@ public class Plateau {
 	public Plateau(String[] gif,int taille, boolean withTextArea){
 		// Instancie la fenetre principale et et les deux composants.
 		infos = new JPanel();
-		infos.setLayout(new BoxLayout(infos, BoxLayout.PAGE_AXIS));
+		infos.setLayout(new BorderLayout());
+		
+		actionPartie=new JPanel();
+		infos.add(actionPartie,BorderLayout.CENTER);
+		actionPartie.setLayout(new GridLayout(3,1));
+		
+		infosPerso = new JPanel();
+		infosPerso.setLayout(new GridLayout(4,2));
+		infos.add(infosPerso,BorderLayout.NORTH);
 
 		window = new JFrame() ;
 		graphic = new GraphicPane(gif, taille) ;
 		console = null ;
-		window.setPreferredSize(new Dimension(taille*46+70, taille*46));
+		window.setPreferredSize(new Dimension(taille*46+150, taille*46));
 		// Caractéristiques initiales pour la fenetre.
 		window.setTitle("Plateau de jeu ("+taille+"X"+taille+")");
 		window.setLocationRelativeTo(null);
@@ -125,12 +142,20 @@ public class Plateau {
 		// La fermeture de la fenetre ne fait que la cacher. 
 		// cf Javadoc setDefaultCloseOperation
 		window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
-		// Ajout des deux composants à la fenetre
-		infos.add(energie);
-		infos.add(recupenergie);
-		infos.add(inventaire);
-		infos.add(recupInventaire);
+		
+		actionPartie.add(passageDuTour);
+		actionPartie.add(abandon);
+		actionPartie.add(annulerSelection);
+		
+		// Ajout des composants à la fenetre
+		infosPerso.add(typePerso);
+		infosPerso.add(recupTypePerso);
+		infosPerso.add(nomPerso);
+		infosPerso.add(recupNomPerso);
+		infosPerso.add(energie);
+		infosPerso.add(recupenergie);
+		infosPerso.add(inventaire);
+		infosPerso.add(recupInventaire);
 		window.getContentPane().add(infos, BorderLayout.EAST);
 		window.getContentPane().add(graphic, BorderLayout.WEST);
 		if (withTextArea) {
@@ -145,7 +170,37 @@ public class Plateau {
 		graphic.addMouseListener(new Mouse());
 		window.addKeyListener(new Key()) ;
 		currentEvent = null ;
+		
+		passageDuTour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				id=1;
+			}
+		});
+		abandon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				id=2;
+			}
+		});
+		annulerSelection.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				id=3;
+			}
+		});
+		annulerSelection.setVisible(false);
 	}
+	
+	public void setVisibleBouttonAnnuler(boolean setter){
+		annulerSelection.setVisible(setter);
+	}
+	
+	public int getId(){
+		return id;
+	}
+	
+	public void resetId(){
+		id=0;
+	}
+	
 	/**
 	 * Méthode permettant de placer les éléments sur le plateau. Le tableau doit être  
 	 * de même taille que la dimension déclarée via le constructeur.
@@ -349,8 +404,13 @@ public class Plateau {
 	public void setText(int x, int y, String msg) {
 		graphic.setText(x, y, msg) ;		
 	}
-	public void refreshinfo(String energie, String inventaire){
-		recupenergie.setText(energie);
-		recupInventaire.setText(inventaire);
+	public void refreshinfo(Personnage perso){
+		if(perso.getInventaire().isEmpty())
+			recupInventaire.setText("Vide");
+		else
+			recupInventaire.setText(""+perso.getInventaire());
+		recupNomPerso.setText(perso.getNom());
+		recupTypePerso.setText(perso.getType());
+		recupenergie.setText(""+perso.getEnergie());
 	}
 }

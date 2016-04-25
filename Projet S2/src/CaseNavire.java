@@ -78,6 +78,7 @@ public class CaseNavire extends Case {
 				persoSortant=(Personnage)  JOptionPane.showInputDialog(null,"Quels personnage voulez-vous faire sortir du navire ?", "Sortie du navire", JOptionPane.QUESTION_MESSAGE, null, listePerso, listePerso[0]);
 				if(persoSortant!=null){
 					//si le joueur a choisi de faire sortir un personnage	
+					plateauDuJeu.setVisibleBouttonAnnuler(true);
 					int[] cordonnees = action.choixCaseSortie(plateauDuJeu, tableauAffichage, x, y, persoSortant);
 					if(cordonnees[0]!=777){
 						//si le joueur n'annule pas l'action	
@@ -104,7 +105,7 @@ public class CaseNavire extends Case {
 					null, options, options[0]);
 			this.actionImpossible();
 		}
-
+		plateauDuJeu.setVisibleBouttonAnnuler(false);
 	}
 
 	/**
