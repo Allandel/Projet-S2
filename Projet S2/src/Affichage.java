@@ -47,12 +47,14 @@ public class Affichage {
 	 */
 	public Affichage(int [][] tableauAffichage, ile ileDuJeu, Joueur[] joueur, boolean test){
 		tableauAffichageTest=new int [tableauAffichage.length][tableauAffichage[1].length];
+		tableaux.add(tableauAffichageTest);
 		
 		plateauDuTest= new Plateau(images,ileDuJeu.getTableau().length);
-
+		plateaux.add(plateauDuTest);
+		
 		this.updateTableauAffichage(ileDuJeu, tableauAffichageTest);
 		
-		plateauDuTest.setJeu(tableauAffichageTest);
+		plateaux.get(0).setJeu(tableauAffichageTest);
 		System.out.println("\n"+ileDuJeu.toString());
 	}
 	

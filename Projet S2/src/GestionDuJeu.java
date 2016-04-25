@@ -71,7 +71,7 @@ public class GestionDuJeu {
 					affichage.setHighlight(cordonnees, equipe);
 					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
 						refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), affichage.getPlateau(equipe));
-						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe]);
+						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],false);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
 						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1]);
 
@@ -96,10 +96,13 @@ public class GestionDuJeu {
 	 * @param joueur
 	 * @return vrai si le personnage rentre dans le bateau avec le tresor
 	 */
-	boolean [] actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur){
+	boolean [] actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur, boolean test){
 		boolean []gagner={false,false};
-		int[] cordonnees = action.choixCase(ileDuJeu, affichage.getPlateauTest(), tableauAffichage, x, y, perso);
-
+		int[] cordonnees;
+		if(!test)
+			cordonnees= action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
+		else
+			cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(0), tableauAffichage, x, y, perso);
 		if(cordonnees[0]==999){
 			//si le joueur decide de passer le tour du personnage selectionne
 			perso.setAction(false);
