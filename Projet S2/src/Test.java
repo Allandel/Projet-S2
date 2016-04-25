@@ -93,6 +93,7 @@ public class Test {
 			gestion.soinBateau(joueur[equipe]);
 			equipe=1-equipe;
 		}
+		affichage.getPlateau(0).close();
 	}
 
 	public void testIle(){
