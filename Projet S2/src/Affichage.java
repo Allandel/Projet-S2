@@ -247,6 +247,12 @@ public class Affichage {
 		plateaux.get(equipe).popUp(texte, titre, optionNull);
 	}
 
+	public Object popUpYesNo(int equipe, String texte, String titre, Object[] listeItem){
+		if(Test.testEnCours)
+			equipe=0;
+		return plateaux.get(equipe).popUpYesNo(texte, titre, listeItem);
+	}
+	
 	public void close(){
 		for(Plateau plat: plateaux){
 			plat.close();

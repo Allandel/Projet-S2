@@ -72,8 +72,7 @@ public class CaseNavire extends Case {
 						i++;
 					}
 				}
-				//persoSortant=(Personnage)  affichage.popUp(equipe, "Quels personnage voulez-vous faire sortir du navire ?", "Sortie du navire", listePerso);
-				persoSortant=(Personnage)  JOptionPane.showInputDialog(null,"Quels personnage voulez-vous faire sortir du navire ?", "Sortie du navire", JOptionPane.QUESTION_MESSAGE, null, listePerso, listePerso[0]);
+				persoSortant=(Personnage)affichage.popUpYesNo(equipe,"\nQuels personnage voulez-vous faire sortir du navire ?\n\n", "Sortie du navire",listePerso);  
 				if(persoSortant!=null){
 					//si le joueur a choisi de faire sortir un personnage	
 					plateauDuJeu.setVisibleBouttonAnnuler(true);

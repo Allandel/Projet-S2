@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * @version 1.1 
  */
 
-import javax.swing.JOptionPane;
 public class Personnage{
 
 	private int energie=100, id, idBateau,compteur=0;
@@ -163,9 +162,8 @@ public class Personnage{
 	 * @param p
 	 */
 	public void echangeObjet(Personnage p, Affichage affichage, int equipe){
-		int decision;
 		String itemEchange;
-		decision=JOptionPane.showConfirmDialog(null,"Désirez vous effectuer un échange avec ce membre de votre équipe ?", "Effectuer un echange ?", JOptionPane.YES_NO_OPTION);
+		int decision=(int)affichage.popUpYesNo(equipe,"Désirez vous effectuer un échange avec ce membre de votre équipe ?", "Effectuer un echange ?",null);
 		if (decision==0){
 			if(!this.inventaire.isEmpty() || !p.inventaire.isEmpty()){
 				if(!this.inventaire.isEmpty()){
@@ -174,7 +172,7 @@ public class Personnage{
 					for(int cpt=0; cpt<inventaire.size(); cpt++){
 						listeItem[cpt]=inventaire.get(cpt);
 					}
-					itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "DONNER ITEM", JOptionPane.QUESTION_MESSAGE , null,listeItem, listeItem[0]);
+					itemEchange=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous donner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "DONNER ITEM",listeItem); 
 					if(itemEchange!=null){
 						p.inventaire.add(itemEchange);
 						this.inventaire.remove(itemEchange);
@@ -189,7 +187,7 @@ public class Personnage{
 					for(int cpt=0; cpt<p.inventaire.size(); cpt++){
 						listeItem2[cpt]=p.inventaire.get(cpt);
 					}
-					itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM", JOptionPane.QUESTION_MESSAGE ,null, listeItem2, listeItem2[0]);
+					itemEchange=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM",listeItem2); 
 					if(itemEchange!=null){
 						this.inventaire.add(itemEchange);
 						p.inventaire.remove(itemEchange);
@@ -236,7 +234,7 @@ public class Personnage{
 		boolean victoire[]={false,false};
 
 		if(joueur.nbrVivant()>((CaseNavire)tableauIle[xApres][yApres]).nbrVivantStock()+1){
-			int decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
+			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire",null);
 			if (decision==0){
 				((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
 				tableauIle[xAvant][yAvant].removePersonnageCourant();

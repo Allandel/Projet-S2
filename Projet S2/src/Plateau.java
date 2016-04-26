@@ -423,4 +423,16 @@ public class Plateau {
 	public void popUp(String texte, String titre, Object[] options){
 		JOptionPane.showOptionDialog(window, texte, titre,JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,null, options, options[0]);
 	}
+
+	public Object popUpYesNo(String texte, String titre, Object []listeItem){
+		Object object;
+		if(listeItem==null)
+			object=JOptionPane.showConfirmDialog(window,texte,titre, JOptionPane.YES_NO_OPTION);
+		else
+			object=JOptionPane.showInputDialog(window,texte, titre, JOptionPane.QUESTION_MESSAGE , null,listeItem, listeItem[0]);
+		return object;
+
+	}
+
+
 }

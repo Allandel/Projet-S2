@@ -62,7 +62,7 @@ public class GestionDuJeu {
 					joueur[equipe].passerTour();
 				else if(cordonnees[0]==888){
 					//si le joueur decide d'abandonner	
-					int decision=JOptionPane.showConfirmDialog(null,"Désirez vous abandonner la partie ?", "Abandonner la partie ?", JOptionPane.YES_NO_OPTION);
+					int decision=(int)affichage.popUpYesNo(equipe,"Désirez vous abandonner la partie ?", "Abandonner la partie ?",null);
 					if(decision==0)
 						joueur[equipe].abandon();
 				}else{

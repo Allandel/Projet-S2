@@ -1,4 +1,3 @@
-import javax.swing.JOptionPane;
 
 /**
  * Permet le lancement de test des elements du jeu
@@ -79,7 +78,7 @@ public class Test {
 					joueur[equipe].passerTour();
 				else if(cordonnees[0]==888){
 					//si le joueur decide de quitter le test
-					int decision=JOptionPane.showConfirmDialog(null,"Désirez vous quitter le test ?", "Quitter le test?", JOptionPane.YES_NO_OPTION);
+					int decision=(int)affichage.popUpYesNo(equipe,"Désirez vous quitter le test ?", "Quitter le test?",null);
 					if(decision==0)
 						quitter=true;
 				}else{

@@ -33,8 +33,7 @@ public class Piegeur extends Personnage{
 	 * @param tableauIle
 	 */
 	public void pieger(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
-		int decision;
-		decision=JOptionPane.showConfirmDialog(null,"Voulez vous pieger cette case ?","Poser un piege", JOptionPane.YES_NO_OPTION);
+		int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous pieger cette case ?","Poser un piege",null);
 		if (decision==0){
 			tableauIle[x][y].setPiege(true);
 			if(this.equipe1){
