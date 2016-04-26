@@ -168,7 +168,7 @@ public class ActionJoueur {
 		InputEvent event;
 
 		do{
-			event=  plateauDuJeu.waitEvent(2000);	
+			event=  plateauDuJeu.waitEvent(1500);	
 			if(event instanceof KeyEvent)
 				keyCode=((KeyEvent) event).getKeyCode() ;
 			if(plateauDuJeu.getId()==1)
