@@ -26,6 +26,7 @@ public class Launcher extends JFrame{
 	static int id=5;
 	static int nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1;
 	static int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2;
+	private JTabbedPane menuOnglet;
 	/**
 	 * Affiche le menu principal du jeu
 	 * Permet de recuperer la taille et le pourcentage de rocher
@@ -36,7 +37,7 @@ public class Launcher extends JFrame{
 		JPanel onglet3 = new JPanel();
 		JPanel onglet4 = new JPanel();
 		JPanel onglet5 = new JPanel();
-		JTabbedPane menuOnglet = new JTabbedPane();
+		menuOnglet = new JTabbedPane();
 		GridLayout g = new GridLayout(3,3);
 		GridLayout g2 = new GridLayout(4,3);
 		onglet2.setLayout(g);
@@ -218,8 +219,7 @@ public class Launcher extends JFrame{
 				nbrGuerrierJ2=sliderNbrGuerrierJ2.getValue();
 				nbrVoleurJ2=sliderNbrVoleurJ2.getValue();
 				nbrPiegeurJ2=sliderNbrPiegeurJ2.getValue();
-				etat = false;
-				dispose();
+				id=55;
 			}
 		});
 		Bquitter.addActionListener(new ActionListener() {
@@ -294,7 +294,6 @@ public class Launcher extends JFrame{
 	}
 	
 	class ImagePanel extends JPanel {
-
 		private Image img;
 
 		public ImagePanel(String img) {
@@ -312,8 +311,6 @@ public class Launcher extends JFrame{
 		public void paintComponent(Graphics g) {
 			g.drawImage(img, 0, 0, null);
 		}
-		
-
 	}
-
+	
 }

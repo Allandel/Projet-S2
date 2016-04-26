@@ -246,4 +246,10 @@ public class Affichage {
 		Object[] optionNull = { "OK" };
 		plateaux.get(equipe).popUp(texte, titre, optionNull);
 	}
+
+	public void close(){
+		for(Plateau plat: plateaux){
+			plat.close();
+		}
+	}
 }

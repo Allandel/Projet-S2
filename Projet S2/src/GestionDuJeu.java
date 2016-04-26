@@ -81,6 +81,7 @@ public class GestionDuJeu {
 			if(!gagner[0])
 				gagner=this.equipeMorte();
 		}
+		affichage.close();
 		return gagner;
 	}
 
