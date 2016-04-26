@@ -10,9 +10,11 @@ public class main {
 		Launcher menu = new Launcher();		
 		while(Launcher.getetat()){
 			if(Launcher.getid() >= 0 && Launcher.getid() <5){ /* test 1 */
+				menu.setVisible(false);
 				Test test=new Test();
 				test.testPerso(Launcher.getid());
 				Launcher.id=5;
+				menu.setVisible(true);
 			}
 			if(Launcher.getid()==55){
 				menu.setVisible(false);
