@@ -162,9 +162,8 @@ public class Personnage{
 	 * Permet a un personnage de faire un echange avec un personnage de son equipe
 	 * @param p
 	 */
-	public void echangeObjet(Personnage p){
+	public void echangeObjet(Personnage p, Affichage affichage, int equipe){
 		int decision;
-		Object[] options = { "OK" };
 		String itemEchange;
 		decision=JOptionPane.showConfirmDialog(null,"Désirez vous effectuer un échange avec ce membre de votre équipe ?", "Effectuer un echange ?", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
@@ -175,16 +174,14 @@ public class Personnage{
 					for(int cpt=0; cpt<inventaire.size(); cpt++){
 						listeItem[cpt]=inventaire.get(cpt);
 					}
-					itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "DONNER ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem, listeItem[0]);
+					itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous donner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "DONNER ITEM", JOptionPane.QUESTION_MESSAGE , null,listeItem, listeItem[0]);
 					if(itemEchange!=null){
 						p.inventaire.add(itemEchange);
 						this.inventaire.remove(itemEchange);
 						action=false;
 					}
 				}else{
-					JOptionPane.showOptionDialog(null, "Votre inventaire est vide, impossible de lui donner un objet", "ECHANGE IMPOSSIBLE",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-							null, options, options[0]);
+					affichage.popUp(equipe,"Votre inventaire est vide, impossible de lui donner un objet", "ECHANGE IMPOSSIBLE" );
 				}
 				if(!p.inventaire.isEmpty()){
 					//=======PRENDRE ITEM=======
@@ -192,21 +189,17 @@ public class Personnage{
 					for(int cpt=0; cpt<p.inventaire.size(); cpt++){
 						listeItem2[cpt]=p.inventaire.get(cpt);
 					}
-					itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM", JOptionPane.QUESTION_MESSAGE, null, listeItem2, listeItem2[0]);
+					itemEchange=(String) JOptionPane.showInputDialog(null,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM", JOptionPane.QUESTION_MESSAGE ,null, listeItem2, listeItem2[0]);
 					if(itemEchange!=null){
 						this.inventaire.add(itemEchange);
 						p.inventaire.remove(itemEchange);
 						action=false;
 					}
 				}else{
-					JOptionPane.showOptionDialog(null, "L'inventaire de votre coequipier est vide, impossible de lui prendre un objet", "ECHANGE IMPOSSIBLE",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-							null, options, options[0]);
+					affichage.popUp(equipe,"L'inventaire de votre coequipier est vide, impossible de lui prendre un objet", "ECHANGE IMPOSSIBLE" );
 				}
 			}else{
-				JOptionPane.showOptionDialog(null, "Vos inventaires sont vides, impossible de faire des échanges", "ECHANGE IMPOSSIBLE",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-						null, options, options[0]);
+				affichage.popUp(equipe,"Vos inventaires sont vides, impossible de faire des échanges", "ECHANGE IMPOSSIBLE" );
 
 			}
 		}
@@ -221,12 +214,12 @@ public class Personnage{
 	 * @param xAvant
 	 * @param tableauIle
 	 */
-	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle){
+	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
 		tableauIle[xApres][yApres].setPersonnageCourant(this);
 		if(tableauIle[xApres][yApres].getTeamPiege()!=(this.getIdBateau()-2))
 			tableauIle[xApres][yApres].setPiege(false);
-		perteEnergie(1, xApres,yApres, tableauIle, false, true);
+		perteEnergie(1, xApres,yApres, tableauIle, false, true, affichage, equipe);
 	}
 
 	/**
@@ -239,32 +232,27 @@ public class Personnage{
 	 * @param joueur
 	 * @return true si le personnage possède le tresor
 	 */
-	public boolean[] entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Joueur joueur){
+	public boolean[] entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, Joueur joueur, int equipe){
 		boolean victoire[]={false,false};
 
-		Object[] options = { "OK" };
 		if(joueur.nbrVivant()>((CaseNavire)tableauIle[xApres][yApres]).nbrVivantStock()+1){
 			int decision=JOptionPane.showConfirmDialog(null,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire", JOptionPane.YES_NO_OPTION);
 			if (decision==0){
 				((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
 				tableauIle[xAvant][yAvant].removePersonnageCourant();
-				this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle);
-				perteEnergie(1, xApres,yApres, tableauIle, false,false);
+				this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle, affichage, equipe);
+				perteEnergie(1, xApres,yApres, tableauIle, false,false, affichage, equipe);
 				if(inventaire.contains("Tresor")){
 					victoire[0]=true;
 					victoire[1]=this.getEquipe();
 				}
 				if(this instanceof Guerrier && !inventaire.contains("Epee")){
 					this.setObjetInventaire("Epee");;
-					JOptionPane.showOptionDialog(null, "En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-							null, options, options[0]);
+					affichage.popUp(equipe,"En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme" );
 				}
 			}
 		}else{
-			JOptionPane.showOptionDialog(null, "Il faut au moins un personnage sur l'ile pour pouvoir rentrer au bateau.", "Entree impossible",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-					null, options, options[0]);
+			affichage.popUp(equipe,"Il faut au moins un personnage sur l'ile pour pouvoir rentrer au bateau.", "Entree impossible" );
 		}
 		return victoire;
 	}
@@ -278,17 +266,14 @@ public class Personnage{
 	 * @param deplacement
 	 * @return true si le personnage meurt de la perte d'energie
 	 */
-	protected boolean perteEnergie(int nrj, int x, int y, Case[][] tableauIle, boolean attaque, boolean deplacement){
+	protected boolean perteEnergie(int nrj, int x, int y, Case[][] tableauIle, boolean attaque, boolean deplacement, Affichage affichage, int equipe){
 		if(energie-nrj<=0){
 			if(tableauIle[x][y].getId()!=2 && tableauIle[x][y].getId()!=3)
 				tableauIle[x][y].setId(14);
 			death=true;
 			if(!attaque){
 				//test pour eviter d'afficher du texte inutile	
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Votre personnage etait a bout de force... Cette ultime action lui a coute la vie. Son inventaire se trouve desormais au sol et peut etre recuperer par n'importe quel personne", "VOTRE PERSONNAGE EST MORT",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
-						null, options, options[0]);
+				affichage.popUp(equipe,"Votre personnage etait a bout de force... Cette ultime action lui a coute la vie. Son inventaire se trouve desormais au sol et peut etre recuperer par n'importe quel personne", "VOTRE PERSONNAGE EST MORT" );
 			}
 			if(deplacement)
 				this.deplacement=false;
@@ -316,30 +301,24 @@ public class Personnage{
 	 * @param yApres
 	 * @param tableauIle
 	 */
-	public void recuperationStuff(boolean sortieBateau, boolean entreeBateau, int x, int y, int xApres, int yApres, Case[][] tableauIle){
+	public void recuperationStuff(boolean sortieBateau, boolean entreeBateau, int x, int y, int xApres, int yApres, Case[][] tableauIle, Affichage affichage, int equipe){
 		String res="\n\n";
 
 		if(!entreeBateau){
 			if(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().isEmpty()){
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Ce cadavre n'avait rien d'interessant...", "Rencontre avec un mort",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-						null, options, options[0]);
+				affichage.popUp(equipe,"Ce cadavre n'avait rien d'interessant...", "Rencontre avec un mort" );
 			}else{
 				for (int i=0; i<tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().size();i++){
 					this.getInventaire().add(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i));
 					res+="+ "+tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i)+"\n";
 				}
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Vous avez r�cuperer des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-						null, options, options[0]);
+				affichage.popUp(equipe,"Vous avez recupere des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort" );
 			}
 
 			tableauIle[xApres][yApres].removePersonnageCourant();
 			if(!sortieBateau)
 				tableauIle[x][y].removePersonnageCourant();
-			this.perteEnergie(1, xApres, yApres, tableauIle, false, true);				
+			this.perteEnergie(1, xApres, yApres, tableauIle, false, true, affichage, equipe);				
 			tableauIle[xApres][yApres].setPersonnageCourant(this);
 		}else{
 			if(((CaseNavire)tableauIle[xApres][yApres]).persoMort()){
@@ -349,10 +328,7 @@ public class Personnage{
 							this.getInventaire().add(perso.getInventaire().get(i));
 							res+="+ "+perso.getInventaire().get(i)+"\n";
 						}
-						Object[] options = { "OK" };
-						JOptionPane.showOptionDialog(null, "Vous avez r�cuperer des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort",
-								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-								null, options, options[0]);
+						affichage.popUp(equipe,"Vous avez recupere des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort" );
 					}
 				}
 			}
@@ -363,11 +339,8 @@ public class Personnage{
 	/**
 	 * Immobilise un personnage a cause d'un piege
 	 */
-	public void immobilisation(){
-		Object[] options = { "OK" };
-		JOptionPane.showOptionDialog(null, "Votre personnage est tomber dans un piege adverse ! Il sera immobilise durant les 3 tours suivants et ne pourra effectuer aucune action !", "C'ETAIT UN PIEGE !",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-				null, options, options[0]);
+	public void immobilisation(Affichage affichage, int equipe){
+		affichage.popUp(equipe,"Votre personnage est tomber dans un piege adverse ! Il sera immobilise durant les 3 tours suivants et ne pourra effectuer aucune action !", "C'ETAIT UN PIEGE !" );
 		this.compteur=3;
 		action=false;
 	}

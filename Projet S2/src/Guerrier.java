@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
  *
  */
 public class Guerrier extends Personnage{
-	
+
 	/**
 	 * Constructeur lui attribuant le nom, type, son epee, son equipe et son id
 	 * @param equipe1
@@ -37,39 +37,27 @@ public class Guerrier extends Personnage{
 	 * @param yApres
 	 * @param tableauIle
 	 */
-	public void attaque(Personnage p,int x, int y, int xApres, int yApres, Case[][] tableauIle){
+	public void attaque(Personnage p,int x, int y, int xApres, int yApres, Case[][] tableauIle, Affichage affichage, int equipe){
 		Random random=new Random();
 		if (this.getObjetInventaire("Epee")){
-		//il fait plus de dommage s'il a une epee	
+			//il fait plus de dommage s'il a une epee	
 			int degat=5*random.nextInt(7);
-			if(!p.perteEnergie(degat, xApres, yApres, tableauIle, true, false)){
-			//Verifie que le personnage ne meurt pas de la perte d'energie
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Vous avez inflige "+degat+" points de degats a votre cible", "ATTAQUE",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-						null, options, options[0]);
+			if(!p.perteEnergie(degat, xApres, yApres, tableauIle, true, false, affichage, equipe)){
+				//Verifie que le personnage ne meurt pas de la perte d'energie
+				affichage.popUp(equipe,"Vous avez inflige "+degat+" points de degats a votre cible", "ATTAQUE" );
 			}else{
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Vous avez  reussi a tuer votre cible", "ATTAQUE",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-						null, options, options[0]);
+				affichage.popUp(equipe,"Vous avez  reussi a tuer votre cible", "ATTAQUE" );
 			}
 		}else{
-		//fait moins de dommage comme le guerrier se bat avec ses poings	
+			//fait moins de dommage comme le guerrier se bat avec ses poings	
 			int degat=random.nextInt(7);
-			if(!p.perteEnergie(degat, xApres, yApres, tableauIle, true, false)){
-			//Verifie que le personnage ne meurt pas de la perte d'energie
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Vous combattez à main nues... Vous avez infliger "+degat+" points de degats a votre cible", "ATTAQUE",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-						null, options, options[0]);
+			if(!p.perteEnergie(degat, xApres, yApres, tableauIle, true, false,affichage, equipe)){
+				//Verifie que le personnage ne meurt pas de la perte d'energie
+				affichage.popUp(equipe,"Vous combattez à main nues... Vous avez infliger "+degat+" points de degats a votre cible", "ATTAQUE" );
 			}else{
-				Object[] options = { "OK" };
-				JOptionPane.showOptionDialog(null, "Vous avez  reussi a tuer votre cible", "ATTAQUE",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-						null, options, options[0]);
+				affichage.popUp(equipe,"Vous avez  reussi a tuer votre cible", "ATTAQUE" );
 			}
 		}
-		super.perteEnergie(10, x,y, tableauIle, false, false);
+		super.perteEnergie(10, x,y, tableauIle, false, false,affichage, equipe);
 	}
 }

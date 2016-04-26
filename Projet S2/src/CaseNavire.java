@@ -50,13 +50,10 @@ public class CaseNavire extends Case {
 	/**
 	 * Permet a un personnage de sortir du bateau dans le bateau
 	 */
-	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y){
-		Object[] options = { "OK" };
+	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Affichage affichage, int equipe){
 		if(stockNavire.isEmpty()){
 			//affichage d'un message si pas de personnage dans le navire
-			JOptionPane.showOptionDialog(null, "Il n'y a pas de personnages dans le Navire", "Attention",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-					null, options, options[0]);
+			affichage.popUp(equipe, "Il n'y a pas de personnages dans le Navire", "Attention" );
 		}else if(this.placeLibre(y, x, ileDuJeu)){
 			//S'il y a de la place autour du bateau
 			Personnage persoSortant = null;
@@ -75,6 +72,7 @@ public class CaseNavire extends Case {
 						i++;
 					}
 				}
+				//persoSortant=(Personnage)  affichage.popUp(equipe, "Quels personnage voulez-vous faire sortir du navire ?", "Sortie du navire", listePerso);
 				persoSortant=(Personnage)  JOptionPane.showInputDialog(null,"Quels personnage voulez-vous faire sortir du navire ?", "Sortie du navire", JOptionPane.QUESTION_MESSAGE, null, listePerso, listePerso[0]);
 				if(persoSortant!=null){
 					//si le joueur a choisi de faire sortir un personnage	
@@ -85,7 +83,7 @@ public class CaseNavire extends Case {
 						if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15)
 							ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
 						else
-							persoSortant.recuperationStuff(true,false, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau());
+							persoSortant.recuperationStuff(true,false, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau(), affichage, equipe);
 						persoSortant.setAction(false);
 						stockNavire.remove(persoSortant);
 					}
@@ -95,14 +93,10 @@ public class CaseNavire extends Case {
 					this.actionImpossible();
 				//met les personnages dans le bateau comme sans action ni deplacement pour eviter une boucle infini dans le tour du joueur
 			}else{
-				JOptionPane.showOptionDialog(null, "Il n'y a pas de personnages jouables dans le Navire", "Attention",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-						null, options, options[0]);
+				affichage.popUp(equipe, "Il n'y a pas de personnages jouables dans le Navire", "Attention" );
 			}
 		}else{
-			JOptionPane.showOptionDialog(null, "Il n'y a pas de place libre pour pouvoir placer un personnage", "Attention",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-					null, options, options[0]);
+			affichage.popUp(equipe, "Il n'y a pas de place libre pour pouvoir placer un personnage", "Attention" );
 			this.actionImpossible();
 		}
 		plateauDuJeu.setVisibleBouttonAnnuler(false);

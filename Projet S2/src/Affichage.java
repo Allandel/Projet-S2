@@ -224,32 +224,26 @@ public class Affichage {
 	 * @return le plateau specifique au joueur
 	 */
 	public Plateau getPlateau(int equipe){
+		if(Test.testEnCours)
+			equipe=0;
 		return plateaux.get(equipe);
 	}
 	
-	/**
-	 * 
-	 * @return le plateau de test
-	 */
-	public Plateau getPlateauTest(){
-		return plateauDuTest;
-	}
-
 	/**
 	 * Highlight la coordonnees du plateau du joueur
 	 * @param cordonnees
 	 * @param equipe
 	 */
 	public void setHighlight(int[]cordonnees, int equipe){
+		if(Test.testEnCours)
+			equipe=0;
 		plateaux.get(equipe).setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
 	}
 	
-	/**
-	 * Highlight la coordonnees du plateau du joueur pour le test
-	 * @param cordonnees
-	 * @param equipe
-	 */
-	public void setHighlightTest(int[]cordonnees, int equipe){
-		plateauDuTest.setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
+	public void popUp(int equipe, String texte, String titre){
+			if(Test.testEnCours)
+				equipe=0;
+		Object[] optionNull = { "OK" };
+		plateaux.get(equipe).popUp(texte, titre, optionNull);
 	}
 }

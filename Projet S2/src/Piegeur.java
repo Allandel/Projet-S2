@@ -32,7 +32,7 @@ public class Piegeur extends Personnage{
 	 * @param y
 	 * @param tableauIle
 	 */
-	public void pieger(int x, int y, Case[][] tableauIle){
+	public void pieger(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		int decision;
 		decision=JOptionPane.showConfirmDialog(null,"Voulez vous pieger cette case ?","Poser un piege", JOptionPane.YES_NO_OPTION);
 		if (decision==0){
@@ -42,7 +42,7 @@ public class Piegeur extends Personnage{
 			}else{
 				tableauIle[x][y].setTeamPiege(1);
 			}
-			super.perteEnergie(20, x,y, tableauIle, false, false);
+			super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 		}
 	}
 	

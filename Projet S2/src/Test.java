@@ -12,6 +12,7 @@ public class Test {
 	private Affichage affichage;
 	private Joueur [] joueur = {new Joueur(true), new Joueur(false)};
 	private Personnage [] persoTest = new Personnage [2];
+	public static boolean testEnCours=false;
 
 	/**
 	 * Initialise une ile avec un perso de chaque type de chaque equipe de chaque cote
@@ -40,6 +41,7 @@ public class Test {
 	 * @param perso
 	 */
 	public void testPerso(int id){
+		testEnCours=true;
 		int [] cordonnees={0,0};
 		int equipe=0;
 		boolean [] gagner;
@@ -60,7 +62,7 @@ public class Test {
 			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Explorateur(true, joueur[0]));
 			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Explorateur(false, joueur[1]));
 		}
-		
+
 		persoTest[0]=ileDuJeu.getTableau()[2][3].getPersonnageCourant();
 		persoTest[1]=ileDuJeu.getTableau()[3][3].getPersonnageCourant();
 
@@ -71,7 +73,7 @@ public class Test {
 			persoTest[equipe].setActionDeplacement(true);
 			affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 			while(joueur[equipe].actionPossible() && !quitter){
-				cordonnees=action.choixCase(affichage.getPlateauTest(), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
+				cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
 				if(cordonnees[0]==999)
 					//si le joueur decide de passer son tour
 					joueur[equipe].passerTour();
@@ -81,12 +83,12 @@ public class Test {
 					if(decision==0)
 						quitter=true;
 				}else{
-					affichage.setHighlightTest(cordonnees, equipe);
+					affichage.setHighlight(cordonnees, equipe);
 					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
 						affichage.getPlateau(0).refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
 						gagner=gestion.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],true);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(0), tableauAffichage, cordonnees[0], cordonnees[1]);
+						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(0), tableauAffichage, cordonnees[0], cordonnees[1], affichage, 0);
 
 					affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}
@@ -95,6 +97,7 @@ public class Test {
 			equipe=1-equipe;
 		}
 		affichage.getPlateau(0).close();
+		testEnCours=false;
 	}
 
 	public void testIle(){

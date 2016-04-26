@@ -13,6 +13,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -38,9 +39,9 @@ public class Plateau {
 	private JLabel recupenergie = new JLabel("  ");
 	private JLabel inventaire  = new JLabel("Inventaire : ");
 	private JLabel recupInventaire = new JLabel("  ");
-	private JButton passageDuTour=new JButton("Passer son tour"), abandon=new JButton("Abandonner la partie"), annulerSelection=new JButton("Retour");
+	private JButton passageDuTour=new JButton("Passer son tour"), abandon, annulerSelection=new JButton("Retour");
 	private int id;
-	
+
 	/**
 	 *  Attribut ou est enregistré un événement observé. Cet attribut est
 	 * initialisé à null au début de la scrutation et rempli par l'événement observé 
@@ -122,11 +123,11 @@ public class Plateau {
 		// Instancie la fenetre principale et et les deux composants.
 		infos = new JPanel();
 		infos.setLayout(new BorderLayout());
-		
+
 		actionPartie=new JPanel();
 		infos.add(actionPartie,BorderLayout.CENTER);
 		actionPartie.setLayout(new GridLayout(3,1));
-		
+
 		infosPerso = new JPanel();
 		infosPerso.setLayout(new GridLayout(4,2));
 		infos.add(infosPerso,BorderLayout.NORTH);
@@ -142,11 +143,16 @@ public class Plateau {
 		// La fermeture de la fenetre ne fait que la cacher. 
 		// cf Javadoc setDefaultCloseOperation
 		window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		
+
+		if(Test.testEnCours)
+			abandon=new JButton("Quitter le test");
+		else
+			abandon=new JButton("Abandonner la partie");
+
 		actionPartie.add(passageDuTour);
 		actionPartie.add(abandon);
 		actionPartie.add(annulerSelection);
-		
+
 		// Ajout des composants à la fenetre
 		infosPerso.add(typePerso);
 		infosPerso.add(recupTypePerso);
@@ -170,7 +176,7 @@ public class Plateau {
 		graphic.addMouseListener(new Mouse());
 		window.addKeyListener(new Key()) ;
 		currentEvent = null ;
-		
+
 		passageDuTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				id=1;
@@ -188,19 +194,19 @@ public class Plateau {
 		});
 		annulerSelection.setVisible(false);
 	}
-	
+
 	public void setVisibleBouttonAnnuler(boolean setter){
 		annulerSelection.setVisible(setter);
 	}
-	
+
 	public int getId(){
 		return id;
 	}
-	
+
 	public void resetId(){
 		id=0;
 	}
-	
+
 	/**
 	 * Méthode permettant de placer les éléments sur le plateau. Le tableau doit être  
 	 * de même taille que la dimension déclarée via le constructeur.
@@ -412,5 +418,9 @@ public class Plateau {
 		recupNomPerso.setText(perso.getNom());
 		recupTypePerso.setText(perso.getType());
 		recupenergie.setText(""+perso.getEnergie());
+	}
+
+	public void popUp(String texte, String titre, Object[] options){
+		JOptionPane.showOptionDialog(window, texte, titre,JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,null, options, options[0]);
 	}
 }
