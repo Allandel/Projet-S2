@@ -24,13 +24,14 @@ public class Bombe {
 		return y;
 	}
 	
-	public void downCompteur(Case[][] tableauIle, Affichage affichage, int equipe){
+	public boolean downCompteur(Case[][] tableauIle, Affichage affichage, int equipe){
 		compteur--;
 		if(compteur==0){
 			this.explosion(tableauIle, affichage, equipe);
 			tableauIle[this.x][this.y].setBombe(null);
-			
+			return true;
 		}
+		return false;
 	}
 	
 	public int getCompteur(){

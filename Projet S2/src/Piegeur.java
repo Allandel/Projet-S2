@@ -62,11 +62,8 @@ public class Piegeur extends Personnage{
 	public void downCompteurBombe(Case[][] tableauIle, Affichage affichage, int equipe){
 		if(!listeBombe.isEmpty()){
 			for(Bombe bombe:listeBombe){
-				if(bombe.getCompteur()>0){
-					bombe.downCompteur(tableauIle, affichage, equipe);
-				}else{
+				if(bombe.downCompteur(tableauIle, affichage, equipe)){
 					listeBombe.remove(bombe);
-					
 				}
 			}
 		}
