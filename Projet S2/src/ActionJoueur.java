@@ -171,7 +171,6 @@ public class ActionJoueur {
 			event=  plateauDuJeu.waitEvent(1500);	
 			if(event instanceof KeyEvent && (x!=999 || ((KeyEvent) event).getKeyCode()==32 || ((KeyEvent) event).getKeyCode()==27 || ((KeyEvent) event).getKeyCode()==127))
 				keyCode=((KeyEvent) event).getKeyCode() ;
-			System.out.println(keyCode);
 			if(plateauDuJeu.getId()==1)
 				keyCode=32;
 			else if(plateauDuJeu.getId()==2)
