@@ -5,10 +5,10 @@ public class Ouvrier extends Personnage{
 		super(equipe, joueur);
 		setNom("Pierre");
 		setType("Ouvrier");
-		if(equipe1)
+	/*	if(equipe1)
 			setId();
 		else
-			setId();
+			setId();*/
 	}
 	
 	public void construireVillage(Joueur joueur){

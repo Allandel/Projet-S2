@@ -8,7 +8,7 @@ public class main {
 	public static void main(String[] args) {
 
 		Launcher menu = new Launcher();		
-		while(Launcher.getetat()){
+		while(menu.getetat()){
 			if(Launcher.getid() >= 0 && Launcher.getid() <5){ /* test 1 */
 				menu.setVisible(false);
 				Test test=new Test();
@@ -18,7 +18,7 @@ public class main {
 			}
 			if(Launcher.getid()==55){
 				menu.setVisible(false);
-				GestionDuJeu gestion=new GestionDuJeu();
+				GestionDuJeu gestion=new GestionDuJeu(menu.getParametres());
 				boolean [] fin;
 				do{
 					fin=gestion.tourDuJoueur();

@@ -11,9 +11,10 @@ public class GestionDuJeu {
 	private int[][] tableauAffichage;
 	private Affichage affichage;
 	private Joueur [] joueur = {new Joueur(true), new Joueur(false)};
+	private int [] parametres;
 
 	/**
-	 * Genere la gestion du jeu en intialisation l'ile, le tableau d'affichage et l'affichage
+	 * Genere la gestion du jeu en intialisation l'ile, le tableau d'affichage et l'affichage pour le test
 	 * @param ileDujeu
 	 * @param tableauAffichage
 	 * @param affichage
@@ -27,11 +28,9 @@ public class GestionDuJeu {
 	/**
 	 * Constructeur initialisant le plateau de jeu de base
 	 */
-	public GestionDuJeu(){
-		int longueurLigne, proportionNb;
-		longueurLigne = Launcher.getTaille();
-		proportionNb = Launcher.getPourcent();
-		ileDuJeu = new ile(longueurLigne, proportionNb);
+	public GestionDuJeu(int [] parametres){
+		this.parametres=parametres;
+		ileDuJeu = new ile(parametres[0], parametres[1]);
 		this.initialisationEquipe(ileDuJeu);
 		tableauAffichage = new int[ileDuJeu.getTableau().length][ileDuJeu.getTableau().length];
 		affichage= new Affichage(tableauAffichage, ileDuJeu, joueur);
@@ -196,31 +195,33 @@ public class GestionDuJeu {
 	 * @param ileDuJeu
 	 */
 	private void initialisationEquipe(ile ileDuJeu){
-		for(int i=0;i<Launcher.nbrExplorateurJ1;i++){
+		for(int i=0;i<parametres[2];i++){
 			Explorateur paul =new Explorateur(true, joueur[0]);
 		}
-		for(int i=0;i<Launcher.nbrGuerrierJ1;i++){
-			Guerrier mar=new Guerrier(true, joueur[0]);
-		}
-		for(int i=0;i<Launcher.nbrPiegeurJ1;i++){
-			Piegeur marc =new Piegeur(true, joueur[0]);
-		}
-		for(int i=0;i<Launcher.nbrVoleurJ1;i++){
+		for(int i=0;i<parametres[3];i++){
 			Voleur jean = new Voleur(true, joueur[0]);
 		}
+		for(int i=0;i<parametres[4];i++){
+			Guerrier mar=new Guerrier(true, joueur[0]);
+		}
+		for(int i=0;i<parametres[5];i++){
+			Piegeur marc =new Piegeur(true, joueur[0]);
+		}
+		
 
-		for(int i=0;i<Launcher.nbrExplorateurJ2;i++){
+		for(int i=0;i<parametres[6];i++){
 			Explorateur paul =new Explorateur(false, joueur[1]);
 		}
-		for(int i=0;i<Launcher.nbrGuerrierJ2;i++){
-			Guerrier mar=new Guerrier(false, joueur[1]);
-		}
-		for(int i=0;i<Launcher.nbrPiegeurJ2;i++){
-			Piegeur marc =new Piegeur(false, joueur[1]);
-		}
-		for(int i=0;i<Launcher.nbrVoleurJ2;i++){
+		for(int i=0;i<parametres[7];i++){
 			Voleur jean = new Voleur(false, joueur[1]);
 		}
+		for(int i=0;i<parametres[8];i++){
+			Guerrier mar=new Guerrier(false, joueur[1]);
+		}
+		for(int i=0;i<parametres[9];i++){
+			Piegeur marc =new Piegeur(false, joueur[1]);
+		}
+		
 
 		for(Joueur player: joueur){
 			player.setBateau(ileDuJeu);
