@@ -55,7 +55,7 @@ public class GestionDuJeu {
 			affichage.popUp(equipe,"Tour du Joueur "+equipeAffichage, "Tour du Joueur");
 			while(joueur[equipe].actionPossible() && !gagner[0]){
 				affichage.getPlateau(equipe).resetId();
-				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
+				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu, joueur[equipe]);
 
 				if(cordonnees[0]==999)
 					//si le joueur decide de passer son tour
