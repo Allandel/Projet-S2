@@ -35,7 +35,7 @@ public class Voleur extends Personnage {
 	 */
 	public void volerObjet(Personnage p, int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		Random random=new Random();
-		if (joueur.getEquipe()!=p.getEquipe()){
+		if (joueur!=p.getJoueur()){
 			if(p.getInventaire().isEmpty() && random.nextInt(3)==2 ){
 				affichage.popUp(equipe,"Votre cible ne possede rien dans son inventaire...", "VOL IMPOSSIBLE" );
 			}else if(!p.getInventaire().isEmpty() && random.nextInt(4)==2 ){

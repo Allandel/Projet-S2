@@ -55,7 +55,7 @@ public class GestionDuJeu {
 			affichage.popUp(equipe,"Tour du Joueur "+equipeAffichage, "Tour du Joueur");
 			while(joueur[equipe].actionPossible() && !gagner[0]){
 				affichage.getPlateau(equipe).resetId();
-				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu, joueur[equipe]);
+				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage,ileDuJeu, joueur[equipe]);
 				
 				if(cordonnees[0]==999)
 					//si le joueur decide de passer son tour
@@ -145,11 +145,11 @@ public class GestionDuJeu {
 						((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
 					}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
 						((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
-					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe()){
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getJoueur()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur()){
 						perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), affichage, equipe);
-					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Guerrier){
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getJoueur()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur() && perso instanceof Guerrier){
 						((Guerrier) perso).attaque(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(),x,y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
-					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getJoueur()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur() && perso instanceof Voleur){
 						((Voleur) perso).volerObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), x, y, ileDuJeu.getTableau(), affichage, equipe);
 					}
 				}

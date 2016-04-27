@@ -47,6 +47,14 @@ public class Personnage{
 	public void setDeath(boolean death){
 		this.death=death;
 	}
+	
+	/**
+	 * 
+	 * @return le joueur du personnage
+	 */
+	public Joueur getJoueur(){
+		return joueur;
+	}
 
 	/**
 	 * 
@@ -88,12 +96,13 @@ public class Personnage{
 	public int getIdBateau(){
 		return joueur.getIdBateau();
 	}
+	
 	/**
 	 * @return the equipe1
 	 */
-	public boolean getEquipe(){
+	/*public boolean getEquipe(){
 		return joueur.getEquipe();
-	}
+	}*/
 	/**
 	 * @param type the type to set
 	 */
@@ -237,7 +246,7 @@ public class Personnage{
 				perteEnergie(1, xApres,yApres, tableauIle, false,false, affichage, equipe);
 				if(inventaire.contains("Tresor")){
 					victoire[0]=true;
-					victoire[1]=this.getEquipe();
+					victoire[1]=joueur.getEquipe();
 				}
 				if(this instanceof Guerrier && !inventaire.contains("Epee")){
 					this.setObjetInventaire("Epee");;

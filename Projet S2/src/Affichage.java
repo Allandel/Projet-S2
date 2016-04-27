@@ -122,7 +122,7 @@ public class Affichage {
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
 
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
 							if(ileDuJeu.getTableau()[y][x].getId()==4 && !joueur.getCoffreTrouve())
@@ -155,7 +155,7 @@ public class Affichage {
 		}
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
 							plateaux.get(equipe).resetHighlight(y, x);
@@ -178,7 +178,7 @@ public class Affichage {
 			equipe=0;
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() && ileDuJeu.getTableau()[j][i].getPersonnageCourant().actionOuDeplacement()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur && ileDuJeu.getTableau()[j][i].getPersonnageCourant().actionOuDeplacement()){
 					plateaux.get(equipe).setHighlight(j, i, Color.YELLOW);
 				}
 			}

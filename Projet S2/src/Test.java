@@ -72,7 +72,7 @@ public class Test {
 			persoTest[equipe].setActionDeplacement(true);
 			affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 			while(joueur[equipe].actionPossible() && !quitter){
-				cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu, joueur[equipe]);
+				cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage,ileDuJeu, joueur[equipe]);
 				if(cordonnees[0]==999)
 					//si le joueur decide de passer son tour
 					joueur[equipe].passerTour();
