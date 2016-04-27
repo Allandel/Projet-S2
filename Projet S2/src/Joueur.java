@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
 	private boolean equipe1, coffreTrouve=false;
-	private int idBateau, ligneBateau, colonneBateau;
+	private int idBateau, ligneBateau, colonneBateau, nbrVillage=0;
 	/**
 	 * Construit un joueur en lui donnant un boolean correspondant a son equipe et l'id de son bateau
 	 */
@@ -33,7 +33,14 @@ public class Joueur {
 	public int getLigneBateau() {
 		return ligneBateau;
 	}
-
+	/**
+	 * 
+	 * @return le nombre de village construit par le joueur
+	 */
+	public int getNbrVillage(){
+		return nbrVillage;
+	}
+	
 	/**
 	 * @return the colonneBateau
 	 */
