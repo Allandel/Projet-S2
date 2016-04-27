@@ -10,7 +10,7 @@ public class Case {
 	private Personnage personnageCourant=null;
 	private boolean piege=false;
 	private int piegeteam;
-	private Bombe bombe;
+	private Bombe bombe=null;
 	
 	/**
 	 * @return the id

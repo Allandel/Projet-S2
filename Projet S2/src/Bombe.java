@@ -32,7 +32,7 @@ public class Bombe {
 			return true;
 		}
 		return false;
-	}
+	 }
 	
 	public int getCompteur(){
 		return compteur;

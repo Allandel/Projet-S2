@@ -60,11 +60,15 @@ public class Piegeur extends Personnage{
 		}
 	}
 	public void downCompteurBombe(Case[][] tableauIle, Affichage affichage, int equipe){
+		int indexBombe=0;
 		if(!listeBombe.isEmpty()){
 			for(Bombe bombe:listeBombe){
 				if(bombe.downCompteur(tableauIle, affichage, equipe)){
-					listeBombe.remove(bombe);
+					indexBombe=listeBombe.indexOf(bombe);
 				}
+			}
+			if(listeBombe.get(indexBombe).getCompteur()==0){
+				listeBombe.remove(indexBombe);
 			}
 		}
 	}
