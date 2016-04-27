@@ -77,6 +77,7 @@ public class GestionDuJeu {
 				}
 			}
 			this.soinBateau(joueur[equipe]);
+			this.joueur[equipe].ExplosionBombes(ileDuJeu.getTableau(), affichage, equipe);
 			equipe=1-equipe;
 			if(!gagner[0])
 				gagner=this.equipeMorte();

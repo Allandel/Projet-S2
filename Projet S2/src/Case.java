@@ -10,6 +10,7 @@ public class Case {
 	private Personnage personnageCourant=null;
 	private boolean piege=false;
 	private int piegeteam;
+	private Bombe bombe;
 	
 	/**
 	 * @return the id
@@ -29,6 +30,19 @@ public class Case {
 	 */
 	public boolean isAccessible() {
 		return accessible;
+	}
+	
+	public void setBombe(Bombe b){
+		this.bombe=b;
+		
+	}
+	
+	public boolean getBombe(){
+		if(bombe!=null){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	/**
