@@ -161,5 +161,4 @@ public class Joueur {
 			perso.setDeath(true);
 		}
 	}
-	
 }

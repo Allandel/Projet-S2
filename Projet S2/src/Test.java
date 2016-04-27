@@ -72,7 +72,7 @@ public class Test {
 			persoTest[equipe].setActionDeplacement(true);
 			affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 			while(joueur[equipe].actionPossible() && !quitter){
-				cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu);
+				cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu, joueur[equipe]);
 				if(cordonnees[0]==999)
 					//si le joueur decide de passer son tour
 					joueur[equipe].passerTour();
@@ -87,7 +87,7 @@ public class Test {
 						affichage.getPlateau(0).refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
 						gagner=gestion.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],true);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(0), tableauAffichage, cordonnees[0], cordonnees[1], affichage, 0);
+						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(0), tableauAffichage, cordonnees[0], cordonnees[1], affichage, 0,joueur[equipe]);
 
 					affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}

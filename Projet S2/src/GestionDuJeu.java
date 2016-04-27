@@ -56,7 +56,7 @@ public class GestionDuJeu {
 			while(joueur[equipe].actionPossible() && !gagner[0]){
 				affichage.getPlateau(equipe).resetId();
 				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu, joueur[equipe]);
-
+				
 				if(cordonnees[0]==999)
 					//si le joueur decide de passer son tour
 					joueur[equipe].passerTour();
@@ -71,13 +71,18 @@ public class GestionDuJeu {
 						affichage.getPlateau(equipe).refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],false);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1], affichage, equipe);
+						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1], affichage, equipe, joueur[equipe]);
 
 					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}
 			}
 			this.soinBateau(joueur[equipe]);
 			equipe=1-equipe;
+			try {
+				Thread.sleep(1000) ;	// Cette instruction - en plus du délai induit - permet à Swing de traiter les événements GUI 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			if(!gagner[0])
 				gagner=this.equipeMorte();
 		}
@@ -108,46 +113,46 @@ public class GestionDuJeu {
 			affichage.getPlateau(0).setVisibleBouttonAnnuler(true);
 			cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(0), tableauAffichage, x, y, perso);
 		}
-		if(cordonnees[0]==999){
-			//si le joueur decide de passer son tour
-			joueur.passerTour();
-		}else if(cordonnees[0]==888){
-			//si le joueur decide d'abandonner
-			int decision=JOptionPane.showConfirmDialog(null,"Désirez vous abandonner la partie ?", "Abandonner la partie ?", JOptionPane.YES_NO_OPTION);
-			if(decision==0)
-				joueur.abandon();
-		}else if(cordonnees[0]!=777){
-			//si le joueur n'annule pas sa selection	
-			if(perso.getDeplacement()){
-				//si le perso peut se deplacer	
-				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
-					if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=equipe){
-						perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
-						perso.immobilisation(affichage, equipe);
-					}else{
-						perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
+			if(cordonnees[0]==999){
+				//si le joueur decide de passer son tour
+				joueur.passerTour();
+			}else if(cordonnees[0]==888){
+				//si le joueur decide d'abandonner
+				int decision=JOptionPane.showConfirmDialog(null,"Désirez vous abandonner la partie ?", "Abandonner la partie ?", JOptionPane.YES_NO_OPTION);
+				if(decision==0)
+					joueur.abandon();
+			}else if(cordonnees[0]!=777){
+				//si le joueur n'annule pas sa selection	
+				if(perso.getDeplacement()){
+					//si le perso peut se deplacer	
+					if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
+						if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=equipe){
+							perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
+							perso.immobilisation(affichage, equipe);
+						}else{
+							perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
+						}
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
+						gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(),affichage, joueur, equipe);
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==14){
+						perso.recuperationStuff(false,false, x,y,cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
 					}
-				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
-					gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(),affichage, joueur, equipe);
-				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==14){
-					perso.recuperationStuff(false,false, x,y,cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
+				}
+				if(perso.getAction()){
+					//si le perso peut faire une action	
+					if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
+						((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), joueur, affichage, equipe);
+					}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
+						((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe()){
+						perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), affichage, equipe);
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Guerrier){
+						((Guerrier) perso).attaque(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(),x,y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
+						((Voleur) perso).volerObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), x, y, ileDuJeu.getTableau(), affichage, equipe);
+					}
 				}
 			}
-			if(perso.getAction()){
-				//si le perso peut faire une action	
-				if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
-					((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), joueur, affichage, equipe);
-				}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
-					((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
-				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe()){
-					perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), affichage, equipe);
-				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Guerrier){
-					((Guerrier) perso).attaque(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(),x,y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
-				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getEquipe()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getEquipe() && perso instanceof Voleur){
-					((Voleur) perso).volerObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), x, y, ileDuJeu.getTableau(), affichage, equipe);
-				}
-			}
-		}
 		if(!test){
 			affichage.getPlateau(equipe).refreshinfo(perso);
 			affichage.getPlateau(equipe).setVisibleBouttonAnnuler(false);
