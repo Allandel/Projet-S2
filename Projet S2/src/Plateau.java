@@ -434,5 +434,11 @@ public class Plateau {
 
 	}
 
+	public void resetInfo(){
+		recupInventaire.setText("");
+		recupNomPerso.setText("");
+		recupTypePerso.setText("");
+		recupenergie.setText("");
+	}
 
 }

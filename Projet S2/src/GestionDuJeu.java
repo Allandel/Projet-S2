@@ -49,6 +49,7 @@ public class GestionDuJeu {
 		int equipe=0, equipeAffichage;
 
 		while(!gagner[0]){
+			affichage.getPlateau(equipe).resetInfo();
 			equipeAffichage=equipe+1;
 			joueur[equipe].resetAction();
 			affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
