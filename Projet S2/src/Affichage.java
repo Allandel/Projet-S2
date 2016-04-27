@@ -12,10 +12,24 @@ public class Affichage {
 	private int[][] tableauAffichageJ1, tableauAffichageJ2, tableauAffichageTest;
 	private ArrayList<int[][]> tableaux=new ArrayList<>();
 	private ArrayList<Plateau> plateaux=new ArrayList<>();
-	private String[] images = new String[]{"img/rocher.jpg","img/1.navire.jpg","img/2.navire.jpg","img/coffre.jpg","img/mer.jpg",
-			"img/1.explorateur.jpg","img/1.voleur.jpg","img/1.piegeur.jpg","img/1.guerrier.jpg",
-			"img/2.explorateur.jpg","img/2.voleur.jpg","img/2.piegeur.jpg","img/2.guerrier.jpg",
-			"img/death.jpg","img/herbe.jpg","img/piege.jpg","img/bombe.jpg"};
+	private String[] images = new String[]{"img/rocher.jpg",			//id 1
+											"img/1.navire.jpg",			//id 2
+											"img/2.navire.jpg",			//id 3
+											"img/coffre.jpg",			//id 4
+											"img/mer.jpg",				//id 5
+											"img/1.explorateur.jpg",	//id 6
+											"img/1.voleur.jpg",			//id 7
+											"img/1.piegeur.jpg",		//id 8
+											"img/1.guerrier.jpg",		//id 9
+											"img/2.explorateur.jpg",	//id 10
+											"img/2.voleur.jpg",			//id 11
+											"img/2.piegeur.jpg",		//id 12
+											"img/2.guerrier.jpg",		//id 13
+											"img/death.jpg",			//id 14
+											"img/herbe.jpg",			//id 15
+											"img/piege.jpg",			//id 16
+											"img/bombe.jpg"				//id 17
+											};			
 	private Plateau plateauDuJeuJ1, plateauDuJeuJ2, plateauDuTest;
 
 	/**
