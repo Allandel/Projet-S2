@@ -397,7 +397,7 @@ public class Personnage{
 	/**
 	 * Diminue le compteur de tour immobilise
 	 */
-	public void setCompteur(){
+	public void downCompteur(){
 		compteur--;
 	}
 

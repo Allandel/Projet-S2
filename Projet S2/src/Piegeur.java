@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -6,6 +8,7 @@ import javax.swing.JOptionPane;
  *
  */
 public class Piegeur extends Personnage{
+	ArrayList<Bombe>listeBombe=new ArrayList<Bombe>();
 	
 	/**
 	 * Constructeur creant un piegeur avec un nom, un type, un ID en fonction du parametre equipe1 determinant son equipe.
@@ -42,7 +45,32 @@ public class Piegeur extends Personnage{
 				tableauIle[x][y].setTeamPiege(1);
 			}
 			super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
+		}else{
+			this.poserBombe(x, y, tableauIle, affichage, equipe);
 		}
 	}
+	
+	public void poserBombe(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
+		int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous poser une bombe ?","Poser une bombe",null);
+		if (decision==0){
+			Bombe b=new Bombe(x,y);
+			tableauIle[x][y].setBombe(b);
+			listeBombe.add(b);
+			super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
+		}
+	}
+	public void downCompteurBombe(Case[][] tableauIle, Affichage affichage, int equipe){
+		if(!listeBombe.isEmpty()){
+			for(Bombe bombe:listeBombe){
+				if(bombe.getCompteur()>0){
+					bombe.downCompteur(tableauIle, affichage, equipe);
+				}else{
+					listeBombe.remove(bombe);
+					
+				}
+			}
+		}
+	}
+	
 	
 }

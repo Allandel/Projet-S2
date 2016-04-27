@@ -106,7 +106,15 @@ public class Joueur {
 			if(perso.getCompteur()==0){
 				perso.setActionDeplacement(true);
 			}else{
-				perso.setCompteur();
+				perso.downCompteur();
+			}
+		}
+	}
+	
+	public void ExplosionBombes(Case[][] tableauIle, Affichage affichage, int equipe1){
+		for(Personnage perso : equipe){
+			if(perso instanceof Piegeur){
+				((Piegeur) perso).downCompteurBombe(tableauIle, affichage, equipe1);
 			}
 		}
 	}

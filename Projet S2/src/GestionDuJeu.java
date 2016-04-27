@@ -78,6 +78,7 @@ public class GestionDuJeu {
 				}
 			}
 			this.soinBateau(joueur[equipe]);
+			this.joueur[equipe].ExplosionBombes(ileDuJeu.getTableau(), affichage, equipe);
 			equipe=1-equipe;
 			try {
 				Thread.sleep(1000) ;	// Cette instruction - en plus du délai induit - permet à Swing de traiter les événements GUI 
