@@ -22,7 +22,7 @@ public class Launcher extends JFrame{
 	private int nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1;
 	private int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2;
 	private boolean etat = true;
-	static int id=5;
+	static int idTest=0;
 	private JTabbedPane menuOnglet;
 	/**
 	 * Affiche le menu principal du jeu
@@ -136,7 +136,6 @@ public class Launcher extends JFrame{
 				nbrGuerrierJ2=sliderNbrGuerrierJ2.getValue();
 				nbrVoleurJ2=sliderNbrVoleurJ2.getValue();
 				nbrPiegeurJ2=sliderNbrPiegeurJ2.getValue();
-				id=55;
 			}
 		});
 		Bquitter.addActionListener(new ActionListener() {
@@ -147,22 +146,22 @@ public class Launcher extends JFrame{
 
 		BTGuerrier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				id = 1;
+				idTest = 1;
 			}
 		});
 		BTPiegeur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				id = 0;
+				idTest = 2;
 			}
 		});
 		BTVoleur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				id = 2;
+				idTest = 3;
 			}
 		});
 		BTExplorateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				id = 3;
+				idTest = 4;
 			}
 		});
 
@@ -202,8 +201,8 @@ public class Launcher extends JFrame{
 	public boolean getetat(){
 		return etat;
 	}
-	public static int getid(){
-		return id;
+	public static int getidTest(){
+		return idTest;
 	}
 
 	class ImagePanel extends JPanel {

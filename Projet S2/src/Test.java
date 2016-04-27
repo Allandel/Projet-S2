@@ -46,18 +46,18 @@ public class Test {
 		boolean [] gagner;
 		boolean quitter=false;
 
-		if(id==0){
+		if(id==2){
 			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Piegeur(true, joueur[0]));
 			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Piegeur(false, joueur[1]));
 		}else if(id==1){
 			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Guerrier(true, joueur[0]));
 			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Guerrier(false, joueur[1]));
 
-		}else if(id==2){
+		}else if(id==3){
 			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Voleur(true, joueur[0]));
 			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Voleur(false, joueur[1]));
 
-		}else if(id==3){
+		}else if(id==4){
 			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Explorateur(true, joueur[0]));
 			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Explorateur(false, joueur[1]));
 		}
