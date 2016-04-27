@@ -13,12 +13,12 @@ public class Guerrier extends Personnage{
 	 * @param equipe1
 	 * @param joueur
 	 */
-	public Guerrier(boolean equipe1, Joueur joueur){
-		super(equipe1, joueur);
+	public Guerrier(Joueur joueur){
+		super(joueur);
 		setNom("Hans");
 		setType("Guerrier");
 		setObjetInventaire("Epee");
-		if(equipe1)
+		if(joueur.getEquipe())
 			setId(9);
 		else
 			setId(13);

@@ -196,30 +196,30 @@ public class GestionDuJeu {
 	 */
 	private void initialisationEquipe(ile ileDuJeu){
 		for(int i=0;i<parametres[2];i++){
-			Explorateur paul =new Explorateur(true, joueur[0]);
+			Explorateur paul =new Explorateur(joueur[0]);
 		}
 		for(int i=0;i<parametres[3];i++){
-			Voleur jean = new Voleur(true, joueur[0]);
+			Voleur jean = new Voleur(joueur[0]);
 		}
 		for(int i=0;i<parametres[4];i++){
-			Guerrier mar=new Guerrier(true, joueur[0]);
+			Guerrier mar=new Guerrier(joueur[0]);
 		}
 		for(int i=0;i<parametres[5];i++){
-			Piegeur marc =new Piegeur(true, joueur[0]);
+			Piegeur marc =new Piegeur(joueur[0]);
 		}
 		
 
 		for(int i=0;i<parametres[6];i++){
-			Explorateur paul =new Explorateur(false, joueur[1]);
+			Explorateur paul =new Explorateur(joueur[1]);
 		}
 		for(int i=0;i<parametres[7];i++){
-			Voleur jean = new Voleur(false, joueur[1]);
+			Voleur jean = new Voleur(joueur[1]);
 		}
 		for(int i=0;i<parametres[8];i++){
-			Guerrier mar=new Guerrier(false, joueur[1]);
+			Guerrier mar=new Guerrier(joueur[1]);
 		}
 		for(int i=0;i<parametres[9];i++){
-			Piegeur marc =new Piegeur(false, joueur[1]);
+			Piegeur marc =new Piegeur(joueur[1]);
 		}
 		
 

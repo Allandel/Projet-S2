@@ -8,11 +8,10 @@ import java.util.ArrayList;
 
 public class Personnage{
 
-	private int energie=100, id, idBateau,compteur=0;
+	private int energie=100, id,compteur=0;
 	private String nom, type;
 	private boolean death=false, action=true, deplacement=true;
 	protected ArrayList <String> inventaire=new ArrayList<String>();
-	protected boolean equipe1;
 	protected Joueur joueur;
 
 	/**
@@ -20,12 +19,7 @@ public class Personnage{
 	 * @param equipe
 	 * @param joueur
 	 */
-	Personnage(boolean equipe, Joueur joueur){
-		this.equipe1=equipe;
-		if(equipe1)		
-			idBateau=2;
-		else
-			idBateau=3;
+	Personnage(Joueur joueur){
 		joueur.addPerso(this);
 		this.joueur=joueur;
 	}
@@ -92,13 +86,13 @@ public class Personnage{
 	 * @return l'id du bateau du personnage
 	 */
 	public int getIdBateau(){
-		return idBateau;
+		return joueur.getIdBateau();
 	}
 	/**
 	 * @return the equipe1
 	 */
 	public boolean getEquipe(){
-		return equipe1;
+		return joueur.getEquipe();
 	}
 	/**
 	 * @param type the type to set

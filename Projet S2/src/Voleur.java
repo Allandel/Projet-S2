@@ -12,11 +12,11 @@ public class Voleur extends Personnage {
 	 * Constructeur cr�ant un voleur avec un nom, un type, un ID en fonction du parametre equipe1 determinant son equipe.
 	 * @param equipe1
 	 */
-	public Voleur(boolean equipe1, Joueur joueur){
-		super(equipe1, joueur);
+	public Voleur(Joueur joueur){
+		super(joueur);
 		setNom("Bill");
 		setType("Voleur");
-		if(equipe1)
+		if(joueur.getEquipe())
 			setId(7);
 		else
 			setId(11);
@@ -35,7 +35,7 @@ public class Voleur extends Personnage {
 	 */
 	public void volerObjet(Personnage p, int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		Random random=new Random();
-		if (this.equipe1!=p.equipe1){
+		if (joueur.getEquipe()!=p.getEquipe()){
 			if(p.getInventaire().isEmpty() && random.nextInt(3)==2 ){
 				affichage.popUp(equipe,"Votre cible ne possede rien dans son inventaire...", "VOL IMPOSSIBLE" );
 			}else if(!p.getInventaire().isEmpty() && random.nextInt(4)==2 ){

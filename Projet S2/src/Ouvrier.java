@@ -1,11 +1,11 @@
 
 public class Ouvrier extends Personnage{
 
-	Ouvrier(boolean equipe, Joueur joueur) {
-		super(equipe, joueur);
+	Ouvrier(Joueur joueur) {
+		super(joueur);
 		setNom("Pierre");
 		setType("Ouvrier");
-	/*	if(equipe1)
+	/*	if(joueur.getEquipe())
 			setId();
 		else
 			setId();*/

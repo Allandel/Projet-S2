@@ -9,11 +9,11 @@ public class Explorateur extends Personnage{
 	/**
 	 * Constructeur d'Explorateur lui attribuant un nom, un id, une equipe et l'ajoute dans l'equipe du joueur correspondant
 	 */
-	public Explorateur(boolean equipe1, Joueur joueur){
-		super(equipe1, joueur);
+	public Explorateur(Joueur joueur){
+		super(joueur);
 		setNom("Bob");
 		setType("Explorateur");
-		if(equipe1)
+		if(joueur.getEquipe())
 			setId(6);
 		else
 			setId(10);
