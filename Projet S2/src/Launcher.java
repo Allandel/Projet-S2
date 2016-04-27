@@ -18,11 +18,10 @@ import javax.swing.JTabbedPane;
  * Permet l'affichage du menu principal du jeu
  */
 public class Launcher extends JFrame{
-	private int tailleCarte, pourcentageRocher;
+	private int tailleCarte, pourcentageRocher,idTest=0;
 	private int nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1;
 	private int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2;
 	private boolean etat = true;
-	static int idTest=0;
 	private JTabbedPane menuOnglet;
 	/**
 	 * Affiche le menu principal du jeu
@@ -136,6 +135,7 @@ public class Launcher extends JFrame{
 				nbrGuerrierJ2=sliderNbrGuerrierJ2.getValue();
 				nbrVoleurJ2=sliderNbrVoleurJ2.getValue();
 				nbrPiegeurJ2=sliderNbrPiegeurJ2.getValue();
+				idTest=55;
 			}
 		});
 		Bquitter.addActionListener(new ActionListener() {
@@ -182,6 +182,14 @@ public class Launcher extends JFrame{
 		});
 	}
 
+	/**
+	 * Initialise les slider du menu
+	 * @param slider
+	 * @param min
+	 * @param max
+	 * @param value
+	 * @param spacing
+	 */
 	private void setSlider(JSlider slider, int min ,int max, int value, int spacing){
 		slider.setMaximum(max);
 		slider.setMinimum(min);
@@ -193,7 +201,6 @@ public class Launcher extends JFrame{
 		slider.setSnapToTicks(true);
 	}
 	
-	
 	/**
 	 * 
 	 * @return l'etat
@@ -201,8 +208,21 @@ public class Launcher extends JFrame{
 	public boolean getetat(){
 		return etat;
 	}
-	public static int getidTest(){
+
+	/**
+	 * 
+	 * @return l'id du test choisi
+	 */
+	public int getidTest(){
 		return idTest;
+	}
+	
+	/**
+	 * 
+	 * @param setter
+	 */
+	public void setIdtest(int setter){
+		idTest=setter;
 	}
 
 	class ImagePanel extends JPanel {
@@ -225,6 +245,10 @@ public class Launcher extends JFrame{
 		}
 	}
 
+	/**
+	 * 
+	 * @return le talbeau de parametre du jeu lance
+	 */
 	public int[] getParametres(){
 		int [] parametres={tailleCarte, pourcentageRocher,nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1, nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2};
 		return parametres;

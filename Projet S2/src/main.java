@@ -9,21 +9,21 @@ public class main {
 
 		Launcher menu = new Launcher();		
 		while(menu.getetat()){
-			if(Launcher.getidTest() > 0 && Launcher.getidTest() <5){
+			if(menu.getidTest() > 0 && menu.getidTest() <5){
 				menu.setVisible(false);
 				Test test=new Test();
-				test.testPerso(Launcher.getidTest());
-				Launcher.idTest=0;
+				test.testPerso(menu.getidTest());
+				menu.setIdtest(0);
 				menu.setVisible(true);
 			}
-			if(Launcher.getidTest()==55){
+			if(menu.getidTest()==55){
 				menu.setVisible(false);
 				GestionDuJeu gestion=new GestionDuJeu(menu.getParametres());
 				boolean [] fin;
 				do{
 					fin=gestion.tourDuJoueur();
 				}while(!fin[0]);
-				
+				menu.setIdtest(0);
 				Affichage victoire=new Affichage(fin);
 				menu.setVisible(true);
 			}
