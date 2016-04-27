@@ -13,6 +13,7 @@ public class Personnage{
 	private boolean death=false, action=true, deplacement=true;
 	protected ArrayList <String> inventaire=new ArrayList<String>();
 	protected boolean equipe1;
+	protected Joueur joueur;
 
 	/**
 	 * Cree un personnage et lui specifie son equipe et l'id de son bateau suivant l'equipe
@@ -26,6 +27,7 @@ public class Personnage{
 		else
 			idBateau=3;
 		joueur.addPerso(this);
+		this.joueur=joueur;
 	}
 
 	/**
@@ -227,10 +229,9 @@ public class Personnage{
 	 * @param xApres
 	 * @param yApres
 	 * @param tableauIle
-	 * @param joueur
 	 * @return true si le personnage possède le tresor
 	 */
-	public boolean[] entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, Joueur joueur, int equipe){
+	public boolean[] entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
 		boolean victoire[]={false,false};
 
 		if(joueur.nbrVivant()>((CaseNavire)tableauIle[xApres][yApres]).nbrVivantStock()+1){

@@ -26,7 +26,7 @@ public class Explorateur extends Personnage{
 	 * @param tableauIle
 	 * @param joueur
 	 */
-	public void interactionRocher(int x, int y, Case[][] tableauIle, Joueur joueur, Affichage affichage, int equipe){
+	public void interactionRocher(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		boolean key=((CaseRocher)tableauIle[x][y]).getKey();
 		boolean chest=((CaseRocher)tableauIle[x][y]).getChest(), chestTaken=((CaseRocher)tableauIle[x][y]).getChestTaken();
 		boolean keyTaken=((CaseRocher)tableauIle[x][y]).getKeyTaken();
