@@ -66,6 +66,7 @@ public class Piegeur extends Personnage{
 					bombe.downCompteur(tableauIle, affichage, equipe);
 				}else{
 					listeBombe.remove(bombe);
+					
 				}
 			}
 		}
