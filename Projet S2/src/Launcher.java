@@ -71,22 +71,22 @@ public class Launcher extends JFrame{
 		setSlider(sliderPourcent, 10 ,50, 10, 5);
 
 		final JSlider sliderNbrExplorateurJ1 = new JSlider();
-		setSlider(sliderNbrExplorateurJ1, 1 ,4, 1, 1);
+		setSlider(sliderNbrExplorateurJ1, 0 ,4, 1, 1);
 		final JSlider sliderNbrGuerrierJ1 = new JSlider();
-		setSlider(sliderNbrGuerrierJ1, 1 ,4, 1, 1);
+		setSlider(sliderNbrGuerrierJ1, 0 ,4, 1, 1);
 		final JSlider sliderNbrVoleurJ1 = new JSlider();
-		setSlider(sliderNbrVoleurJ1, 1 ,4, 1, 1);
+		setSlider(sliderNbrVoleurJ1, 0 ,4, 1, 1);
 		final JSlider sliderNbrPiegeurJ1 = new JSlider();
-		setSlider(sliderNbrPiegeurJ1, 1 ,4, 1, 1);
+		setSlider(sliderNbrPiegeurJ1, 0 ,4, 1, 1);
 
 		final JSlider sliderNbrExplorateurJ2 = new JSlider();
-		setSlider(sliderNbrExplorateurJ2, 1 ,4, 1, 1);
+		setSlider(sliderNbrExplorateurJ2, 0 ,4, 1, 1);
 		final JSlider sliderNbrGuerrierJ2 = new JSlider();
-		setSlider(sliderNbrGuerrierJ2, 1 ,4, 1, 1);
+		setSlider(sliderNbrGuerrierJ2, 0 ,4, 1, 1);
 		final JSlider sliderNbrVoleurJ2 = new JSlider();
-		setSlider(sliderNbrVoleurJ2, 1 ,4, 1, 1);
+		setSlider(sliderNbrVoleurJ2, 0 ,4, 1, 1);
 		final JSlider sliderNbrPiegeurJ2 = new JSlider();
-		setSlider(sliderNbrPiegeurJ2, 1 ,4, 1, 1);
+		setSlider(sliderNbrPiegeurJ2, 0 ,4, 1, 1);
 
 		onglet3.add(LB2Explorateur);
 		onglet3.add(sliderNbrExplorateurJ1);
@@ -200,7 +200,7 @@ public class Launcher extends JFrame{
 		slider.setMinorTickSpacing(spacing);
 		slider.setSnapToTicks(true);
 	}
-	
+
 	/**
 	 * 
 	 * @return l'etat
@@ -216,7 +216,7 @@ public class Launcher extends JFrame{
 	public int getidTest(){
 		return idTest;
 	}
-	
+
 	/**
 	 * 
 	 * @param setter
@@ -252,5 +252,21 @@ public class Launcher extends JFrame{
 	public int[] getParametres(){
 		int [] parametres={tailleCarte, pourcentageRocher,nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1, nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2};
 		return parametres;
+	}
+
+	public boolean parametresValide(){
+		int nbrJ1=0,nbrJ2=0;
+
+		for(int x=2;x<6;x++){
+			nbrJ1+=this.getParametres()[x];
+		}
+
+		for(int x=6;x<10;x++){
+			nbrJ2+=this.getParametres()[x];
+		}
+
+		if(nbrJ1>0 && nbrJ2>0)
+			return true;
+		return false;
 	}
 }

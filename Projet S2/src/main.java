@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /**
  * Classe principale pour lancer le jeu
  * @author Allan
@@ -15,8 +17,7 @@ public class main {
 				test.testPerso(menu.getidTest());
 				menu.setIdtest(0);
 				menu.setVisible(true);
-			}
-			if(menu.getidTest()==55){
+			}else if(menu.getidTest()==55 && menu.parametresValide()){
 				menu.setVisible(false);
 				GestionDuJeu gestion=new GestionDuJeu(menu.getParametres());
 				boolean [] fin;
@@ -26,7 +27,12 @@ public class main {
 				menu.setIdtest(0);
 				Affichage victoire=new Affichage(fin);
 				menu.setVisible(true);
+			}else if(menu.getidTest()==55){
+				menu.setIdtest(0);
+				Object[] options = { "OK" };
+				JOptionPane.showOptionDialog(null, "Il faut au moins un personnage dans chaque équipe pour pouvoir joueur.", "Quantite de personnage invalide",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,null, options, options[0]);
 			}
+				
 			System.out.flush();
 		}		 
 	}
