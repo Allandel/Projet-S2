@@ -9,7 +9,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,7 +32,7 @@ public class Plateau {
 	private JFrame window ;
 	private GraphicPane graphic ;
 	private ConsolePane console ;
-	private JPanel infos, infosPerso, actionPartie;
+	private JPanel infos=new JPanel(), infosPerso=new JPanel(), actionPartie=new JPanel(),inventairePerso=new JPanel();
 	private JLabel nomPerso = new JLabel("Nom : ");
 	private JLabel  recupNomPerso = new JLabel("  ");
 	private JLabel typePerso = new JLabel("Type : ");
@@ -38,9 +40,9 @@ public class Plateau {
 	private JLabel energie = new JLabel("Energie : ");
 	private JLabel recupenergie = new JLabel("  ");
 	private JLabel inventaire  = new JLabel("Inventaire : ");
-	private JLabel recupInventaire = new JLabel("  ");
-	private JButton passageDuTour=new JButton("Passer son tour"), abandon, annulerSelection=new JButton("Retour");
+	private JButton passageDuTour=new JButton("Passer son tour"), abandon, annulerSelection=new JButton("Retour"), aide=new JButton("Aide");
 	private int id;
+	private ArrayList<JLabel> objetIventaire=new ArrayList();
 
 	/**
 	 *  Attribut ou est enregistré un événement observé. Cet attribut est
@@ -121,16 +123,21 @@ public class Plateau {
 	 */
 	public Plateau(String[] gif,int taille, boolean withTextArea){
 		// Instancie la fenetre principale et et les deux composants.
-		infos = new JPanel();
+
+		JPanel vide=new JPanel();
+
+		vide.setLayout(new GridLayout(2,1));
 		infos.setLayout(new BorderLayout());
-
-		actionPartie=new JPanel();
-		infos.add(actionPartie,BorderLayout.CENTER);
-		actionPartie.setLayout(new GridLayout(3,1));
-
-		infosPerso = new JPanel();
+		actionPartie.setLayout(new GridLayout(4,1));
+		inventairePerso.setLayout(new GridLayout(2,3));
 		infosPerso.setLayout(new GridLayout(4,2));
+
+		infos.add(vide,BorderLayout.CENTER);
+		infos.add(actionPartie,BorderLayout.SOUTH);
 		infos.add(infosPerso,BorderLayout.NORTH);
+		vide.add(inventairePerso, BorderLayout.NORTH);
+
+		this.setObjetIventaire();
 
 		window = new JFrame() ;
 		graphic = new GraphicPane(gif, taille) ;
@@ -149,9 +156,10 @@ public class Plateau {
 		else
 			abandon=new JButton("Abandonner la partie");
 
-		actionPartie.add(passageDuTour);
-		actionPartie.add(abandon);
 		actionPartie.add(annulerSelection);
+		actionPartie.add(passageDuTour);
+		actionPartie.add(aide);
+		actionPartie.add(abandon);
 
 		// Ajout des composants à la fenetre
 		infosPerso.add(typePerso);
@@ -161,7 +169,6 @@ public class Plateau {
 		infosPerso.add(energie);
 		infosPerso.add(recupenergie);
 		infosPerso.add(inventaire);
-		infosPerso.add(recupInventaire);
 		window.getContentPane().add(infos, BorderLayout.EAST);
 		window.getContentPane().add(graphic, BorderLayout.WEST);
 		if (withTextArea) {
@@ -410,11 +417,45 @@ public class Plateau {
 	public void setText(int x, int y, String msg) {
 		graphic.setText(x, y, msg) ;		
 	}
+
+	private void affichageInventaire(Personnage perso){
+		for(int cpt=0;cpt<objetIventaire.size();cpt++){
+			if(cpt<perso.getInventaire().size())
+				this.addImageIcon(objetIventaire.get(cpt),perso.getInventaire().get(cpt));
+			else
+				this.addImageIcon(objetIventaire.get(cpt),"Vide");
+		}
+	}
+
+	private void addImageIcon(JLabel label, String objet){
+		if(objet.equals("Vide"))
+			label.setVisible(false);
+		else{
+			label.setVisible(true);
+			label.setIcon(new ImageIcon("img/bombe.jpg"));
+		}
+	}
+
+	private void inventaireVide(){
+		for(int cpt=0;cpt<objetIventaire.size();cpt++){
+			this.addImageIcon(objetIventaire.get(cpt),"Vide");
+		}
+	}
+
+	private void setObjetIventaire(){
+		for(int i=0;i<6;i++){
+			JLabel objet=new JLabel();
+			inventairePerso.add(objet);
+			objetIventaire.add(objet);
+			objet.setVisible(true);
+		}
+	}
+
 	public void refreshinfo(Personnage perso){
 		if(perso.getInventaire().isEmpty())
-			recupInventaire.setText("Vide");
+			inventaireVide();
 		else
-			recupInventaire.setText(""+perso.getInventaire());
+			this.affichageInventaire(perso);
 		recupNomPerso.setText(perso.getNom());
 		recupTypePerso.setText(perso.getType());
 		recupenergie.setText(""+perso.getEnergie());
@@ -435,7 +476,6 @@ public class Plateau {
 	}
 
 	public void resetInfo(){
-		recupInventaire.setText("");
 		recupNomPerso.setText("");
 		recupTypePerso.setText("");
 		recupenergie.setText("");
