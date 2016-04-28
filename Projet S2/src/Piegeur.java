@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 public class Piegeur extends Personnage{
 	ArrayList<Bombe>listeBombe=new ArrayList<Bombe>();
 	
+	
 	/**
 	 * Constructeur creant un piegeur avec un nom, un type, un ID en fonction du parametre equipe1 determinant son equipe.
 	 * @param equipe1
