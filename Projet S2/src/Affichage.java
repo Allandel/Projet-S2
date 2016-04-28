@@ -13,7 +13,7 @@ public class Affichage {
 	private ArrayList<int[][]> tableaux=new ArrayList<>();
 	private ArrayList<Plateau> plateaux=new ArrayList<>();
 	private Plateau plateauDuJeuJ1, plateauDuJeuJ2, plateauDuTest;
-	private String[] images = new String[]{"img/rocher.jpg",			//id 1
+	private String[] images = new String[]{ "img/rocher.jpg",			//id 1
 											"img/1.navire.jpg",			//id 2
 											"img/2.navire.jpg",			//id 3
 											"img/coffre.jpg",			//id 4
