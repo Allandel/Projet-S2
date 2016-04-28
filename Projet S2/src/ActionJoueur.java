@@ -20,7 +20,7 @@ public class ActionJoueur {
 	 * @param ileDuJeu
 	 * @return le tableau contenant le x et le y des coordonnees selectionnees
 	 */
-	public int [] choixCase(Plateau plateauDuJeu, int[][] tableauAffichage, Boolean equipe, ile ileDuJeu, Joueur joueur){
+	public int [] choixCase(Plateau plateauDuJeu, int[][] tableauAffichage, ile ileDuJeu, Joueur joueur){
 		int[] coordonnees =new int[2];
 		int xEvent,yEvent;
 		do{
@@ -29,7 +29,7 @@ public class ActionJoueur {
 				xEvent=coordonnees[0];
 				yEvent=coordonnees[1];
 			}while(coordonnees[0]==777 || (coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || tableauAffichage[yEvent][xEvent]>=14)));
-		}while(coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]==5 && (tableauAffichage[yEvent][xEvent]!=2 && tableauAffichage[yEvent][xEvent]!=3 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()!=equipe)));
+		}while(coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]==5 && (tableauAffichage[yEvent][xEvent]!=2 && tableauAffichage[yEvent][xEvent]!=3 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()!=joueur)));
 		return coordonnees;
 	}
 
@@ -59,10 +59,10 @@ public class ActionJoueur {
 				}else if(perso instanceof Piegeur){
 					if(perso.getDeplacement() && (tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==15))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
-					if(perso.getAction() && tableauAffichage[i][j]>5 && tableauAffichage[i][j]<15 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe())
+					if(perso.getAction() && tableauAffichage[i][j]>5 && tableauAffichage[i][j]<15 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==perso.getJoueur())
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}else if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
-					if(perso.getAction() && (tableauAffichage[i][j]==1 || tableauAffichage[i][j]==4 || (tableauAffichage[i][j]<14 && tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==perso.getEquipe())))
+					if(perso.getAction() && (tableauAffichage[i][j]==1 || tableauAffichage[i][j]==4 || (tableauAffichage[i][j]<14 && tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==perso.getJoueur())))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 					else if(perso.getDeplacement() && (tableauAffichage[i][j]==15 || tableauAffichage[i][j]==14 || tableauAffichage[i][j]==perso.getIdBateau()))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
@@ -77,7 +77,7 @@ public class ActionJoueur {
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
 				}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y))));
-			}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=1 && tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=14 && !(tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()==perso.getEquipe())));
+			}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=1 && tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=14 && !(tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur())));
 		}else if(perso instanceof Voleur || perso instanceof Guerrier){
 			do{
 				do{
@@ -93,7 +93,7 @@ public class ActionJoueur {
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
 				}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && ((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1));
-			}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=14 && (tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getEquipe()==perso.getEquipe())));
+			}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=14 && (tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur())));
 
 		}
 		return coordonnees;

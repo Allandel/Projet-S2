@@ -50,7 +50,7 @@ public class CaseNavire extends Case {
 	/**
 	 * Permet a un personnage de sortir du bateau dans le bateau
 	 */
-	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Affichage affichage, int equipe, Joueur joueur){
+	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Affichage affichage, int equipe){
 		if(stockNavire.isEmpty()){
 			//affichage d'un message si pas de personnage dans le navire
 			affichage.popUp(equipe, "Il n'y a pas de personnages dans le Navire", "Attention" );

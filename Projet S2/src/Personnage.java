@@ -8,24 +8,20 @@ import java.util.ArrayList;
 
 public class Personnage{
 
-	private int energie=100, id, idBateau,compteur=0;
+	private int energie=100, id,compteur=0;
 	private String nom, type;
 	private boolean death=false, action=true, deplacement=true;
 	protected ArrayList <String> inventaire=new ArrayList<String>();
-	protected boolean equipe1;
+	protected Joueur joueur;
 
 	/**
 	 * Cree un personnage et lui specifie son equipe et l'id de son bateau suivant l'equipe
 	 * @param equipe
 	 * @param joueur
 	 */
-	Personnage(boolean equipe, Joueur joueur){
-		this.equipe1=equipe;
-		if(equipe1)		
-			idBateau=2;
-		else
-			idBateau=3;
+	Personnage(Joueur joueur){
 		joueur.addPerso(this);
+		this.joueur=joueur;
 	}
 
 	/**
@@ -50,6 +46,14 @@ public class Personnage{
 	 */
 	public void setDeath(boolean death){
 		this.death=death;
+	}
+	
+	/**
+	 * 
+	 * @return le joueur du personnage
+	 */
+	public Joueur getJoueur(){
+		return joueur;
 	}
 
 	/**
@@ -90,14 +94,15 @@ public class Personnage{
 	 * @return l'id du bateau du personnage
 	 */
 	public int getIdBateau(){
-		return idBateau;
+		return joueur.getIdBateau();
 	}
+	
 	/**
 	 * @return the equipe1
 	 */
-	public boolean getEquipe(){
-		return equipe1;
-	}
+	/*public boolean getEquipe(){
+		return joueur.getEquipe();
+	}*/
 	/**
 	 * @param type the type to set
 	 */
@@ -227,10 +232,9 @@ public class Personnage{
 	 * @param xApres
 	 * @param yApres
 	 * @param tableauIle
-	 * @param joueur
 	 * @return true si le personnage possède le tresor
 	 */
-	public boolean[] entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, Joueur joueur, int equipe){
+	public boolean[] entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
 		boolean victoire[]={false,false};
 
 		if(joueur.nbrVivant()>((CaseNavire)tableauIle[xApres][yApres]).nbrVivantStock()+1){
@@ -242,7 +246,7 @@ public class Personnage{
 				perteEnergie(1, xApres,yApres, tableauIle, false,false, affichage, equipe);
 				if(inventaire.contains("Tresor")){
 					victoire[0]=true;
-					victoire[1]=this.getEquipe();
+					victoire[1]=joueur.getEquipe();
 				}
 				if(this instanceof Guerrier && !inventaire.contains("Epee")){
 					this.setObjetInventaire("Epee");;

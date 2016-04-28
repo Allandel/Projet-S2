@@ -15,11 +15,11 @@ public class Piegeur extends Personnage{
 	 * @param equipe1
 	 * @param joueur
 	 */
-	public Piegeur(boolean equipe1, Joueur joueur){
-		super(equipe1, joueur);
+	public Piegeur(Joueur joueur){
+		super(joueur);
 		setNom("Paul");
 		setType("Piegeur");
-		if(equipe1)
+		if(joueur.getEquipe())
 			setId(8);
 		else
 			setId(12);
@@ -39,7 +39,7 @@ public class Piegeur extends Personnage{
 		int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous pieger cette case ?","Poser un piege",null);
 		if (decision==0){
 			tableauIle[x][y].setPiege(true);
-			if(this.equipe1){
+			if(joueur.getEquipe()){
 				tableauIle[x][y].setTeamPiege(0);
 			}else{
 				tableauIle[x][y].setTeamPiege(1);

@@ -12,11 +12,25 @@ public class Affichage {
 	private int[][] tableauAffichageJ1, tableauAffichageJ2, tableauAffichageTest;
 	private ArrayList<int[][]> tableaux=new ArrayList<>();
 	private ArrayList<Plateau> plateaux=new ArrayList<>();
-	private String[] images = new String[]{"img/rocher.jpg","img/1.navire.jpg","img/2.navire.jpg","img/coffre.jpg","img/mer.jpg",
-			"img/1.explorateur.jpg","img/1.voleur.jpg","img/1.piegeur.jpg","img/1.guerrier.jpg",
-			"img/2.explorateur.jpg","img/2.voleur.jpg","img/2.piegeur.jpg","img/2.guerrier.jpg",
-			"img/death.jpg","img/herbe.jpg","img/piege.jpg","img/bombe.jpg"};
 	private Plateau plateauDuJeuJ1, plateauDuJeuJ2, plateauDuTest;
+	private String[] images = new String[]{ "img/rocher.jpg",			//id 1
+											"img/1.navire.jpg",			//id 2
+											"img/2.navire.jpg",			//id 3
+											"img/coffre.jpg",			//id 4
+											"img/mer.jpg",				//id 5
+											"img/1.explorateur.jpg",	//id 6
+											"img/1.voleur.jpg",			//id 7
+											"img/1.piegeur.jpg",		//id 8
+											"img/1.guerrier.jpg",		//id 9
+											"img/2.explorateur.jpg",	//id 10
+											"img/2.voleur.jpg",			//id 11
+											"img/2.piegeur.jpg",		//id 12
+											"img/2.guerrier.jpg",		//id 13
+											"img/death.jpg",			//id 14
+											"img/herbe.jpg",			//id 15
+											"img/piege.jpg",			//id 16
+											"img/bombe.jpg"				//id 17
+											};			
 
 	/**
 	 * Affiche un message disant le gagnant du jeu à la fin de la partie
@@ -108,7 +122,7 @@ public class Affichage {
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
 
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
 							if(ileDuJeu.getTableau()[y][x].getId()==4 && !joueur.getCoffreTrouve())
@@ -141,7 +155,7 @@ public class Affichage {
 		}
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
 							plateaux.get(equipe).resetHighlight(y, x);
@@ -160,31 +174,17 @@ public class Affichage {
 	 * @param joueur
 	 */
 	private void affichagePersoActionnable(ile ileDuJeu, int equipe, Joueur joueur){
+		if(Test.testEnCours)
+			equipe=0;
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() && ileDuJeu.getTableau()[j][i].getPersonnageCourant().actionOuDeplacement()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur && ileDuJeu.getTableau()[j][i].getPersonnageCourant().actionOuDeplacement()){
 					plateaux.get(equipe).setHighlight(j, i, Color.YELLOW);
 				}
 			}
 		}
 	}
 	
-	/**
-	 * Highlight les personnages du test qui ont encore la possibilite de se deplacer ou faire une action
-	 * @param ileDuJeu
-	 * @param equipe
-	 * @param joueur
-	 */
-	private void affichagePersoActionnableTest(ile ileDuJeu, int equipe, Joueur joueur){
-		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
-			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getEquipe()==joueur.getEquipe() && ileDuJeu.getTableau()[j][i].getPersonnageCourant().actionOuDeplacement()){
-					plateauDuTest.setHighlight(j, i, Color.YELLOW);
-				}
-			}
-		}
-	}
-
 	/**
 	 * Affiche le tableau de jeu specifique au joueur
 	 * @param ileDuJeu
@@ -193,8 +193,10 @@ public class Affichage {
 	 * @param equipe
 	 */
 	public void affichageDuJeuJoueur(ile ileDuJeu, int[][] tableauAffichage, Joueur joueur, int equipe){
-		plateaux.get(1-equipe).masquer();
+		if(!Test.testEnCours){
+			plateaux.get(1-equipe).masquer();
 		this.updateTableauAffichageJoueur(ileDuJeu,joueur, tableaux.get(equipe),equipe);
+		}
 		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
 		System.out.println("\n"+ileDuJeu.toString());
 		plateaux.get(equipe).setJeu(tableaux.get(equipe));
@@ -215,7 +217,7 @@ public class Affichage {
 		System.out.println("\n"+ileDuJeu.toString());
 		plateauDuTest.setJeu(tableauAffichageTest);
 		plateauDuTest.affichage();
-		this.affichagePersoActionnableTest(ileDuJeu, equipe, joueur);
+		this.affichagePersoActionnable(ileDuJeu, equipe, joueur);
 	}
 	/**
 	 * 

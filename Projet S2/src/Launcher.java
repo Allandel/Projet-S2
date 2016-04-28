@@ -18,11 +18,10 @@ import javax.swing.JTabbedPane;
  * Permet l'affichage du menu principal du jeu
  */
 public class Launcher extends JFrame{
-	static int tailleCarte, pourcentageRocher;
-	static boolean etat = true;
-	static int id=5;
-	static int nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1;
-	static int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2;
+	private int tailleCarte, pourcentageRocher,idTest=0;
+	private int nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1;
+	private int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2;
+	private boolean etat = true;
 	private JTabbedPane menuOnglet;
 	/**
 	 * Affiche le menu principal du jeu
@@ -40,14 +39,14 @@ public class Launcher extends JFrame{
 		onglet2.setLayout(g);
 		onglet3.setLayout(g2);
 		onglet4.setLayout(g2);
-		
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(500,250));
 		this.setTitle("Treasure Hunt");
 		this.setUndecorated(true);
 		this.pack();
 		this.setLocationRelativeTo(null);
-		
+
 		JButton BJouer = new JButton("Jouer");
 		JButton Bquitter = new JButton("Quitter");
 		JButton Bregles = new JButton("Regles");
@@ -56,8 +55,7 @@ public class Launcher extends JFrame{
 		JButton BTPiegeur = new JButton("Piegeur");
 		JButton BTExplorateur = new JButton("Explorateur");
 		JLabel LBTaille = new JLabel("Taille du plateau:");
-		JLabel LBPourcent = new JLabel("Pourcentage de rochers:"
-				+ "");
+		JLabel LBPourcent = new JLabel("Pourcentage de rochers:");
 		JLabel LBExplorateur = new JLabel("Nombre d'Explorateur :");
 		JLabel LBGuerrier = new JLabel("Nombre de Guerrier :");
 		JLabel LBVoleur = new JLabel("Nombre de Voleur :");
@@ -66,109 +64,30 @@ public class Launcher extends JFrame{
 		JLabel LB2Guerrier = new JLabel("Nombre de Guerrier :");
 		JLabel LB2Voleur = new JLabel("Nombre de Voleur :");
 		JLabel LB2Piegeur = new JLabel("Nombre de Piegeur :");
-		
-		final JSlider slidertaille = new JSlider();
-		slidertaille.setMaximum(30);
-		slidertaille.setMinimum(10);
-		slidertaille.setValue(10);
-		slidertaille.setPaintTicks(true);
-		slidertaille.setPaintLabels(true);
-		slidertaille.setMajorTickSpacing(5);
-		slidertaille.setMinorTickSpacing(5);
-		slidertaille.setSnapToTicks(true);
-		slidertaille.setPreferredSize(new Dimension(200,25));
-		final JSlider sliderpourcent = new JSlider();
-		sliderpourcent.setMaximum(50);
-		sliderpourcent.setMinimum(10);
-		sliderpourcent.setValue(10);
-		sliderpourcent.setPaintTicks(true);
-		sliderpourcent.setPaintLabels(true);
-		sliderpourcent.setMinorTickSpacing(5);
-		sliderpourcent.setMajorTickSpacing(5);
-		sliderpourcent.setSnapToTicks(true);
-		
+
+		final JSlider sliderTaille = new JSlider();
+		setSlider(sliderTaille, 10 ,30, 10, 5);
+		final JSlider sliderPourcent = new JSlider();
+		setSlider(sliderPourcent, 10 ,50, 10, 5);
+
 		final JSlider sliderNbrExplorateurJ1 = new JSlider();
-		sliderNbrExplorateurJ1.setMaximum(4);
-		sliderNbrExplorateurJ1.setMinimum(1);
-		sliderNbrExplorateurJ1.setValue(1);
-		sliderNbrExplorateurJ1.setPaintTicks(true);
-		sliderNbrExplorateurJ1.setPaintLabels(true);
-		sliderNbrExplorateurJ1.setMajorTickSpacing(1);
-		sliderNbrExplorateurJ1.setMinorTickSpacing(1);
-		sliderNbrExplorateurJ1.setSnapToTicks(true);
-		sliderNbrExplorateurJ1.setPreferredSize(new Dimension(200,25));
+		setSlider(sliderNbrExplorateurJ1, 1 ,4, 1, 1);
 		final JSlider sliderNbrGuerrierJ1 = new JSlider();
-		sliderNbrGuerrierJ1.setMaximum(4);
-		sliderNbrGuerrierJ1.setMinimum(1);
-		sliderNbrGuerrierJ1.setValue(1);
-		sliderNbrGuerrierJ1.setPaintTicks(true);
-		sliderNbrGuerrierJ1.setPaintLabels(true);
-		sliderNbrGuerrierJ1.setMajorTickSpacing(1);
-		sliderNbrGuerrierJ1.setMinorTickSpacing(1);
-		sliderNbrGuerrierJ1.setSnapToTicks(true);
-		sliderNbrGuerrierJ1.setPreferredSize(new Dimension(200,25));
+		setSlider(sliderNbrGuerrierJ1, 1 ,4, 1, 1);
 		final JSlider sliderNbrVoleurJ1 = new JSlider();
-		sliderNbrVoleurJ1.setMaximum(4);
-		sliderNbrVoleurJ1.setMinimum(1);
-		sliderNbrVoleurJ1.setValue(1);
-		sliderNbrVoleurJ1.setPaintTicks(true);
-		sliderNbrVoleurJ1.setPaintLabels(true);
-		sliderNbrVoleurJ1.setMajorTickSpacing(1);
-		sliderNbrVoleurJ1.setMinorTickSpacing(1);
-		sliderNbrVoleurJ1.setSnapToTicks(true);
-		sliderNbrVoleurJ1.setPreferredSize(new Dimension(200,25));
+		setSlider(sliderNbrVoleurJ1, 1 ,4, 1, 1);
 		final JSlider sliderNbrPiegeurJ1 = new JSlider();
-		sliderNbrPiegeurJ1.setMaximum(4);
-		sliderNbrPiegeurJ1.setMinimum(1);
-		sliderNbrPiegeurJ1.setValue(1);
-		sliderNbrPiegeurJ1.setPaintTicks(true);
-		sliderNbrPiegeurJ1.setPaintLabels(true);
-		sliderNbrPiegeurJ1.setMajorTickSpacing(1);
-		sliderNbrPiegeurJ1.setMinorTickSpacing(1);
-		sliderNbrPiegeurJ1.setSnapToTicks(true);
-		sliderNbrPiegeurJ1.setPreferredSize(new Dimension(200,25));
-		
+		setSlider(sliderNbrPiegeurJ1, 1 ,4, 1, 1);
+
 		final JSlider sliderNbrExplorateurJ2 = new JSlider();
-		sliderNbrExplorateurJ2.setMaximum(4);
-		sliderNbrExplorateurJ2.setMinimum(1);
-		sliderNbrExplorateurJ2.setValue(1);
-		sliderNbrExplorateurJ2.setPaintTicks(true);
-		sliderNbrExplorateurJ2.setPaintLabels(true);
-		sliderNbrExplorateurJ2.setMajorTickSpacing(1);
-		sliderNbrExplorateurJ2.setMinorTickSpacing(1);
-		sliderNbrExplorateurJ2.setSnapToTicks(true);
-		sliderNbrExplorateurJ2.setPreferredSize(new Dimension(200,25));
+		setSlider(sliderNbrExplorateurJ2, 1 ,4, 1, 1);
 		final JSlider sliderNbrGuerrierJ2 = new JSlider();
-		sliderNbrGuerrierJ2.setMaximum(4);
-		sliderNbrGuerrierJ2.setMinimum(1);
-		sliderNbrGuerrierJ2.setValue(1);
-		sliderNbrGuerrierJ2.setPaintTicks(true);
-		sliderNbrGuerrierJ2.setPaintLabels(true);
-		sliderNbrGuerrierJ2.setMajorTickSpacing(1);
-		sliderNbrGuerrierJ2.setMinorTickSpacing(1);
-		sliderNbrGuerrierJ2.setSnapToTicks(true);
-		sliderNbrGuerrierJ2.setPreferredSize(new Dimension(200,25));
+		setSlider(sliderNbrGuerrierJ2, 1 ,4, 1, 1);
 		final JSlider sliderNbrVoleurJ2 = new JSlider();
-		sliderNbrVoleurJ2.setMaximum(4);
-		sliderNbrVoleurJ2.setMinimum(1);
-		sliderNbrVoleurJ2.setValue(1);
-		sliderNbrVoleurJ2.setPaintTicks(true);
-		sliderNbrVoleurJ2.setPaintLabels(true);
-		sliderNbrVoleurJ2.setMajorTickSpacing(1);
-		sliderNbrVoleurJ2.setMinorTickSpacing(1);
-		sliderNbrVoleurJ2.setSnapToTicks(true);
-		sliderNbrVoleurJ2.setPreferredSize(new Dimension(200,25));
+		setSlider(sliderNbrVoleurJ2, 1 ,4, 1, 1);
 		final JSlider sliderNbrPiegeurJ2 = new JSlider();
-		sliderNbrPiegeurJ2.setMaximum(4);
-		sliderNbrPiegeurJ2.setMinimum(1);
-		sliderNbrPiegeurJ2.setValue(1);
-		sliderNbrPiegeurJ2.setPaintTicks(true);
-		sliderNbrPiegeurJ2.setPaintLabels(true);
-		sliderNbrPiegeurJ2.setMajorTickSpacing(1);
-		sliderNbrPiegeurJ2.setMinorTickSpacing(1);
-		sliderNbrPiegeurJ2.setSnapToTicks(true);
-		sliderNbrPiegeurJ2.setPreferredSize(new Dimension(200,25));
-		
+		setSlider(sliderNbrPiegeurJ2, 1 ,4, 1, 1);
+
 		onglet3.add(LB2Explorateur);
 		onglet3.add(sliderNbrExplorateurJ1);
 		onglet3.add(LB2Guerrier);
@@ -186,9 +105,9 @@ public class Launcher extends JFrame{
 		onglet4.add(LBPiegeur);
 		onglet4.add(sliderNbrPiegeurJ2);
 		onglet2.add(LBTaille);
-		onglet2.add(slidertaille);
+		onglet2.add(sliderTaille);
 		onglet2.add(LBPourcent);
-		onglet2.add(sliderpourcent);
+		onglet2.add(sliderPourcent);
 		onglet1.add(BJouer);
 		onglet1.add(Bregles);
 		onglet1.add(Bquitter);
@@ -206,8 +125,8 @@ public class Launcher extends JFrame{
 		this.setVisible(true);		
 		BJouer.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent arg0){
-				tailleCarte = slidertaille.getValue();
-				pourcentageRocher = sliderpourcent.getValue();
+				tailleCarte = sliderTaille.getValue();
+				pourcentageRocher = sliderPourcent.getValue();
 				nbrExplorateurJ1=sliderNbrExplorateurJ1.getValue();
 				nbrGuerrierJ1=sliderNbrGuerrierJ1.getValue();
 				nbrVoleurJ1=sliderNbrVoleurJ1.getValue();
@@ -216,7 +135,7 @@ public class Launcher extends JFrame{
 				nbrGuerrierJ2=sliderNbrGuerrierJ2.getValue();
 				nbrVoleurJ2=sliderNbrVoleurJ2.getValue();
 				nbrPiegeurJ2=sliderNbrPiegeurJ2.getValue();
-				id=55;
+				idTest=55;
 			}
 		});
 		Bquitter.addActionListener(new ActionListener() {
@@ -224,27 +143,27 @@ public class Launcher extends JFrame{
 				System.exit(0);
 			}
 		});
-	
-	BTGuerrier.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			id = 1;
-		}
-	});
-	BTPiegeur.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			id = 0;
-		}
-	});
-	BTVoleur.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			id = 2;
-		}
-	});
-	BTExplorateur.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			id = 3;
-		}
-	});
+
+		BTGuerrier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				idTest = 1;
+			}
+		});
+		BTPiegeur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				idTest = 2;
+			}
+		});
+		BTVoleur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				idTest = 3;
+			}
+		});
+		BTExplorateur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				idTest = 4;
+			}
+		});
 
 		Bregles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -253,43 +172,59 @@ public class Launcher extends JFrame{
 				regles.setLocationRelativeTo(null);
 				Icon img = new ImageIcon("img/regles.jpg");
 				JLabel img2 = new JLabel();
-				
+
 				img2.setIcon(img);
 				regles.setSize(1000, 664);
 				regles.add(img2);
 				regles.setVisible(true);
 			}	
-			
+
 		});
 	}
-		
+
 	/**
-	 * 
-	 * @return taille de la carte
+	 * Initialise les slider du menu
+	 * @param slider
+	 * @param min
+	 * @param max
+	 * @param value
+	 * @param spacing
 	 */
-	public static int getTaille(){
-		return tailleCarte;
-	}
-	
-	/**
-	 * 
-	 * @return le pourcentage de rocher
-	 */
-	public static int getPourcent(){
-		return pourcentageRocher;
+	private void setSlider(JSlider slider, int min ,int max, int value, int spacing){
+		slider.setMaximum(max);
+		slider.setMinimum(min);
+		slider.setValue(value);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		slider.setMajorTickSpacing(spacing);
+		slider.setMinorTickSpacing(spacing);
+		slider.setSnapToTicks(true);
 	}
 	
 	/**
 	 * 
 	 * @return l'etat
 	 */
-	public static boolean getetat(){
+	public boolean getetat(){
 		return etat;
 	}
-	public static int getid(){
-		return id;
+
+	/**
+	 * 
+	 * @return l'id du test choisi
+	 */
+	public int getidTest(){
+		return idTest;
 	}
 	
+	/**
+	 * 
+	 * @param setter
+	 */
+	public void setIdtest(int setter){
+		idTest=setter;
+	}
+
 	class ImagePanel extends JPanel {
 		private Image img;
 
@@ -309,5 +244,13 @@ public class Launcher extends JFrame{
 			g.drawImage(img, 0, 0, null);
 		}
 	}
-	
+
+	/**
+	 * 
+	 * @return le talbeau de parametre du jeu lance
+	 */
+	public int[] getParametres(){
+		int [] parametres={tailleCarte, pourcentageRocher,nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1, nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2};
+		return parametres;
+	}
 }

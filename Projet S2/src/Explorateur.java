@@ -9,11 +9,11 @@ public class Explorateur extends Personnage{
 	/**
 	 * Constructeur d'Explorateur lui attribuant un nom, un id, une equipe et l'ajoute dans l'equipe du joueur correspondant
 	 */
-	public Explorateur(boolean equipe1, Joueur joueur){
-		super(equipe1, joueur);
+	public Explorateur(Joueur joueur){
+		super(joueur);
 		setNom("Bob");
 		setType("Explorateur");
-		if(equipe1)
+		if(joueur.getEquipe())
 			setId(6);
 		else
 			setId(10);
@@ -26,7 +26,7 @@ public class Explorateur extends Personnage{
 	 * @param tableauIle
 	 * @param joueur
 	 */
-	public void interactionRocher(int x, int y, Case[][] tableauIle, Joueur joueur, Affichage affichage, int equipe){
+	public void interactionRocher(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		boolean key=((CaseRocher)tableauIle[x][y]).getKey();
 		boolean chest=((CaseRocher)tableauIle[x][y]).getChest(), chestTaken=((CaseRocher)tableauIle[x][y]).getChestTaken();
 		boolean keyTaken=((CaseRocher)tableauIle[x][y]).getKeyTaken();

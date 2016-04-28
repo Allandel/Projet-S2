@@ -21,15 +21,15 @@ public class Test {
 		ileDuJeu=new ile(true);
 		tableauAffichage=new int[7][7];
 
-		ileDuJeu.getTableau()[1][1].setPersonnageCourant(new Explorateur(true, joueur[0]));
-		ileDuJeu.getTableau()[2][1].setPersonnageCourant(new Guerrier(true, joueur[0]));
-		ileDuJeu.getTableau()[3][1].setPersonnageCourant(new Voleur(true, joueur[0]));
-		ileDuJeu.getTableau()[4][1].setPersonnageCourant(new Piegeur(true, joueur[0]));
+		ileDuJeu.getTableau()[1][1].setPersonnageCourant(new Explorateur(joueur[0]));
+		ileDuJeu.getTableau()[2][1].setPersonnageCourant(new Guerrier(joueur[0]));
+		ileDuJeu.getTableau()[3][1].setPersonnageCourant(new Voleur(joueur[0]));
+		ileDuJeu.getTableau()[4][1].setPersonnageCourant(new Piegeur(joueur[0]));
 
-		ileDuJeu.getTableau()[1][5].setPersonnageCourant(new Explorateur(false, joueur[1]));
-		ileDuJeu.getTableau()[2][5].setPersonnageCourant(new Guerrier(false, joueur[1]));
-		ileDuJeu.getTableau()[3][5].setPersonnageCourant(new Voleur(false, joueur[1]));
-		ileDuJeu.getTableau()[4][5].setPersonnageCourant(new Piegeur(false, joueur[1]));
+		ileDuJeu.getTableau()[1][5].setPersonnageCourant(new Explorateur(joueur[1]));
+		ileDuJeu.getTableau()[2][5].setPersonnageCourant(new Guerrier(joueur[1]));
+		ileDuJeu.getTableau()[3][5].setPersonnageCourant(new Voleur(joueur[1]));
+		ileDuJeu.getTableau()[4][5].setPersonnageCourant(new Piegeur(joueur[1]));
 
 		joueur[0].passerTour();
 		joueur[1].passerTour();
@@ -46,20 +46,20 @@ public class Test {
 		boolean [] gagner;
 		boolean quitter=false;
 
-		if(id==0){
-			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Piegeur(true, joueur[0]));
-			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Piegeur(false, joueur[1]));
+		if(id==2){
+			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Piegeur(joueur[0]));
+			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Piegeur(joueur[1]));
 		}else if(id==1){
-			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Guerrier(true, joueur[0]));
-			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Guerrier(false, joueur[1]));
-
-		}else if(id==2){
-			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Voleur(true, joueur[0]));
-			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Voleur(false, joueur[1]));
+			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Guerrier(joueur[0]));
+			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Guerrier(joueur[1]));
 
 		}else if(id==3){
-			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Explorateur(true, joueur[0]));
-			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Explorateur(false, joueur[1]));
+			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Voleur(joueur[0]));
+			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Voleur(joueur[1]));
+
+		}else if(id==4){
+			ileDuJeu.getTableau()[2][3].setPersonnageCourant(new Explorateur(joueur[0]));
+			ileDuJeu.getTableau()[3][3].setPersonnageCourant(new Explorateur(joueur[1]));
 		}
 
 		persoTest[0]=ileDuJeu.getTableau()[2][3].getPersonnageCourant();
@@ -72,7 +72,7 @@ public class Test {
 			persoTest[equipe].setActionDeplacement(true);
 			affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 			while(joueur[equipe].actionPossible() && !quitter){
-				cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage, joueur[equipe].getEquipe(),ileDuJeu, joueur[equipe]);
+				cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage,ileDuJeu, joueur[equipe]);
 				if(cordonnees[0]==999)
 					//si le joueur decide de passer son tour
 					joueur[equipe].passerTour();
@@ -87,7 +87,7 @@ public class Test {
 						affichage.getPlateau(0).refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
 						gagner=gestion.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],true);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(0), tableauAffichage, cordonnees[0], cordonnees[1], affichage, 0,joueur[equipe]);
+						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(0), tableauAffichage, cordonnees[0], cordonnees[1], affichage, 0);
 
 					affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}

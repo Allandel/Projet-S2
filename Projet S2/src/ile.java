@@ -272,18 +272,5 @@ public class ile {
 		}
 		return res+borne;
 	}
-
-	public int[] coordonneesPerso(Personnage perso){
-		int[] res ={777,777};
-		for(int i=0;i<tableauIle[0].length;i++){
-			for(int j=0;j<tableauIle[1].length;j++){
-				if(tableauIle[i][j].getPersonnageCourant()==perso){
-					res[0]=i;
-					res[1]=j;
-				}
-			}
-		}
-		return res;
-	}
 }
 

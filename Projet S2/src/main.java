@@ -8,29 +8,26 @@ public class main {
 	public static void main(String[] args) {
 
 		Launcher menu = new Launcher();		
-		while(Launcher.getetat()){
-			if(Launcher.getid() >= 0 && Launcher.getid() <5){ /* test 1 */
+		while(menu.getetat()){
+			if(menu.getidTest() > 0 && menu.getidTest() <5){
 				menu.setVisible(false);
 				Test test=new Test();
-				test.testPerso(Launcher.getid());
-				Launcher.id=5;
+				test.testPerso(menu.getidTest());
+				menu.setIdtest(0);
 				menu.setVisible(true);
 			}
-			if(Launcher.getid()==55){
+			if(menu.getidTest()==55){
 				menu.setVisible(false);
-				GestionDuJeu gestion=new GestionDuJeu();
+				GestionDuJeu gestion=new GestionDuJeu(menu.getParametres());
 				boolean [] fin;
 				do{
 					fin=gestion.tourDuJoueur();
 				}while(!fin[0]);
-				
+				menu.setIdtest(0);
 				Affichage victoire=new Affichage(fin);
-				Launcher.id=5;
 				menu.setVisible(true);
 			}
 			System.out.flush();
 		}		 
-		System.exit(0);
-
 	}
 }

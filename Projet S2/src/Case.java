@@ -5,13 +5,18 @@
  * @version 1.0
  */
 public class Case {
-	private int id=15;
-	private boolean accessible;
+	private int id=15, piegeteam;
+	private boolean accessible, piege=false;
 	private Personnage personnageCourant=null;
-	private boolean piege=false;
-	private int piegeteam;
 	private Bombe bombe=null;
 	
+	/**
+	 * Construit une case initialisant l'attribut accessible a false
+	 */
+	public Case(){
+		accessible =false;
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -25,18 +30,11 @@ public class Case {
 	public void setId(int id) {
 		this.id = id;
 	}
-	/**
-	 * @return the accessible
-	 */
-	public boolean isAccessible() {
-		return accessible;
-	}
-	
 	public void setBombe(Bombe b){
 		this.bombe=b;
 		
 	}
-	
+
 	public boolean getBombe(){
 		if(bombe!=null){
 			return true;
@@ -46,18 +44,35 @@ public class Case {
 	}
 
 	/**
+	 * Met la valeur de piegeteam suivant l'equipe qui piege la case
+	 * @param x
+	 */
+	public void setTeamPiege(int x){
+		this.piegeteam=x;
+	}
+
+	/**
+	 * 
+	 * @return la valeur de l'equipe qui a piege la case
+	 */
+	public int getTeamPiege(){
+		return piegeteam;
+	}
+
+	/**
 	 * @param accessible the accessible to set
 	 */
 	public void setAccessible(boolean accessible) {
 		this.accessible = accessible;
 	}
-	
+
 	/**
-	 * Construit une case initialisant l'attribut accessible a false
+	 * @return the accessible
 	 */
-	public Case(){
-		accessible =false;
+	public boolean isAccessible() {
+		return accessible;
 	}
+
 	/**
 	 * met un personnge dans une case et change l'id de la case
 	 * @param p the PersonnageCourant to set
@@ -85,8 +100,8 @@ public class Case {
 	 * Change la valeur de piege
 	 * @param x
 	 */
-	public void setPiege(boolean x){
-		piege=x;
+	public void setPiege(boolean setter){
+		piege=setter;
 	}
 	
 	/**
@@ -105,22 +120,6 @@ public class Case {
 			return  " ";
 		}
 		return personnageCourant.toString(true);
-	}
-	
-	/**
-	 * Met la valeur de piegeteam suivant l'equipe qui piege la case
-	 * @param x
-	 */
-	public void setTeamPiege(int x){
-		this.piegeteam=x;
-	}
-	
-	/**
-	 * 
-	 * @return la valeur de l'equipe qui a piege la case
-	 */
-	public int getTeamPiege(){
-		return piegeteam;
 	}
 	
 }
