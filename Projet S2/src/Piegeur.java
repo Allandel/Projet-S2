@@ -19,6 +19,10 @@ public class Piegeur extends Personnage{
 		super(joueur);
 		setNom("Paul");
 		setType("Piegeur");
+		inventaire.add("Pelle");
+		inventaire.add("Bombe");
+		inventaire.add("Bombe");
+		inventaire.add("Bombe");
 		if(joueur.getEquipe())
 			setId(8);
 		else
@@ -35,30 +39,52 @@ public class Piegeur extends Personnage{
 	 * @param y
 	 * @param tableauIle
 	 */
-	public void pieger(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
-		int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous pieger cette case ?","Poser un piege",null);
-		if (decision==0){
-			tableauIle[x][y].setPiege(true);
-			if(joueur.getEquipe()){
-				tableauIle[x][y].setTeamPiege(0);
-			}else{
-				tableauIle[x][y].setTeamPiege(1);
+	public void pieger(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
+		if(tableauIle[x][y].getId()>0 && tableauIle[x][y].getId()<4){
+			int decision =(int)affichage.popUpYesNo(equipe,"Voulez vous faire exploser cet objet ?", "POSER UNE BOMBE", null );
+			if(decision==0){
+				this.poserBombe(x, y, tableauIle, affichage, equipe,joueur);
+				super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 			}
-			super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
+		}else if(!tableauIle[x][y].getBombe() && !tableauIle[x][y].getPiege()){
+			String [] tab=new String [2];
+			tab[0]="PIEGER LA CASE";
+			tab[1]="POSER UNE BOMBE";
+			String action=null;
+			action=(String)affichage.popUpYesNo(equipe,"\nQue voulez vous faire ?\n\n[Cliquez sur annuler si vous ne voulez rien faire]\n", "Choix de l'action",tab);
+			if(action!=null){
+
+				if (action.compareTo("PIEGER LA CASE")==0 && tableauIle[x][y].getPersonnageCourant().getObjetInventaire("Pelle")){
+					tableauIle[x][y].setPiege(true);
+					if(joueur[equipe].getEquipe()){
+						tableauIle[x][y].setTeamPiege(0);
+					}else{
+						tableauIle[x][y].setTeamPiege(1);
+					}
+					super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
+				}else if(action.compareTo("POSER UNE BOMBE")==0 && tableauIle[x][y].getPersonnageCourant().getObjetInventaire("Bombe")){
+					super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
+					this.poserBombe(x, y, tableauIle, affichage, equipe, joueur);
+				}else{
+					affichage.popUp(equipe,"Vous n'avez pas les outils pour effectuer cette action !", "PAS D'ACTION POSSIBLE");
+				}
+			}
 		}else{
-			this.poserBombe(x, y, tableauIle, affichage, equipe);
+			affichage.popUp(equipe,"Un piege ou une bombe a deja été poser ici", "PAS D'ACTION POSSIBLE");
 		}
 	}
 	
-	public void poserBombe(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
-		int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous poser une bombe ?","Poser une bombe",null);
-		if (decision==0){
+	public void poserBombe(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
+		if(tableauIle[x][y] instanceof CaseRocher || tableauIle[x][y] instanceof CaseNavire){
 			Bombe b=new Bombe(x,y);
-			tableauIle[x][y].setBombe(b);
-			listeBombe.add(b);
-			super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
+			b.explosionObjet(tableauIle, affichage, equipe, joueur);
+		}else{
+		Bombe b=new Bombe(x,y);
+		tableauIle[x][y].setBombe(b);
+		listeBombe.add(b);
 		}
 	}
+	
 	public void downCompteurBombe(Case[][] tableauIle, Affichage affichage, int equipe){
 		int indexBombe=0;
 		if(!listeBombe.isEmpty()){

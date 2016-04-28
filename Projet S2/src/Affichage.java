@@ -129,7 +129,7 @@ public class Affichage {
 								tableau[x][y] = 1;
 							else if(ileDuJeu.getTableau()[y][x].getPiege() && ileDuJeu.getTableau()[y][x].getId()==15 && ileDuJeu.getTableau()[y][x].getTeamPiege()==equipe)
 								tableau[x][y]=16;
-							else if(ileDuJeu.getTableau()[y][x].getBombe() && ileDuJeu.getTableau()[y][x].getPersonnageCourant()==null)
+							else if(ileDuJeu.getTableau()[y][x].getBombe() && (ileDuJeu.getTableau()[y][x].getPersonnageCourant()==null || ileDuJeu.getTableau()[y][x].getPersonnageCourant().getDeath()==true))
 								tableau[x][y]=17;
 							else
 								tableau[x][y] = ileDuJeu.getTableau()[y][x].getId();

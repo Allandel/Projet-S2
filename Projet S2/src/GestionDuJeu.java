@@ -36,6 +36,10 @@ public class GestionDuJeu {
 		affichage= new Affichage(tableauAffichage, ileDuJeu, joueur);
 		affichage.affichageDuJeuJoueur(ileDuJeu,tableauAffichage, joueur[0], 0);
 	}
+	
+	public Joueur[] getJoueur(){
+		return joueur;
+	}
 
 	/**
 	 * Organise la succession d'action possible pour le joueur
@@ -143,8 +147,8 @@ public class GestionDuJeu {
 					//si le perso peut faire une action	
 					if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
 						((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
-					}else if(perso instanceof Piegeur && cordonnees[0]==x && cordonnees[1]==y){
-						((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
+					}else if(perso instanceof Piegeur && ((cordonnees[0]==x && cordonnees[1]==y)||(tableauAffichage[cordonnees[1]][cordonnees[0]]>0 && tableauAffichage[cordonnees[1]][cordonnees[0]]<4))){
+						((Piegeur)perso).pieger(cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe, getJoueur());
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getJoueur()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur()){
 						perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), affichage, equipe);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getJoueur()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur() && perso instanceof Guerrier){

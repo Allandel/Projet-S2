@@ -9,7 +9,8 @@ import javax.swing.JOptionPane;
  */
 public class CaseNavire extends Case {
 	private ArrayList<Personnage>stockNavire=new ArrayList<Personnage>();
-
+	private int coqueHealth=200;
+	
 
 	/**
 	 * Construit un navire en lui attribuant l'ID donnee
@@ -17,6 +18,14 @@ public class CaseNavire extends Case {
 	 */
 	public CaseNavire(int id){
 		this.setId(id);
+	}
+	
+	public void dommageCoque(int deg){
+		coqueHealth-=deg;
+	}
+	
+	public int getCoqueHealth(){
+		return coqueHealth;
 	}
 
 	/**
