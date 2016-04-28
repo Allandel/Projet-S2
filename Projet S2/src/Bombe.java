@@ -52,7 +52,7 @@ public class Bombe {
 	
 	/*public void explosionObjet(Case[][] tableauIle){
 		if(tableauIle[this.x][this.y] instanceof CaseRocher){
-			if((CaseRocher)tableauIle[this.x][this.y].)
+			if((CaseRocher )tableauIle[this.x][this.y].get)
 		}
 	}*/
 }
