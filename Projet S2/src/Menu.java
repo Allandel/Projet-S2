@@ -17,17 +17,20 @@ import javax.swing.JTabbedPane;
 /**
  * Permet l'affichage du menu principal du jeu
  */
-public class Launcher extends JFrame{
+public class Menu extends JFrame{
 	private int tailleCarte, pourcentageRocher,idTest=0;
 	private int nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1;
 	private int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2;
 	private boolean etat = true;
 	private JTabbedPane menuOnglet;
+	
+	public Menu(){}
+	
 	/**
 	 * Affiche le menu principal du jeu
 	 * Permet de recuperer la taille et le pourcentage de rocher
 	 */
-	public Launcher(){
+	public void menuPrincipal(){
 		JPanel onglet1 =  new ImagePanel(new ImageIcon("img/carte.jpg").getImage());
 		JPanel onglet2 = new JPanel();
 		JPanel onglet3 = new JPanel();
@@ -65,28 +68,28 @@ public class Launcher extends JFrame{
 		JLabel LB2Voleur = new JLabel("Nombre de Voleur :");
 		JLabel LB2Piegeur = new JLabel("Nombre de Piegeur :");
 
-		final JSlider sliderTaille = new JSlider();
-		setSlider(sliderTaille, 10 ,30, 10, 5);
-		final JSlider sliderPourcent = new JSlider();
-		setSlider(sliderPourcent, 10 ,50, 10, 5);
+		final JSlider sliderTaille = new JSlider(10,30);
+		setSlider(sliderTaille,5);
+		final JSlider sliderPourcent = new JSlider(10,50);
+		setSlider(sliderPourcent, 5);
 
-		final JSlider sliderNbrExplorateurJ1 = new JSlider();
-		setSlider(sliderNbrExplorateurJ1, 0 ,4, 1, 1);
-		final JSlider sliderNbrGuerrierJ1 = new JSlider();
-		setSlider(sliderNbrGuerrierJ1, 0 ,4, 1, 1);
-		final JSlider sliderNbrVoleurJ1 = new JSlider();
-		setSlider(sliderNbrVoleurJ1, 0 ,4, 1, 1);
-		final JSlider sliderNbrPiegeurJ1 = new JSlider();
-		setSlider(sliderNbrPiegeurJ1, 0 ,4, 1, 1);
+		final JSlider sliderNbrExplorateurJ1 = new JSlider(0,4);
+		setSlider(sliderNbrExplorateurJ1, 1);
+		final JSlider sliderNbrGuerrierJ1 = new JSlider(0,4);
+		setSlider(sliderNbrGuerrierJ1,1);
+		final JSlider sliderNbrVoleurJ1 = new JSlider(0,4);
+		setSlider(sliderNbrVoleurJ1, 1);
+		final JSlider sliderNbrPiegeurJ1 = new JSlider(0,4);
+		setSlider(sliderNbrPiegeurJ1, 1);
 
-		final JSlider sliderNbrExplorateurJ2 = new JSlider();
-		setSlider(sliderNbrExplorateurJ2, 0 ,4, 1, 1);
-		final JSlider sliderNbrGuerrierJ2 = new JSlider();
-		setSlider(sliderNbrGuerrierJ2, 0 ,4, 1, 1);
-		final JSlider sliderNbrVoleurJ2 = new JSlider();
-		setSlider(sliderNbrVoleurJ2, 0 ,4, 1, 1);
-		final JSlider sliderNbrPiegeurJ2 = new JSlider();
-		setSlider(sliderNbrPiegeurJ2, 0 ,4, 1, 1);
+		final JSlider sliderNbrExplorateurJ2 = new JSlider(0,4);
+		setSlider(sliderNbrExplorateurJ2, 1);
+		final JSlider sliderNbrGuerrierJ2 = new JSlider(0,4);
+		setSlider(sliderNbrGuerrierJ2, 1);
+		final JSlider sliderNbrVoleurJ2 = new JSlider(0,4);
+		setSlider(sliderNbrVoleurJ2, 1);
+		final JSlider sliderNbrPiegeurJ2 = new JSlider(0,4);
+		setSlider(sliderNbrPiegeurJ2,1);
 
 		onglet3.add(LB2Explorateur);
 		onglet3.add(sliderNbrExplorateurJ1);
@@ -178,10 +181,9 @@ public class Launcher extends JFrame{
 				regles.add(img2);
 				regles.setVisible(true);
 			}	
-
 		});
 	}
-
+	
 	/**
 	 * Initialise les slider du menu
 	 * @param slider
@@ -190,10 +192,7 @@ public class Launcher extends JFrame{
 	 * @param value
 	 * @param spacing
 	 */
-	private void setSlider(JSlider slider, int min ,int max, int value, int spacing){
-		slider.setMaximum(max);
-		slider.setMinimum(min);
-		slider.setValue(value);
+	private void setSlider(JSlider slider, int spacing){
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
 		slider.setMajorTickSpacing(spacing);
