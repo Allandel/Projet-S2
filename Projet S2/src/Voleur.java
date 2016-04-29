@@ -25,7 +25,7 @@ public class Voleur extends Personnage {
 	public String toString(boolean console){
 		return "V";
 	}
-	
+
 	/**
 	 * Permet au voleur de voler un autre personnage
 	 * @param p
@@ -36,17 +36,19 @@ public class Voleur extends Personnage {
 	public void volerObjet(Personnage p, int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		Random random=new Random();
 		if (joueur!=p.getJoueur()){
-			if(p.getInventaire().isEmpty() && random.nextInt(3)==2 ){
-				affichage.popUp(equipe,"Vous avez reussi a mettre la main dans le sac de votre cible mais celui ci est vide.", "VOL IMPOSSIBLE" );
-			}else if(!p.getInventaire().isEmpty() && random.nextInt(4)==2 ){
-				int objetVole=random.nextInt(p.getInventaire().size());
-				getInventaire().add(p.getInventaire().get(objetVole));
-				p.getInventaire().remove(objetVole);
-				affichage.popUp(equipe,"Vous avez voler : "+getInventaire().get(getInventaire().size()-1)+" avec un franc succes ! Vous etes un fin voleur !", "VOL REUSSI" );
-			}else{
-				affichage.popUp(equipe,"Vous avez echoue votre vol... Peut etre aurez vous plus de chance la prochaine fois", "VOL ECHEC" );
+			if(!inventairePlein(affichage, "L'inventaire de votre voleur est plein, vous ne pouvez rien y ajouter.")){
+				if(p.getInventaire().isEmpty() && random.nextInt(3)==2 ){
+					affichage.popUp(equipe,"Vous avez reussi a mettre la main dans le sac de votre cible mais celui ci est vide.", "VOL IMPOSSIBLE" );
+				}else if(!p.getInventaire().isEmpty() && random.nextInt(4)==2 ){
+					int objetVole=random.nextInt(p.getInventaire().size());
+					getInventaire().add(p.getInventaire().get(objetVole));
+					p.getInventaire().remove(objetVole);
+					affichage.popUp(equipe,"Vous avez voler : "+getInventaire().get(getInventaire().size()-1)+" avec un franc succes ! Vous etes un fin voleur !", "VOL REUSSI" );
+				}else{
+					affichage.popUp(equipe,"Vous avez echoue votre vol... Peut etre aurez vous plus de chance la prochaine fois", "VOL ECHEC" );
+				}
+				super.perteEnergie(10, x,y, tableauIle, false, false, affichage, equipe);
 			}
-			super.perteEnergie(10, x,y, tableauIle, false, false, affichage, equipe);
 		}
 	}
 

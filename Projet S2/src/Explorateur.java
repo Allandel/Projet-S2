@@ -32,9 +32,11 @@ public class Explorateur extends Personnage{
 		boolean keyTaken=((CaseRocher)tableauIle[x][y]).getKeyTaken();
 
 		if(key){
-			affichage.popUp(equipe,"Vous avez trouve la cle ! Rendez vous au tresor afin de vous emparer de ses richesses !", "FELICITATION" );
-			this.setObjetInventaire("Cle");
-			((CaseRocher)tableauIle[x][y]).setKeyTaken(true);
+			if(!super.inventairePlein(affichage, "Vous avez trouve la cle ! Mais vous n'avez plus de place dans votre inventaire pour la prendre.")){
+				affichage.popUp(equipe,"Vous avez trouve la cle ! Rendez vous au tresor afin de vous emparer de ses richesses !", "FELICITATION" );
+				this.setObjetInventaire("Cle");
+				((CaseRocher)tableauIle[x][y]).setKeyTaken(true);
+			}
 		}else if(keyTaken){
 			affichage.popUp(equipe,"Autrefois ici se trouvait la cle. Vous devriez surveiller le coffre... Mais peut etre est il deja trop tard", "PRENEZ GARDE..." );
 		}else if(chestTaken){
@@ -44,11 +46,13 @@ public class Explorateur extends Personnage{
 			tableauIle[x][y].setId(4);
 			joueur.coffreTrouve();
 		}else if(chest && this.getObjetInventaire("Cle")){
-			affichage.popUp(equipe,"Vous avez trouve le coffre et vous avez la cle ! Vous avez donc ouvert le coffre avec succes et possedez maintenant ses richesses dans votre inventaire ! Gare au Voleurs !", "FELICITATION" );
 			tableauIle[x][y].setId(4);
-			((CaseRocher)tableauIle[x][y]).setChestTaken(true);
-			joueur.coffreTrouve();
-			this.setObjetInventaire("Tresor");
+			if(!super.inventairePlein(affichage, "Vous avez trouve le coffre et vous avez la cle ! Mais votre inventaire est plein et vous ne pouvez pas prendre le tresor.")){
+				affichage.popUp(equipe,"Vous avez trouve le coffre et vous avez la cle ! Vous avez donc ouvert le coffre avec succes et possedez maintenant ses richesses dans votre inventaire ! Gare au Voleurs !", "FELICITATION" );
+				((CaseRocher)tableauIle[x][y]).setChestTaken(true);
+				joueur.coffreTrouve();
+				this.setObjetInventaire("Tresor");
+			}
 		}else if(chest && !this.getObjetInventaire("Cle") && joueur.getCoffreTrouve()){
 			affichage.popUp(equipe,"Vous avez deja trouve le coffre... Ne restez pas ici ! Cherchez la cle avant que les adversaires la trouvent", "FELICITATION" );
 		}else{
