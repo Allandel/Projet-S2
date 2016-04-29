@@ -67,8 +67,10 @@ public class Piegeur extends Personnage{
 					super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 					this.poserBombe(p, x, y, tableauIle, affichage, equipe, joueur);
 					this.getInventaire().remove(this.getInventaire().indexOf("Bombe"));					
+				}else if(!this.getObjetInventaire("Bombe")){
+					affichage.popUp(equipe,"Vous n'avez plus de bombes... Retournez au bateau pour en récupérer.", "PAS D'ACTION POSSIBLE");
 				}else{
-					affichage.popUp(equipe,"Vous n'avez pas les outils pour effectuer cette action !", "PAS D'ACTION POSSIBLE");
+					affichage.popUp(equipe,"Vous n'avez plus de pelle, vous ne pouvez donc pas creuser de trou.\nRetournez au bateau pour en récuperer une.", "PAS D'ACTION POSSIBLE");
 				}
 			}
 		}else{
