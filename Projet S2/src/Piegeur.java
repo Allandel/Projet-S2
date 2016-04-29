@@ -40,11 +40,11 @@ public class Piegeur extends Personnage{
 	 * @param y
 	 * @param tableauIle
 	 */
-	public void pieger(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
+	public void pieger(Personnage p,int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
 		if(tableauIle[x][y].getId()>0 && tableauIle[x][y].getId()<4){
 			int decision =(int)affichage.popUpYesNo(equipe,"Voulez vous faire exploser cet objet ?", "POSER UNE BOMBE", null );
 			if(decision==0){
-				this.poserBombe(x, y, tableauIle, affichage, equipe,joueur);
+				this.poserBombe(p, x, y, tableauIle, affichage, equipe,joueur);
 				super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 			}
 		}else if(!tableauIle[x][y].getBombe() && !tableauIle[x][y].getPiege()){
@@ -65,7 +65,7 @@ public class Piegeur extends Personnage{
 					super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 				}else if(action.compareTo("POSER UNE BOMBE")==0 && this.getObjetInventaire("Bombe")){
 					super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
-					this.poserBombe(x, y, tableauIle, affichage, equipe, joueur);
+					this.poserBombe(p, x, y, tableauIle, affichage, equipe, joueur);
 					this.getInventaire().remove(this.getInventaire().indexOf("Bombe"));					
 				}else{
 					affichage.popUp(equipe,"Vous n'avez pas les outils pour effectuer cette action !", "PAS D'ACTION POSSIBLE");
@@ -76,11 +76,11 @@ public class Piegeur extends Personnage{
 		}
 	}
 	
-	public void poserBombe(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
+	public void poserBombe(Personnage p,int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
 		if(tableauIle[x][y] instanceof CaseRocher || tableauIle[x][y] instanceof CaseNavire){
 			Bombe b=new Bombe(x,y);
 			this.getInventaire().remove(this.getInventaire().indexOf("Bombe"));
-			b.explosionObjet(tableauIle, affichage, equipe, joueur);
+			b.explosionObjet(p,tableauIle, affichage, equipe, joueur);
 		}else{
 		Bombe b=new Bombe(x,y);
 		tableauIle[x][y].setBombe(b);
