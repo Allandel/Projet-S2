@@ -9,9 +9,9 @@ import javax.swing.JOptionPane;
  */
 public class Affichage {
 
-	private int[][] tableauAffichageJ1, tableauAffichageJ2, tableauAffichageTest;
+	private int[][] tableauAffichageJ1, tableauAffichageJ2;
 	private ArrayList<int[][]> tableaux=new ArrayList<>();
-	private Plateau  plateauDuJeu, plateauDuTest;
+	private Plateau  plateauDuJeu;
 	private String[] images = new String[]{ "img/rocher.jpg",			//id 1
 			"img/1.navire.jpg",			//id 2
 			"img/2.navire.jpg",			//id 3
@@ -56,14 +56,14 @@ public class Affichage {
 	 * @param test
 	 */
 	public Affichage(int [][] tableauAffichage, ile ileDuJeu, Joueur[] joueur, boolean test){
-		tableauAffichageTest=new int [tableauAffichage.length][tableauAffichage[1].length];
-		tableaux.add(tableauAffichageTest);
+		tableauAffichageJ1=new int [tableauAffichage.length][tableauAffichage[1].length];
+		tableaux.add(tableauAffichageJ1);
 
 		plateauDuJeu= new Plateau(images,ileDuJeu.getTableau().length);
 
-		this.updateTableauAffichage(ileDuJeu, tableauAffichageTest);
+		this.updateTableauAffichage(ileDuJeu, tableauAffichageJ1);
 
-		plateauDuJeu.setJeu(tableauAffichageTest);
+		plateauDuJeu.setJeu(tableauAffichageJ1);
 		System.out.println("\n"+ileDuJeu.toString());
 	}
 
@@ -206,20 +206,6 @@ public class Affichage {
 		this.affichagePersoActionnable(ileDuJeu, equipe, joueur);
 	}
 
-	/**
-	 * 	 * Affichage du jeu pour les tests
-	 * @param ileDuJeu
-	 * @param tableauAffichageTest
-	 * @param joueur
-	 * @param equipe
-	 */
-	public void affichageDuJeuTest(ile ileDuJeu, int[][] tableauAffichage, Joueur joueur, int equipe){
-		this.updateTableauAffichage(ileDuJeu, tableauAffichage);
-		System.out.println("\n"+ileDuJeu.toString());
-		plateauDuJeu.setJeu(tableauAffichage);
-		plateauDuJeu.affichage();
-		this.affichagePersoActionnable(ileDuJeu, equipe, joueur);
-	}
 	/**
 	 * 
 	 * @param equipe

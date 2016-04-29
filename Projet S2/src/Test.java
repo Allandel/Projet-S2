@@ -89,7 +89,7 @@ public class Test {
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
 						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(), tableauAffichage, cordonnees[0], cordonnees[1], affichage, 0);
 
-					affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
+					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}
 			}
 			gestion.soinBateau(joueur[equipe]);
