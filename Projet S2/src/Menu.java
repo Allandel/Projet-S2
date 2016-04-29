@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * Permet l'affichage du menu principal du jeu
@@ -31,6 +33,8 @@ public class Menu extends JFrame{
 	 * Permet de recuperer la taille et le pourcentage de rocher
 	 */
 	public void menuPrincipal(){
+		int nbrPointJ1=10,nbrPointJ2=10;
+		
 		JPanel onglet1 =  new ImagePanel(new ImageIcon("img/carte.jpg").getImage());
 		JPanel onglet2 = new JPanel();
 		JPanel onglet3 = new JPanel();
@@ -69,27 +73,27 @@ public class Menu extends JFrame{
 		JLabel LB2Piegeur = new JLabel("Nombre de Piegeur :");
 
 		final JSlider sliderTaille = new JSlider(10,30);
-		setSlider(sliderTaille,5);
+		setSlider(sliderTaille,5,10);
 		final JSlider sliderPourcent = new JSlider(10,50);
-		setSlider(sliderPourcent, 5);
+		setSlider(sliderPourcent, 5,10);
 
 		final JSlider sliderNbrExplorateurJ1 = new JSlider(0,4);
-		setSlider(sliderNbrExplorateurJ1, 1);
+		setSlider(sliderNbrExplorateurJ1, 1,0);
 		final JSlider sliderNbrGuerrierJ1 = new JSlider(0,4);
-		setSlider(sliderNbrGuerrierJ1,1);
+		setSlider(sliderNbrGuerrierJ1,1,0);
 		final JSlider sliderNbrVoleurJ1 = new JSlider(0,4);
-		setSlider(sliderNbrVoleurJ1, 1);
+		setSlider(sliderNbrVoleurJ1, 1,0);
 		final JSlider sliderNbrPiegeurJ1 = new JSlider(0,4);
-		setSlider(sliderNbrPiegeurJ1, 1);
+		setSlider(sliderNbrPiegeurJ1, 1,0);
 
 		final JSlider sliderNbrExplorateurJ2 = new JSlider(0,4);
-		setSlider(sliderNbrExplorateurJ2, 1);
+		setSlider(sliderNbrExplorateurJ2, 1,0);
 		final JSlider sliderNbrGuerrierJ2 = new JSlider(0,4);
-		setSlider(sliderNbrGuerrierJ2, 1);
+		setSlider(sliderNbrGuerrierJ2, 1,0);
 		final JSlider sliderNbrVoleurJ2 = new JSlider(0,4);
-		setSlider(sliderNbrVoleurJ2, 1);
+		setSlider(sliderNbrVoleurJ2, 1,0);
 		final JSlider sliderNbrPiegeurJ2 = new JSlider(0,4);
-		setSlider(sliderNbrPiegeurJ2,1);
+		setSlider(sliderNbrPiegeurJ2,1,0);
 
 		onglet3.add(LB2Explorateur);
 		onglet3.add(sliderNbrExplorateurJ1);
@@ -126,6 +130,17 @@ public class Menu extends JFrame{
 		this.getContentPane().add(menuOnglet);
 		this.pack();
 		this.setVisible(true);		
+
+		sliderNbrExplorateurJ1.addChangeListener(new ChangeListener() {
+			
+			public void stateChanged(ChangeEvent e) {
+				sliderNbrExplorateurJ1.getValue();
+//				Enregistrer la valeur initiale, la metrre à jour à chaque changement
+//				Comparer si changement plus grand ou petit et mettre à jour la taille 
+//				maxi des autres en fonction
+			}
+		});
+		
 		BJouer.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent arg0){
 				tailleCarte = sliderTaille.getValue();
@@ -192,9 +207,10 @@ public class Menu extends JFrame{
 	 * @param value
 	 * @param spacing
 	 */
-	private void setSlider(JSlider slider, int spacing){
+	private void setSlider(JSlider slider, int spacing, int value){
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
+		slider.setValue(value);
 		slider.setMajorTickSpacing(spacing);
 		slider.setMinorTickSpacing(spacing);
 		slider.setSnapToTicks(true);
