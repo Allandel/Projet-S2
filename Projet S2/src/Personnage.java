@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class Personnage{
 
-	private int energie=100, id,compteur=0;
+	private int energie=100, id,compteur=0, energieTourPrecedent=100;
 	private String nom, type;
-	private boolean death=false, action=true, deplacement=true;
+	private boolean death=false, action=true, deplacement=true, deathTourPrecedent=false;
 	protected ArrayList <String> inventaire=new ArrayList<String>();
 	protected Joueur joueur;
 
@@ -22,6 +22,36 @@ public class Personnage{
 	Personnage(Joueur joueur){
 		joueur.addPerso(this);
 		this.joueur=joueur;
+	}
+	
+	/**
+	 * 
+	 * @return l'energie que le personnage avait le tour precedent
+	 */
+	public int getEnergieTourPrecedent(){
+		return energieTourPrecedent;
+	}
+	
+	/**
+	 * @return the deathTourPrecedent
+	 */
+	public boolean getDeathTourPrecedent() {
+		return deathTourPrecedent;
+	}
+
+	/**
+	 * @param deathTourPrecedent the deathTourPrecedent to set
+	 */
+	public void setDeathTourPrecedent(boolean deathTourPrecedent) {
+		this.deathTourPrecedent = deathTourPrecedent;
+	}
+
+	/**
+	 * Setter d'energieTourPrecedent
+	 * @param setter
+	 */
+	public void setEnergieTourPrecedent(int setter){
+		energieTourPrecedent=setter;
 	}
 
 	/**
@@ -287,6 +317,8 @@ public class Personnage{
 			return true;
 		}else{
 			energie-=nrj;
+			if(!attaque)
+				this.energieTourPrecedent=energie;
 			if(deplacement)
 				this.deplacement=false;
 			else

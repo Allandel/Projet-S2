@@ -9,6 +9,7 @@ public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
 	private boolean equipe1, coffreTrouve=false;
 	private int idBateau, ligneBateau, colonneBateau, nbrVillage=0;
+
 	/**
 	 * Construit un joueur en lui donnant un boolean correspondant a son equipe et l'id de son bateau
 	 */
@@ -40,7 +41,7 @@ public class Joueur {
 	public int getNbrVillage(){
 		return nbrVillage;
 	}
-	
+
 	/**
 	 * @return the colonneBateau
 	 */
@@ -61,7 +62,7 @@ public class Joueur {
 			colonneBateau=ileDuJeu.getColonneNavJ2();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return l'equipe du joueur
@@ -117,7 +118,7 @@ public class Joueur {
 			}
 		}
 	}
-	
+
 	public void ExplosionBombes(Case[][] tableauIle, Affichage affichage, int equipe1){
 		for(Personnage perso : equipe){
 			if(perso instanceof Piegeur){
@@ -159,7 +160,7 @@ public class Joueur {
 		}
 		return nbrVivant;
 	}
-	
+
 	/**
 	 * 
 	 * @return l'id du bateau du joueur
@@ -167,13 +168,38 @@ public class Joueur {
 	public int getIdBateau() {
 		return idBateau;
 	}
-	
+
 	/**
 	 * Tue tous les personnages du joueur s'il abandonne
 	 */
 	public void abandon(){
 		for(Personnage perso: equipe){
 			perso.setDeath(true);
+		}
+	}
+
+	public void persoAttaque(Affichage affichage){
+		int cpt=0;
+		for(Personnage perso:equipe){
+			if(perso.getEnergie()<perso.getEnergieTourPrecedent() || perso.getDeath()!=perso.getDeathTourPrecedent()){
+				cpt++;
+			}
+		}
+		if(cpt>0){
+			Object[] listeDommage=new String [cpt];
+			cpt=0;
+			for(Personnage perso:equipe){
+				if(perso.getEnergie()<perso.getEnergieTourPrecedent() ){
+					listeDommage[cpt]=""+perso.getType()+" "+perso.getNom()+" a reçu "+(perso.getEnergieTourPrecedent()-perso.getEnergie())+" dommages";
+					perso.setEnergieTourPrecedent(perso.getEnergie());
+					cpt++;
+				}else if(perso.getDeath()!=perso.getDeathTourPrecedent()){
+					listeDommage[cpt]=""+perso.getType()+" "+perso.getNom()+" est mort des dommages qu'il a reçu pendant ce tour.";
+					perso.setDeathTourPrecedent(perso.getDeath());
+					cpt++;
+				}
+			}
+			affichage.popUpYesNo(idBateau-2, "Liste des personnages qui ont subis des dommages.", "Dommage tour precedent", listeDommage);
 		}
 	}
 }

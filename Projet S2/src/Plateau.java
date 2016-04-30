@@ -438,7 +438,7 @@ public class Plateau {
 		else if(objet.equals("Tresor"))
 			label.setIcon(new ImageIcon("img/treasure.png"));
 		else if(objet.equals("Bombe"))
-//			TODO changer l'image utilise
+//			TODO changer l'image utilise pour la bombe
 			label.setIcon(new ImageIcon("img/bombe.jpg"));
 		else if(objet.equals("Pelle"))
 			label.setIcon(new ImageIcon("img/pelle.png"));

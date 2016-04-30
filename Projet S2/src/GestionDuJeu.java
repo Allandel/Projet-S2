@@ -57,6 +57,7 @@ public class GestionDuJeu {
 			affichage.masquer();
 			affichage.popUp(equipe,"Tour du Joueur "+(equipe+1), "Tour du Joueur");
 			affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
+			joueur[equipe].persoAttaque(affichage);
 			while(joueur[equipe].actionPossible() && !gagner[0]){
 				affichage.getPlateau().resetId();
 				int [] cordonnees=action.choixCase(affichage.getPlateau(), tableauAffichage,ileDuJeu, joueur[equipe]);
