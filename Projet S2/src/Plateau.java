@@ -432,7 +432,7 @@ public class Plateau {
 		if(objet.equals("Vide"))
 			label.setIcon(new ImageIcon("img/inventaire_vide.png"));
 		else if(objet.equals("Cle"))
-			label.setIcon(new ImageIcon("img/key.png"));
+			label.setIcon(new ImageIcon("img/key.jpeg"));
 		else if(objet.equals("Epee"))
 			label.setIcon(new ImageIcon("img/sword.png"));
 		else if(objet.equals("Tresor"))
