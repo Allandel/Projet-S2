@@ -1,4 +1,7 @@
+import java.awt.CardLayout;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -54,6 +57,7 @@ public class Launcher extends JFrame{
 		JButton BTGuerrier = new JButton("Guerrier");
 		JButton BTPiegeur = new JButton("Piegeur");
 		JButton BTExplorateur = new JButton("Explorateur");
+		JButton BTPersonnage = new JButton("Personnages");
 		JLabel LBTaille = new JLabel("Taille du plateau:");
 		JLabel LBPourcent = new JLabel("Pourcentage de rochers:");
 		JLabel LBExplorateur = new JLabel("Nombre d'Explorateur :");
@@ -167,16 +171,7 @@ public class Launcher extends JFrame{
 
 		Bregles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame regles = new JFrame();
-				regles.setTitle("Regles");
-				regles.setLocationRelativeTo(null);
-				Icon img = new ImageIcon("img/regles.jpg");
-				JLabel img2 = new JLabel();
-
-				img2.setIcon(img);
-				regles.setSize(1000, 664);
-				regles.add(img2);
-				regles.setVisible(true);
+				new LauncherRegles();
 			}	
 
 		});
