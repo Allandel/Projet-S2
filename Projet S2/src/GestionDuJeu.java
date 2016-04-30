@@ -37,10 +37,6 @@ public class GestionDuJeu {
 		affichage.affichageDuJeuJoueur(ileDuJeu,tableauAffichage, joueur[0], 0);
 	}
 	
-	public Joueur[] getJoueur(){
-		return joueur;
-	}
-
 	/**
 	 * Organise la succession d'action possible pour le joueur
 	 * Fini quand un des joueur est rentre dans le bateau avec le tresor
@@ -49,17 +45,18 @@ public class GestionDuJeu {
 	 */
 	public boolean [] tourDuJoueur(){
 		boolean [] gagner={false,false};
-		int equipe=0, equipeAffichage;
+		int equipe=0;
 
 		while(!gagner[0]){
-			affichage.getPlateau(equipe).resetInfo();
-			equipeAffichage=equipe+1;
+			affichage.getPlateau().resetInfo();
 			joueur[equipe].resetAction();
+			affichage.masquer();
+			affichage.popUp(equipe,"Tour du Joueur "+(equipe+1), "Tour du Joueur");
 			affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
-			affichage.popUp(equipe,"Tour du Joueur "+equipeAffichage, "Tour du Joueur");
+			joueur[equipe].persoAttaque(affichage);
 			while(joueur[equipe].actionPossible() && !gagner[0]){
-				affichage.getPlateau(equipe).resetId();
-				int [] cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage,ileDuJeu, joueur[equipe]);
+				affichage.getPlateau().resetId();
+				int [] cordonnees=action.choixCase(affichage.getPlateau(), tableauAffichage,ileDuJeu, joueur[equipe]);
 				
 				if(cordonnees[0]==999)
 					//si le joueur decide de passer son tour
@@ -72,10 +69,10 @@ public class GestionDuJeu {
 				}else{
 					affichage.setHighlight(cordonnees, equipe);
 					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
-						affichage.getPlateau(equipe).refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
+						affichage.getPlateau().refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],false);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, cordonnees[0], cordonnees[1], affichage, equipe);
+						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(), tableauAffichage, cordonnees[0], cordonnees[1], affichage, equipe);
 
 					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}
@@ -110,13 +107,13 @@ public class GestionDuJeu {
 		int[] cordonnees;
 
 		if(!test){
-			affichage.getPlateau(equipe).resetId();
-			affichage.getPlateau(equipe).setVisibleBouttonAnnuler(true);
-			cordonnees= action.choixCase(ileDuJeu, affichage.getPlateau(equipe), tableauAffichage, x, y, perso);
+			affichage.getPlateau().resetId();
+			affichage.getPlateau().setVisibleBouttonAnnuler(true);
+			cordonnees= action.choixCase(ileDuJeu, affichage.getPlateau(), tableauAffichage, x, y, perso);
 		}else{
-			affichage.getPlateau(0).resetId();
-			affichage.getPlateau(0).setVisibleBouttonAnnuler(true);
-			cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(0), tableauAffichage, x, y, perso);
+			affichage.getPlateau().resetId();
+			affichage.getPlateau().setVisibleBouttonAnnuler(true);
+			cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(), tableauAffichage, x, y, perso);
 		}
 			if(cordonnees[0]==999){
 				//si le joueur decide de passer son tour
@@ -148,7 +145,7 @@ public class GestionDuJeu {
 					if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
 						((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
 					}else if(perso instanceof Piegeur && ((cordonnees[0]==x && cordonnees[1]==y)||(tableauAffichage[cordonnees[1]][cordonnees[0]]>0 && tableauAffichage[cordonnees[1]][cordonnees[0]]<4))){
-						((Piegeur)perso).pieger(perso, cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe, getJoueur());
+						((Piegeur)perso).pieger(perso, cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe, this.joueur);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getJoueur()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur()){
 						perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), affichage, equipe);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<14 && perso.getJoueur()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur() && perso instanceof Guerrier){
@@ -158,13 +155,8 @@ public class GestionDuJeu {
 					}
 				}
 			}
-		if(!test){
-			affichage.getPlateau(equipe).refreshinfo(perso);
-			affichage.getPlateau(equipe).setVisibleBouttonAnnuler(false);
-		}else{
-			affichage.getPlateau(0).refreshinfo(perso);
-			affichage.getPlateau(0).setVisibleBouttonAnnuler(false);
-		}	
+			affichage.getPlateau().refreshinfo(perso);
+			affichage.getPlateau().setVisibleBouttonAnnuler(false);
 		return gagner;
 	}
 

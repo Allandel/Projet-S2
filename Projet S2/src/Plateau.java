@@ -39,7 +39,7 @@ public class Plateau {
 	private JLabel  recupTypePerso = new JLabel("  ");
 	private JLabel energie = new JLabel("Energie : ");
 	private JLabel recupenergie = new JLabel("  ");
-	private JLabel inventaire  = new JLabel("Inventaire : ");
+	private JLabel inventaire  = new JLabel("Inventaire");
 	private JButton passageDuTour=new JButton("Passer son tour"), abandon, annulerSelection=new JButton("Retour"), aide=new JButton("Aide");
 	private int id;
 	private ArrayList<JLabel> objetIventaire=new ArrayList();
@@ -428,17 +428,31 @@ public class Plateau {
 	}
 
 	private void addImageIcon(JLabel label, String objet){
+		label.setVisible(true);
 		if(objet.equals("Vide"))
-			label.setVisible(false);
-		else{
-			label.setVisible(true);
+			label.setIcon(new ImageIcon("img/inventaire_vide.png"));
+		else if(objet.equals("Cle"))
+			label.setIcon(new ImageIcon("img/key.jpeg"));
+		else if(objet.equals("Epee"))
+			label.setIcon(new ImageIcon("img/sword.png"));
+		else if(objet.equals("Tresor"))
+			label.setIcon(new ImageIcon("img/treasure.png"));
+		else if(objet.equals("Bombe"))
+//			TODO changer l'image utilise pour la bombe
 			label.setIcon(new ImageIcon("img/bombe.jpg"));
-		}
+		else if(objet.equals("Pelle"))
+			label.setIcon(new ImageIcon("img/pelle.png"));
 	}
 
 	private void inventaireVide(){
 		for(int cpt=0;cpt<objetIventaire.size();cpt++){
 			this.addImageIcon(objetIventaire.get(cpt),"Vide");
+		}
+	}
+	
+	private void hideInventaire(){
+		for(int cpt=0;cpt<objetIventaire.size();cpt++){
+			objetIventaire.get(cpt).setVisible(false);
 		}
 	}
 
@@ -476,6 +490,7 @@ public class Plateau {
 	}
 
 	public void resetInfo(){
+		this.hideInventaire();
 		recupNomPerso.setText("");
 		recupTypePerso.setText("");
 		recupenergie.setText("");

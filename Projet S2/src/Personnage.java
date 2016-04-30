@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class Personnage{
 
-	private int energie=100, id,compteur=0;
+	private int energie=100, id,compteur=0, energieTourPrecedent=100;
 	private String nom, type;
-	private boolean death=false, action=true, deplacement=true;
+	private boolean death=false, action=true, deplacement=true, deathTourPrecedent=false;
 	protected ArrayList <String> inventaire=new ArrayList<String>();
 	protected Joueur joueur;
 
@@ -22,6 +22,36 @@ public class Personnage{
 	Personnage(Joueur joueur){
 		joueur.addPerso(this);
 		this.joueur=joueur;
+	}
+	
+	/**
+	 * 
+	 * @return l'energie que le personnage avait le tour precedent
+	 */
+	public int getEnergieTourPrecedent(){
+		return energieTourPrecedent;
+	}
+	
+	/**
+	 * @return the deathTourPrecedent
+	 */
+	public boolean getDeathTourPrecedent() {
+		return deathTourPrecedent;
+	}
+
+	/**
+	 * @param deathTourPrecedent the deathTourPrecedent to set
+	 */
+	public void setDeathTourPrecedent(boolean deathTourPrecedent) {
+		this.deathTourPrecedent = deathTourPrecedent;
+	}
+
+	/**
+	 * Setter d'energieTourPrecedent
+	 * @param setter
+	 */
+	public void setEnergieTourPrecedent(int setter){
+		energieTourPrecedent=setter;
 	}
 
 	/**
@@ -47,7 +77,7 @@ public class Personnage{
 	public void setDeath(boolean death){
 		this.death=death;
 	}
-	
+
 	/**
 	 * 
 	 * @return le joueur du personnage
@@ -96,7 +126,7 @@ public class Personnage{
 	public int getIdBateau(){
 		return joueur.getIdBateau();
 	}
-	
+
 	/**
 	 * @return the equipe1
 	 */
@@ -186,20 +216,22 @@ public class Personnage{
 				}else{
 					affichage.popUp(equipe,"Votre inventaire est vide, impossible de lui donner un objet", "ECHANGE IMPOSSIBLE" );
 				}
-				if(!p.inventaire.isEmpty()){
-					//=======PRENDRE ITEM=======
-					String [] listeItem2= new String[p.inventaire.size()];
-					for(int cpt=0; cpt<p.inventaire.size(); cpt++){
-						listeItem2[cpt]=p.inventaire.get(cpt);
+				if(!inventairePlein(affichage,"Votre inventaire est plein, vous ne pouvez rien y ajouter.")){
+					if(!p.inventaire.isEmpty()){
+						//=======PRENDRE ITEM=======
+						String [] listeItem2= new String[p.inventaire.size()];
+						for(int cpt=0; cpt<p.inventaire.size(); cpt++){
+							listeItem2[cpt]=p.inventaire.get(cpt);
+						}
+						itemEchange=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM",listeItem2); 
+						if(itemEchange!=null){
+							this.inventaire.add(itemEchange);
+							p.inventaire.remove(itemEchange);
+							action=false;
+						}
+					}else{
+						affichage.popUp(equipe,"L'inventaire de votre coequipier est vide, impossible de lui prendre un objet", "ECHANGE IMPOSSIBLE" );
 					}
-					itemEchange=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM",listeItem2); 
-					if(itemEchange!=null){
-						this.inventaire.add(itemEchange);
-						p.inventaire.remove(itemEchange);
-						action=false;
-					}
-				}else{
-					affichage.popUp(equipe,"L'inventaire de votre coequipier est vide, impossible de lui prendre un objet", "ECHANGE IMPOSSIBLE" );
 				}
 			}else{
 				affichage.popUp(equipe,"Vos inventaires sont vides, impossible de faire des échanges", "ECHANGE IMPOSSIBLE" );
@@ -248,10 +280,11 @@ public class Personnage{
 					victoire[0]=true;
 					victoire[1]=joueur.getEquipe();
 				}
-				if(this instanceof Guerrier && !inventaire.contains("Epee")){
+				if(this instanceof Guerrier && !inventaire.contains("Epee") && !inventairePlein(affichage, "Ce guerrier n'a plus de place dans son inventaire pour récupérer une épée.")){
 					this.setObjetInventaire("Epee");;
 					affichage.popUp(equipe,"En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme" );
 				}
+				// TODO ajout récupération bombe dans inventaire si place libre
 			}
 		}else{
 			affichage.popUp(equipe,"Il faut au moins un personnage sur l'ile pour pouvoir rentrer au bateau.", "Entree impossible" );
@@ -284,6 +317,8 @@ public class Personnage{
 			return true;
 		}else{
 			energie-=nrj;
+			if(!attaque)
+				this.energieTourPrecedent=energie;
 			if(deplacement)
 				this.deplacement=false;
 			else
@@ -307,21 +342,23 @@ public class Personnage{
 		String res="\n\n";
 
 		if(!entreeBateau){
-			if(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().isEmpty()){
-				affichage.popUp(equipe,"Ce cadavre n'avait rien d'interessant...", "Rencontre avec un mort" );
-			}else{
-				for (int i=0; i<tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().size();i++){
-					this.getInventaire().add(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i));
-					res+="+ "+tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i)+"\n";
+			if(!inventairePlein(affichage,"Votre inventaire est plein, vous ne pouvez rien y ajouter.")){
+				if(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().isEmpty()){
+					affichage.popUp(equipe,"Ce cadavre n'avait rien d'interessant...", "Rencontre avec un mort" );
+				}else{
+					for (int i=0; i<tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().size();i++){
+						this.getInventaire().add(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i));
+						res+="+ "+tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i)+"\n";
+					}
+					affichage.popUp(equipe,"Vous avez recupere des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort" );
 				}
-				affichage.popUp(equipe,"Vous avez recupere des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort" );
-			}
 
-			tableauIle[xApres][yApres].removePersonnageCourant();
-			if(!sortieBateau)
-				tableauIle[x][y].removePersonnageCourant();
-			this.perteEnergie(1, xApres, yApres, tableauIle, false, true, affichage, equipe);				
-			tableauIle[xApres][yApres].setPersonnageCourant(this);
+				tableauIle[xApres][yApres].removePersonnageCourant();
+				if(!sortieBateau)
+					tableauIle[x][y].removePersonnageCourant();
+				this.perteEnergie(1, xApres, yApres, tableauIle, false, true, affichage, equipe);				
+				tableauIle[xApres][yApres].setPersonnageCourant(this);
+			}
 		}else{
 			if(((CaseNavire)tableauIle[xApres][yApres]).persoMort()){
 				for(Personnage perso : ((CaseNavire)tableauIle[xApres][yApres]).getStocknavire()){
@@ -335,7 +372,6 @@ public class Personnage{
 				}
 			}
 		}
-		System.out.println(this.getInventaire());
 	}
 
 	/**
@@ -436,14 +472,19 @@ public class Personnage{
 		return "";
 	}
 
-	public String inventaireToString(){
-		String stringInventaire="";
-		for(String objet:inventaire){
-			stringInventaire+="- "+objet;
-		}
-		return stringInventaire;
+	/**
+	 * Test si l'inventaire est plein ou non et affiche un message s'il est plein
+	 * @param affichage
+	 * @return true si inventaire plein
+	 */
+	protected boolean inventairePlein(Affichage affichage, String texte){
+		if(inventaire.size()==6){
+			affichage.popUp(joueur.getIdBateau()-2, texte, "Inventaire plein");
+			return true;
+		}else
+			return false;
 	}
-	
+
 	public void setActionDeplacement(boolean setter){
 		this.setAction(setter);
 		this.setDeplacement(setter);

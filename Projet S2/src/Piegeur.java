@@ -74,7 +74,7 @@ public class Piegeur extends Personnage{
 				}
 			}
 		}else{
-			affichage.popUp(equipe,"Un piege ou une bombe a deja été poser ici", "PAS D'ACTION POSSIBLE");
+			affichage.popUp(equipe,"Un piege ou une bombe a deja été posé ici", "PAS D'ACTION POSSIBLE");
 		}
 	}
 	

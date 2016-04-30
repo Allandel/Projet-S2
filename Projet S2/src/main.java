@@ -9,7 +9,8 @@ public class main {
 
 	public static void main(String[] args) {
 
-		Launcher menu = new Launcher();		
+		Menu menu = new Menu();	
+		menu.menuPrincipal();
 		while(menu.getetat()){
 			if(menu.getidTest() > 0 && menu.getidTest() <5){
 				menu.setVisible(false);

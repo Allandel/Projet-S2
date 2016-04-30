@@ -65,14 +65,14 @@ public class Test {
 		persoTest[0]=ileDuJeu.getTableau()[2][3].getPersonnageCourant();
 		persoTest[1]=ileDuJeu.getTableau()[3][3].getPersonnageCourant();
 
-		affichage=new Affichage(tableauAffichage, ileDuJeu, joueur, true);
+		affichage=new Affichage(tableauAffichage, ileDuJeu, joueur);
 		GestionDuJeu gestion=new GestionDuJeu(ileDuJeu, tableauAffichage, affichage);
 		while(!quitter){
-			affichage.getPlateau(0).resetId();
+			affichage.getPlateau().resetId();
 			persoTest[equipe].setActionDeplacement(true);
-			affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
+			affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 			while(joueur[equipe].actionPossible() && !quitter){
-				cordonnees=action.choixCase(affichage.getPlateau(equipe), tableauAffichage,ileDuJeu, joueur[equipe]);
+				cordonnees=action.choixCase(affichage.getPlateau(), tableauAffichage,ileDuJeu, joueur[equipe]);
 				if(cordonnees[0]==999)
 					//si le joueur decide de passer son tour
 					joueur[equipe].passerTour();
@@ -84,18 +84,18 @@ public class Test {
 				}else{
 					affichage.setHighlight(cordonnees, equipe);
 					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
-						affichage.getPlateau(0).refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
+						affichage.getPlateau().refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant());
 						gagner=gestion.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],true);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(0), tableauAffichage, cordonnees[0], cordonnees[1], affichage, 0);
+						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(), tableauAffichage, cordonnees[0], cordonnees[1], affichage, 0);
 
-					affichage.affichageDuJeuTest(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
+					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}
 			}
 			gestion.soinBateau(joueur[equipe]);
 			equipe=1-equipe;
 		}
-		affichage.getPlateau(0).close();
+		affichage.getPlateau().close();
 		testEnCours=false;
 	}
 

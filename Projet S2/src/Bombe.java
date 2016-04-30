@@ -28,7 +28,7 @@ public class Bombe {
 		for(int x=this.x-1;x<this.x+2;x++){
 			for(int y=this.y-1;y<this.y+2;y++){
 				if(tableauIle[x][y].getPersonnageCourant()!=null && tableauIle[x][y].getPersonnageCourant().getDeath()==false){
-					tableauIle[x][y].getPersonnageCourant().perteEnergie(dommages, x,y, tableauIle, false, false,affichage, equipe);
+					tableauIle[x][y].getPersonnageCourant().perteEnergie(dommages, x,y, tableauIle, true, false,affichage, equipe);
 				}
 			}
 		}
