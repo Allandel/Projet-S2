@@ -446,7 +446,7 @@ public class Plateau {
 			label.setIcon(new ImageIcon("img/treasure.png"));
 		else if(objet.equals("Bombe"))
 //			TODO changer l'image utilise pour la bombe
-			label.setIcon(new ImageIcon("img/bombe.jpg"));
+			label.setIcon(new ImageIcon("img/Bombe.png"));
 		else if(objet.equals("Pelle"))
 			label.setIcon(new ImageIcon("img/pelle.png"));
 	}
