@@ -265,6 +265,9 @@ public class Menu extends JFrame{
 		return parametres;
 	}
 
+	/**
+	 * Affichage des regles du jeu
+	 */
 	public void menuRegle(){
 		JFrame menuRegle=new JFrame();
 		JMenuBar menuBar = new JMenuBar();
