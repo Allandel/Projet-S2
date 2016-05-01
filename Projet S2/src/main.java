@@ -32,6 +32,9 @@ public class main {
 				menu.setIdtest(0);
 				Object[] options = { "OK" };
 				JOptionPane.showOptionDialog(null, "Il faut au moins un personnage dans chaque équipe pour pouvoir joueur.", "Quantite de personnage invalide",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,null, options, options[0]);
+			}else if(menu.getidTest()==44){
+				menu.menuRegle();
+				menu.setIdtest(0);
 			}
 				
 			System.out.flush();

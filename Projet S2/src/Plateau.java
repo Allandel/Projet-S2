@@ -27,6 +27,7 @@ import javax.swing.JPanel;
  * 
  */
 public class Plateau {
+	private Menu menu;
 	private static boolean defaultVisibility = true ;
 	private static final long serialVersionUID = 1L;
 	private JFrame window ;
@@ -183,7 +184,8 @@ public class Plateau {
 		graphic.addMouseListener(new Mouse());
 		window.addKeyListener(new Key()) ;
 		currentEvent = null ;
-
+		menu=new Menu();
+		
 		passageDuTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				id=1;
@@ -197,6 +199,11 @@ public class Plateau {
 		annulerSelection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				id=3;
+			}
+		});
+		aide.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				menu.menuRegle();
 			}
 		});
 		annulerSelection.setVisible(false);

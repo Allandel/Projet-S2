@@ -10,9 +10,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -25,16 +29,17 @@ public class Menu extends JFrame{
 	private int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2;
 	private boolean etat = true;
 	private JTabbedPane menuOnglet;
-	
+	private JTextArea lol;
+
 	public Menu(){}
-	
+
 	/**
 	 * Affiche le menu principal du jeu
 	 * Permet de recuperer la taille et le pourcentage de rocher
 	 */
 	public void menuPrincipal(){
 		int nbrPointJ1=10,nbrPointJ2=10;
-		
+
 		JPanel onglet1 =  new ImagePanel(new ImageIcon("img/carte.jpg").getImage());
 		JPanel onglet2 = new JPanel();
 		JPanel onglet3 = new JPanel();
@@ -132,15 +137,15 @@ public class Menu extends JFrame{
 		this.setVisible(true);		
 
 		sliderNbrExplorateurJ1.addChangeListener(new ChangeListener() {
-			
+
 			public void stateChanged(ChangeEvent e) {
 				sliderNbrExplorateurJ1.getValue();
-//				Enregistrer la valeur initiale, la metrre à jour à chaque changement
-//				Comparer si changement plus grand ou petit et mettre à jour la taille 
-//				maxi des autres en fonction
+				//				Enregistrer la valeur initiale, la metrre à jour à chaque changement
+				//				Comparer si changement plus grand ou petit et mettre à jour la taille 
+				//				maxi des autres en fonction
 			}
 		});
-		
+
 		BJouer.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent arg0){
 				tailleCarte = sliderTaille.getValue();
@@ -185,20 +190,11 @@ public class Menu extends JFrame{
 
 		Bregles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame regles = new JFrame();
-				regles.setTitle("Regles");
-				regles.setLocationRelativeTo(null);
-				Icon img = new ImageIcon("img/regles.jpg");
-				JLabel img2 = new JLabel();
-
-				img2.setIcon(img);
-				regles.setSize(1000, 664);
-				regles.add(img2);
-				regles.setVisible(true);
+				idTest=44;
 			}	
 		});
 	}
-	
+
 	/**
 	 * Initialise les slider du menu
 	 * @param slider
@@ -269,6 +265,100 @@ public class Menu extends JFrame{
 		return parametres;
 	}
 
+	public void menuRegle(){
+		JFrame menuRegle=new JFrame();
+		JMenuBar menuBar = new JMenuBar();
+		JMenu but = new JMenu("But du jeu");
+		JMenu perso = new JMenu("Personnages");
+		JMenu envir = new JMenu("Environnement");
+		JMenu comm = new JMenu("Commandes");
+		lol=new JTextArea(
+				"                                             BIENVENUE DANS LE MANUEL DE LA CHASSE AU TRESOR\n\n\n"
+						+ "Vous trouverez dans ce manuel toutes les explications necessaires afin de jouer convenablement une \npartie de Chasse au Trésor. "
+						+ "Afin de vous déplacer dans le manuel, utilisez la barre de Menu du Haut qui vous \npermettra de trouver les information necessaires en quelques instants.\n\n"
+						+ "Bonne Navigation !"
+						,5,5);
+		//=================================================================
+		JMenuItem itemperso1 = new JMenuItem("Explorateurs");
+		JMenuItem itemperso2 = new JMenuItem("Guerriers");
+		JMenuItem itemperso3 = new JMenuItem("Piegeurs");
+		JMenuItem itemperso4 = new JMenuItem("Guerriers");
+		JMenuItem itemperso5 = new JMenuItem("Ouvriers");
+		//=================================================================
+		JMenuItem itemenvir1 = new JMenuItem("Herbe");
+		JMenuItem itemenvir2 = new JMenuItem("Rochers");
+		JMenuItem itemenvir3 = new JMenuItem("Océan");
+		JMenuItem itemenvir4 = new JMenuItem("Navire");
+		JMenuItem itemenvir5 = new JMenuItem("Coffre");
+		JMenuItem itemenvir6 = new JMenuItem("Forteresse");
+		//==================================================================
+		JMenuItem itembut1 = new JMenuItem("Les Objetifs");
+		//==================================================================
+		JMenuItem itemcomm1 = new JMenuItem("Les Commandes Basiques");
+		JMenuItem itemcomm2 = new JMenuItem("Les Commandes Avancées");
+
+		menuRegle.setSize(700, 400);
+		menuRegle.setLocationRelativeTo(null);
+		lol.setEditable(false);
+		//initialisation des menus      
+		perso.add(itemperso1);
+		perso.add(itemperso2);
+		perso.add(itemperso3);
+		perso.add(itemperso4);
+		perso.add(itemperso5);
+		envir.add(itemenvir1);  
+		envir.add(itemenvir2);
+		envir.add(itemenvir3);
+		envir.add(itemenvir4);
+		envir.add(itemenvir5);
+		envir.add(itemenvir6);
+		but.add(itembut1);
+		comm.add(itemcomm1);
+		comm.add(itemcomm2);
+		itembut1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         LES OBJECTIFS\n\n\n"
+						+"Sur l'Ile au Trésor, différents choix s'offrent à vous pour obtenir la victoire finale ! Choisissez la meilleure \nstratégie parmis celles suivantes :\n\n"
+						+"- Retrouver la clé et le coffre au trésor afin d'ouvrir le coffre et d'en découvrir son contenu ! Ammenez le trésor \n  sur votre Navire et la victoire sera à vous !\n"
+						+"- Détruire l'équipe adverse et la réduire à néant. Soyez les derniers sur l'ile !\n\n"
+						+"A vous de jouer ! Remportez la victoire à tout prix !");
+			}        
+		});
+		itemperso1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         L'EXPLORATEUR\n\n\n"
+						+"CAPACITES\n\n"
+						+"L'explorateur est un personnage clé du jeu. En effet, celui ci est l'unique personnage capable de soulever un\nrocher afin de regarder au dessous si une clé ou un trésor ne s'y trouve pas\n"
+						+"Une fois la clé en sa possession, l'explorateur sera le seul personnage capable d'aller ouvrir le coffre et de\ns'emparer du trésor !\n\n"
+						+"DEPLACEMENTS\n\n"
+						+"L'Explorateur se déplace uniquement en croix, c'est a dire qu'il ne peut aller qu'au dessus, en dessous,\nà droite ou à gauche\n");
+			}        
+		});
+		itemperso2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         LES GUERRIERS\n\n\n"
+						+"CAPACITES\n\n"
+						+"Les Guerriers sont les seuls capables de frapper un autre personnage. Avec une épée, ou sans ils infligeront\nde nombreux dégats aux adversaires ! Mais prenez garde aux voleurs\n"
+						+"car ils peuvent vous voler votre épée et vous priver de votre unique moyen de faire des dégats !\nSi vous perdez votre épée, vous pourrez en récupérer au Navire.\n\n"
+						+"DEPLACEMENTS\n\n"
+						+"Les Guerriers sont capables de se déplacer en diagonale et aussi d'attaquer en Diagonale.\nToutes les actions du Guerriers peuvent être faites en diagonale\n");
+			}        
+		});
+		menuRegle.add(menuBar);
+		menuBar.add(but);
+		menuBar.add(perso);
+		menuBar.add(envir);
+		menuBar.add(comm);
+		menuRegle.setTitle("Manuel du Jeu");
+		menuRegle.setJMenuBar(menuBar);
+		menuRegle.setVisible(true);
+		menuRegle.add(lol);
+	}
+
+	/**
+	 * 
+	 * @return true si chaque equipe a au moins un personnage
+	 */
 	public boolean parametresValide(){
 		int nbrJ1=0,nbrJ2=0;
 
