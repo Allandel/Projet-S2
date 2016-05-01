@@ -18,11 +18,6 @@ public class Guerrier extends Personnage{
 		setNom("Hans");
 		setType("Guerrier");
 		setObjetInventaire("Epee");
-		setObjetInventaire("Epee");
-		setObjetInventaire("Epee");
-		setObjetInventaire("Epee");
-		setObjetInventaire("Epee");
-		setObjetInventaire("Epee");
 		if(joueur.getEquipe())
 			setId(9);
 		else

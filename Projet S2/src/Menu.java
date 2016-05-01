@@ -285,7 +285,7 @@ public class Menu extends JFrame{
 		JMenuItem itemperso1 = new JMenuItem("Explorateurs");
 		JMenuItem itemperso2 = new JMenuItem("Guerriers");
 		JMenuItem itemperso3 = new JMenuItem("Piegeurs");
-		JMenuItem itemperso4 = new JMenuItem("Guerriers");
+		JMenuItem itemperso4 = new JMenuItem("Voleurs");
 		JMenuItem itemperso5 = new JMenuItem("Ouvriers");
 		//=================================================================
 		JMenuItem itemenvir1 = new JMenuItem("Herbe");
@@ -344,7 +344,108 @@ public class Menu extends JFrame{
 						+"Les Guerriers sont les seuls capables de frapper un autre personnage. Avec une épée, ou sans ils infligeront\nde nombreux dégats aux adversaires ! Mais prenez garde aux voleurs\n"
 						+"car ils peuvent vous voler votre épée et vous priver de votre unique moyen de faire des dégats !\nSi vous perdez votre épée, vous pourrez en récupérer au Navire.\n\n"
 						+"DEPLACEMENTS\n\n"
-						+"Les Guerriers sont capables de se déplacer en diagonale et aussi d'attaquer en Diagonale.\nToutes les actions du Guerriers peuvent être faites en diagonale\n");
+						+"Les Guerriers sont capables de se déplacer en diagonale et aussi d'interagir en Diagonale.");
+			}        
+		});
+		itemperso3.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         LES PIEGEURS\n\n\n"
+						+"CAPACITES\n\n"
+						+"Les piegeurs disposent de plusieurs capacités très utiles au groupe :\n\n"
+						+"- Ils sont capables de poser des pièges à l'aide d'une pelle. Ils seront visibles par votre équipe uniquement qui\n immobiliseront les personnages adverses durant 3 tours (Clic gauche sur lui même)\n\n"
+						+"- Ils peuvent poser des bombes au sol qui, au bout d'un compte a rebours, explose dans un rayon d'une case, imposant\n de lourd dégâts a quiconque se trouverait au alentours.(Clic Gauche sur lui même)\n\n"
+						+"- Ils peuvent aussi poser des bombes dans des rochers afin de les détruire ou bien dans le Navire ennemi\n afin de le couler ! (Clic gauche sur le rocher ou navire)"
+						+"\n\nDEPLACEMENTS\n\n"
+						+"Les Piegeurs sont capables de se déplacer en diagonale et aussi d'interagir en Diagonale.");
+			}        
+		});
+		itemperso4.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         LES VOLEURS\n\n\n"
+						+"CAPACITES\n\n"
+						+"Les voleurs sont capables de dérober des objets aux personnages adverses dans un rayon de 1 case.\nCette fonctionnalité peut permettre a votre équipe de priver temporairement un joueur adverse des\nfonctionnalité d'un personnage clé ! En effet, privez le Guerrier de son épée, et il sera bien moins dangereux !\nPrivez Le piégeur de sa pelle ou de ses bombes, et il ne sera plus capable de vous poser\ndes bâtons dans les roues ! \n"
+						+"\n\nDEPLACEMENTS\n\n"
+						+"Les Voleurs sont capables de se déplacer en diagonale et aussi d'interagir en Diagonale.");
+			}        
+		});
+		itemperso5.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         LES OUVRIERS\n\n\n"
+						+"CAPACITES\n\n"
+						+"Les ouvriers sont des personnages spéciaux disposant de capacités de support très importantes par\nrapport au autres personnages. Ce personnage est le seul capable de :\n\n"
+						+"- Récolter des ressources avec du Minage. Ces ressources pourraient s'avérer cruciales pour permettre\naux autre personnages de devenir plus puissants !\n\n"
+						+"- Créer un Village, puis une Forteresse à l'aide des ressources nécessaires à l'amélioration.\n\n"
+						+"Ainsi, en utilisant l'ouvrier prudemment afin de le garder en vie, vous serez capables de monter\nvotre propre cité et tout les avantages qui en découlent !"
+						+"\n\nDEPLACEMENTS\n\n"
+						+"Les Ouvriers sont capables de se déplacer en diagonale et aussi d'interagir en Diagonale.");
+			}        
+		});
+		itemenvir1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         L'HERBE\n\n\n"
+						+"DESCRIPTION\n\n"
+						+"L'herbe est le terrain par défaut de l’île."
+						+"\n\nINTERACTIONS POSSIBLES\n\n"
+						+"- Mouvement (Tout les personnages)\n- Minage (Ouvrier)");
+			}        
+		});
+		itemenvir2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         LES ROCHERS\n\n\n"
+						+"DESCRIPTION\n\n"
+						+"Les Rochers constituent la cachette de la clé du trésor et du coffre au trésor, ou de rien du tout."
+						+"\n\nINTERACTIONS POSSIBLES\n\n"
+						+"- Regarder sous le rocher (Explorateur)\n- Explosion du Rocher (Piégeur)");
+			}        
+		});
+		itemenvir3.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         L'OCEAN\n\n\n"
+						+"DESCRIPTION\n\n"
+						+"L'océan entoure l'île au trésor ! Les personnages ne peuvent que la contempler…"
+						+"\n\nINTERACTIONS POSSIBLES\n\n"
+						+"- Aucune (X)");
+			}        
+		});
+		itemenvir4.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         NAVIRE\n\n\n"
+						+"DESCRIPTION\n\n"
+						+"Le Navire est le refuge des Personnages ! Il vous permet de régénérer votre énergie et de récupérer\nles outils que vous vous êtes fait dérober !"
+						+"\n\nINTERACTIONS POSSIBLES\n\n"
+						+"- Montée a bord (Tout les Personnages Alliés)\n- Sortir un personnage (Clic Gauche souris)\n- Exploser la Coque ennemie (Piégeur)");
+			}        
+		});
+		itemenvir5.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         COFFRE\n\n\n"
+						+"DESCRIPTION\n\n"
+						+"Le coffre renferme le trésor ! Pour l'ouvrir, il vous faudra la clé !"
+						+"\n\nINTERACTIONS POSSIBLES\n\n"
+						+"- Ouvrir le Coffre (Explorateur – Avec la clé)");
+			}        
+		});
+		itemenvir6.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         FORTERESSE\n\n\n"
+						+"DESCRIPTION\n\n"
+						+"La Forteresse constitue un refuge pour vos alliés ! En plus de régénérer la vie de vos personnages\nplus rapidement, elle leur permet d'autres actions très intéressantes :"
+						+"\n\nINTERACTIONS POSSIBLES\n\n"
+						+"- Revente d'Item au Marché de contrebande\n- Achat d'Item au Marché de contrebande\n- Stockage d'Item dans un Entrepot");
+			}        
+		});
+		itemcomm1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                    COMMANDES BASIQUES\n\n\n"
+						+"Les interactions basiques avec le jeu se font à l'aide de la souris.\n\n"
+						+"SORTIR UN PERSONNAGE DU NAVIRE : Clic gauche sur le Navire allié puis Clic gauche sur l'une des\n                                                         cases bleutée.\n\nMOUVEMENT D'UN PERSONNAGE : Clic gauche sur un personnage puis Clic gauche sur l'une des cases de type\n                                                    \"Herbe\" bleutée\n\nACTION D'UN PERSONNAGE : Clic gauche sur un personnage puis clic gauche sur l'une des cases bleuté autre\n                                              que une case de type herbe\n\nPASSER SON TOUR : Clic gauche sur le bouton d'interaction «Passer son tour»en bas au droite du menu\n                               d'information.\n\nDESELECTIONNER UN PERSONNAGE : Clic gauche sur le bouton d'interaction «Retour»en bas au droite du menu\n                                                           d'information.\n\nABANDONNER UNE PARTIE : Clic gauche sur le bouton d'interaction «Abandonner»en bas au droite du menu\n                                           d'information.");
+			}        
+		});
+		itemcomm2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                    COMMANDES AVANCEES\n\n\n"
+						+"Les interaction avancées ajoutent le clavier à la souris :\n\n"
+						+"");
 			}        
 		});
 		menuRegle.add(menuBar);
