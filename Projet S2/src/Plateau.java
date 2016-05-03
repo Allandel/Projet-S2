@@ -445,10 +445,13 @@ public class Plateau {
 		else if(objet.equals("Tresor"))
 			label.setIcon(new ImageIcon("img/treasure.png"));
 		else if(objet.equals("Bombe"))
-//			TODO changer l'image utilise pour la bombe
 			label.setIcon(new ImageIcon("img/Bombe.png"));
 		else if(objet.equals("Pelle"))
 			label.setIcon(new ImageIcon("img/pelle.png"));
+		else if(objet.equals("Pioche"))
+			label.setIcon(new ImageIcon("img/Pioche.png"));
+		else if(objet.equals("Pierre"))
+			label.setIcon(new ImageIcon("img/Pierre.png"));
 	}
 
 	private void inventaireVide(){
