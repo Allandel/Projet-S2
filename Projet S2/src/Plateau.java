@@ -41,7 +41,7 @@ public class Plateau {
 	private JLabel energie = new JLabel("Energie : ");
 	private JLabel recupenergie = new JLabel("  ");
 	private JLabel inventaire  = new JLabel("Inventaire");
-	private JButton passageDuTour=new JButton("Passer son tour"), abandon, annulerSelection=new JButton("Retour"), aide=new JButton("Aide");
+	private JButton passageDuTour=new JButton("Passer son tour"), abandon, annulerSelection=new JButton("Retour"), aide=new JButton("Aide"), lacherObjet=new JButton("Lacher objet");
 	private int id;
 	private ArrayList<JLabel> objetIventaire=new ArrayList();
 
@@ -129,7 +129,7 @@ public class Plateau {
 
 		vide.setLayout(new GridLayout(2,1));
 		infos.setLayout(new BorderLayout());
-		actionPartie.setLayout(new GridLayout(4,1));
+		actionPartie.setLayout(new GridLayout(5,1));
 		inventairePerso.setLayout(new GridLayout(2,3));
 		infosPerso.setLayout(new GridLayout(4,2));
 
@@ -156,7 +156,8 @@ public class Plateau {
 			abandon=new JButton("Quitter le test");
 		else
 			abandon=new JButton("Abandonner la partie");
-
+		
+		actionPartie.add(lacherObjet);
 		actionPartie.add(annulerSelection);
 		actionPartie.add(passageDuTour);
 		actionPartie.add(aide);
@@ -201,16 +202,26 @@ public class Plateau {
 				id=3;
 			}
 		});
+		lacherObjet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				id=4;
+			}
+		});
 		aide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				menu.menuRegle();
 			}
 		});
 		annulerSelection.setVisible(false);
+		lacherObjet.setVisible(false);
 	}
 
 	public void setVisibleBouttonAnnuler(boolean setter){
 		annulerSelection.setVisible(setter);
+	}
+	
+	public void setVisibleBouttonLacher(boolean setter){
+		lacherObjet.setVisible(setter);
 	}
 
 	public int getId(){
@@ -445,7 +456,6 @@ public class Plateau {
 		else if(objet.equals("Tresor"))
 			label.setIcon(new ImageIcon("img/treasure.png"));
 		else if(objet.equals("Bombe"))
-//			TODO changer l'image utilise pour la bombe
 			label.setIcon(new ImageIcon("img/Bombe.png"));
 		else if(objet.equals("Pelle"))
 			label.setIcon(new ImageIcon("img/pelle.png"));

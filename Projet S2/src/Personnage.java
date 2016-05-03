@@ -23,7 +23,7 @@ public class Personnage{
 		joueur.addPerso(this);
 		this.joueur=joueur;
 	}
-	
+
 	/**
 	 * 
 	 * @return l'energie que le personnage avait le tour precedent
@@ -31,7 +31,7 @@ public class Personnage{
 	public int getEnergieTourPrecedent(){
 		return energieTourPrecedent;
 	}
-	
+
 	/**
 	 * @return the deathTourPrecedent
 	 */
@@ -488,5 +488,28 @@ public class Personnage{
 	public void setActionDeplacement(boolean setter){
 		this.setAction(setter);
 		this.setDeplacement(setter);
+	}
+
+	public void abandonnerObjet(Affichage affichage, int equipe){
+		String itemAbandonne;
+		String [] listeItem;
+		if(inventaire.size()>1){
+			listeItem= new String[inventaire.size()+1];
+			listeItem[inventaire.size()]="Tout abandonner";
+		}else
+			listeItem= new String[inventaire.size()];
+
+		for(int cpt=0; cpt<inventaire.size(); cpt++){
+			listeItem[cpt]=inventaire.get(cpt);
+		}
+		
+		itemAbandonne=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous abandonner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "ABANDONNER ITEM",listeItem);		
+
+		if(itemAbandonne!=null){
+			if(itemAbandonne=="Tout abandonner")
+				inventaire.removeAll(inventaire);
+			else
+				inventaire.remove(itemAbandonne);
+		}
 	}
 }

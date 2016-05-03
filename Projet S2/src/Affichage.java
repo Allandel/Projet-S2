@@ -240,4 +240,13 @@ public class Affichage {
 	public void masquer(){
 		plateauDuJeu.masquer();
 	}
+
+	public void setVisibleActionPerso(boolean setter, Personnage perso){
+		if(perso!=null && !perso.inventaire.isEmpty())
+			plateauDuJeu.setVisibleBouttonLacher(setter);
+		else
+			plateauDuJeu.setVisibleBouttonLacher(false);
+		plateauDuJeu.setVisibleBouttonAnnuler(setter);
+	}
+	
 }

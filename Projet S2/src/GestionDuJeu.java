@@ -108,11 +108,11 @@ public class GestionDuJeu {
 
 		if(!test){
 			affichage.getPlateau().resetId();
-			affichage.getPlateau().setVisibleBouttonAnnuler(true);
+			affichage.setVisibleActionPerso(true, perso);
 			cordonnees= action.choixCase(ileDuJeu, affichage.getPlateau(), tableauAffichage, x, y, perso);
 		}else{
 			affichage.getPlateau().resetId();
-			affichage.getPlateau().setVisibleBouttonAnnuler(true);
+			affichage.setVisibleActionPerso(true, perso);
 			cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(), tableauAffichage, x, y, perso);
 		}
 			if(cordonnees[0]==999){
@@ -123,6 +123,8 @@ public class GestionDuJeu {
 				int decision=JOptionPane.showConfirmDialog(null,"Désirez vous abandonner la partie ?", "Abandonner la partie ?", JOptionPane.YES_NO_OPTION);
 				if(decision==0)
 					joueur.abandon();
+			}else if(cordonnees[0]==666){
+				perso.abandonnerObjet(affichage, equipe);
 			}else if(cordonnees[0]!=777){
 				//si le joueur n'annule pas sa selection	
 				if(perso.getDeplacement()){
@@ -156,7 +158,7 @@ public class GestionDuJeu {
 				}
 			}
 			affichage.getPlateau().refreshinfo(perso);
-			affichage.getPlateau().setVisibleBouttonAnnuler(false);
+			affichage.setVisibleActionPerso(false,perso);
 		return gagner;
 	}
 
