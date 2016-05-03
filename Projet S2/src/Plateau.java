@@ -459,6 +459,10 @@ public class Plateau {
 			label.setIcon(new ImageIcon("img/Bombe.png"));
 		else if(objet.equals("Pelle"))
 			label.setIcon(new ImageIcon("img/pelle.png"));
+		else if(objet.equals("Pioche"))
+			label.setIcon(new ImageIcon("img/Pioche.png"));
+		else if(objet.equals("Pierre"))
+			label.setIcon(new ImageIcon("img/Pierre.png"));
 	}
 
 	private void inventaireVide(){

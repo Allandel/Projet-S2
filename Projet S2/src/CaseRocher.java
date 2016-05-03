@@ -6,6 +6,7 @@
  */
 public class CaseRocher extends Case{
 	private boolean key, chest, keyTaken=false, chestTaken=false;
+	private int cptMinage=3;
 
 	/**
 	 * Constructeur permettant d'attribuer l'ID du rocher
@@ -25,6 +26,14 @@ public class CaseRocher extends Case{
 		}else{
 			return "R";
 		}
+	}
+	
+	public void setMinage(int minage){
+		cptMinage=minage;
+	}
+	
+	public int getMinage(){
+		return cptMinage;
 	}
 	/**
 	 * Setter de Key
