@@ -76,24 +76,24 @@ public class ActionJoueur {
 					coordonnees=this.getCoordonneesClic(plateauDuJeu,x,y,null);
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
-				}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y))));
-			}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=1 && tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=14 && !(tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur())));
+				}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (!(((yEvent==(y-1) || yEvent==(y+1)) && xEvent==x) || ((xEvent==(x-1) || xEvent==(x+1)) && yEvent==y))));
+			}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=1 && tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=4 && tableauAffichage[yEvent][xEvent]!=14 && !(tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur())));
 		}else if(perso instanceof Voleur || perso instanceof Guerrier){
 			do{
 				do{
 					coordonnees=this.getCoordonneesClic(plateauDuJeu,x,y,null);
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
-				}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && ((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (x==xEvent && y==yEvent)));
-			}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=14));
+				}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && ((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (x==xEvent && y==yEvent)));
+			}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=14));
 		}else if(perso instanceof Piegeur){
 			do{
 				do{
 					coordonnees=this.getCoordonneesClic(plateauDuJeu,x,y,null);
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
-				}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && ((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1));
-			}while(coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=14 && (tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur())));
+				}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && ((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1));
+			}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=14 && (tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur())));
 
 		}
 		return coordonnees;
@@ -177,9 +177,12 @@ public class ActionJoueur {
 				keyCode=27;
 			else if(plateauDuJeu.getId()==3)
 				keyCode=127;
-		}while(!(event instanceof MouseEvent) && keyCode!=32 && keyCode!=27 && keyCode!=127 && (keyCode<97 && keyCode>105) && keyCode!=96);
+		}while(!(event instanceof MouseEvent) && keyCode!=32 && keyCode!=27 && keyCode!=127 && (keyCode<97 && keyCode>105) && keyCode!=96 && plateauDuJeu.getId()!=4);
 
-		if(event instanceof MouseEvent){
+		if(plateauDuJeu.getId()==4){
+			res[0]=666;
+			res[1]=666;
+		}else if(event instanceof MouseEvent){
 			res[0]=plateauDuJeu.getX((MouseEvent) event) ;
 			res[1]=plateauDuJeu.getY((MouseEvent) event) ;
 		}else if(event instanceof KeyEvent || plateauDuJeu.getId()>0){

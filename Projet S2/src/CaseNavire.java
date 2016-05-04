@@ -84,7 +84,7 @@ public class CaseNavire extends Case {
 				persoSortant=(Personnage)affichage.popUpYesNo(equipe,"\nQuels personnage voulez-vous faire sortir du navire ?\n\n", "Sortie du navire",listePerso);  
 				if(persoSortant!=null){
 					//si le joueur a choisi de faire sortir un personnage	
-					plateauDuJeu.setVisibleBouttonAnnuler(true);
+					affichage.setVisibleActionPerso(true, null);
 					int[] cordonnees = action.choixCaseSortie(plateauDuJeu, tableauAffichage, x, y, persoSortant);
 					if(cordonnees[0]!=777){
 						//si le joueur n'annule pas l'action	
@@ -107,7 +107,7 @@ public class CaseNavire extends Case {
 			affichage.popUp(equipe, "Il n'y a pas de place libre pour pouvoir placer un personnage", "Attention" );
 			this.actionImpossible();
 		}
-		plateauDuJeu.setVisibleBouttonAnnuler(false);
+		affichage.setVisibleActionPerso(false,null);
 	}
 
 	/**
