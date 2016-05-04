@@ -81,7 +81,7 @@ public class Piegeur extends Personnage{
 	public void poserBombe(Personnage p,int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
 		if(tableauIle[x][y] instanceof CaseRocher || tableauIle[x][y] instanceof CaseNavire){
 			Bombe b=new Bombe(x,y);
-			this.getInventaire().remove(this.getInventaire().indexOf("Bombe"));
+			this.removeObjetInventaire("Bombe",false);
 			b.explosionObjet(p,tableauIle, affichage, equipe, joueur);
 		}else{
 		Bombe b=new Bombe(x,y);
