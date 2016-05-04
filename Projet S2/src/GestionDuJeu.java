@@ -45,7 +45,7 @@ public class GestionDuJeu {
 	 */
 	public boolean [] tourDuJoueur(){
 		boolean [] gagner={false,false};
-		int equipe=0;
+		int equipe=0 ;
 
 		while(!gagner[0]){
 			affichage.getPlateau().resetInfo();
