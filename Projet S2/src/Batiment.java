@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Batiment {
 	protected ArrayList<Personnage>stockBatiment=new ArrayList<Personnage>();
 	protected int batimentHealth=200,id=0;
+	protected Joueur joueur;
 	
 	public void dommageBatiment(int deg){
 		batimentHealth-=deg;
