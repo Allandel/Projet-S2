@@ -49,7 +49,7 @@ public class GestionDuJeu {
 
 		while(!gagner[0]){
 			affichage.getPlateau().resetInfo();
-			joueur[equipe].resetAction();
+			joueur[equipe].resetAction(affichage, equipe);
 			affichage.masquer();
 			affichage.popUp(equipe,"Tour du Joueur "+(equipe+1), "Tour du Joueur");
 			affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
