@@ -106,15 +106,9 @@ public class GestionDuJeu {
 		boolean []gagner={false,false};
 		int[] cordonnees;
 
-		if(!test){
-			affichage.getPlateau().resetId();
-			affichage.setVisibleActionPerso(true, perso);
-			cordonnees= action.choixCase(ileDuJeu, affichage.getPlateau(), tableauAffichage, x, y, perso);
-		}else{
 			affichage.getPlateau().resetId();
 			affichage.setVisibleActionPerso(true, perso);
 			cordonnees = action.choixCase(ileDuJeu, affichage.getPlateau(), tableauAffichage, x, y, perso);
-		}
 			if(cordonnees[0]==999){
 				//si le joueur decide de passer son tour
 				joueur.passerTour();
