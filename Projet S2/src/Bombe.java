@@ -52,12 +52,12 @@ public class Bombe {
 				tableauIle[x][y]=new Case();
 				tableauIle[x][y].setId(15);
 			}
-		}else if(((CaseNavire)tableauIle[this.x][this.y]).getId()!=joueur[equipe].getIdBateau()){
+		}else if(tableauIle[this.x][this.y].getId()!=joueur[equipe].getIdBateau()){
 			Random ran=new Random();
 			int deg=ran.nextInt(50)+10;
 			affichage.popUp(equipe,"Vous avez fait exploser une bombe sur la coque du navire ennemi ! Vous avez infligé "+deg+" de dégats", "ATTAQUE DU NAVIRE");
-			((CaseNavire)tableauIle[this.x][this.y]).dommageCoque(deg);
-			if(((CaseNavire)tableauIle[this.x][this.y]).getCoqueHealth()<=0){
+			tableauIle[this.x][this.y].getBatimentCourant().dommageBatiment(deg);
+			if((tableauIle[this.x][this.y]).getBatimentCourant().getBatimentHealth()<=0){
 				String res;
 				if(equipe==0){
 					res="rouge";

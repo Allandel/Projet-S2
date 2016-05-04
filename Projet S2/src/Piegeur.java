@@ -48,9 +48,7 @@ public class Piegeur extends Personnage{
 				super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 			}
 		}else if(!tableauIle[x][y].getBombe() && !tableauIle[x][y].getPiege()){
-			String [] tab=new String [2];
-			tab[0]="PIEGER LA CASE";
-			tab[1]="POSER UNE BOMBE";
+			String [] tab={"Pieger la case","Poser une bombe"};
 			String action=null;
 			action=(String)affichage.popUpYesNo(equipe,"\nQue voulez vous faire ?\n\n[Cliquez sur annuler si vous ne voulez rien faire]\n", "Choix de l'action",tab);
 			if(action!=null){
@@ -79,7 +77,7 @@ public class Piegeur extends Personnage{
 	}
 	
 	public void poserBombe(Personnage p,int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
-		if(tableauIle[x][y] instanceof CaseRocher || tableauIle[x][y] instanceof CaseNavire){
+		if(tableauIle[x][y] instanceof CaseRocher || tableauIle[x][y].getBatimentCourant() instanceof Navire){
 			Bombe b=new Bombe(x,y);
 			this.removeObjetInventaire("Bombe",false);
 			b.explosionObjet(p,tableauIle, affichage, equipe, joueur);

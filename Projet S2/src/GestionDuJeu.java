@@ -69,7 +69,7 @@ public class GestionDuJeu {
 						affichage.getPlateau().refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), 0);
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],false);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-						((CaseNavire)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]]).sortieBateau(ileDuJeu, affichage.getPlateau(), tableauAffichage, cordonnees[0], cordonnees[1], affichage, equipe);
+						ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant().sortieBateau(ileDuJeu, affichage.getPlateau(), tableauAffichage, cordonnees[0], cordonnees[1], affichage, equipe);
 
 					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}
@@ -174,9 +174,9 @@ public class GestionDuJeu {
 	 */
 	void soinBateau(Joueur joueur){
 		if(joueur.getEquipe())
-			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getLigneNavJ1()][ileDuJeu.getColonneNavJ1()]).recupEnergie();
+			ileDuJeu.getTableau()[ileDuJeu.getLigneNavJ1()][ileDuJeu.getColonneNavJ1()].getBatimentCourant().recupEnergie();
 		else
-			((CaseNavire)ileDuJeu.getTableau()[ileDuJeu.getLigneNavJ2()][ileDuJeu.getColonneNavJ2()]).recupEnergie();
+			ileDuJeu.getTableau()[ileDuJeu.getLigneNavJ2()][ileDuJeu.getColonneNavJ2()].getBatimentCourant().recupEnergie();
 	}
 
 	/**
@@ -215,7 +215,7 @@ public class GestionDuJeu {
 		for(Joueur player: joueur){
 			player.setBateau(ileDuJeu);
 			for(Personnage perso: player.getPersos()){
-				((CaseNavire)ileDuJeu.getTableau()[player.getLigneBateau()][player.getColonneBateau()]).addPersoNavire(perso);
+				ileDuJeu.getTableau()[player.getLigneBateau()][player.getColonneBateau()].getBatimentCourant().addPersoBatiment(perso);
 			}
 		}
 

@@ -63,8 +63,8 @@ public class ile {
 		}
 		tableauIle[5][1].setId(5);
 		tableauIle[5][5].setId(5);
-		tableauIle[5][2]=new CaseNavire(2);
-		tableauIle[5][4]=new CaseNavire(3);
+		tableauIle[5][2].setBatimentCourant(new Navire(2));
+		tableauIle[5][4].setBatimentCourant(new Navire(3));
 		((CaseRocher)tableauIle[0][2]).setChest(true);
 		((CaseRocher)tableauIle[0][4]).setKey(true);
 	}
@@ -80,8 +80,8 @@ public class ile {
 
 		ligneNavJ1= random.nextInt(tableauIle.length-2)+1;
 		ligneNavJ2= random.nextInt(tableauIle.length-2)+1;
-		tableauIle[ligneNavJ1][1]= new CaseNavire(2);
-		tableauIle[ligneNavJ2][tableauIle.length-2]= new CaseNavire(3);
+		tableauIle[ligneNavJ1][1].setBatimentCourant(new Navire(2));
+		tableauIle[ligneNavJ2][tableauIle.length-2].setBatimentCourant(new Navire(3));
 
 		setRocher(taille,proportion);
 		setKeyCoffre();	

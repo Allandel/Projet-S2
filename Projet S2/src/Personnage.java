@@ -285,10 +285,10 @@ public class Personnage{
 	public boolean[] entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
 		boolean victoire[]={false,false};
 
-		if(joueur.nbrVivant()>((CaseNavire)tableauIle[xApres][yApres]).nbrVivantStock()+1){
+		if(joueur.nbrVivant()>tableauIle[xApres][yApres].getBatimentCourant().nbrVivantStock()+1){
 			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire",null);
 			if (decision==0){
-				((CaseNavire)tableauIle[xApres][yApres]).addPersoNavire(this);
+				tableauIle[xApres][yApres].getBatimentCourant().addPersoBatiment(this);
 				tableauIle[xAvant][yAvant].removePersonnageCourant();
 				this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle, affichage, equipe);
 				perteEnergie(1, xApres,yApres, tableauIle, false,false, affichage, equipe);
@@ -392,8 +392,8 @@ public class Personnage{
 				tableauIle[xApres][yApres].setPersonnageCourant(this);
 			}
 		}else{
-			if(((CaseNavire)tableauIle[xApres][yApres]).persoMort()){
-				for(Personnage perso : ((CaseNavire)tableauIle[xApres][yApres]).getStocknavire()){
+			if(tableauIle[xApres][yApres].getBatimentCourant().persoMort()){
+				for(Personnage perso : tableauIle[xApres][yApres].getBatimentCourant().getStockBatiment()){
 					if(perso.getDeath() && !perso.getInventaire().isEmpty()){
 						for (int i=0; i<perso.getInventaire().size();i++){
 							this.setObjetInventaire(perso.getInventaire().get(i));

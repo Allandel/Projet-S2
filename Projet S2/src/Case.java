@@ -9,7 +9,7 @@ public class Case {
 	private boolean accessible, piege=false;
 	private Personnage personnageCourant=null;
 	private Bombe bombe=null;
-	
+	private Batiment batimentCourant=null;
 	/**
 	 * Construit une case initialisant l'attribut accessible a false
 	 */
@@ -33,6 +33,26 @@ public class Case {
 	public void setBombe(Bombe b){
 		this.bombe=b;
 		
+	}
+	
+	/**
+	 * @return the batimentCourant
+	 */
+	public Batiment getBatimentCourant() {
+		return batimentCourant;
+	}
+
+	/**
+	 * @param batimentCourant the batimentCourant to set
+	 */
+	public void setBatimentCourant(Batiment batimentCourant) {
+		this.batimentCourant = batimentCourant;
+		this.setId(batimentCourant.getId());
+	}
+	
+	public void removeBatimentCourant(){
+		this.batimentCourant = null;
+		this.setId(15);
 	}
 
 	public boolean getBombe(){
@@ -116,10 +136,12 @@ public class Case {
 	 * return un string vide ou celui specifique au personnage si la case est occupe
 	 */
 	public String toString(){
-		if(personnageCourant==null){
-			return  " ";
-		}
-		return personnageCourant.toString(true);
+			
+		if(batimentCourant!=null)
+			return batimentCourant.toString();
+		else if(personnageCourant!=null)
+			return personnageCourant.toString(true);
+		return  " ";
 	}
 	
 }
