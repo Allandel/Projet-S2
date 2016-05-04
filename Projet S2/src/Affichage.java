@@ -237,10 +237,6 @@ public class Affichage {
 		plateauDuJeu.close();
 	}
 
-	public void masquer(){
-		plateauDuJeu.masquer();
-	}
-
 	public void setVisibleActionPerso(boolean setter, Personnage perso){
 		if(perso!=null && !perso.getInventaire().isEmpty())
 			plateauDuJeu.setVisibleBouttonLacher(setter);
@@ -249,11 +245,18 @@ public class Affichage {
 		plateauDuJeu.setVisibleBouttonAnnuler(setter);
 	}
 
-	public void actionEnnemi(Joueur joueur){
-		String actionEnnemi=joueur.persoAttaque();
+	private void actionEnnemi(Joueur joueur){
+		String actionEnnemi="Tour du Joueur "+(joueur.getIdBateau()-1);
+		actionEnnemi+=joueur.persoAttaque();
 		actionEnnemi+=joueur.persoVole();
 		if(!actionEnnemi.equals(""))
-			this.popUp(joueur.getIdBateau()-2, actionEnnemi, "Liste des actions ennemis sur votre personnage.");
+			this.popUp(joueur.getIdBateau()-2, actionEnnemi, "Tour du Joueur "+(joueur.getIdBateau()-1));
 	}
 
+	public void actionDebutTour(int equipe, Joueur []joueur, ile ileDuJeu, int [][] tableauAffichage){
+		plateauDuJeu.resetInfo();
+		plateauDuJeu.masquer();
+		affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
+		actionEnnemi(joueur[equipe]);
+	}
 }

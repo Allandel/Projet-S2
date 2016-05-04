@@ -48,12 +48,9 @@ public class GestionDuJeu {
 		int equipe=0;
 
 		while(!gagner[0]){
-			affichage.getPlateau().resetInfo();
 			joueur[equipe].resetAction();
-			affichage.masquer();
-			affichage.popUp(equipe,"Tour du Joueur "+(equipe+1), "Tour du Joueur");
-			affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
-			affichage.actionEnnemi(joueur[equipe]);
+			affichage.actionDebutTour(equipe, joueur, ileDuJeu, tableauAffichage);
+
 			while(joueur[equipe].actionPossible() && !gagner[0]){
 				affichage.getPlateau().resetId();
 				int [] cordonnees=action.choixCase(affichage.getPlateau(), tableauAffichage,ileDuJeu, joueur[equipe]);
