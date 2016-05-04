@@ -214,7 +214,7 @@ public class Plateau {
 		annulerSelection.setVisible(false);
 		lacherObjet.setVisible(false);
 	}
-	
+
 	/**
 	 * Change la visibilité du bouton annuler
 	 * @param setter
@@ -222,7 +222,7 @@ public class Plateau {
 	public void setVisibleBouttonAnnuler(boolean setter){
 		annulerSelection.setVisible(setter);
 	}
-	
+
 	/**
 	 * Change la visibilité du bouton lacher
 	 * @param setter
@@ -230,7 +230,7 @@ public class Plateau {
 	public void setVisibleBouttonLacher(boolean setter){
 		lacherObjet.setVisible(setter);
 	}
-	
+
 	/**
 	 * return l'id du buton selectionné
 	 * @return
@@ -449,7 +449,7 @@ public class Plateau {
 	public void setText(int x, int y, String msg) {
 		graphic.setText(x, y, msg) ;		
 	}
-	
+
 	/**
 	 * affiche l'inventaire du personnage
 	 * @param perso
@@ -462,7 +462,7 @@ public class Plateau {
 				this.addImageIcon(objetIventaire.get(cpt),"Vide");
 		}
 	}
-	
+
 	/**
 	 * set l'image de l'objet passé en parametre dans l'inventaire
 	 * @param label
@@ -581,7 +581,7 @@ public class Plateau {
 		recupenergie.setText("");
 		this.affichagePanel();
 	}
-	
+
 	/**
 	 * affiche les panels d'information
 	 */

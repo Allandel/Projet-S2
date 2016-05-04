@@ -4,7 +4,7 @@ import java.util.Random;
 public class Fort extends Batiment{
 
 	/**
-	 * Construit un navire en lui attribuant l'ID donnee
+	 * Construit un fort en lui attribuant l'ID donnee
 	 * @param id
 	 */
 	public Fort(int id, int x, int y, Joueur joueur){
@@ -15,7 +15,13 @@ public class Fort extends Batiment{
 	public String toString(){
 		return "F";
 	}
-
+	
+	/**
+	 * Attaque les perso ennemi autour du fort
+	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
+	 */
 	public void attaque(Case[][] tableauIle, Affichage affichage, int equipe){
 		Random deg=new Random();
 		int dommages=deg.nextInt(10)+20;
