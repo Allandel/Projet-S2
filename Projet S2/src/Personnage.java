@@ -11,7 +11,7 @@ public class Personnage{
 	private int energie=100, id,compteur=0, energieTourPrecedent=100;
 	private String nom, type;
 	private boolean death=false, action=true, deplacement=true, deathTourPrecedent=false;
-	protected ArrayList <String> inventaire=new ArrayList<String>(),inventaireTourPrecedent=new ArrayList<String>();
+	private ArrayList <String> inventaire=new ArrayList<String>(),inventaireTourPrecedent=new ArrayList<String>();
 	protected Joueur joueur;
 
 	/**
@@ -184,6 +184,13 @@ public class Personnage{
 		return this.inventaire;
 	}
 	/**
+	 * @return the inventaireTourPrecedent
+	 */
+	public ArrayList<String> getInventaireTourPrecedent() {
+		return inventaireTourPrecedent;
+	}
+
+	/**
 	 * Explore l'inventaire a la recherche d'un objet precis
 	 * @param objet
 	 */
@@ -217,7 +224,7 @@ public class Personnage{
 					itemEchange=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous donner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "DONNER ITEM",listeItem); 
 					if(itemEchange!=null){
 						p.setObjetInventaire(itemEchange);
-						this.inventaire.remove(itemEchange);
+						this.removeObjetInventaire(itemEchange,false);
 						action=false;
 					}
 				}else{
@@ -233,7 +240,7 @@ public class Personnage{
 						itemEchange=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM",listeItem2); 
 						if(itemEchange!=null){
 							this.setObjetInventaire(itemEchange);
-							p.inventaire.remove(itemEchange);
+							p.removeObjetInventaire(itemEchange,false);
 							action=false;
 						}
 					}else{
@@ -370,7 +377,7 @@ public class Personnage{
 					affichage.popUp(equipe,"Ce cadavre n'avait rien d'interessant...", "Rencontre avec un mort" );
 				}else{
 					for (int i=0; i<tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().size();i++){
-						this.getInventaire().add(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i));
+						this.setObjetInventaire(tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i));
 						res+="+ "+tableauIle[xApres][yApres].getPersonnageCourant().getInventaire().get(i)+"\n";
 					}
 					affichage.popUp(equipe,"Vous avez recupere des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort" );
@@ -387,7 +394,7 @@ public class Personnage{
 				for(Personnage perso : ((CaseNavire)tableauIle[xApres][yApres]).getStocknavire()){
 					if(perso.getDeath() && !perso.getInventaire().isEmpty()){
 						for (int i=0; i<perso.getInventaire().size();i++){
-							this.getInventaire().add(perso.getInventaire().get(i));
+							this.setObjetInventaire(perso.getInventaire().get(i));
 							res+="+ "+perso.getInventaire().get(i)+"\n";
 						}
 						affichage.popUp(equipe,"Vous avez recupere des objets sur le cadavre... Vous en aurez plus besoin que lui.\nVous avez recuperer :"+res, "Rencontre avec un mort" );
@@ -529,10 +536,12 @@ public class Personnage{
 		itemAbandonne=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous abandonner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "ABANDONNER ITEM",listeItem);		
 
 		if(itemAbandonne!=null){
-			if(itemAbandonne=="Tout abandonner")
+			if(itemAbandonne=="Tout abandonner"){
 				inventaire.removeAll(inventaire);
-			else
-				inventaire.remove(itemAbandonne);
+				inventaireTourPrecedent.removeAll(inventaire);
+			}else{
+				this.removeObjetInventaire(itemAbandonne, false);
+			}
 		}
 	}
 }

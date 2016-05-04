@@ -20,10 +20,10 @@ public class Piegeur extends Personnage{
 		super(joueur);
 		setNom("Paul");
 		setType("Piegeur");
-		inventaire.add("Pelle");
-		inventaire.add("Bombe");
-		inventaire.add("Bombe");
-		inventaire.add("Bombe");
+		super.setObjetInventaire("Pelle");
+		super.setObjetInventaire("Bombe");
+		super.setObjetInventaire("Bombe");
+		super.setObjetInventaire("Bombe");
 		if(joueur.getEquipe())
 			setId(8);
 		else

@@ -178,7 +178,8 @@ public class Joueur {
 		}
 	}
 
-	public void persoAttaque(Affichage affichage){
+	public String persoAttaque(){
+		String actionEnnemi="";
 		int cpt=0;
 		for(Personnage perso:equipe){
 			if(perso.getEnergie()<perso.getEnergieTourPrecedent() || perso.getDeath()!=perso.getDeathTourPrecedent()){
@@ -186,20 +187,42 @@ public class Joueur {
 			}
 		}
 		if(cpt>0){
-			Object[] listeDommage=new String [cpt];
-			cpt=0;
 			for(Personnage perso:equipe){
 				if(perso.getEnergie()<perso.getEnergieTourPrecedent() ){
-					listeDommage[cpt]=""+perso.getType()+" "+perso.getNom()+" a reçu "+(perso.getEnergieTourPrecedent()-perso.getEnergie())+" dommages";
+					actionEnnemi+=""+perso.getType()+" "+perso.getNom()+" a reçu "+(perso.getEnergieTourPrecedent()-perso.getEnergie())+" dommages. \n";
 					perso.setEnergieTourPrecedent(perso.getEnergie());
-					cpt++;
 				}else if(perso.getDeath()!=perso.getDeathTourPrecedent()){
-					listeDommage[cpt]=""+perso.getType()+" "+perso.getNom()+" est mort des dommages qu'il a reçu pendant ce tour.";
+					actionEnnemi+=""+perso.getType()+" "+perso.getNom()+" est mort des dommages qu'il a reçu pendant ce tour.\n";
 					perso.setDeathTourPrecedent(perso.getDeath());
-					cpt++;
 				}
 			}
-			affichage.popUpYesNo(idBateau-2, "Liste des personnages qui ont subis des dommages.", "Dommage tour precedent", listeDommage);
 		}
+		return actionEnnemi;
+	}
+
+	public String persoVole(){
+		String actionEnnemi="";
+		int cpt=0;
+		for(Personnage perso:equipe){
+			if(!perso.getInventaire().equals(perso.getInventaireTourPrecedent())){
+				cpt++;
+			}
+		}
+		if(cpt>0){
+			for(Personnage perso:equipe){
+				if(!perso.getInventaire().equals(perso.getInventaireTourPrecedent())){
+					actionEnnemi+=""+perso.getType()+" "+perso.getNom()+" s'est fait voler";
+//					for(String objet:perso.getInventaireTourPrecedent()){
+					for(int i=0;i<perso.getInventaireTourPrecedent().size();i++){
+						if(!perso.getInventaire().contains(perso.getInventaireTourPrecedent().get(i))){
+							actionEnnemi+=" "+perso.getInventaireTourPrecedent().get(i);
+							perso.getInventaireTourPrecedent().remove(i);
+						}
+					}
+					actionEnnemi+="\n";
+				}
+			}
+		}
+		return actionEnnemi;
 	}
 }

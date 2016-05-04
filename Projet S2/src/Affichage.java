@@ -234,7 +234,7 @@ public class Affichage {
 	}
 
 	public void close(){
-			plateauDuJeu.close();
+		plateauDuJeu.close();
 	}
 
 	public void masquer(){
@@ -242,11 +242,18 @@ public class Affichage {
 	}
 
 	public void setVisibleActionPerso(boolean setter, Personnage perso){
-		if(perso!=null && !perso.inventaire.isEmpty())
+		if(perso!=null && !perso.getInventaire().isEmpty())
 			plateauDuJeu.setVisibleBouttonLacher(setter);
 		else
 			plateauDuJeu.setVisibleBouttonLacher(false);
 		plateauDuJeu.setVisibleBouttonAnnuler(setter);
 	}
-	
+
+	public void actionEnnemi(Joueur joueur){
+		String actionEnnemi=joueur.persoAttaque();
+		actionEnnemi+=joueur.persoVole();
+		if(!actionEnnemi.equals(""))
+			this.popUp(joueur.getIdBateau()-2, actionEnnemi, "Liste des actions ennemis sur votre personnage.");
+	}
+
 }
