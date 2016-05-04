@@ -54,7 +54,7 @@ public class Batiment {
 	}
 
 	/**
-	 * Met l'attribut action et deplacement des personnages du navire a faux pour eviter une boucle infini dans le jeu
+	 * Met l'attribut action et deplacement des personnages du batiment a faux pour eviter une boucle infini dans le jeu
 	 */
 	private void actionImpossible(){
 		for(Personnage perso:stockBatiment){
@@ -64,7 +64,7 @@ public class Batiment {
 	}
 
 	/**
-	 * Regarde s'il y a une place libre autour du bateau
+	 * Regarde s'il y a une place libre autour du batiment
 	 * @param i
 	 * @param j
 	 * @param ileDuJeu
@@ -85,7 +85,7 @@ public class Batiment {
 	 * @param i
 	 * @param j
 	 * @param ileDuJeu
-	 * @return vrai s'il n'y a pas de case vide ou de personnage pouvant se deplacer autour du bateau
+	 * @return vrai s'il n'y a pas de case vide ou de personnage pouvant se deplacer autour du batiment
 	 */
 	public boolean sortieImpossible(int i, int j, ile ileDuJeu){
 		for(int x=i-1;x<i+2;x++){
@@ -98,7 +98,7 @@ public class Batiment {
 	}
 
 	/**
-	 * Regenere l'energie des personnages dans le navire 
+	 * Regenere l'energie des personnages dans le batiment 
 	 */
 	public void recupEnergie(){
 		for(Personnage perso: stockBatiment){
@@ -108,16 +108,16 @@ public class Batiment {
 	}
 
 	/**
-	 * Permet a un personnage de sortir du bateau dans le bateau
+	 * Permet a un personnage de sortir du batiment
 	 */
-	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Affichage affichage, int equipe){
+	public void sortieBatiment(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Affichage affichage, int equipe){
 		plateauDuJeu.refreshinfo(null,batimentHealth );
 		
 		if(stockBatiment.isEmpty()){
-			//affichage d'un message si pas de personnage dans le navire
-			affichage.popUp(equipe, "Il n'y a pas de personnages dans le Navire", "Attention" );
+			//affichage d'un message si pas de personnage dans le batiment
+			affichage.popUp(equipe, "Il n'y a pas de personnages.", "Attention" );
 		}else if(this.placeLibre(y, x, ileDuJeu)){
-			//S'il y a de la place autour du bateau
+			//S'il y a de la place autour du batiment
 			Personnage persoSortant = null;
 			ActionJoueur action= new ActionJoueur();
 			int nbrVivantJouable=0, i=0;
@@ -126,7 +126,7 @@ public class Batiment {
 					nbrVivantJouable++;
 			}
 			if(nbrVivantJouable>0){
-				//S'il y a au moins un personnage vivant et jouable dans le bateau	
+				//S'il y a au moins un personnage vivant et jouable dans le batiment	
 				Personnage [] listePerso= new Personnage[nbrVivantJouable];
 				for(Personnage perso: stockBatiment){
 					if(perso.sortiePossible(y, x, ileDuJeu)){
@@ -134,7 +134,7 @@ public class Batiment {
 						i++;
 					}
 				}
-				persoSortant=(Personnage)affichage.popUpYesNo(equipe,"\nQuels personnage voulez-vous faire sortir du navire ?\n\n", "Sortie du navire",listePerso);  
+				persoSortant=(Personnage)affichage.popUpYesNo(equipe,"\nQuels personnage voulez-vous faire sortir ?\n\n", "Sortie de personnage",listePerso);  
 				if(persoSortant!=null){
 					//si le joueur a choisi de faire sortir un personnage	
 					affichage.setVisibleActionPerso(true, null);
@@ -150,11 +150,11 @@ public class Batiment {
 					}
 				}
 				if(this.sortieImpossible(y, x, ileDuJeu))
-					//S'il n'y a plus de case vide ou de personnage pouvant se deplacer autour du bateau
+					//S'il n'y a plus de case vide ou de personnage pouvant se deplacer autour du batiment
 					this.actionImpossible();
-				//met les personnages dans le bateau comme sans action ni deplacement pour eviter une boucle infini dans le tour du joueur
+				//met les personnages dans le batiment comme sans action ni deplacement pour eviter une boucle infini dans le tour du joueur
 			}else{
-				affichage.popUp(equipe, "Il n'y a pas de personnages jouables dans le Navire", "Attention" );
+				affichage.popUp(equipe, "Il n'y a pas de personnages jouables", "Attention" );
 			}
 		}else{
 			affichage.popUp(equipe, "Il n'y a pas de place libre pour pouvoir placer un personnage", "Attention" );
