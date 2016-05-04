@@ -209,7 +209,7 @@ public class Affichage {
 	/**
 	 * 
 	 * @param equipe
-	 * @return le plateau specifique au joueur
+	 * @return le plateau du jeu
 	 */
 	public Plateau getPlateau(){
 		return plateauDuJeu;
@@ -224,19 +224,41 @@ public class Affichage {
 		plateauDuJeu.setHighlight(cordonnees[0], cordonnees[1], Color.BLUE);
 	}
 
+	/**
+	 * Affiche un JOptionPane centré sur le plateau
+	 * @param equipe
+	 * @param texte
+	 * @param titre
+	 */
 	public void popUp(int equipe, String texte, String titre){
 		Object[] optionNull = { "OK" };
 		plateauDuJeu.popUp(texte, titre, optionNull);
 	}
 
+	/**
+	 * Affiche un JOptionPane centré sur le plateau avec un retour
+	 * @param equipe
+	 * @param texte
+	 * @param titre
+	 * @param listeItem
+	 * @return
+	 */
 	public Object popUpYesNo(int equipe, String texte, String titre, Object[] listeItem){
 		return plateauDuJeu.popUpYesNo(texte, titre, listeItem);
 	}
 
+	/**
+	 * Ferme le plateau de jeu
+	 */
 	public void close(){
 		plateauDuJeu.close();
 	}
 
+	/**
+	 * Change la visibilité des bouttons suivant l'inventaire du perso
+	 * @param setter
+	 * @param perso
+	 */
 	public void setVisibleActionPerso(boolean setter, Personnage perso){
 		if(perso!=null && !perso.getInventaire().isEmpty())
 			plateauDuJeu.setVisibleBouttonLacher(setter);
@@ -245,6 +267,10 @@ public class Affichage {
 		plateauDuJeu.setVisibleBouttonAnnuler(setter);
 	}
 
+	/**
+	 * Affiche les actions effectuées par l'ennemi pendant son tour sur les personnages du joueur
+	 * @param joueur
+	 */
 	private void actionEnnemi(Joueur joueur){
 		String actionEnnemi="Tour du Joueur "+(joueur.getIdBateau()-1+"\n");
 		actionEnnemi+=joueur.persoAttaque();
@@ -253,6 +279,13 @@ public class Affichage {
 			this.popUp(joueur.getIdBateau()-2, actionEnnemi, "Tour du Joueur "+(joueur.getIdBateau()-1));
 	}
 
+	/**
+	 * Actions d'affichages effectuées au début du tour du joueur 
+	 * @param equipe
+	 * @param joueur
+	 * @param ileDuJeu
+	 * @param tableauAffichage
+	 */
 	public void actionDebutTour(int equipe, Joueur []joueur, ile ileDuJeu, int [][] tableauAffichage){
 		plateauDuJeu.resetInfo();
 		plateauDuJeu.masquer();

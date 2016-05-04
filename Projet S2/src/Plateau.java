@@ -214,19 +214,34 @@ public class Plateau {
 		annulerSelection.setVisible(false);
 		lacherObjet.setVisible(false);
 	}
-
+	
+	/**
+	 * Change la visibilité du bouton annuler
+	 * @param setter
+	 */
 	public void setVisibleBouttonAnnuler(boolean setter){
 		annulerSelection.setVisible(setter);
 	}
-
+	
+	/**
+	 * Change la visibilité du bouton lacher
+	 * @param setter
+	 */
 	public void setVisibleBouttonLacher(boolean setter){
 		lacherObjet.setVisible(setter);
 	}
-
+	
+	/**
+	 * return l'id du buton selectionné
+	 * @return
+	 */
 	public int getId(){
 		return id;
 	}
 
+	/**
+	 * remet l'id à 0
+	 */
 	public void resetId(){
 		id=0;
 	}
@@ -434,7 +449,11 @@ public class Plateau {
 	public void setText(int x, int y, String msg) {
 		graphic.setText(x, y, msg) ;		
 	}
-
+	
+	/**
+	 * affiche l'inventaire du personnage
+	 * @param perso
+	 */
 	private void affichageInventaire(Personnage perso){
 		for(int cpt=0;cpt<objetIventaire.size();cpt++){
 			if(cpt<perso.getInventaire().size())
@@ -443,7 +462,12 @@ public class Plateau {
 				this.addImageIcon(objetIventaire.get(cpt),"Vide");
 		}
 	}
-
+	
+	/**
+	 * set l'image de l'objet passé en parametre dans l'inventaire
+	 * @param label
+	 * @param objet
+	 */
 	private void addImageIcon(JLabel label, String objet){
 		label.setVisible(true);
 		if(objet.equals("Vide"))
@@ -464,18 +488,27 @@ public class Plateau {
 			label.setIcon(new ImageIcon("img/Pierre.png"));
 	}
 
+	/**
+	 * Affichage specifique à l'inventaire vide
+	 */
 	private void inventaireVide(){
 		for(int cpt=0;cpt<objetIventaire.size();cpt++){
 			this.addImageIcon(objetIventaire.get(cpt),"Vide");
 		}
 	}
 
+	/**
+	 * Cache l'inventaire
+	 */
 	private void hideInventaire(){
 		for(int cpt=0;cpt<objetIventaire.size();cpt++){
 			objetIventaire.get(cpt).setVisible(false);
 		}
 	}
 
+	/**
+	 * Initialise les jlabel de l'inventaire
+	 */
 	private void setObjetIventaire(){
 		for(int i=0;i<6;i++){
 			JLabel objet=new JLabel();
@@ -485,6 +518,12 @@ public class Plateau {
 		}
 	}
 
+	/**
+	 * refrsh des info suivant si c'est un personnage ou un bateau.
+	 * Mettre à null perso si c'est le bateau qui est refresh
+	 * @param perso
+	 * @param coqueHealth
+	 */
 	public void refreshinfo(Personnage perso, int coqueHealth){
 		if(perso!=null){
 			if(perso.getInventaire().isEmpty())
@@ -504,10 +543,23 @@ public class Plateau {
 		}
 	}
 
+	/**
+	 * Affichage d'un JOptionPane centré sur le plateau sans retour
+	 * @param texte
+	 * @param titre
+	 * @param options
+	 */
 	public void popUp(String texte, String titre, Object[] options){
 		JOptionPane.showOptionDialog(window, texte, titre,JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,null, options, options[0]);
 	}
 
+	/**
+	 * Affichage d'un JOptionPane centré sur le plateau avec un retour
+	 * @param texte
+	 * @param titre
+	 * @param listeItem
+	 * @return
+	 */
 	public Object popUpYesNo(String texte, String titre, Object []listeItem){
 		Object object;
 		if(listeItem==null)
@@ -518,6 +570,9 @@ public class Plateau {
 
 	}
 
+	/**
+	 * Reset les infos des panel d'information
+	 */
 	public void resetInfo(){
 		this.hideInventaire();
 		recupNomPerso.setText("");
@@ -525,7 +580,10 @@ public class Plateau {
 		recupenergie.setText("");
 		this.affichagePanel();
 	}
-
+	
+	/**
+	 * affiche les panels d'information
+	 */
 	private void affichagePanel(){
 		nomPerso.setVisible(true);
 		inventaire.setVisible(true);
