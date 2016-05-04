@@ -2,18 +2,15 @@ import java.util.Random;
 
 
 public class Fort extends Batiment{
-	private int x,y;
-	
+
 	/**
 	 * Construit un navire en lui attribuant l'ID donnee
 	 * @param id
 	 */
 	public Fort(int id, int x, int y, Joueur joueur){
+		super(x, y, joueur);
 		this.setId(id);
-		this.x=x;
-		this.y=y;
-		this.joueur=joueur;
-	}
+		}
 
 	public String toString(){
 		return "F";

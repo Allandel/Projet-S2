@@ -3,8 +3,14 @@ import java.util.ArrayList;
 
 public class Batiment {
 	protected ArrayList<Personnage>stockBatiment=new ArrayList<Personnage>();
-	protected int batimentHealth=200,id=0;
+	protected int batimentHealth=200,id=0,x,y;
 	protected Joueur joueur;
+	
+	Batiment(int x, int y, Joueur joueur){
+		this.x=x;
+		this.y=y;
+		this.joueur=joueur;
+	}
 	
 	public void dommageBatiment(int deg){
 		batimentHealth-=deg;
@@ -71,10 +77,10 @@ public class Batiment {
 	 * @param ileDuJeu
 	 * @return vrai si une case est vide
 	 */
-	private boolean placeLibre(int i, int j, ile ileDuJeu){
-		for(int x=i-1;x<i+2;x++){
-			for(int y=j-1;y<j+2;y++){
-				if(ileDuJeu.getTableau()[y][x].getId()==15)
+	private boolean placeLibre(ile ileDuJeu){
+		for(int i=x-1;i<x+2;i++){
+			for(int j=y-1;j<y+2;j++){
+				if(ileDuJeu.getTableau()[i][j].getId()==15)
 					return true;
 			}
 		}
@@ -88,10 +94,10 @@ public class Batiment {
 	 * @param ileDuJeu
 	 * @return vrai s'il n'y a pas de case vide ou de personnage pouvant se deplacer autour du batiment
 	 */
-	public boolean sortieImpossible(int i, int j, ile ileDuJeu){
-		for(int x=i-1;x<i+2;x++){
-			for(int y=j-1;y<j+2;y++){
-				if(ileDuJeu.getTableau()[y][x].getId()==15 || (ileDuJeu.getTableau()[y][x].getId()>5 && ileDuJeu.getTableau()[y][x].getId()<15 && ileDuJeu.getTableau()[y][x].getPersonnageCourant().getDeplacement()))
+	public boolean sortieImpossible(ile ileDuJeu){
+		for(int i=x-1;i<x+2;i++){
+			for(int j=y-1;j<y+2;j++){
+				if(ileDuJeu.getTableau()[j][i].getId()==15 || (ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<15 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getDeplacement()))
 					return false;
 			}
 		}
@@ -111,13 +117,13 @@ public class Batiment {
 	/**
 	 * Permet a un personnage de sortir du batiment
 	 */
-	public void sortieBatiment(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Affichage affichage, int equipe){
+	public void sortieBatiment(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe){
 		plateauDuJeu.refreshinfo(null,batimentHealth );
 		
 		if(stockBatiment.isEmpty()){
 			//affichage d'un message si pas de personnage dans le batiment
 			affichage.popUp(equipe, "Il n'y a pas de personnages.", "Attention" );
-		}else if(this.placeLibre(y, x, ileDuJeu)){
+		}else if(this.placeLibre(ileDuJeu)){
 			//S'il y a de la place autour du batiment
 			Personnage persoSortant = null;
 			ActionJoueur action= new ActionJoueur();
@@ -150,7 +156,7 @@ public class Batiment {
 						stockBatiment.remove(persoSortant);
 					}
 				}
-				if(this.sortieImpossible(y, x, ileDuJeu))
+				if(this.sortieImpossible(ileDuJeu))
 					//S'il n'y a plus de case vide ou de personnage pouvant se deplacer autour du batiment
 					this.actionImpossible();
 				//met les personnages dans le batiment comme sans action ni deplacement pour eviter une boucle infini dans le tour du joueur

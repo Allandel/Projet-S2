@@ -12,7 +12,8 @@ public class Navire extends Batiment {
 	 * Construit un navire en lui attribuant l'ID donnee
 	 * @param id
 	 */
-	public Navire(int id){
+	public Navire(int id, int x, int y, Joueur joueur){
+		super(x, y, joueur);
 		this.setId(id);
 	}
 

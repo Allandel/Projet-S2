@@ -18,7 +18,7 @@ public class Test {
 	 * plus la mer en bas, des rocher en haut avec le coffre et la clé
 	 */
 	Test(){
-		ileDuJeu=new ile(true);
+		ileDuJeu=new ile(true, joueur);
 		tableauAffichage=new int[7][7];
 
 		ileDuJeu.getTableau()[1][1].setPersonnageCourant(new Explorateur(joueur[0]));
@@ -87,7 +87,7 @@ public class Test {
 						affichage.getPlateau().refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(),0);
 						gagner=gestion.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],true);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-						ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant().sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, cordonnees[0], cordonnees[1], affichage, 0);
+						ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant().sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, 0);
 
 					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}

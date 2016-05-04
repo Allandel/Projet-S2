@@ -30,7 +30,7 @@ public class GestionDuJeu {
 	 */
 	public GestionDuJeu(int [] parametres){
 		this.parametres=parametres;
-		ileDuJeu = new ile(parametres[0], parametres[1]);
+		ileDuJeu = new ile(parametres[0], parametres[1], joueur);
 		this.initialisationEquipe(ileDuJeu);
 		tableauAffichage = new int[ileDuJeu.getTableau().length][ileDuJeu.getTableau().length];
 		affichage= new Affichage(tableauAffichage, ileDuJeu, joueur);
@@ -69,7 +69,7 @@ public class GestionDuJeu {
 						affichage.getPlateau().refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), 0);
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],false);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
-						ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant().sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, cordonnees[0], cordonnees[1], affichage, equipe);
+						ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant().sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
 
 					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}

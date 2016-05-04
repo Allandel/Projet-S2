@@ -17,12 +17,12 @@ public class ile {
 	 * @param taille
 	 * @param proportion
 	 */
-	ile(int taille, int proportion){
+	ile(int taille, int proportion, Joueur[] joueur){
 		this.proportion = proportion;
 		this.taille= taille;
 		colonneNavJ2=taille-2;
 		do{
-			initialiser();
+			initialiser(joueur);
 			estAccessible(ligneNavJ1, 1);
 			accesNav1 = accessible();
 			resetAcces();
@@ -35,7 +35,7 @@ public class ile {
 	 * Ile qui sert pour les tests
 	 * @param test
 	 */
-	ile(boolean test){
+	ile(boolean test, Joueur[] joueur){
 		tableauIle = new Case[7][7];
 		ligneNavJ1=5;
 		colonneNavJ1=2;
@@ -63,8 +63,8 @@ public class ile {
 		}
 		tableauIle[5][1].setId(5);
 		tableauIle[5][5].setId(5);
-		tableauIle[5][2].setBatimentCourant(new Navire(2));
-		tableauIle[5][4].setBatimentCourant(new Navire(3));
+		tableauIle[5][2].setBatimentCourant(new Navire(2,5,2, joueur[0]));
+		tableauIle[5][4].setBatimentCourant(new Navire(3,5,4, joueur[1]));
 		((CaseRocher)tableauIle[0][2]).setChest(true);
 		((CaseRocher)tableauIle[0][4]).setKey(true);
 	}
@@ -72,7 +72,7 @@ public class ile {
 	/**
 	 * Cree un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
 	 */
-	void initialiser(){
+	void initialiser(Joueur [] joueur){
 		tableauIle = new Case[taille][taille];
 
 		setZero();
@@ -80,8 +80,8 @@ public class ile {
 
 		ligneNavJ1= random.nextInt(tableauIle.length-2)+1;
 		ligneNavJ2= random.nextInt(tableauIle.length-2)+1;
-		tableauIle[ligneNavJ1][1].setBatimentCourant(new Navire(2));
-		tableauIle[ligneNavJ2][tableauIle.length-2].setBatimentCourant(new Navire(3));
+		tableauIle[ligneNavJ1][1].setBatimentCourant(new Navire(2,ligneNavJ1,1, joueur[0]));
+		tableauIle[ligneNavJ2][tableauIle.length-2].setBatimentCourant(new Navire(3,ligneNavJ2,tableauIle.length-2, joueur[0]));
 
 		setRocher(taille,proportion);
 		setKeyCoffre();	
