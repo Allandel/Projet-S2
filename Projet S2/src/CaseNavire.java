@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 /**
  * Classe heritee de Case representant les navires
  * @author Allan
@@ -10,7 +8,6 @@ import javax.swing.JOptionPane;
 public class CaseNavire extends Case {
 	private ArrayList<Personnage>stockNavire=new ArrayList<Personnage>();
 	private int coqueHealth=200;
-	
 
 	/**
 	 * Construit un navire en lui attribuant l'ID donnee
@@ -60,6 +57,8 @@ public class CaseNavire extends Case {
 	 * Permet a un personnage de sortir du bateau dans le bateau
 	 */
 	public void sortieBateau(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, int x, int y, Affichage affichage, int equipe){
+		plateauDuJeu.refreshinfo(null,coqueHealth );
+		
 		if(stockNavire.isEmpty()){
 			//affichage d'un message si pas de personnage dans le navire
 			affichage.popUp(equipe, "Il n'y a pas de personnages dans le Navire", "Attention" );

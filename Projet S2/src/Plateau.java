@@ -29,7 +29,6 @@ import javax.swing.JPanel;
 public class Plateau {
 	private Menu menu;
 	private static boolean defaultVisibility = true ;
-	private static final long serialVersionUID = 1L;
 	private JFrame window ;
 	private GraphicPane graphic ;
 	private ConsolePane console ;
@@ -156,7 +155,7 @@ public class Plateau {
 			abandon=new JButton("Quitter le test");
 		else
 			abandon=new JButton("Abandonner la partie");
-		
+
 		actionPartie.add(lacherObjet);
 		actionPartie.add(annulerSelection);
 		actionPartie.add(passageDuTour);
@@ -186,7 +185,7 @@ public class Plateau {
 		window.addKeyListener(new Key()) ;
 		currentEvent = null ;
 		menu=new Menu();
-		
+
 		passageDuTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				id=1;
@@ -219,7 +218,7 @@ public class Plateau {
 	public void setVisibleBouttonAnnuler(boolean setter){
 		annulerSelection.setVisible(setter);
 	}
-	
+
 	public void setVisibleBouttonLacher(boolean setter){
 		lacherObjet.setVisible(setter);
 	}
@@ -470,7 +469,7 @@ public class Plateau {
 			this.addImageIcon(objetIventaire.get(cpt),"Vide");
 		}
 	}
-	
+
 	private void hideInventaire(){
 		for(int cpt=0;cpt<objetIventaire.size();cpt++){
 			objetIventaire.get(cpt).setVisible(false);
@@ -486,14 +485,23 @@ public class Plateau {
 		}
 	}
 
-	public void refreshinfo(Personnage perso){
-		if(perso.getInventaire().isEmpty())
-			inventaireVide();
-		else
-			this.affichageInventaire(perso);
-		recupNomPerso.setText(perso.getNom());
-		recupTypePerso.setText(perso.getType());
-		recupenergie.setText(""+perso.getEnergie());
+	public void refreshinfo(Personnage perso, int coqueHealth){
+		if(perso!=null){
+			if(perso.getInventaire().isEmpty())
+				inventaireVide();
+			else
+				this.affichageInventaire(perso);
+			this.affichagePanel();
+			recupNomPerso.setText(perso.getNom());
+			recupTypePerso.setText(perso.getType());
+			recupenergie.setText(""+perso.getEnergie());
+		}else{
+			recupTypePerso.setText("Navire");
+			recupenergie.setText(""+coqueHealth);
+			nomPerso.setVisible(false);
+			inventairePerso.setVisible(false);
+			inventaire.setVisible(false);
+		}
 	}
 
 	public void popUp(String texte, String titre, Object[] options){
@@ -515,6 +523,13 @@ public class Plateau {
 		recupNomPerso.setText("");
 		recupTypePerso.setText("");
 		recupenergie.setText("");
+		this.affichagePanel();
 	}
 
+	private void affichagePanel(){
+		nomPerso.setVisible(true);
+		inventaire.setVisible(true);
+		inventairePerso.setVisible(true);
+		
+	}
 }
