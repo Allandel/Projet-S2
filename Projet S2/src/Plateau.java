@@ -540,6 +540,7 @@ public class Plateau {
 			nomPerso.setVisible(false);
 			inventairePerso.setVisible(false);
 			inventaire.setVisible(false);
+			recupNomPerso.setVisible(false);
 		}
 	}
 
@@ -588,6 +589,6 @@ public class Plateau {
 		nomPerso.setVisible(true);
 		inventaire.setVisible(true);
 		inventairePerso.setVisible(true);
-		
+		recupNomPerso.setVisible(true);
 	}
 }
