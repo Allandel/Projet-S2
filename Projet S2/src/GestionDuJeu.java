@@ -50,6 +50,7 @@ public class GestionDuJeu {
 		while(!gagner[0]){
 			joueur[equipe].resetAction(affichage, equipe);
 			affichage.actionDebutTour(equipe, joueur, ileDuJeu, tableauAffichage);
+		
 			while(joueur[equipe].actionPossible() && !gagner[0]){
 				affichage.getPlateau().resetId();
 				int [] cordonnees=action.choixCase(affichage.getPlateau(), tableauAffichage,ileDuJeu, joueur[equipe]);
