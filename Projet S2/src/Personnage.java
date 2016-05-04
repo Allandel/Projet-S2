@@ -544,4 +544,13 @@ public class Personnage{
 			}
 		}
 	}
+
+	public int nbrObjetInventaire(String objet,ArrayList<String> list){
+		int nbr=0;
+		for(String obj:list){
+			if(obj.equals(objet))
+				nbr++;
+		}
+		return nbr;
+	}
 }

@@ -212,9 +212,8 @@ public class Joueur {
 			for(Personnage perso:equipe){
 				if(!perso.getInventaire().equals(perso.getInventaireTourPrecedent())){
 					actionEnnemi+=""+perso.getType()+" "+perso.getNom()+" s'est fait voler";
-//					for(String objet:perso.getInventaireTourPrecedent()){
 					for(int i=0;i<perso.getInventaireTourPrecedent().size();i++){
-						if(!perso.getInventaire().contains(perso.getInventaireTourPrecedent().get(i))){
+						if(perso.nbrObjetInventaire(perso.getInventaireTourPrecedent().get(i), perso.getInventaire())<perso.nbrObjetInventaire(perso.getInventaireTourPrecedent().get(i), perso.getInventaireTourPrecedent())){
 							actionEnnemi+=" "+perso.getInventaireTourPrecedent().get(i);
 							perso.getInventaireTourPrecedent().remove(i);
 						}

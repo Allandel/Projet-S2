@@ -246,7 +246,7 @@ public class Affichage {
 	}
 
 	private void actionEnnemi(Joueur joueur){
-		String actionEnnemi="Tour du Joueur "+(joueur.getIdBateau()-1);
+		String actionEnnemi="Tour du Joueur "+(joueur.getIdBateau()-1+"\n");
 		actionEnnemi+=joueur.persoAttaque();
 		actionEnnemi+=joueur.persoVole();
 		if(!actionEnnemi.equals(""))
