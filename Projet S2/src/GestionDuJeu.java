@@ -45,12 +45,11 @@ public class GestionDuJeu {
 	 */
 	public boolean [] tourDuJoueur(){
 		boolean [] gagner={false,false};
-		int equipe=0;
+		int equipe=0 ;
 
 		while(!gagner[0]){
-			joueur[equipe].resetAction();
+			joueur[equipe].resetAction(affichage, equipe);
 			affichage.actionDebutTour(equipe, joueur, ileDuJeu, tableauAffichage);
-
 			while(joueur[equipe].actionPossible() && !gagner[0]){
 				affichage.getPlateau().resetId();
 				int [] cordonnees=action.choixCase(affichage.getPlateau(), tableauAffichage,ileDuJeu, joueur[equipe]);

@@ -109,12 +109,15 @@ public class Joueur {
 	/**
 	 * Remet toutes les actions et deplacement des personnages de l'equipe du joueur a true
 	 */
-	public void resetAction(){
-		for(Personnage perso : equipe){
+	public void resetAction(Affichage affichage, int equipe){
+		for(Personnage perso : this.equipe){
 			if(perso.getCompteur()==0){
 				perso.setActionDeplacement(true);
 			}else{
 				perso.downCompteur();
+				if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getMinage()){
+					((Ouvrier) perso).issueMinage(affichage, equipe);
+				}
 			}
 		}
 	}
@@ -123,6 +126,14 @@ public class Joueur {
 		for(Personnage perso : equipe){
 			if(perso instanceof Piegeur){
 				((Piegeur) perso).downCompteurBombe(tableauIle, affichage, equipe1);
+			}
+		}
+	}
+	
+	public void checkMinage(Case[][] tableauIle, Affichage affichage, int equipe1){
+		for(Personnage perso : equipe){
+			if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getMinage()){
+				((Ouvrier) perso).issueMinage(affichage, equipe1);
 			}
 		}
 	}

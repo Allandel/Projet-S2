@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 public class Personnage{
 
-	private int energie=100, id,compteur=0, energieTourPrecedent=100;
+	private int energie=100, id;
+	protected int compteur=0;
+	private int energieTourPrecedent=100;
 	private String nom, type;
 	private boolean death=false, action=true, deplacement=true, deathTourPrecedent=false;
 	private ArrayList <String> inventaire=new ArrayList<String>(),inventaireTourPrecedent=new ArrayList<String>();
@@ -482,6 +484,7 @@ public class Personnage{
 	 * @return le nombre de tour ou le personnage est encore immobilise
 	 */
 	public int getCompteur(){return compteur;}
+	public void setCompteur(int i){compteur=i;}
 
 	/**
 	 * ToString pour l'affichage dans le menu de sortie de bateau
