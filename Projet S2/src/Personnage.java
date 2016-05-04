@@ -11,7 +11,7 @@ public class Personnage{
 	private int energie=100, id,compteur=0, energieTourPrecedent=100;
 	private String nom, type;
 	private boolean death=false, action=true, deplacement=true, deathTourPrecedent=false;
-	protected ArrayList <String> inventaire=new ArrayList<String>();
+	protected ArrayList <String> inventaire=new ArrayList<String>(),inventaireTourPrecedent=new ArrayList<String>();
 	protected Joueur joueur;
 
 	/**
@@ -169,6 +169,13 @@ public class Personnage{
 	 */
 	public void setObjetInventaire(String objet){
 		inventaire.add(objet);
+		inventaireTourPrecedent.add(objet);
+	}
+
+	public void removeObjetInventaire(String objet, boolean vol){
+		inventaire.remove(objet);
+		if(!vol)
+			inventaireTourPrecedent.remove(objet);
 	}
 	/**
 	 * @return the inventaire
@@ -209,7 +216,7 @@ public class Personnage{
 					}
 					itemEchange=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous donner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "DONNER ITEM",listeItem); 
 					if(itemEchange!=null){
-						p.inventaire.add(itemEchange);
+						p.setObjetInventaire(itemEchange);
 						this.inventaire.remove(itemEchange);
 						action=false;
 					}
@@ -225,7 +232,7 @@ public class Personnage{
 						}
 						itemEchange=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous prendre dans l'inventaire de votre coequipier ?\n\n( Pour ne rien prendre, cliquez sur annuler)", "PRENDRE ITEM",listeItem2); 
 						if(itemEchange!=null){
-							this.inventaire.add(itemEchange);
+							this.setObjetInventaire(itemEchange);
 							p.inventaire.remove(itemEchange);
 							action=false;
 						}
@@ -281,10 +288,26 @@ public class Personnage{
 					victoire[1]=joueur.getEquipe();
 				}
 				if(this instanceof Guerrier && !inventaire.contains("Epee") && !inventairePlein(affichage, "Ce guerrier n'a plus de place dans son inventaire pour récupérer une épée.")){
-					this.setObjetInventaire("Epee");;
-					affichage.popUp(equipe,"En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme" );
+					this.setObjetInventaire("Epee");
+					affichage.popUp(equipe,"En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme");
+				}else if(this instanceof Piegeur && !inventaire.contains("Pelle") && !inventaire.contains("Bombe") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une pelle et des bombes.")){
+					this.setObjetInventaire("Pelle");
+					int cpt=0;
+					while(inventaire.size()<6 && cpt<3){
+						this.setObjetInventaire("Bombe");
+						cpt++;
+					}
+				}else if(this instanceof Piegeur && !inventaire.contains("Pelle") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une pelle.")){
+					this.setObjetInventaire("Pelle");
+					affichage.popUp(equipe,"En retournant au Navire, votre Pigeur à récupére une pelle!", "Recuperation d'une pelle");
+				}else if(this instanceof Piegeur && !inventaire.contains("Bombe") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une bombe.")){
+					int cpt=0;
+					do{
+						this.setObjetInventaire("Bombe");
+						cpt++;
+					}while(inventaire.size()<6 && cpt<3);
+					affichage.popUp(equipe,"En retournant au Navire, votre Pigeur à récupére une/des bombe(s)!", "Recuperation de bombe");
 				}
-				// TODO ajout récupération bombe dans inventaire si place libre
 			}
 		}else{
 			affichage.popUp(equipe,"Il faut au moins un personnage sur l'ile pour pouvoir rentrer au bateau.", "Entree impossible" );
@@ -502,7 +525,7 @@ public class Personnage{
 		for(int cpt=0; cpt<inventaire.size(); cpt++){
 			listeItem[cpt]=inventaire.get(cpt);
 		}
-		
+
 		itemAbandonne=(String)affichage.popUpYesNo(equipe,"Quels Item voulez vous abandonner ?\n\n( Pour ne rien donner, cliquez sur annuler)", "ABANDONNER ITEM",listeItem);		
 
 		if(itemAbandonne!=null){
