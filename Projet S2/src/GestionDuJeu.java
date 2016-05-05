@@ -131,7 +131,7 @@ public class GestionDuJeu {
 			//si le joueur n'annule pas sa selection	
 			if(perso.getDeplacement()){
 				//si le perso peut se deplacer	
-				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15){
+				if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15 || (tableauAffichage[cordonnees[1]][cordonnees[0]]==16 && Test.testEnCours)){
 					if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPiege() && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getTeamPiege()!=equipe){
 						perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
 						perso.immobilisation(affichage, equipe);

@@ -57,9 +57,9 @@ public class ActionJoueur {
 					if(perso.getAction() && tableauAffichage[i][j]>5 && tableauAffichage[i][j]<14)
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}else if(perso instanceof Piegeur){
-					if(perso.getDeplacement() && (tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==15 || tableauAffichage[i][j]==14))
+					if(perso.getDeplacement() && (tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]>=14))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
-					if(perso.getAction() && tableauAffichage[i][j]>5 && tableauAffichage[i][j]<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==perso.getJoueur()|| (tableauAffichage[i][j]>0 && tableauAffichage[i][j]<4))
+					if(perso.getAction() && tableauAffichage[i][j]>5 && tableauAffichage[i][j]<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==perso.getJoueur() || (tableauAffichage[i][j]>0 && tableauAffichage[i][j]<4))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}else if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
 					if(perso.getAction() && (tableauAffichage[i][j]==1 || tableauAffichage[i][j]==4 || (tableauAffichage[i][j]<14 && tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==perso.getJoueur())))
@@ -93,7 +93,7 @@ public class ActionJoueur {
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
 				}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && ((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1));
-			}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]!=14 && (tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur())));
+			}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && tableauAffichage[yEvent][xEvent]<15 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau()  && (tableauAffichage[yEvent][xEvent]<6 && tableauAffichage[yEvent][xEvent]>14 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur()));
 
 		}
 		return coordonnees;
