@@ -288,8 +288,10 @@ public class Affichage {
 	 */
 	public void actionDebutTour(int equipe, Joueur []joueur, ile ileDuJeu, int [][] tableauAffichage){
 		plateauDuJeu.resetInfo();
-		plateauDuJeu.masquer();
+		if(!Test.testEnCours){
+			plateauDuJeu.masquer();
+			actionEnnemi(joueur[equipe]);
+		}
 		affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
-		actionEnnemi(joueur[equipe]);
 	}
 }

@@ -19,10 +19,11 @@ public class GestionDuJeu {
 	 * @param tableauAffichage
 	 * @param affichage
 	 */
-	public GestionDuJeu(ile ileDujeu, int[][] tableauAffichage, Affichage affichage){
+	public GestionDuJeu(ile ileDujeu, int[][] tableauAffichage, Affichage affichage, Joueur[] joueur){
 		this.ileDuJeu=ileDujeu;
 		this.tableauAffichage=tableauAffichage;
 		this.affichage=affichage;
+		this.joueur=joueur;
 	}
 
 	/**
@@ -77,10 +78,12 @@ public class GestionDuJeu {
 			this.soinBateau(joueur[equipe]);
 			this.joueur[equipe].ExplosionBombes(ileDuJeu.getTableau(), affichage, equipe);
 			equipe=1-equipe;
-			try {
-				Thread.sleep(1000) ;	// Cette instruction - en plus du délai induit - permet à Swing de traiter les événements GUI 
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if(!Test.testEnCours){
+				try {
+					Thread.sleep(1000) ;	// Cette instruction - en plus du délai induit - permet à Swing de traiter les événements GUI 
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			if(!gagner[0])
 				gagner=this.equipeMorte();
