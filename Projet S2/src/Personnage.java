@@ -285,7 +285,7 @@ public class Personnage{
 	public boolean[] entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
 		boolean victoire[]={false,false};
 
-		if(joueur.nbrVivant()>tableauIle[xApres][yApres].getBatimentCourant().nbrVivantStock()+1){
+		if(joueur.nbrVivant()>tableauIle[xApres][yApres].getBatimentCourant().nbrVivantStock()+1 || Test.testEnCours){
 			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire",null);
 			if (decision==0){
 				tableauIle[xApres][yApres].getBatimentCourant().addPersoBatiment(this);

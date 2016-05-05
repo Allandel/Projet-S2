@@ -52,7 +52,7 @@ public class GestionDuJeu {
 			joueur[equipe].resetAction(affichage, equipe);
 			affichage.actionDebutTour(equipe, joueur, ileDuJeu, tableauAffichage);
 
-			while(joueur[equipe].actionPossible() && !gagner[0]){
+			while(!gagner[0] && joueur[equipe].actionPossible()){
 				affichage.getPlateau().resetId();
 				int [] cordonnees=action.choixCase(affichage.getPlateau(), tableauAffichage,ileDuJeu, joueur[equipe]);
 
@@ -61,9 +61,17 @@ public class GestionDuJeu {
 					joueur[equipe].passerTour();
 				else if(cordonnees[0]==888){
 					//si le joueur decide d'abandonner	
-					int decision=(int)affichage.popUpYesNo(equipe,"Désirez vous abandonner la partie ?", "Abandonner la partie ?",null);
-					if(decision==0)
-						joueur[equipe].abandon();
+					int decision;
+					if(!Test.testEnCours)
+						decision=(int)affichage.popUpYesNo(equipe,"Désirez vous abandonner la partie ?", "Abandonner la partie ?",null);
+					else
+						decision=(int)affichage.popUpYesNo(equipe,"Désirez vous quitter le test?", "Quitter le test?",null);
+					if(decision==0){
+						if(Test.testEnCours)
+							gagner[0]=true;
+						else
+							joueur[equipe].abandon();
+					}
 				}else{
 					affichage.setHighlight(cordonnees, equipe);
 					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
