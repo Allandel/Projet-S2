@@ -53,7 +53,7 @@ public class Piegeur extends Personnage{
 			action=(String)affichage.popUpYesNo(equipe,"\nQue voulez vous faire ?\n\n[Cliquez sur annuler si vous ne voulez rien faire]\n", "Choix de l'action",tab);
 			if(action!=null){
 
-				if (action.compareTo("PIEGER LA CASE")==0 && this.getObjetInventaire("Pelle")){
+				if (action.compareTo("Pieger la case")==0 && this.getObjetInventaire("Pelle")){
 					tableauIle[x][y].setPiege(true);
 					if(joueur[equipe].getEquipe()){
 						tableauIle[x][y].setTeamPiege(0);
@@ -61,7 +61,7 @@ public class Piegeur extends Personnage{
 						tableauIle[x][y].setTeamPiege(1);
 					}
 					super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
-				}else if(action.compareTo("POSER UNE BOMBE")==0 && this.getObjetInventaire("Bombe")){
+				}else if(action.compareTo("Poser une bombe")==0 && this.getObjetInventaire("Bombe")){
 					super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 					this.poserBombe(p, x, y, tableauIle, affichage, equipe, joueur);
 					this.getInventaire().remove(this.getInventaire().indexOf("Bombe"));					
