@@ -36,37 +36,38 @@ public class ile {
 	 * @param test
 	 */
 	ile(boolean test, Joueur[] joueur){
-		tableauIle = new Case[7][7];
+		tableauIle = new Case[9][9];
 		ligneNavJ1=5;
 		colonneNavJ1=2;
 		ligneNavJ2=5;
 		colonneNavJ2=4;		
 
-		for(int i = 0;i<7;i++){
-			for(int j = 0;j<7;j++){
+		for(int i = 0;i<9;i++){
+			for(int j = 0;j<9;j++){
 				tableauIle[i][j]= new Case();
 			}
 		}
 
-		for(int i = 0;i<7;i++){
-			tableauIle[0][i]= new CaseRocher();
+		for(int i = 1;i<9;i++){
+			tableauIle[1][i]= new CaseRocher();
 		}
 
-		for(int i = 0;i<7;i++){
-			tableauIle[6][i].setId(5);
+		for(int j=0;j<9;j+=8){
+			for(int i = 0;i<9;i++){
+				tableauIle[j][i].setId(5);
+			}
 		}
 
-		for(int j=0;j<7;j+=6){
-			for(int i = 1;i<7;i++){
+		for(int j=0;j<9;j+=8){
+			for(int i = 1;i<9;i++){
 				tableauIle[i][j].setId(5);
 			}
 		}
-		tableauIle[5][1].setId(5);
-		tableauIle[5][5].setId(5);
-		tableauIle[5][2].setBatimentCourant(new Navire(2,5,2, joueur[0]));
-		tableauIle[5][4].setBatimentCourant(new Navire(3,5,4, joueur[1]));
-		((CaseRocher)tableauIle[0][2]).setChest(true);
-		((CaseRocher)tableauIle[0][4]).setKey(true);
+
+		tableauIle[7][1].setBatimentCourant(new Navire(2,5,2, joueur[0]));
+		tableauIle[7][7].setBatimentCourant(new Navire(3,5,4, joueur[1]));
+		((CaseRocher)tableauIle[1][3]).setChest(true);
+		((CaseRocher)tableauIle[1][5]).setKey(true);
 	}
 
 	/**
