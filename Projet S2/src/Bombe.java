@@ -45,12 +45,12 @@ public class Bombe {
 			}if(((CaseRocher)tableauIle[this.x][this.y]).getKey()){
 				affichage.popUp(equipe,"Vous avez fait exploser le rocher sous lequel se trouvait la clé !\nCelle ci se trouve désormais dans votre inventaire", "CLE DECOUVERTE" );
 				tableauIle[x][y]=new Case();
-				tableauIle[x][y].setId(15);
+				tableauIle[x][y].setId(17);
 				p.setObjetInventaire("Cle");
 			}else{
 				affichage.popUp(equipe,"Vous avez fait sauter le rocher, mais celui ci ne dissimulait rien...", "EXPLOSION ROCHER" );
 				tableauIle[x][y]=new Case();
-				tableauIle[x][y].setId(15);
+				tableauIle[x][y].setId(17);
 			}
 		}else if(tableauIle[this.x][this.y].getId()!=joueur[equipe].getIdBateau()){
 			Random ran=new Random();

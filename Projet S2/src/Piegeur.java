@@ -27,7 +27,7 @@ public class Piegeur extends Personnage{
 		if(joueur.getEquipe())
 			setId(8);
 		else
-			setId(12);
+			setId(13);
 	}
 	
 	public String toString(boolean console){

@@ -97,7 +97,7 @@ public class ile {
 		do{
 			Rocherx = random.nextInt(tableauIle.length-2)+1;
 			Rochery = random.nextInt(tableauIle.length-2)+1;
-			if(tableauIle[Rocherx][Rochery].getId()==15){
+			if(tableauIle[Rocherx][Rochery].getId()==17){
 				tableauIle[Rocherx][Rochery]= new CaseRocher();
 				if(cpt==0){
 					((CaseRocher) tableauIle[Rocherx][Rochery]).setChest(true);
@@ -143,7 +143,7 @@ public class ile {
 		while(cpt<nbRocher){
 			Rocherx = random.nextInt(tableauIle.length-2)+1;
 			Rochery = random.nextInt(tableauIle.length-2)+1;
-			if(tableauIle[Rocherx][Rochery].getId() == 15){
+			if(tableauIle[Rocherx][Rochery].getId() == 17){
 				tableauIle[Rocherx][Rochery]= new CaseRocher();
 				cpt++;
 			}
@@ -197,28 +197,28 @@ public class ile {
 	void estAccessible(int x, int y){
 		tableauIle[x][y].setAccessible(true);
 		if(x>0){
-			if(tableauIle[x-1][y].getId()==15 && !tableauIle[x-1][y].isAccessible()){
+			if(tableauIle[x-1][y].getId()==17 && !tableauIle[x-1][y].isAccessible()){
 				estAccessible(x-1,y);
 			}else{
 				tableauIle[x-1][y].setAccessible(true);
 			}
 		}
 		if(y<tableauIle.length-1){
-			if(tableauIle[x][y+1].getId()==15 && !tableauIle[x][y+1].isAccessible()){
+			if(tableauIle[x][y+1].getId()==17 && !tableauIle[x][y+1].isAccessible()){
 				estAccessible(x,y+1);
 			}else{
 				tableauIle[x][y+1].setAccessible(true);
 			}
 		}
 		if(x<tableauIle.length-1){
-			if(tableauIle[x+1][y].getId()==15 && !tableauIle[x+1][y].isAccessible()){
+			if(tableauIle[x+1][y].getId()==17 && !tableauIle[x+1][y].isAccessible()){
 				estAccessible(x+1,y);
 			}else{
 				tableauIle[x+1][y].setAccessible(true);
 			}
 		}
 		if(y>0){
-			if(tableauIle[x][y-1].getId()==15 && !tableauIle[x][y-1].isAccessible()){
+			if(tableauIle[x][y-1].getId()==17 && !tableauIle[x][y-1].isAccessible()){
 				estAccessible(x,y-1);
 			}else{
 				tableauIle[x][y-1].setAccessible(true);

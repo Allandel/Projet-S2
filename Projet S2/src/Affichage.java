@@ -12,7 +12,8 @@ public class Affichage {
 	private int[][] tableauAffichageJ1, tableauAffichageJ2;
 	private ArrayList<int[][]> tableaux=new ArrayList<>();
 	private Plateau  plateauDuJeu;
-	private String[] images = new String[]{ "img/rocher.jpg",			//id 1
+	private String[] images = new String[]{ 
+			"img/rocher.jpg",			//id 1
 			"img/1.navire.jpg",			//id 2
 			"img/2.navire.jpg",			//id 3
 			"img/coffre.jpg",			//id 4
@@ -21,14 +22,16 @@ public class Affichage {
 			"img/1.voleur.jpg",			//id 7
 			"img/1.piegeur.jpg",		//id 8
 			"img/1.guerrier.jpg",		//id 9
-			"img/2.explorateur.jpg",	//id 10
-			"img/2.voleur.jpg",			//id 11
-			"img/2.piegeur.jpg",		//id 12
-			"img/2.guerrier.jpg",		//id 13
-			"img/death.jpg",			//id 14
-			"img/herbe.jpg",			//id 15
-			"img/piege.jpg",			//id 16
-			"img/bombe.jpg"				//id 17
+			"img/1.ouvrier.jpg",		//id 10
+			"img/2.explorateur.jpg",	//id 11
+			"img/2.voleur.jpg",			//id 12
+			"img/2.piegeur.jpg",		//id 13
+			"img/2.guerrier.jpg",		//id 14
+			"img/2.ouvrier.jpg",		//id 15
+			"img/death.jpg",			//id 16
+			"img/herbe.jpg",			//id 17
+			"img/piege.jpg",			//id 18
+			"img/bombe.jpg"				//id 19
 	};			
 
 	/**
@@ -118,15 +121,15 @@ public class Affichage {
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
 
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<16 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
 							if(ileDuJeu.getTableau()[y][x].getId()==4 && !joueur.getCoffreTrouve())
 								tableau[x][y] = 1;
-							else if(ileDuJeu.getTableau()[y][x].getPiege() && ileDuJeu.getTableau()[y][x].getId()==15 && (ileDuJeu.getTableau()[y][x].getTeamPiege()==equipe || Test.testEnCours))
-								tableau[x][y]=16;
+							else if(ileDuJeu.getTableau()[y][x].getPiege() && ileDuJeu.getTableau()[y][x].getId()==17 && (ileDuJeu.getTableau()[y][x].getTeamPiege()==equipe || Test.testEnCours))
+								tableau[x][y]=18;
 							else if(ileDuJeu.getTableau()[y][x].getBombe() && (ileDuJeu.getTableau()[y][x].getPersonnageCourant()==null || ileDuJeu.getTableau()[y][x].getPersonnageCourant().getDeath()==true))
-								tableau[x][y]=17;
+								tableau[x][y]=19;
 							else
 								tableau[x][y] = ileDuJeu.getTableau()[y][x].getId();
 						}
@@ -151,7 +154,7 @@ public class Affichage {
 		}
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<16 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
 							plateauDuJeu.resetHighlight(y, x);
@@ -174,7 +177,7 @@ public class Affichage {
 			equipe=0;
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<14 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur && ileDuJeu.getTableau()[j][i].getPersonnageCourant().actionOuDeplacement()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<16 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur && ileDuJeu.getTableau()[j][i].getPersonnageCourant().actionOuDeplacement()){
 					plateauDuJeu.setHighlight(j, i, Color.YELLOW);
 				}
 			}

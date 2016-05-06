@@ -21,7 +21,7 @@ public class Guerrier extends Personnage{
 		if(joueur.getEquipe())
 			setId(9);
 		else
-			setId(13);
+			setId(14);
 	}
 
 	public String toString(boolean console){

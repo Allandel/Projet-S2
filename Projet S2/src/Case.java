@@ -5,7 +5,7 @@
  * @version 1.0
  */
 public class Case {
-	private int id=15, piegeteam;
+	private int id=17, piegeteam;
 	private boolean accessible, piege=false;
 	private Personnage personnageCourant=null;
 	private Bombe bombe=null;
@@ -52,7 +52,7 @@ public class Case {
 	
 	public void removeBatimentCourant(){
 		this.batimentCourant = null;
-		this.setId(15);
+		this.setId(17);
 	}
 
 	public boolean getBombe(){
@@ -106,7 +106,7 @@ public class Case {
 	 */
 	public void removePersonnageCourant(){
 		this.personnageCourant = null;
-		this.setId(15);
+		this.setId(17);
 	}
 	
 	/**

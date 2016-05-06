@@ -16,7 +16,7 @@ public class Explorateur extends Personnage{
 		if(joueur.getEquipe())
 			setId(6);
 		else
-			setId(10);
+			setId(11);
 	}
 
 	/**

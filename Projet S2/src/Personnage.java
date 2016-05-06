@@ -130,12 +130,6 @@ public class Personnage{
 	}
 
 	/**
-	 * @return the equipe1
-	 */
-	/*public boolean getEquipe(){
-		return joueur.getEquipe();
-	}*/
-	/**
 	 * @param type the type to set
 	 */
 	void setType(String type){
@@ -336,7 +330,7 @@ public class Personnage{
 	protected boolean perteEnergie(int nrj, int x, int y, Case[][] tableauIle, boolean attaque, boolean deplacement, Affichage affichage, int equipe){
 		if(energie-nrj<=0){
 			if(tableauIle[x][y].getId()!=2 && tableauIle[x][y].getId()!=3)
-				tableauIle[x][y].setId(14);
+				tableauIle[x][y].setId(16);
 			death=true;
 			if(!attaque){
 				//test pour eviter d'afficher du texte inutile	
@@ -427,18 +421,18 @@ public class Personnage{
 			if(!(this instanceof Explorateur)){
 				for(int x=i-1;x<i+2;x++){
 					for(int y=j-1;y<j+2;y++){
-						if(ileDuJeu.getTableau()[y][x].getId()==15 || (ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getDeplacement()))
+						if(ileDuJeu.getTableau()[y][x].getId()==17 || ileDuJeu.getTableau()[y][x].getId()==16 || (ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getDeplacement()))
 							return true;
 					}
 				}
 			}else{
-				if(ileDuJeu.getTableau()[j-1][i].getId()==15 || (ileDuJeu.getTableau()[j-1][i].getId()>5 && ileDuJeu.getTableau()[j-1][i].getPersonnageCourant().getDeplacement())){
+				if(ileDuJeu.getTableau()[j-1][i].getId()==17 || ileDuJeu.getTableau()[j-1][i].getId()==16 || (ileDuJeu.getTableau()[j-1][i].getId()>5 && ileDuJeu.getTableau()[j-1][i].getPersonnageCourant().getDeplacement())){
 					return true;
-				}else if(ileDuJeu.getTableau()[j+1][i].getId()==15 || (ileDuJeu.getTableau()[j+1][i].getId()>5 && ileDuJeu.getTableau()[j+1][i].getPersonnageCourant().getDeplacement())){
+				}else if(ileDuJeu.getTableau()[j+1][i].getId()==17 || ileDuJeu.getTableau()[j+1][i].getId()==16 || (ileDuJeu.getTableau()[j+1][i].getId()>5 && ileDuJeu.getTableau()[j+1][i].getPersonnageCourant().getDeplacement())){
 					return true;
-				} else if(ileDuJeu.getTableau()[j][i-1].getId()==15 || (ileDuJeu.getTableau()[j][i-1].getId()>5 && ileDuJeu.getTableau()[j][i-1].getPersonnageCourant().getDeplacement())){
+				} else if(ileDuJeu.getTableau()[j][i-1].getId()==17 || ileDuJeu.getTableau()[j][i-1].getId()==16 || (ileDuJeu.getTableau()[j][i-1].getId()>5 && ileDuJeu.getTableau()[j][i-1].getPersonnageCourant().getDeplacement())){
 					return true;
-				}else if(ileDuJeu.getTableau()[j][i+1].getId()==15 || (ileDuJeu.getTableau()[j][i+1].getId()>5 && ileDuJeu.getTableau()[j][i+1].getPersonnageCourant().getDeplacement())){
+				}else if(ileDuJeu.getTableau()[j][i+1].getId()==17 || ileDuJeu.getTableau()[j][i+1].getId()==16 || (ileDuJeu.getTableau()[j][i+1].getId()>5 && ileDuJeu.getTableau()[j][i+1].getPersonnageCourant().getDeplacement())){
 					return true;
 				}
 			}

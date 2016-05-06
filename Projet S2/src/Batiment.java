@@ -80,7 +80,7 @@ public class Batiment {
 	private boolean placeLibre(ile ileDuJeu){
 		for(int i=x-1;i<x+2;i++){
 			for(int j=y-1;j<y+2;j++){
-				if(ileDuJeu.getTableau()[i][j].getId()==15)
+				if(ileDuJeu.getTableau()[i][j].getId()==17 || ileDuJeu.getTableau()[i][j].getId()==16)
 					return true;
 			}
 		}
@@ -97,7 +97,7 @@ public class Batiment {
 	public boolean sortieImpossible(ile ileDuJeu){
 		for(int i=x-1;i<x+2;i++){
 			for(int j=y-1;j<y+2;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()==15 || (ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<15 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getDeplacement()))
+				if(ileDuJeu.getTableau()[j][i].getId()==16 || ileDuJeu.getTableau()[i][j].getId()==17 || (ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<16 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getDeplacement()))
 					return false;
 			}
 		}
@@ -148,7 +148,7 @@ public class Batiment {
 					int[] cordonnees = action.choixCaseSortie(plateauDuJeu, tableauAffichage, x, y, persoSortant);
 					if(cordonnees[0]!=777){
 						//si le joueur n'annule pas l'action	
-						if(tableauAffichage[cordonnees[1]][cordonnees[0]]==15)
+						if(tableauAffichage[cordonnees[1]][cordonnees[0]]==17)
 							ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
 						else
 							persoSortant.recuperationStuff(true,false, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau(), affichage, equipe);
