@@ -9,7 +9,7 @@ public class Test {
 	private ile ileDuJeu;
 	private int[][] tableauAffichage;
 	private Affichage affichage;
-	private Joueur [] joueur = {new Joueur(true), new Joueur(false)},joueurTest = {new Joueur(true), new Joueur(false)};
+	private Joueur [] joueur = {new Joueur(true), new Joueur(false)};
 	private Personnage [] persoTest = new Personnage [2];
 	public static boolean testEnCours=false;
 
@@ -46,30 +46,30 @@ public class Test {
 		boolean [] fin={false,false};
 
 		if(id==2){
-			ileDuJeu.getTableau()[4][4].setPersonnageCourant(new Piegeur(joueurTest[0]));
-			ileDuJeu.getTableau()[5][4].setPersonnageCourant(new Piegeur(joueurTest[1]));
+			ileDuJeu.getTableau()[4][4].setPersonnageCourant(new Piegeur(joueur[0]));
+			ileDuJeu.getTableau()[5][4].setPersonnageCourant(new Piegeur(joueur[1]));
 		}else if(id==1){
-			ileDuJeu.getTableau()[4][4].setPersonnageCourant(new Guerrier(joueurTest[0]));
-			ileDuJeu.getTableau()[5][4].setPersonnageCourant(new Guerrier(joueurTest[1]));
+			ileDuJeu.getTableau()[4][4].setPersonnageCourant(new Guerrier(joueur[0]));
+			ileDuJeu.getTableau()[5][4].setPersonnageCourant(new Guerrier(joueur[1]));
 
 		}else if(id==3){
-			ileDuJeu.getTableau()[4][4].setPersonnageCourant(new Voleur(joueurTest[0]));
-			ileDuJeu.getTableau()[5][4].setPersonnageCourant(new Voleur(joueurTest[1]));
+			ileDuJeu.getTableau()[4][4].setPersonnageCourant(new Voleur(joueur[0]));
+			ileDuJeu.getTableau()[5][4].setPersonnageCourant(new Voleur(joueur[1]));
 
 		}else if(id==4){
-			ileDuJeu.getTableau()[4][4].setPersonnageCourant(new Explorateur(joueurTest[0]));
-			ileDuJeu.getTableau()[5][4].setPersonnageCourant(new Explorateur(joueurTest[1]));
+			ileDuJeu.getTableau()[4][4].setPersonnageCourant(new Explorateur(joueur[0]));
+			ileDuJeu.getTableau()[5][4].setPersonnageCourant(new Explorateur(joueur[1]));
 		}else if(id==5){
-			ileDuJeu.getTableau()[4][4].setPersonnageCourant(new Ouvrier(joueurTest[0]));
-			ileDuJeu.getTableau()[5][4].setPersonnageCourant(new Ouvrier(joueurTest[1]));
+			ileDuJeu.getTableau()[4][4].setPersonnageCourant(new Ouvrier(joueur[0]));
+			ileDuJeu.getTableau()[5][4].setPersonnageCourant(new Ouvrier(joueur[1]));
 		}
 
 
 		persoTest[0]=ileDuJeu.getTableau()[2][3].getPersonnageCourant();
 		persoTest[1]=ileDuJeu.getTableau()[3][3].getPersonnageCourant();
 
-		affichage=new Affichage(tableauAffichage, ileDuJeu, joueurTest);
-		GestionDuJeu gestion=new GestionDuJeu(ileDuJeu, tableauAffichage, affichage, joueurTest);
+		affichage=new Affichage(tableauAffichage, ileDuJeu, joueur);
+		GestionDuJeu gestion=new GestionDuJeu(ileDuJeu, tableauAffichage, affichage, joueur);
 		while(!fin[0]){
 			gestion.tourDuJoueur();
 		}

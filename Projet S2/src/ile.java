@@ -37,10 +37,10 @@ public class ile {
 	 */
 	ile(boolean test, Joueur[] joueur){
 		tableauIle = new Case[9][9];
-		ligneNavJ1=5;
-		colonneNavJ1=2;
-		ligneNavJ2=5;
-		colonneNavJ2=4;		
+		ligneNavJ1=7;
+		colonneNavJ1=1;
+		ligneNavJ2=7;
+		colonneNavJ2=7;		
 
 		for(int i = 0;i<9;i++){
 			for(int j = 0;j<9;j++){
@@ -64,8 +64,8 @@ public class ile {
 			}
 		}
 
-		tableauIle[7][1].setBatimentCourant(new Navire(2,5,2, joueur[0]));
-		tableauIle[7][7].setBatimentCourant(new Navire(3,5,4, joueur[1]));
+		tableauIle[7][1].setBatimentCourant(new Navire(2,7,1, joueur[0]));
+		tableauIle[7][7].setBatimentCourant(new Navire(3,7,7, joueur[1]));
 		((CaseRocher)tableauIle[1][3]).setChest(true);
 		((CaseRocher)tableauIle[1][5]).setKey(true);
 	}
