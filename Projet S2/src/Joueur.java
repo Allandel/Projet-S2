@@ -153,7 +153,7 @@ public class Joueur {
 		}
 	}
 
-	public void ExplosionBombes(Case[][] tableauIle, Affichage affichage, int equipe1){
+	private void ExplosionBombes(Case[][] tableauIle, Affichage affichage, int equipe1){
 		for(Personnage perso : equipe){
 			if(perso instanceof Piegeur){
 				((Piegeur) perso).downCompteurBombe(tableauIle, affichage, equipe1);
@@ -259,9 +259,14 @@ public class Joueur {
 		return actionEnnemi;
 	}
 
-	public void soinPersoBatiment(){
+	private void soinPersoBatiment(){
 		for(Batiment bat:batiments){
 			bat.recupEnergie();
 		}
+	}
+
+	public void actionFinPartie(ile ileDuJeu, Affichage affichage, int equipe){
+		soinPersoBatiment();
+		ExplosionBombes(ileDuJeu.getTableau(), affichage, equipe);
 	}
 }

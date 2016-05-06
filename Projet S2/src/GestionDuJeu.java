@@ -83,8 +83,7 @@ public class GestionDuJeu {
 					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}
 			}
-			joueur[equipe].soinPersoBatiment();
-			this.joueur[equipe].ExplosionBombes(ileDuJeu.getTableau(), affichage, equipe);
+			joueur[equipe].actionFinPartie(ileDuJeu, affichage, equipe);
 			equipe=1-equipe;
 			if(!Test.testEnCours){
 				try {
