@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
 	private boolean equipe1, coffreTrouve=false;
-	private int idBateau, ligneBateau, colonneBateau, nbrVillage=0;
+	private int idBateau, ligneBateau, colonneBateau, nbrVillage=0, niveauVillage=0;
 
 	/**
 	 * Construit un joueur en lui donnant un boolean correspondant a son equipe et l'id de son bateau
@@ -44,6 +44,13 @@ public class Joueur {
 	
 	public void addVillage(){
 		nbrVillage=1;
+	}
+	
+	public void incrNiveauVillage(){
+		niveauVillage++;
+	}
+	public int getNiveauVillage(){
+		return niveauVillage;
 	}
 
 	/**
@@ -119,8 +126,8 @@ public class Joueur {
 				perso.setActionDeplacement(true);
 			}else{
 				perso.downCompteur();
-				if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getMinage()){
-					((Ouvrier) perso).issueMinage(affichage, equipe);
+				if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getUpgrade()){
+					((Ouvrier)perso).setUpgrade(false);
 				}
 			}
 		}
@@ -134,14 +141,6 @@ public class Joueur {
 		}
 	}
 	
-	public void checkMinage(Case[][] tableauIle, Affichage affichage, int equipe1){
-		for(Personnage perso : equipe){
-			if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getMinage()){
-				((Ouvrier) perso).issueMinage(affichage, equipe1);
-			}
-		}
-	}
-
 	/**
 	 * Met toutes les actions et deplacement des personnages de l'equipe du joueur a false pour pouvoir passer son tour
 	 */

@@ -24,8 +24,8 @@ import javax.swing.event.ChangeListener;
  */
 public class Menu extends JFrame{
 	private int tailleCarte, pourcentageRocher,idTest=0;
-	private int nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1;
-	private int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2;
+	private int nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1, nbrOuvrierJ1;
+	private int nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2, nbrOuvrierJ2;
 	private boolean etat = true;
 	private JTabbedPane menuOnglet;
 	private JTextArea lol;
@@ -46,13 +46,13 @@ public class Menu extends JFrame{
 		JPanel onglet5 = new JPanel();
 		menuOnglet = new JTabbedPane();
 		GridLayout g = new GridLayout(3,3);
-		GridLayout g2 = new GridLayout(4,3);
+		GridLayout g2 = new GridLayout(5,3);
 		onglet2.setLayout(g);
 		onglet3.setLayout(g2);
 		onglet4.setLayout(g2);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setPreferredSize(new Dimension(500,250));
+		this.setPreferredSize(new Dimension(500,300));
 		this.setTitle("Treasure Hunt");
 		this.setUndecorated(true);
 		this.pack();
@@ -71,10 +71,12 @@ public class Menu extends JFrame{
 		JLabel LBGuerrier = new JLabel("Nombre de Guerrier :");
 		JLabel LBVoleur = new JLabel("Nombre de Voleur :");
 		JLabel LBPiegeur = new JLabel("Nombre de Piegeur :");
+		JLabel LBOuvrier = new JLabel("Nombre d'Ouvrier");
 		JLabel LB2Explorateur = new JLabel("Nombre d'Explorateur :");
 		JLabel LB2Guerrier = new JLabel("Nombre de Guerrier :");
 		JLabel LB2Voleur = new JLabel("Nombre de Voleur :");
 		JLabel LB2Piegeur = new JLabel("Nombre de Piegeur :");
+		JLabel LB2Ouvrier = new JLabel("Nombre d'Ouvrier");
 
 		final JSlider sliderTaille = new JSlider(10,30);
 		setSlider(sliderTaille,5,10);
@@ -89,6 +91,8 @@ public class Menu extends JFrame{
 		setSlider(sliderNbrVoleurJ1, 1,0);
 		final JSlider sliderNbrPiegeurJ1 = new JSlider(0,4);
 		setSlider(sliderNbrPiegeurJ1, 1,0);
+		final JSlider sliderNbrOuvrierJ1 = new JSlider(0,4);
+		setSlider(sliderNbrOuvrierJ1, 1,0);
 
 		final JSlider sliderNbrExplorateurJ2 = new JSlider(0,4);
 		setSlider(sliderNbrExplorateurJ2, 1,0);
@@ -98,6 +102,8 @@ public class Menu extends JFrame{
 		setSlider(sliderNbrVoleurJ2, 1,0);
 		final JSlider sliderNbrPiegeurJ2 = new JSlider(0,4);
 		setSlider(sliderNbrPiegeurJ2,1,0);
+		final JSlider sliderNbrOuvrierJ2 = new JSlider(0,4);
+		setSlider(sliderNbrOuvrierJ2, 1,0);
 
 		onglet3.add(LB2Explorateur);
 		onglet3.add(sliderNbrExplorateurJ1);
@@ -107,6 +113,8 @@ public class Menu extends JFrame{
 		onglet3.add(sliderNbrVoleurJ1);
 		onglet3.add(LB2Piegeur);
 		onglet3.add(sliderNbrPiegeurJ1);
+		onglet3.add(LB2Ouvrier);
+		onglet3.add(sliderNbrOuvrierJ1);
 		onglet4.add(LBExplorateur);
 		onglet4.add(sliderNbrExplorateurJ2);
 		onglet4.add(LBGuerrier);
@@ -115,6 +123,8 @@ public class Menu extends JFrame{
 		onglet4.add(sliderNbrVoleurJ2);
 		onglet4.add(LBPiegeur);
 		onglet4.add(sliderNbrPiegeurJ2);
+		onglet4.add(LBOuvrier);
+		onglet4.add(sliderNbrOuvrierJ2);
 		onglet2.add(LBTaille);
 		onglet2.add(sliderTaille);
 		onglet2.add(LBPourcent);
@@ -153,10 +163,12 @@ public class Menu extends JFrame{
 				nbrGuerrierJ1=sliderNbrGuerrierJ1.getValue();
 				nbrVoleurJ1=sliderNbrVoleurJ1.getValue();
 				nbrPiegeurJ1=sliderNbrPiegeurJ1.getValue();
+				nbrOuvrierJ1=sliderNbrOuvrierJ1.getValue();
 				nbrExplorateurJ2=sliderNbrExplorateurJ2.getValue();
 				nbrGuerrierJ2=sliderNbrGuerrierJ2.getValue();
 				nbrVoleurJ2=sliderNbrVoleurJ2.getValue();
 				nbrPiegeurJ2=sliderNbrPiegeurJ2.getValue();
+				nbrOuvrierJ2=sliderNbrOuvrierJ2.getValue();
 				idTest=55;
 			}
 		});
@@ -260,7 +272,7 @@ public class Menu extends JFrame{
 	 * @return le talbeau de parametre du jeu lance
 	 */
 	public int[] getParametres(){
-		int [] parametres={tailleCarte, pourcentageRocher,nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1, nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2};
+		int [] parametres={tailleCarte, pourcentageRocher,nbrExplorateurJ1, nbrVoleurJ1, nbrGuerrierJ1, nbrPiegeurJ1, nbrOuvrierJ1, nbrExplorateurJ2, nbrVoleurJ2, nbrGuerrierJ2, nbrPiegeurJ2, nbrOuvrierJ2};
 		return parametres;
 	}
 
@@ -465,11 +477,11 @@ public class Menu extends JFrame{
 	public boolean parametresValide(){
 		int nbrJ1=0,nbrJ2=0;
 
-		for(int x=2;x<6;x++){
+		for(int x=2;x<7;x++){
 			nbrJ1+=this.getParametres()[x];
 		}
 
-		for(int x=6;x<10;x++){
+		for(int x=8;x<12;x++){
 			nbrJ2+=this.getParametres()[x];
 		}
 

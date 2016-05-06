@@ -150,6 +150,8 @@ public class GestionDuJeu {
 					((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
 				}else if(perso instanceof Piegeur && ((cordonnees[0]==x && cordonnees[1]==y) || tableauAffichage[cordonnees[1]][cordonnees[0]]==1 || (tableauAffichage[cordonnees[1]][cordonnees[0]]==2 || tableauAffichage[cordonnees[1]][cordonnees[0]]==3)&& tableauAffichage[cordonnees[1]][cordonnees[0]]!=perso.getJoueur().getIdBateau())){
 					((Piegeur)perso).pieger(perso, cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe, this.joueur);
+				}else if(perso instanceof Ouvrier && (tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || ((cordonnees[0]==x && cordonnees[1]==y)))){
+					((Ouvrier)perso).actionOuvrier(x, y, ileDuJeu.getTableau(), affichage, equipe,joueur);
 				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<16 && perso.getJoueur()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur()){
 					perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), affichage, equipe);
 				}else if(perso instanceof Guerrier && tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<16 && perso.getJoueur()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur()){
@@ -207,19 +209,24 @@ public class GestionDuJeu {
 		for(int i=0;i<parametres[5];i++){
 			Piegeur marc =new Piegeur(joueur[0]);
 		}
-
-
 		for(int i=0;i<parametres[6];i++){
+			Ouvrier roland =new Ouvrier(joueur[0]);
+		}
+
+		for(int i=0;i<parametres[7];i++){
 			Explorateur paul =new Explorateur(joueur[1]);
 		}
-		for(int i=0;i<parametres[7];i++){
+		for(int i=0;i<parametres[8];i++){
 			Voleur jean = new Voleur(joueur[1]);
 		}
-		for(int i=0;i<parametres[8];i++){
+		for(int i=0;i<parametres[9];i++){
 			Guerrier mar=new Guerrier(joueur[1]);
 		}
-		for(int i=0;i<parametres[9];i++){
+		for(int i=0;i<parametres[10];i++){
 			Piegeur marc =new Piegeur(joueur[1]);
+		}
+		for(int i=0;i<parametres[11];i++){
+			Ouvrier roland =new Ouvrier(joueur[1]);
 		}
 
 

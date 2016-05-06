@@ -1,8 +1,7 @@
 import java.util.Random;
 
 public class Ouvrier extends Personnage{
-	private boolean minage=false;
-	private int resultMinage;
+	private boolean upgrade=false;
 	
 	Ouvrier(Joueur joueur) {
 		super(joueur);
@@ -15,7 +14,6 @@ public class Ouvrier extends Personnage{
 			setId(15);
 	}
 	
-	
 	public void construireVillage(int x, int y, Case[][] tableauIle, Joueur joueur){
 		if(joueur.getNbrVillage()<1){
 			joueur.addVillage();
@@ -24,25 +22,57 @@ public class Ouvrier extends Personnage{
 		}
 	}
 	
+	public void commencerUpgrade(){
+			upgrade=true;
+			this.setCompteur(4);
+	}
+	
+	public void setUpgrade(boolean a){
+		upgrade=a;
+	}
+	
+	public boolean getUpgrade(){
+		return upgrade;
+	}
+	
+	public void construireMine(int x, int y, Case[][] tableauIle, Joueur joueur){
+	}
+	
+	public int nbPierre(){
+		int cpt=0;
+		for(String test : getInventaire()){
+			if(test.compareTo("Pierre")==0){
+				cpt++;
+			}
+		}
+		return cpt;
+	}
+	
 	public void minage(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		if(this.getObjetInventaire("Pioche") && ((CaseRocher)tableauIle[x][y]).getMinage()>0 && this.getInventaire().size()<6){
-			affichage.popUp(equipe,"Votre ouvrier va tenter de miner ce rocher. Il sera donc indisponible pendant 2 tours", "TENTATIVE DE MINAGE" );
-			this.setCompteur(3);
-			this.minage=true;
 			int cpt;
+			int resultMinage;
 			Random random=new Random(6);
 			cpt=random.nextInt();
 			if(cpt==0){
 				resultMinage=0;
+				affichage.popUp(equipe,"Votre minage à échoué...", "MINAGE RATER" );
 			}else if(cpt==5){
 				resultMinage=2;
+				affichage.popUp(equipe,"Votre minage à été brillant ! Vous avez récolter 2 pierre taillées !", "MINAGE BRILLANT");
+				this.inventairePlein(affichage, "Votre inventaire ne peut pas supporter autant de pierres !\nVotre inventaire sera completé");
 			}else{
 				resultMinage=1;
+				affichage.popUp(equipe,"Votre minage à reussi ! Vous avez récolter 1 pierre taillée", "MINAGE REUSSI");
+				
 			}
 
 			for(int i=0;i<resultMinage;i++){
 				if(this.getInventaire().size()+i<5){
 					((CaseRocher)tableauIle[x][y]).setMinage((((CaseRocher)tableauIle[x][y]).getMinage())-1);
+				}
+				if(this.getInventaire().size()<6){
+					this.setObjetInventaire("Pierre");
 				}
 			}
 		}else{
@@ -55,26 +85,26 @@ public class Ouvrier extends Personnage{
 			}
 		}
 	}
-			
-	public void issueMinage(Affichage affichage, int equipe){
-		if(resultMinage==0){
-			affichage.popUp(equipe,"Votre minage à échoué...", "MINAGE RATER" );
-			this.minage=false;
-		}else if(resultMinage==2){
-			affichage.popUp(equipe,"Votre minage à été brillant ! Vous avez récolter 2 pierre taillées !", "MINAGE BRILLANT");
-			this.inventairePlein(affichage, "Votre inventaire ne peut pas supporter autant de pierres !\nVotre inventaire sera completé");
-			for(int i=0; i<resultMinage;i++)
-			if(this.getInventaire().size()<6){
-				this.setObjetInventaire("Pierre");
-			}
-			this.minage=false;
-		}else{
-			affichage.popUp(equipe,"Votre minage à reussi ! Vous avez récolter 1 pierre taillée", "MINAGE REUSSI");
-			this.minage=false;
-		}
-	}
 	
-	public boolean getMinage(){
-		return minage;
-	}
+	public void actionOuvrier(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur joueur){
+		if(tableauIle[x][y].getId()==1){
+			this.minage(x, y, tableauIle, affichage, equipe);
+		}else{
+			if(this.nbPierre()==5){
+				if(joueur.getNbrVillage()==0){
+					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer votre village ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
+					if (decision==0){
+						construireVillage(x,y, tableauIle, joueur);
+					}
+				}else if(joueur.getNiveauVillage()>=2){
+					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer une Mine ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
+					if (decision==0){
+						construireMine(x,y,tableauIle,joueur);
+					}
+				}	
+			}else{
+				affichage.popUp(equipe,"Vous n'avez pas assez de pierres ! Impossible de construire quoi que ce soit", "CONSTRUCTION IMPOSSIBLE" );
+			}
+		}
+	}	
 }

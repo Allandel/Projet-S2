@@ -14,6 +14,7 @@ public class Fort extends Batiment{
 		super(x, y, joueur);
 		this.setId(id);
 		batimentHealth=100;
+		joueur.incrNiveauVillage();
 		}
 
 	public String toString(){
@@ -24,6 +25,7 @@ public class Fort extends Batiment{
 		if(niveau==1 && stockRessources.size()>=10){
 			niveau=2;
 			batimentHealth=200;
+			joueur.incrNiveauVillage();
 			for(int i=0; i<10;i++){
 				stockRessources.remove(0);
 			}
@@ -32,6 +34,7 @@ public class Fort extends Batiment{
 		}else if(niveau==2 && stockRessources.size()>=30){
 			niveau=3;
 			batimentHealth=300;
+			joueur.incrNiveauVillage();
 			for(int i=0; i<30;i++){
 				stockRessources.remove(0);
 			}
