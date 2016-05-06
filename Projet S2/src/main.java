@@ -12,7 +12,7 @@ public class main {
 		Menu menu = new Menu();	
 		menu.menuPrincipal();
 		while(menu.getetat()){
-			if(menu.getidTest() > 0 && menu.getidTest() <5){
+			if(menu.getidTest() > 0 && menu.getidTest() <6){
 				menu.setVisible(false);
 				Test test=new Test();
 				test.testPerso(menu.getidTest());

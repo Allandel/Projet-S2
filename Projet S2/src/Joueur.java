@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
+	private ArrayList<Batiment> batiments = new ArrayList<Batiment>();
 	private boolean equipe1, coffreTrouve=false;
 	private int idBateau, ligneBateau, colonneBateau, nbrVillage=0, niveauVillage=0;
 
@@ -29,6 +30,14 @@ public class Joueur {
 	}
 
 	/**
+	 * Ajoute le batiment dans la liste de batiment du joueur
+	 * @param batiment
+	 */
+	public void addBatiment(Batiment batiment){
+		batiments.add(batiment);
+	}
+
+	/**
 	 * @return the ligneBateau
 	 */
 	public int getLigneBateau() {
@@ -41,11 +50,11 @@ public class Joueur {
 	public int getNbrVillage(){
 		return nbrVillage;
 	}
-	
+
 	public void addVillage(){
 		nbrVillage=1;
 	}
-	
+
 	public void incrNiveauVillage(){
 		niveauVillage++;
 	}
@@ -121,26 +130,37 @@ public class Joueur {
 	 * Remet toutes les actions et deplacement des personnages de l'equipe du joueur a true
 	 */
 	public void resetAction(Affichage affichage, int equipe){
-		for(Personnage perso : this.equipe){
-			if(perso.getCompteur()==0){
-				perso.setActionDeplacement(true);
+		if(Test.testEnCours){
+			if(this.equipe.get(this.equipe.size()-1).getCompteur()==0){
+				this.equipe.get(this.equipe.size()-1).setActionDeplacement(true);
 			}else{
-				perso.downCompteur();
-				if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getUpgrade()){
-					((Ouvrier)perso).setUpgrade(false);
+				this.equipe.get(this.equipe.size()-1).downCompteur();
+				if(this.equipe.get(this.equipe.size()-1) instanceof Ouvrier && this.equipe.get(this.equipe.size()-1).compteur==0 && ((Ouvrier) this.equipe.get(this.equipe.size()-1)).getUpgrade()){
+					((Ouvrier)this.equipe.get(this.equipe.size()-1)).setUpgrade(false);
+				}
+			}
+		}else{
+			for(Personnage perso : this.equipe){
+				if(perso.getCompteur()==0){
+					perso.setActionDeplacement(true);
+				}else{
+					perso.downCompteur();
+					if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getUpgrade()){
+						((Ouvrier)perso).setUpgrade(false);
+					}
 				}
 			}
 		}
 	}
 
-	public void ExplosionBombes(Case[][] tableauIle, Affichage affichage, int equipe1){
+	private void ExplosionBombes(Case[][] tableauIle, Affichage affichage, int equipe1){
 		for(Personnage perso : equipe){
 			if(perso instanceof Piegeur){
 				((Piegeur) perso).downCompteurBombe(tableauIle, affichage, equipe1);
 			}
 		}
 	}
-	
+
 	/**
 	 * Met toutes les actions et deplacement des personnages de l'equipe du joueur a false pour pouvoir passer son tour
 	 */
@@ -237,5 +257,16 @@ public class Joueur {
 			}
 		}
 		return actionEnnemi;
+	}
+
+	private void soinPersoBatiment(){
+		for(Batiment bat:batiments){
+			bat.recupEnergie();
+		}
+	}
+
+	public void actionFinPartie(ile ileDuJeu, Affichage affichage, int equipe){
+		soinPersoBatiment();
+		ExplosionBombes(ileDuJeu.getTableau(), affichage, equipe);
 	}
 }

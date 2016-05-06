@@ -10,12 +10,21 @@ public class Batiment {
 		this.x=x;
 		this.y=y;
 		this.joueur=joueur;
+		joueur.addBatiment(this);
 	}
 	
+	/**
+	 * Fait des dommages au batiment
+	 * @param deg
+	 */
 	public void dommageBatiment(int deg){
 		batimentHealth-=deg;
 	}
 	
+	/**
+	 * 
+	 * @return la vie du batiment
+	 */
 	public int getBatimentHealth(){
 		return batimentHealth;
 	}

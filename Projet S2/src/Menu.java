@@ -65,6 +65,7 @@ public class Menu extends JFrame{
 		JButton BTGuerrier = new JButton("Guerrier");
 		JButton BTPiegeur = new JButton("Piegeur");
 		JButton BTExplorateur = new JButton("Explorateur");
+		JButton BTOuvrier = new JButton("Ouvrier");
 		JLabel LBTaille = new JLabel("Taille du plateau:");
 		JLabel LBPourcent = new JLabel("Pourcentage de rochers:");
 		JLabel LBExplorateur = new JLabel("Nombre d'Explorateur :");
@@ -136,6 +137,7 @@ public class Menu extends JFrame{
 		onglet5.add(BTPiegeur);
 		onglet5.add(BTVoleur);
 		onglet5.add(BTExplorateur);
+		onglet5.add(BTOuvrier);
 		menuOnglet.add("Menu", onglet1);
 		menuOnglet.add("Parametres", onglet2);
 		menuOnglet.add("Parametres Joueur 1", onglet3);
@@ -196,6 +198,11 @@ public class Menu extends JFrame{
 		BTExplorateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				idTest = 4;
+			}
+		});
+		BTOuvrier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				idTest = 5;
 			}
 		});
 
