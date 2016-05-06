@@ -19,7 +19,7 @@ public class Voleur extends Personnage {
 		if(joueur.getEquipe())
 			setId(7);
 		else
-			setId(11);
+			setId(12);
 	}
 
 	public String toString(boolean console){
