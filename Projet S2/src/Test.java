@@ -71,7 +71,7 @@ public class Test {
 		affichage=new Affichage(tableauAffichage, ileDuJeu, joueur);
 		GestionDuJeu gestion=new GestionDuJeu(ileDuJeu, tableauAffichage, affichage, joueur);
 		while(!fin[0]){
-			gestion.tourDuJoueur();
+			fin=gestion.tourDuJoueur();
 		}
 		testEnCours=false;
 	}
