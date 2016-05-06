@@ -15,6 +15,7 @@ public class Ouvrier extends Personnage{
 			setId(15);
 	}
 	
+	
 	public void construireVillage(int x, int y, Case[][] tableauIle, Joueur joueur){
 		if(joueur.getNbrVillage()<1){
 			joueur.addVillage();
