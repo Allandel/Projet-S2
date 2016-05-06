@@ -41,6 +41,10 @@ public class Joueur {
 	public int getNbrVillage(){
 		return nbrVillage;
 	}
+	
+	public void addVillage(){
+		nbrVillage=1;
+	}
 
 	/**
 	 * @return the colonneBateau

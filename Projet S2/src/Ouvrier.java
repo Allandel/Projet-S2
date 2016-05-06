@@ -15,9 +15,11 @@ public class Ouvrier extends Personnage{
 			setId(15);
 	}
 	
-	public void construireVillage(Joueur joueur){
+	public void construireVillage(int x, int y, Case[][] tableauIle, Joueur joueur){
 		if(joueur.getNbrVillage()<1){
-			
+			joueur.addVillage();
+			tableauIle[x][y].setBatimentCourant(new Fort(15,x,y,joueur));
+			tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
 		}
 	}
 	
