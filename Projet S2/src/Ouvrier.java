@@ -119,14 +119,14 @@ public class Ouvrier extends Personnage{
 						super.perteEnergie(30, x,y, tableauIle, false, false,affichage, equipe);
 					}
 				}else if(joueur.getNiveauVillage()>=2){
-					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer une Mine ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
+					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer une Mine ici ?\n\n(Attention, ce choix est irréversible)", "Créer une mine",null);
 					if (decision==0){
 						construireMine(x,y,tableauIle,joueur);
 						super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 					}
 				}	
 			}else{
-				affichage.popUp(equipe,"Vous n'avez pas assez de pierres ! Impossible de construire quoi que ce soit", "CONSTRUCTION IMPOSSIBLE" );
+				affichage.popUp(equipe,"Vous avez besoin de 5 pierres pour pouvoir construire ! Impossible de construire quoi que ce soit", "CONSTRUCTION IMPOSSIBLE" );
 			}
 		}
 	}	
