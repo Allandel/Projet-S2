@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Batiment {
 	protected ArrayList<Personnage>stockBatiment=new ArrayList<Personnage>();
-	protected int batimentHealth=200,id=0,x,y;
+	protected int batimentHealth=200,id,x,y;
 	protected Joueur joueur;
 	protected String type;
 	

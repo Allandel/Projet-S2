@@ -9,17 +9,17 @@ public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
 	private ArrayList<Batiment> batiments = new ArrayList<Batiment>();
 	private boolean equipe1, coffreTrouve=false;
-	private int idBateau, ligneBateau, colonneBateau, nbrVillage=0, niveauVillage=0, idFort=17;
+	private int idBateau=2, ligneBateau, colonneBateau, nbrVillage=0, niveauVillage=0, idFort=20;
 
 	/**
 	 * Construit un joueur en lui donnant un boolean correspondant a son equipe et l'id de son bateau
 	 */
 	Joueur(boolean equipe1){
 		this.equipe1=equipe1;
-		if(equipe1)
-			idBateau=2;
-		else
-			idBateau=3;
+		if(!equipe1){
+			idBateau++;
+			idFort++;
+		}
 	}
 	/**
 	 * 
@@ -36,15 +36,15 @@ public class Joueur {
 	public void addBatiment(Batiment batiment){
 		batiments.add(batiment);
 	}
-	
+
 	public ArrayList<Batiment> getBatiment(){
-		 return batiments;
+		return batiments;
 	}
-	
+
 	public int getIdFort(){
 		return idFort;
 	}
-	
+
 	public void setIdFort(int idfort){
 		this.idFort=idfort;
 	}

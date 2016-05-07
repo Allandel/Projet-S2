@@ -9,10 +9,9 @@ public class Fort extends Batiment{
 	 * Construit un fort en lui attribuant l'ID donnee
 	 * @param id
 	 */
-	public Fort(int id, int x, int y, Joueur joueur){
+	public Fort(int x, int y, Joueur joueur){
 		super(x, y, joueur);
-		this.setId(id);
-		joueur.setIdFort(id);
+		this.setId(joueur.getIdFort());
 		batimentHealth=100;
 		this.type="Fort";
 		joueur.incrNiveauVillage();

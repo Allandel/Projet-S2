@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Ouvrier extends Personnage{
 	private boolean upgrade=false;
-	
+
 	Ouvrier(Joueur joueur) {
 		super(joueur);
 		setNom("Bertrand");
@@ -13,50 +13,49 @@ public class Ouvrier extends Personnage{
 		else
 			setId(15);
 	}
-	
+
 	public void construireVillage(int x, int y, Case[][] tableauIle, Joueur joueur){
 		if(joueur.getNbrVillage()<1){
+			Fort fort;
 			joueur.addVillage();
 			this.viderInventaireDeRochers();
 			tableauIle[x][y].removePersonnageCourant(); 
-			if(joueur.getEquipe()){
-				Fort bleu=new Fort(20,x,y,joueur);
-				tableauIle[x][y].setBatimentCourant(bleu);
-			}else{
-				Fort rouge=new Fort(21,x,y,joueur);
-				tableauIle[x][y].setBatimentCourant(rouge);	
-			}
+			if(joueur.getEquipe())
+				fort=new Fort(x,y,joueur);
+			else
+				fort=new Fort(x,y,joueur);
+			tableauIle[x][y].setBatimentCourant(fort);
 			tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
 		}
 	}
-	
+
 	public int viderInventaireDeRochers(){
 		int cpt=0;
 		for(int i=0; i<6;i++){
 			if(this.getObjetInventaire("Pierre")){
-			this.removeObjetInventaire("Pierre", false);
-			cpt++;
+				this.removeObjetInventaire("Pierre", false);
+				cpt++;
 			}
 		}
 		return cpt;
 	}
-	
+
 	public void commencerUpgrade(){
-			upgrade=true;
-			this.setCompteur(4);
+		upgrade=true;
+		this.setCompteur(4);
 	}
-	
+
 	public void setUpgrade(boolean a){
 		upgrade=a;
 	}
-	
+
 	public boolean getUpgrade(){
 		return upgrade;
 	}
-	
+
 	public void construireMine(int x, int y, Case[][] tableauIle, Joueur joueur){
 	}
-	
+
 	public int nbPierre(){
 		int cpt=0;
 		for(String test : getInventaire()){
@@ -66,7 +65,7 @@ public class Ouvrier extends Personnage{
 		}
 		return cpt;
 	}
-	
+
 	public void minage(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		if(this.getObjetInventaire("Pioche") && ((CaseRocher)tableauIle[x][y]).getMinage()>0 && this.getInventaire().size()<6){
 			int cpt;
@@ -86,7 +85,7 @@ public class Ouvrier extends Personnage{
 				resultMinage=1;
 				affichage.popUp(equipe,"Votre minage à reussi ! Vous avez récolter 1 pierre taillée", "MINAGE REUSSI");
 				super.perteEnergie(10, x,y, tableauIle, false, false,affichage, equipe);
-				
+
 			}
 
 			for(int i=0;i<resultMinage;i++){
@@ -107,7 +106,7 @@ public class Ouvrier extends Personnage{
 			}
 		}
 	}
-	
+
 	public void actionOuvrier(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur joueur){
 		if(tableauIle[x][y].getId()==1){
 			this.minage(x, y, tableauIle, affichage, equipe);
