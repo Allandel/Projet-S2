@@ -541,9 +541,11 @@ public class Plateau {
 		}else{
 			recupTypePerso.setText(batiment.getType());
 			recupenergie.setText(""+batiment.batimentHealth);
-			recupStockRessource.setText(""+((Fort)batiment).getStockRessource());
-			stockRessource.setVisible(true);
-			recupStockRessource.setVisible(true);
+			if(batiment instanceof Fort){
+				recupStockRessource.setText(""+((Fort)batiment).getStockRessource());
+				stockRessource.setVisible(true);
+				recupStockRessource.setVisible(true);
+			}
 			nomPerso.setVisible(false);
 			inventairePerso.setVisible(false);
 			inventaire.setVisible(false);
