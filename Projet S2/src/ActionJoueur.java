@@ -52,7 +52,7 @@ public class ActionJoueur {
 		for(int i=y-1;i<y+2;i++){
 			for(int j=x-1;j<x+2;j++){
 				if(perso instanceof Voleur || perso instanceof Guerrier){
-					if(perso.getDeplacement() && (tableauAffichage[i][j]==17 || tableauAffichage[i][j]==16 || tableauAffichage[i][j]==perso.getIdBateau()))
+					if(perso.getDeplacement() && (tableauAffichage[i][j]==17 || tableauAffichage[i][j]==16 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==perso.getIdFort()))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
 					if(perso.getAction() && tableauAffichage[i][j]>5 && tableauAffichage[i][j]<16)
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
@@ -64,7 +64,7 @@ public class ActionJoueur {
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				
 				}else if(perso instanceof Ouvrier){
-					if(perso.getDeplacement() && (tableauAffichage[i][j]==17 || tableauAffichage[i][j]==16 || tableauAffichage[i][j]==perso.getIdBateau()))
+					if(perso.getDeplacement() && (tableauAffichage[i][j]==17 || tableauAffichage[i][j]==16 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==perso.getIdFort()))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
 					if(perso.getAction() && (tableauAffichage[i][j]==1 || (tableauAffichage[i][j]<16 && tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==perso.getJoueur())))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);	
@@ -72,7 +72,7 @@ public class ActionJoueur {
 				}else if(((i==(y-1) || i==(y+1)) && j==x) || ((j==(x-1) || j==(x+1)) && i==y)){
 					if(perso.getAction() && (tableauAffichage[i][j]==1 || tableauAffichage[i][j]==4 || (tableauAffichage[i][j]<16 && tableauAffichage[i][j]>5 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==perso.getJoueur())))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
-					else if(perso.getDeplacement() && (tableauAffichage[i][j]==17 || tableauAffichage[i][j]==16 || tableauAffichage[i][j]==perso.getIdBateau()))
+					else if(perso.getDeplacement() && (tableauAffichage[i][j]==17 || tableauAffichage[i][j]==16 || tableauAffichage[i][j]==perso.getIdBateau() || tableauAffichage[i][j]==perso.getIdFort()))
 						plateauDuJeu.setHighlight(j, i, Color.BLUE);
 				}
 			}
