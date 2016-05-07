@@ -28,7 +28,7 @@ public class ActionJoueur {
 				coordonnees=this.getCoordonneesClic(plateauDuJeu,999,999, joueur);
 				xEvent=coordonnees[0];
 				yEvent=coordonnees[1];
-  			}while(coordonnees[0]==777 || (coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || (tableauAffichage[yEvent][xEvent]>=16  && tableauAffichage[yEvent][xEvent]<=20))));
+  			}while(coordonnees[0]==777 || (coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || (tableauAffichage[yEvent][xEvent]>=16  && tableauAffichage[yEvent][xEvent]<19))));
 		}while(coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]==5 && (tableauAffichage[yEvent][xEvent]!=2 && tableauAffichage[yEvent][xEvent]!=3 && tableauAffichage[yEvent][xEvent]!=20 && tableauAffichage[yEvent][xEvent]!=21 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()!=joueur)));
 		return coordonnees;
 	}

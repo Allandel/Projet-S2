@@ -17,6 +17,7 @@ public class Ouvrier extends Personnage{
 	public void construireVillage(int x, int y, Case[][] tableauIle, Joueur joueur){
 		if(joueur.getNbrVillage()<1){
 			joueur.addVillage();
+			tableauIle[x][y].removePersonnageCourant(); 
 			if(joueur.getEquipe()){
 				Fort bleu=new Fort(20,x,y,joueur);
 				tableauIle[x][y].setBatimentCourant(bleu);
@@ -25,6 +26,14 @@ public class Ouvrier extends Personnage{
 				tableauIle[x][y].setBatimentCourant(rouge);	
 			}
 			tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
+				for(int i=0;i<6;i++){
+					int cpt=0;
+					if(getInventaire().get(cpt).compareTo("Pierre")==0){
+						getInventaire().remove(cpt);
+					}else{
+						cpt++;
+					}
+				}
 		}
 	}
 	
@@ -58,18 +67,21 @@ public class Ouvrier extends Personnage{
 		if(this.getObjetInventaire("Pioche") && ((CaseRocher)tableauIle[x][y]).getMinage()>0 && this.getInventaire().size()<6){
 			int cpt;
 			int resultMinage;
-			Random random=new Random(6);
+			Random random=new Random(7);
 			cpt=random.nextInt();
 			if(cpt==0){
 				resultMinage=0;
 				affichage.popUp(equipe,"Votre minage à échoué...", "MINAGE RATER" );
-			}else if(cpt==5){
+				super.perteEnergie(10, x,y, tableauIle, false, false,affichage, equipe);
+			}else if(cpt>=5){
 				resultMinage=2;
 				affichage.popUp(equipe,"Votre minage à été brillant ! Vous avez récolter 2 pierre taillées !", "MINAGE BRILLANT");
 				this.inventairePlein(affichage, "Votre inventaire ne peut pas supporter autant de pierres !\nVotre inventaire sera completé");
+				super.perteEnergie(10, x,y, tableauIle, false, false,affichage, equipe);
 			}else{
 				resultMinage=1;
 				affichage.popUp(equipe,"Votre minage à reussi ! Vous avez récolter 1 pierre taillée", "MINAGE REUSSI");
+				super.perteEnergie(10, x,y, tableauIle, false, false,affichage, equipe);
 				
 			}
 
@@ -95,7 +107,6 @@ public class Ouvrier extends Personnage{
 	public void actionOuvrier(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur joueur){
 		if(tableauIle[x][y].getId()==1){
 			this.minage(x, y, tableauIle, affichage, equipe);
-			super.perteEnergie(10, x,y, tableauIle, false, false,affichage, equipe);
 		}else{
 			if(this.nbPierre()==5){
 				if(joueur.getNbrVillage()==0){

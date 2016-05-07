@@ -75,7 +75,7 @@ public class GestionDuJeu {
 					}
 				}else{
 					affichage.setHighlight(cordonnees, equipe);
-					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6&& ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
+					if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant()!=null && tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
 						affichage.getPlateau().refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), 0);
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],false);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2)){
