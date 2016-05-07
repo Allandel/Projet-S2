@@ -31,7 +31,9 @@ public class Affichage {
 			"img/death.jpg",			//id 16
 			"img/herbe.jpg",			//id 17
 			"img/piege.jpg",			//id 18
-			"img/bombe.jpg"				//id 19
+			"img/bombe.jpg",			//id 19
+			"img/1.village.jpg",        //id 20
+			"img/2.village.jpg"			//id 21
 	};			
 
 	/**

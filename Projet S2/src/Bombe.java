@@ -42,7 +42,7 @@ public class Bombe {
 				joueur[0].coffreTrouve();
 				joueur[1].coffreTrouve();
 				
-			}if(((CaseRocher)tableauIle[this.x][this.y]).getKey()){
+			}else if(((CaseRocher)tableauIle[this.x][this.y]).getKey()){
 				affichage.popUp(equipe,"Vous avez fait exploser le rocher sous lequel se trouvait la clé !\nCelle ci se trouve désormais dans votre inventaire", "CLE DECOUVERTE" );
 				tableauIle[x][y]=new Case();
 				tableauIle[x][y].setId(17);

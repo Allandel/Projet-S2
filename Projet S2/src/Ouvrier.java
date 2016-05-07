@@ -17,7 +17,13 @@ public class Ouvrier extends Personnage{
 	public void construireVillage(int x, int y, Case[][] tableauIle, Joueur joueur){
 		if(joueur.getNbrVillage()<1){
 			joueur.addVillage();
-			tableauIle[x][y].setBatimentCourant(new Fort(15,x,y,joueur));
+			if(joueur.getEquipe()){
+				Fort bleu=new Fort(20,x,y,joueur);
+				tableauIle[x][y].setBatimentCourant(bleu);
+			}else{
+				Fort rouge=new Fort(21,x,y,joueur);
+				tableauIle[x][y].setBatimentCourant(rouge);	
+			}
 			tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
 		}
 	}
@@ -89,17 +95,20 @@ public class Ouvrier extends Personnage{
 	public void actionOuvrier(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur joueur){
 		if(tableauIle[x][y].getId()==1){
 			this.minage(x, y, tableauIle, affichage, equipe);
+			super.perteEnergie(10, x,y, tableauIle, false, false,affichage, equipe);
 		}else{
 			if(this.nbPierre()==5){
 				if(joueur.getNbrVillage()==0){
 					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer votre village ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
 					if (decision==0){
 						construireVillage(x,y, tableauIle, joueur);
+						super.perteEnergie(30, x,y, tableauIle, false, false,affichage, equipe);
 					}
 				}else if(joueur.getNiveauVillage()>=2){
 					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer une Mine ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
 					if (decision==0){
 						construireMine(x,y,tableauIle,joueur);
+						super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 					}
 				}	
 			}else{

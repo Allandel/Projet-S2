@@ -102,8 +102,8 @@ public class ActionJoueur {
 					coordonnees=this.getCoordonneesClic(plateauDuJeu,x,y,null);
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
-				}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && ((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1 || (x==xEvent && y==yEvent)));
-			}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=17 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && (tableauAffichage[yEvent][xEvent]<1 || tableauAffichage[yEvent][xEvent]>6) && tableauAffichage[yEvent][xEvent]!=16));
+				}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && ((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1));
+			}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=17 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && (tableauAffichage[yEvent][xEvent]<1 || tableauAffichage[yEvent][xEvent]>6) && tableauAffichage[yEvent][xEvent]!=16) && !(tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur()));
 		
 		}else if(perso instanceof Piegeur){
 			do{
