@@ -33,16 +33,12 @@ public class Plateau {
 	private GraphicPane graphic ;
 	private ConsolePane console ;
 	private JPanel infos=new JPanel(), infosPerso=new JPanel(), actionPartie=new JPanel(),inventairePerso=new JPanel();
-	private JLabel nomPerso = new JLabel("Nom : ");
-	private JLabel  recupNomPerso = new JLabel("  ");
-	private JLabel typePerso = new JLabel("Type : ");
-	private JLabel  recupTypePerso = new JLabel("  ");
-	private JLabel energie = new JLabel("Energie : ");
-	private JLabel recupenergie = new JLabel("  ");
-	private JLabel inventaire  = new JLabel("Inventaire");
+	private JLabel nomPerso = new JLabel("Nom : "),recupNomPerso = new JLabel("  "),typePerso = new JLabel("Type : "),recupTypePerso = new JLabel("  ");
+	private JLabel energie = new JLabel("Energie : "),recupenergie = new JLabel("  ");
+	private JLabel inventaire  = new JLabel("Inventaire"), JLvide=new JLabel(), stockRessource=new JLabel("Ressources : "), recupStockRessource=new JLabel();
 	private JButton passageDuTour=new JButton("Passer son tour"), abandon, annulerSelection=new JButton("Retour"), aide=new JButton("Aide"), lacherObjet=new JButton("Lacher objet");
 	private int id;
-	private ArrayList<JLabel> objetIventaire=new ArrayList();
+	private ArrayList<JLabel> objetIventaire=new ArrayList<JLabel>();
 
 	/**
 	 *  Attribut ou est enregistré un événement observé. Cet attribut est
@@ -130,7 +126,7 @@ public class Plateau {
 		infos.setLayout(new BorderLayout());
 		actionPartie.setLayout(new GridLayout(5,1));
 		inventairePerso.setLayout(new GridLayout(2,3));
-		infosPerso.setLayout(new GridLayout(4,2));
+		infosPerso.setLayout(new GridLayout(5,2));
 
 		infos.add(vide,BorderLayout.CENTER);
 		infos.add(actionPartie,BorderLayout.SOUTH);
@@ -170,6 +166,10 @@ public class Plateau {
 		infosPerso.add(energie);
 		infosPerso.add(recupenergie);
 		infosPerso.add(inventaire);
+		infosPerso.add(JLvide);
+		infosPerso.add(stockRessource);
+		infosPerso.add(recupStockRessource);
+		
 		window.getContentPane().add(infos, BorderLayout.EAST);
 		window.getContentPane().add(graphic, BorderLayout.WEST);
 		if (withTextArea) {
@@ -213,6 +213,8 @@ public class Plateau {
 		});
 		annulerSelection.setVisible(false);
 		lacherObjet.setVisible(false);
+		stockRessource.setVisible(false);
+		recupStockRessource.setVisible(false);
 	}
 
 	/**
@@ -534,9 +536,14 @@ public class Plateau {
 			recupNomPerso.setText(perso.getNom());
 			recupTypePerso.setText(perso.getType());
 			recupenergie.setText(""+perso.getEnergie());
+			stockRessource.setVisible(false);
+			recupStockRessource.setVisible(false);
 		}else{
 			recupTypePerso.setText(batiment.getType());
 			recupenergie.setText(""+batiment.batimentHealth);
+			recupStockRessource.setText(""+((Fort)batiment).getStockRessource());
+			stockRessource.setVisible(true);
+			recupStockRessource.setVisible(true);
 			nomPerso.setVisible(false);
 			inventairePerso.setVisible(false);
 			inventaire.setVisible(false);
