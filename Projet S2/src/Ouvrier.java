@@ -131,4 +131,8 @@ public class Ouvrier extends Personnage{
 			}
 		}
 	}	
+
+	public String toString(boolean console){
+		return "O";
+	}
 }
