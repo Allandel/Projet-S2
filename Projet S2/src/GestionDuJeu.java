@@ -78,9 +78,11 @@ public class GestionDuJeu {
 					if(tableauAffichage[cordonnees[1]][cordonnees[0]]>=6&& ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
 						affichage.getPlateau().refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), 0);
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],false);
-					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2))
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2)){
 						ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant().sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
-
+					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==joueur[equipe].searchBati("Fort").getId()){
+						ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant().actionFort(cordonnees[0],cordonnees[1], ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
+					}
 					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}
 			}
@@ -140,6 +142,8 @@ public class GestionDuJeu {
 					}
 				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
 					gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(),affichage, equipe);
+				}else if(joueur.getNbrVillage()>0 && tableauAffichage[cordonnees[1]][cordonnees[0]]==joueur.searchBati("Fort").getId()){
+					perso.entreeFort(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(),affichage, equipe);
 				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==16){
 					perso.recuperationStuff(false,false, x,y,cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
 				}

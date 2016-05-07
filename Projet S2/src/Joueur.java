@@ -36,6 +36,27 @@ public class Joueur {
 	public void addBatiment(Batiment batiment){
 		batiments.add(batiment);
 	}
+	
+	public ArrayList<Batiment> getBatiment(){
+		 return batiments;
+	}
+	
+	public Batiment searchBati(String rech){
+		if(rech.compareTo("Fort")==0){
+			for(Batiment bati:batiments){
+				if(bati instanceof Fort){
+					return bati;
+				}
+			}
+		}/*else if(rech.compareTo("Mine")==0){
+			for(Batiment bati:batiments){
+				if(bati instanceof Mine){
+					return bati;
+				}
+			}*/
+		//}
+		return null; 
+	}
 
 	/**
 	 * @return the ligneBateau

@@ -14,6 +14,7 @@ public class Fort extends Batiment{
 		super(x, y, joueur);
 		this.setId(id);
 		batimentHealth=100;
+		this.type="Fort";
 		joueur.incrNiveauVillage();
 		}
 
