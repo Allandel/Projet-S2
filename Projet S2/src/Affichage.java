@@ -33,7 +33,9 @@ public class Affichage {
 			"img/piege.jpg",			//id 18
 			"img/bombe.jpg",			//id 19
 			"img/1.village.jpg",        //id 20
-			"img/2.village.jpg"			//id 21
+			"img/2.village.jpg",		//id 21
+			"img/1.forteresse.jpg",		//id 22
+			"img/2.forteresse.jpg"		//id 23
 	};			
 
 	/**

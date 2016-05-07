@@ -45,6 +45,17 @@ public class Batiment {
 		return stockBatiment;
 	}
 	
+	public boolean getPersonnage(String type){
+		if(!stockBatiment.isEmpty()){
+			for(Personnage perso : stockBatiment){
+				if(perso.getType().compareTo(type)==0){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * 
 	 * @return le nombre de personnage vivant dans le batiment
@@ -189,19 +200,6 @@ public class Batiment {
 		affichage.setVisibleActionPerso(false,null);
 	}
 	
-	public void actionFort(int x, int y, ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe){
-		plateauDuJeu.refreshinfo(null,this);
-		String [] tab={"Sortir un Personnage","Monter le Niveau de la Forteresse"};
-		String action=null;
-		action=(String)affichage.popUpYesNo(equipe,"\nQue voulez vous faire ?\n\n[Cliquez sur annuler si vous ne voulez rien faire]\n", "Choix de l'action",tab);
-		if(action!=null){
-			if(action.compareTo("Sortir un Personnage")==0){
-				ileDuJeu.getTableau()[x][y].getBatimentCourant().sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
-			}
-		}
-		plateauDuJeu.refreshinfo(null,this);
-	}
-
 	public void setId(int id){
 		this.id=id;
 	}
