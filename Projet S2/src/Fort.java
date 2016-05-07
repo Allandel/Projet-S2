@@ -42,11 +42,14 @@ public class Fort extends Batiment{
 			stockRessources-=30;
 			affichage.popUp(equipe, "Votre Forteresse a été amélioré! Elle est désormais plus résistante et inflige plus de dégats alentours !", "Evolution au niveau 3" );
 		}else{
-			if((niveau==1 && stockRessources<=10)||(niveau==2 && stockRessources<=30)){
-				affichage.popUp(equipe, "Vous n'avez pas assez de ressources", "Impossible d'évoluer");
+			if((niveau==1 && stockRessources<=10)){
+				affichage.popUp(equipe, "Vous n'avez pas assez de ressources, il vous en faut encore "+(10-stockRessources), "Impossible d'évoluer");
+			}else if((niveau==2 && stockRessources<=30)){
+				affichage.popUp(equipe, "Vous n'avez pas assez de ressources, il vous en faut encore "+(30-stockRessources), "Impossible d'évoluer");
 			}else if(!this.getPersonnage("Ouvrier")){
 				affichage.popUp(equipe, "Il vous faut un ouvrier au sein de votre ville pour évoluer !", "Impossible d'évoluer");
 			}
+		
 		}
 	}
 	
