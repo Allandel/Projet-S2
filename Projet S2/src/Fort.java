@@ -13,6 +13,7 @@ public class Fort extends Batiment{
 	public Fort(int id, int x, int y, Joueur joueur){
 		super(x, y, joueur);
 		this.setId(id);
+		joueur.setIdFort(id);
 		batimentHealth=100;
 		this.type="Fort";
 		joueur.incrNiveauVillage();

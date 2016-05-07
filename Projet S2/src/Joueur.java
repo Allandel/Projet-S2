@@ -9,7 +9,7 @@ public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
 	private ArrayList<Batiment> batiments = new ArrayList<Batiment>();
 	private boolean equipe1, coffreTrouve=false;
-	private int idBateau, ligneBateau, colonneBateau, nbrVillage=0, niveauVillage=0;
+	private int idBateau, ligneBateau, colonneBateau, nbrVillage=0, niveauVillage=0, idFort=17;
 
 	/**
 	 * Construit un joueur en lui donnant un boolean correspondant a son equipe et l'id de son bateau
@@ -41,21 +41,12 @@ public class Joueur {
 		 return batiments;
 	}
 	
-	public Batiment searchBati(String rech){
-		if(rech.compareTo("Fort")==0){
-			for(Batiment bati:batiments){
-				if(bati instanceof Fort){
-					return bati;
-				}
-			}
-		}/*else if(rech.compareTo("Mine")==0){
-			for(Batiment bati:batiments){
-				if(bati instanceof Mine){
-					return bati;
-				}
-			}*/
-		//}
-		return null; 
+	public int getIdFort(){
+		return idFort;
+	}
+	
+	public void setIdFort(int idfort){
+		this.idFort=idfort;
 	}
 
 	/**

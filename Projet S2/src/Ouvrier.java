@@ -17,6 +17,7 @@ public class Ouvrier extends Personnage{
 	public void construireVillage(int x, int y, Case[][] tableauIle, Joueur joueur){
 		if(joueur.getNbrVillage()<1){
 			joueur.addVillage();
+			this.viderInventaireDeRochers();
 			tableauIle[x][y].removePersonnageCourant(); 
 			if(joueur.getEquipe()){
 				Fort bleu=new Fort(20,x,y,joueur);
@@ -26,14 +27,14 @@ public class Ouvrier extends Personnage{
 				tableauIle[x][y].setBatimentCourant(rouge);	
 			}
 			tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
-				for(int i=0;i<6;i++){
-					int cpt=0;
-					if(getInventaire().get(cpt).compareTo("Pierre")==0){
-						getInventaire().remove(cpt);
-					}else{
-						cpt++;
-					}
-				}
+		}
+	}
+	
+	public void viderInventaireDeRochers(){
+		for(int i=0; i<6;i++){
+			if(this.getObjetInventaire("Pierre")){
+			this.removeObjetInventaire("Pierre", false);
+			}
 		}
 	}
 	

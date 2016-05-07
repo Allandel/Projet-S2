@@ -130,7 +130,7 @@ public class Personnage{
 	}
 	
 	public int getIdFort(){
-		return joueur.searchBati("Fort").getId();
+		return joueur.getIdFort();
 	}
 
 	/**
