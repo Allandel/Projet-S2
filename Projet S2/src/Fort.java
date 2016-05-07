@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 
 public class Fort extends Batiment{
 	int niveau=1;
-	protected ArrayList<String> stockRessources=new ArrayList<String>();
+	protected int stockRessources;
 	
 	/**
 	 * Construit un fort en lui attribuant l'ID donnee
@@ -24,22 +23,18 @@ public class Fort extends Batiment{
 	}
 	
 	public void evolution(Affichage affichage, int equipe){
-		if(niveau==1 && stockRessources.size()>=10){
+		if(niveau==1 && stockRessources>=10){
 			niveau=2;
 			batimentHealth=200;
 			joueur.incrNiveauVillage();
-			for(int i=0; i<10;i++){
-				stockRessources.remove(0);
-			}
+			stockRessources-=10;
 			this.setId(15);
 			affichage.popUp(equipe, "Votre village à évolué en Forteresse ! Votre base est désormais plus résistante et ", "Evolution au niveau 2" );
-		}else if(niveau==2 && stockRessources.size()>=30){
+		}else if(niveau==2 && stockRessources>=30){
 			niveau=3;
 			batimentHealth=300;
 			joueur.incrNiveauVillage();
-			for(int i=0; i<30;i++){
-				stockRessources.remove(0);
-			}
+			stockRessources-=30;
 			affichage.popUp(equipe, "Votre Forteresse à évoluer ! Elle est désormais plus résistante et inflige plus de dégats alentours !", "Evolution au niveau 3" );
 		}
 	}

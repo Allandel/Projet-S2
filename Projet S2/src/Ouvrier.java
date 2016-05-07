@@ -30,12 +30,15 @@ public class Ouvrier extends Personnage{
 		}
 	}
 	
-	public void viderInventaireDeRochers(){
+	public int viderInventaireDeRochers(){
+		int cpt=0;
 		for(int i=0; i<6;i++){
 			if(this.getObjetInventaire("Pierre")){
 			this.removeObjetInventaire("Pierre", false);
+			cpt++;
 			}
 		}
+		return cpt;
 	}
 	
 	public void commencerUpgrade(){
