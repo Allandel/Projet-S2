@@ -21,7 +21,7 @@ public class Fort extends Batiment{
 		return "F";
 	}
 	
-	public void evolution(Affichage affichage, int equipe){
+	public void evolution(Affichage affichage, int equipe, ile ileDuJeu){
 		if(niveau==1 && stockRessources>=10 && this.getPersonnage("Ouvrier")){
 			niveau=2;
 			batimentHealth=200;
@@ -30,9 +30,11 @@ public class Fort extends Batiment{
 			if(equipe==0){
 				this.setId(22);
 				joueur.setIdFort(22);
+				ileDuJeu.getTableau()[x][y].setId(22);
 			}else{
 				this.setId(23);
 				joueur.setIdFort(23);
+				ileDuJeu.getTableau()[x][y].setId(23);
 			}
 			affichage.popUp(equipe, "Votre village a été amélioré en Forteresse ! Votre base est désormais plus résistante et soigne mieux !", "Evolution au niveau 2" );
 		}else if(niveau==2 && stockRessources>=30 && this.getPersonnage("Ouvrier")){
@@ -72,7 +74,7 @@ public class Fort extends Batiment{
 			if(action.compareTo("Sortir un Personnage")==0){
 				this.sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
 			}else{
-				((Fort)this).evolution(affichage, equipe);
+				((Fort)this).evolution(affichage, equipe, ileDuJeu);
 			}
 		}
 		plateauDuJeu.refreshinfo(null,this);
