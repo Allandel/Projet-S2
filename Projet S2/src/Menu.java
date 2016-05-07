@@ -488,7 +488,7 @@ public class Menu extends JFrame{
 			nbrJ1+=this.getParametres()[x];
 		}
 
-		for(int x=8;x<12;x++){
+		for(int x=7;x<12;x++){
 			nbrJ2+=this.getParametres()[x];
 		}
 
