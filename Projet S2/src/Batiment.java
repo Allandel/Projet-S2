@@ -129,6 +129,7 @@ public class Batiment {
 	public void sortieBatiment(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe){
 		plateauDuJeu.refreshinfo(null,batimentHealth );
 		
+		
 		if(stockBatiment.isEmpty()){
 			//affichage d'un message si pas de personnage dans le batiment
 			affichage.popUp(equipe, "Il n'y a pas de personnages.", "Attention" );
