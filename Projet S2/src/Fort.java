@@ -3,8 +3,8 @@ import java.util.Random;
 
 public class Fort extends Batiment{
 	int niveau=1;
-	protected int stockRessources=40;
-	
+	protected int stockRessources=40, dmg=10;
+
 	/**
 	 * Construit un fort en lui attribuant l'ID donnee
 	 * @param id
@@ -15,18 +15,19 @@ public class Fort extends Batiment{
 		batimentHealth=100;
 		this.type="Fort";
 		joueur.incrNiveauVillage();
-		}
+	}
 
 	public String toString(){
 		return "F";
 	}
-	
+
 	public void evolution(Affichage affichage, int equipe, ile ileDuJeu){
 		if(niveau==1 && stockRessources>=10 && this.getPersonnage("Ouvrier")){
 			niveau=2;
 			batimentHealth=200;
 			joueur.incrNiveauVillage();
 			stockRessources-=10;
+			heal=20;
 			if(equipe==0){
 				this.setId(22);
 				joueur.setIdFort(22);
@@ -39,6 +40,7 @@ public class Fort extends Batiment{
 			affichage.popUp(equipe, "Votre village a été amélioré en Forteresse ! Votre base est désormais plus résistante et soigne mieux !", "Evolution au niveau 2" );
 		}else if(niveau==2 && stockRessources>=30 && this.getPersonnage("Ouvrier")){
 			niveau=3;
+			dmg=20;
 			batimentHealth=300;
 			joueur.incrNiveauVillage();
 			stockRessources-=30;
@@ -51,10 +53,10 @@ public class Fort extends Batiment{
 			}else if(!this.getPersonnage("Ouvrier")){
 				affichage.popUp(equipe, "Il vous faut un ouvrier au sein de votre ville pour évoluer !", "Impossible d'évoluer");
 			}
-		
+
 		}
 	}
-	
+
 	/**
 	 * Affichage des actions possible avec le fort quand on le selectionne
 	 * @param x
@@ -79,8 +81,8 @@ public class Fort extends Batiment{
 		}
 		plateauDuJeu.refreshinfo(null,this);
 	}
-	
-	
+
+
 	/**
 	 * Attaque les perso ennemi autour du fort
 	 * @param tableauIle
@@ -88,17 +90,19 @@ public class Fort extends Batiment{
 	 * @param equipe
 	 */
 	public void attaque(Case[][] tableauIle, Affichage affichage, int equipe){
-		Random deg=new Random();
-		int dommages=deg.nextInt(10)+20;
-		for(int i=x-1;i<x+2;i++){
-			for(int j=y-1;j<y+2;j++){
-				if(tableauIle[i][j].getPersonnageCourant()!=null && tableauIle[i][j].getPersonnageCourant().getDeath()==false && tableauIle[i][j].getPersonnageCourant().getJoueur()!=joueur){
-					tableauIle[i][j].getPersonnageCourant().perteEnergie(dommages, i,j, tableauIle, true, false,affichage, equipe);
+		if(niveau>1){
+			Random deg=new Random();
+			int dommages=deg.nextInt(10)+dmg;
+			for(int i=x-1;i<x+2;i++){
+				for(int j=y-1;j<y+2;j++){
+					if(tableauIle[i][j].getPersonnageCourant()!=null && tableauIle[i][j].getPersonnageCourant().getDeath()==false && tableauIle[i][j].getPersonnageCourant().getJoueur()!=joueur){
+						tableauIle[i][j].getPersonnageCourant().perteEnergie(dommages, i,j, tableauIle, true, false,affichage, equipe);
+					}
 				}
 			}
 		}
 	}
-	
+
 	public int getStockRessource(){
 		return stockRessources;
 	}

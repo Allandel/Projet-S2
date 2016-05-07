@@ -491,10 +491,10 @@ public class Personnage{
 	/**
 	 * augmente l'energie du personnage
 	 */
-	public void addEnergie(){
+	public void addEnergie(int heal){
 		if(energie<100){
-			if(energie+10<=100){
-				energie+=10;
+			if(energie+heal<=100){
+				energie+=heal;
 			}else
 				energie+=(100-energie);
 		}
