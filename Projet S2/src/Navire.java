@@ -15,6 +15,7 @@ public class Navire extends Batiment {
 	public Navire(int id, int x, int y, Joueur joueur){
 		super(x, y, joueur);
 		this.setId(id);
+		this.type="Navire";
 	}
 
 	public String toString(){

@@ -49,7 +49,7 @@ public class GestionDuJeu {
 		int equipe=0 ;
 
 		while(!gagner[0]){
-			
+
 			joueur[equipe].resetAction(affichage, equipe);
 			affichage.actionDebutTour(equipe, joueur, ileDuJeu, tableauAffichage);
 
@@ -68,15 +68,12 @@ public class GestionDuJeu {
 					else
 						decision=(int)affichage.popUpYesNo(equipe,"Désirez vous quitter le test?", "Quitter le test?",null);
 					if(decision==0){
-						if(Test.testEnCours)
-							gagner[0]=true;
-						else
-							joueur[equipe].abandon();
+						joueur[equipe].abandon();
 					}
 				}else{
 					affichage.setHighlight(cordonnees, equipe);
 					if(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant()!=null && tableauAffichage[cordonnees[1]][cordonnees[0]]>=6 && ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().actionOuDeplacement()){
-						affichage.getPlateau().refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), 0);
+						affichage.getPlateau().refreshinfo(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), null);
 						gagner=this.actionPerso(cordonnees[0],cordonnees[1],ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), equipe, joueur[equipe],false);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2)){
 						ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant().sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
@@ -165,7 +162,7 @@ public class GestionDuJeu {
 				}
 			}
 		}
-		affichage.getPlateau().refreshinfo(perso, 0);
+		affichage.getPlateau().refreshinfo(perso, null);
 		affichage.setVisibleActionPerso(false,perso);
 		return gagner;
 	}

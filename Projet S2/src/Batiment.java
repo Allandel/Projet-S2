@@ -15,6 +15,14 @@ public class Batiment {
 	}
 	
 	/**
+	 * 
+	 * @return le type du batiment
+	 */
+	public String getType(){
+		return type;
+	}
+	
+	/**
 	 * Fait des dommages au batiment
 	 * @param deg
 	 */
@@ -128,7 +136,7 @@ public class Batiment {
 	 * Permet a un personnage de sortir du batiment
 	 */
 	public void sortieBatiment(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe){
-		plateauDuJeu.refreshinfo(null,batimentHealth );
+		plateauDuJeu.refreshinfo(null,this);
 		
 		
 		if(stockBatiment.isEmpty()){
@@ -182,16 +190,16 @@ public class Batiment {
 	}
 	
 	public void actionFort(int x, int y, ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe){
+		plateauDuJeu.refreshinfo(null,this);
 		String [] tab={"Sortir un Personnage","Monter le Niveau de la Forteresse"};
 		String action=null;
 		action=(String)affichage.popUpYesNo(equipe,"\nQue voulez vous faire ?\n\n[Cliquez sur annuler si vous ne voulez rien faire]\n", "Choix de l'action",tab);
 		if(action!=null){
 			if(action.compareTo("Sortir un Personnage")==0){
 				ileDuJeu.getTableau()[x][y].getBatimentCourant().sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
-			}else{
-				
 			}
 		}
+		plateauDuJeu.refreshinfo(null,this);
 	}
 
 	public void setId(int id){

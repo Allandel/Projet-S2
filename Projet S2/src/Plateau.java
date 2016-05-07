@@ -524,7 +524,7 @@ public class Plateau {
 	 * @param perso
 	 * @param coqueHealth
 	 */
-	public void refreshinfo(Personnage perso, int coqueHealth){
+	public void refreshinfo(Personnage perso, Batiment batiment){
 		if(perso!=null){
 			if(perso.getInventaire().isEmpty())
 				inventaireVide();
@@ -535,8 +535,8 @@ public class Plateau {
 			recupTypePerso.setText(perso.getType());
 			recupenergie.setText(""+perso.getEnergie());
 		}else{
-			recupTypePerso.setText("Navire");
-			recupenergie.setText(""+coqueHealth);
+			recupTypePerso.setText(batiment.getType());
+			recupenergie.setText(""+batiment.batimentHealth);
 			nomPerso.setVisible(false);
 			inventairePerso.setVisible(false);
 			inventaire.setVisible(false);
