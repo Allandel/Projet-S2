@@ -276,9 +276,17 @@ public class Joueur {
 			bat.recupEnergie();
 		}
 	}
-
+	
+	private void attaqueFort(Case[][] tableauIle, Affichage affichage, int equipe){
+		for(Batiment bat: batiments){
+			if(bat instanceof Fort)
+				((Fort) bat).attaque(tableauIle, affichage, equipe);
+		}
+	}
+	
 	public void actionFinPartie(ile ileDuJeu, Affichage affichage, int equipe){
 		soinPersoBatiment();
 		ExplosionBombes(ileDuJeu.getTableau(), affichage, equipe);
+		attaqueFort(ileDuJeu.getTableau(), affichage, equipe);
 	}
 }
