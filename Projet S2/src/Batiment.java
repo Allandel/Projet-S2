@@ -249,4 +249,15 @@ public class Batiment {
 	public String toString(){
 		return "";
 	}
+	
+	/**
+	 * Tue les personnages situés dans le batiment lors de sa destruction
+	 * @param tableauIle
+	 */
+	public void destructionBatiment(Case[][] tableauIle){
+		for(Personnage perso: stockBatiment){
+			perso.setDeath(true);
+		}
+		tableauIle[x][y].removeBatimentCourant();
+	}
 }

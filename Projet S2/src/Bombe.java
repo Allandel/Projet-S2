@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Bombe {
 	private int x,y,compteur=2;
-	
+
 	/**
 	 * Constructeur de la bombe, set les coordonnees de la bombe
 	 * @param x
@@ -12,7 +12,7 @@ public class Bombe {
 		this.x=x;
 		this.y=y;
 	}
-	
+
 	/**
 	 * Diminue le temps restant avant l'explosion de la bombe 
 	 * @param tableauIle
@@ -28,8 +28,8 @@ public class Bombe {
 			return true;
 		}
 		return false;
-	 }
-	
+	}
+
 	/**
 	 * 
 	 * @return le compteur de temps
@@ -37,7 +37,7 @@ public class Bombe {
 	public int getCompteur(){
 		return compteur;
 	}
-	
+
 	/**
 	 * explosion de la bombe, fait des dommages aux alentours
 	 * @param tableauIle
@@ -55,7 +55,7 @@ public class Bombe {
 			}
 		}
 	}
-	
+
 	/**
 	 * Explosion d'un batiment
 	 * @param p
@@ -71,7 +71,7 @@ public class Bombe {
 				tableauIle[x][y].setId(4);
 				joueur[0].coffreTrouve();
 				joueur[1].coffreTrouve();
-				
+
 			}else if(((CaseRocher)tableauIle[this.x][this.y]).getKey()){
 				affichage.popUp(equipe,"Vous avez fait exploser le rocher sous lequel se trouvait la clé !\nCelle ci se trouve désormais dans votre inventaire", "CLE DECOUVERTE" );
 				tableauIle[x][y]=new Case();
@@ -85,17 +85,13 @@ public class Bombe {
 		}else if(tableauIle[this.x][this.y].getId()!=joueur[equipe].getIdBateau()){
 			Random ran=new Random();
 			int deg=ran.nextInt(50)+10;
-			affichage.popUp(equipe,"Vous avez fait exploser une bombe sur la coque du navire ennemi ! Vous avez infligé "+deg+" de dégats", "ATTAQUE DU NAVIRE");
+			affichage.popUp(equipe,"Vous avez fait exploser une bombe sur ce batiment ennemi ! Vous avez infligé "+deg+" de dégats", "ATTAQUE DU BATIMENT");
 			tableauIle[this.x][this.y].getBatimentCourant().dommageBatiment(deg);
-			if((tableauIle[this.x][this.y]).getBatimentCourant().getBatimentHealth()<=0){
-				String res;
-				if(equipe==0){
-					res="rouge";
-				}else{
-					res="bleu";
-				}
-				affichage.popUp(equipe,"Le bateau ennemi a coulé... L'équipe "+res+" ne pourra plus jamais rapporter le trésor à son bateau...", "LE  NAVIRE ENNEMI COULE");
-				joueur[equipe].abandon(); 
+			if(tableauIle[this.x][this.y].getBatimentCourant().getBatimentHealth()<=0){
+				affichage.popUp(equipe,"Le batiment ennemi est détruit. L'équipe "+(equipe+1)+" ne pourra plus l'utiliser !", "LE  BATIMENT ENNEMI EST DETRUIT");
+				tableauIle[this.x][this.y].getBatimentCourant().destructionBatiment(tableauIle);
+				if(tableauIle[this.x][this.y].getBatimentCourant() instanceof Navire)
+					joueur[equipe].abandon(); 
 			}
 		}
 	}
