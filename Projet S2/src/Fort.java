@@ -29,6 +29,12 @@ public class Fort extends Batiment{
 		return niveau;
 	}
 
+	/**
+	 * Permet d'augmenter le niveau du fort
+	 * @param affichage
+	 * @param equipe
+	 * @param ileDuJeu
+	 */
 	public void evolution(Affichage affichage, int equipe, ile ileDuJeu){
 		if(niveau==1 && stockRessources>=10 && this.getPersonnage("Ouvrier")){
 			niveau=2;
@@ -54,9 +60,9 @@ public class Fort extends Batiment{
 			stockRessources-=30;
 			affichage.popUp(equipe, "Votre Forteresse a été amélioré! Elle est désormais plus résistante et inflige plus de dégats alentours !", "Evolution au niveau 3" );
 		}else{
-			if((niveau==1 && stockRessources<=10)){
+			if((niveau==1 && stockRessources<10)){
 				affichage.popUp(equipe, "Vous n'avez pas assez de ressources, il vous en faut encore "+(10-stockRessources), "Impossible d'évoluer");
-			}else if((niveau==2 && stockRessources<=30)){
+			}else if((niveau==2 && stockRessources<30)){
 				affichage.popUp(equipe, "Vous n'avez pas assez de ressources, il vous en faut encore "+(30-stockRessources), "Impossible d'évoluer");
 			}else if(!this.getPersonnage("Ouvrier")){
 				affichage.popUp(equipe, "Il vous faut un ouvrier au sein de votre ville pour évoluer !", "Impossible d'évoluer");
@@ -77,9 +83,9 @@ public class Fort extends Batiment{
 	 */
 	public void actionFort(int x, int y, ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe){
 		plateauDuJeu.refreshinfo(null,this);
-		if(niveau==3){
+		if(niveau==3)
 			this.sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
-		}else{
+		else{
 			String [] tab={"Sortir un Personnage","Monter le Niveau de la Forteresse"};
 			String action=null;
 			action=(String)affichage.popUpYesNo(equipe,"\nQue voulez vous faire ?\n\n[Cliquez sur annuler si vous ne voulez rien faire]\n", "Choix de l'action",tab);
