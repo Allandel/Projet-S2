@@ -6,7 +6,13 @@ public class Batiment {
 	protected int batimentHealth=200,id,x,y, heal=10;
 	protected Joueur joueur;
 	protected String type;
-	
+
+	/**
+	 * Constructeur de batiment
+	 * @param x
+	 * @param y
+	 * @param joueur
+	 */
 	Batiment(int x, int y, Joueur joueur){
 		this.x=x;
 		this.y=y;
@@ -45,14 +51,17 @@ public class Batiment {
 		return stockBatiment;
 	}
 	
-	public boolean getPersonnage(String type){
-		if(!stockBatiment.isEmpty()){
+	/**
+	 * 
+	 * @param type
+	 * @return true si le batiment contient un perso d'un type donné
+	 */
+	public boolean ouvrierPresent(){
 			for(Personnage perso : stockBatiment){
-				if(perso.getType().compareTo(type)==0){
+				if(perso.getType().equals("Ouvrier")){
 					return true;
 				}
 			}
-		}
 		return false;
 	}
 	
