@@ -329,6 +329,9 @@ public class Personnage{
 							cpt++;
 						}while(inventaire.size()<6 && cpt<3);
 						affichage.popUp(equipe,"En retournant dans le batiment, votre Pigeur à récupére une/des bombe(s)!", "Recuperation de bombe");
+					}else if(this instanceof Ouvrier && !inventaire.contains("Pioche") && !inventairePlein(affichage, "Cet ouvrier n'a plus de place dans son inventaire pour récupérer une pioche.")){
+						this.setObjetInventaire("Pioche");
+						affichage.popUp(equipe,"En retournant dans le batiment, votre Pigeur à récupére une pioche!", "Recuperation d'une pioche");
 					}
 				}
 				if(victoire[0]==false){
