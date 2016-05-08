@@ -53,7 +53,7 @@ public class Ouvrier extends Personnage{
 			else
 				fort=new Fort(x,y,joueur);
 			tableauIle[x][y].removePersonnageCourant();
-			tableauIle[x][y].setBatimentCourant(fort);
+			tableauIle[x][y].setBatimentCourant(fort,false);
 			tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
 		}
 	}
@@ -85,7 +85,7 @@ public class Ouvrier extends Personnage{
 
 	public void construireMine(int x, int y, Case[][] tableauIle, Joueur joueur){
 		tableauIle[x][y].removePersonnageCourant();
-		tableauIle[x][y].setBatimentCourant(new Mine(x,y,joueur));
+		tableauIle[x][y].setBatimentCourant(new Mine(x,y,joueur),false);
 		tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
 		this.viderInventaireDeRochers();
 	}
@@ -197,6 +197,7 @@ public class Ouvrier extends Personnage{
 	 * @return
 	 */
 	private boolean constructible(ile ileDuJeu,int x, int y, Affichage affichage){
+		ileDuJeu.getTableau()[x][y].setBatimentCourant(new Batiment(),true);
 		boolean res=ileDuJeu.accessible(x+1, y);
 		if(res)
 			res=ileDuJeu.accessible(x-1, y);
@@ -206,6 +207,7 @@ public class Ouvrier extends Personnage{
 			res=ileDuJeu.accessible(x, y-1);
 		if(!res)
 			affichage.popUp(joueur.getIdBateau()-2, "Il n'y a pas de place pour construire ici, les rochers bloquent le chemin", "Construction impossible");
+		ileDuJeu.getTableau()[x][y].removeBatimentCourant(true);
 		return res;
 	}
 }

@@ -67,8 +67,8 @@ public class ile {
 			}
 		}
 
-		tableauIle[7][1].setBatimentCourant(new Navire(2,7,1, joueur[0]));
-		tableauIle[7][7].setBatimentCourant(new Navire(3,7,7, joueur[1]));
+		tableauIle[7][1].setBatimentCourant(new Navire(2,7,1, joueur[0]), false);
+		tableauIle[7][7].setBatimentCourant(new Navire(3,7,7, joueur[1]),false);
 		((CaseRocher)tableauIle[1][3]).setChest(true);
 		((CaseRocher)tableauIle[1][5]).setKey(true);
 	}
@@ -85,8 +85,8 @@ public class ile {
 
 		ligneNavJ1= random.nextInt(tableauIle.length-2)+1;
 		ligneNavJ2= random.nextInt(tableauIle.length-2)+1;
-		tableauIle[ligneNavJ1][1].setBatimentCourant(new Navire(2,ligneNavJ1,1, joueur[0]));
-		tableauIle[ligneNavJ2][tableauIle.length-2].setBatimentCourant(new Navire(3,ligneNavJ2,tableauIle.length-2, joueur[0]));
+		tableauIle[ligneNavJ1][1].setBatimentCourant(new Navire(2,ligneNavJ1,1, joueur[0]),false);
+		tableauIle[ligneNavJ2][tableauIle.length-2].setBatimentCourant(new Navire(3,ligneNavJ2,tableauIle.length-2, joueur[0]),false);
 
 		setRocher(taille,proportion);
 		setKeyCoffre();	
@@ -209,28 +209,28 @@ public class ile {
 	void estAccessible(int x, int y){
 		tableauIle[x][y].setAccessible(true);
 		if(x>0){
-			if(tableauIle[x-1][y].getId()>5 && tableauIle[x-1][y].getId()<20 && !tableauIle[x-1][y].isAccessible()){
+			if((tableauIle[x-1][y].getId()>5 && tableauIle[x-1][y].getBatimentCourant()==null) && !tableauIle[x-1][y].isAccessible()){
 				estAccessible(x-1,y);
 			}else{
 				tableauIle[x-1][y].setAccessible(true);
 			}
 		}
 		if(y<tableauIle.length-1){
-			if(tableauIle[x][y+1].getId()>5 && tableauIle[x-1][y].getId()<20 && !tableauIle[x][y+1].isAccessible()){
+			if((tableauIle[x][y+1].getId()>5 && tableauIle[x][y+1].getBatimentCourant()==null) && !tableauIle[x][y+1].isAccessible()){
 				estAccessible(x,y+1);
 			}else{
 				tableauIle[x][y+1].setAccessible(true);
 			}
 		}
 		if(x<tableauIle.length-1){
-			if(tableauIle[x+1][y].getId()>5 && tableauIle[x-1][y].getId()<20 && !tableauIle[x+1][y].isAccessible()){
+			if((tableauIle[x+1][y].getId()>5 && tableauIle[x+1][y].getBatimentCourant()==null) && !tableauIle[x+1][y].isAccessible()){
 				estAccessible(x+1,y);
 			}else{
 				tableauIle[x+1][y].setAccessible(true);
 			}
 		}
 		if(y>0){
-			if(tableauIle[x][y-1].getId()>5 && tableauIle[x-1][y].getId()<20 && !tableauIle[x][y-1].isAccessible()){
+			if((tableauIle[x][y-1].getId()>5 && tableauIle[x][y-1].getBatimentCourant()==null) && !tableauIle[x][y-1].isAccessible()){
 				estAccessible(x,y-1);
 			}else{
 				tableauIle[x][y-1].setAccessible(true);
@@ -250,6 +250,12 @@ public class ile {
 		}
 	}
 
+	/**
+	 * Test si une case particuliere est accessible depuis les bateaux
+	 * @param x
+	 * @param y
+	 * @return true si la case est accessible
+	 */
 	boolean accessible(int x, int y){
 		boolean access=false;
 		resetAcces();

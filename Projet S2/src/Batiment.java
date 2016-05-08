@@ -8,6 +8,13 @@ public class Batiment {
 	protected String type;
 
 	/**
+	 * Constructeur vide
+	 */
+	Batiment(){
+		
+	}
+	
+	/**
 	 * Constructeur de batiment
 	 * @param x
 	 * @param y
@@ -258,6 +265,6 @@ public class Batiment {
 		for(Personnage perso: stockBatiment){
 			perso.setDeath(true);
 		}
-		tableauIle[x][y].removeBatimentCourant();
+		tableauIle[x][y].removeBatimentCourant(false);
 	}
 }

@@ -51,17 +51,19 @@ public class Case {
 	/**
 	 * @param batimentCourant the batimentCourant to set
 	 */
-	public void setBatimentCourant(Batiment batimentCourant) {
+	public void setBatimentCourant(Batiment batimentCourant, boolean construction) {
 		this.batimentCourant = batimentCourant;
-		this.setId(batimentCourant.getId());
+		if(!construction)
+			this.setId(batimentCourant.getId());
 	}
 
 	/**
 	 * Enleve le batiment courant et réitinialise l'id de la case
 	 */
-	public void removeBatimentCourant(){
+	public void removeBatimentCourant(boolean construction){
 		this.batimentCourant = null;
-		this.setId(17);
+		if(!construction)
+			this.setId(17);
 	}
 
 	/**
