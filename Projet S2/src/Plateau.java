@@ -235,8 +235,7 @@ public class Plateau {
 	}
 
 	/**
-	 * return l'id du buton selectionné
-	 * @return
+	 * @return l'id du buton selectionné
 	 */
 	public int getId(){
 		return id;
@@ -574,7 +573,7 @@ public class Plateau {
 	 * @param texte
 	 * @param titre
 	 * @param listeItem
-	 * @return
+	 * @return l'objet selectionné
 	 */
 	public Object popUpYesNo(String texte, String titre, Object []listeItem){
 		Object object;

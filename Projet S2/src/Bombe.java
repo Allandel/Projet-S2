@@ -18,7 +18,7 @@ public class Bombe {
 	 * @param tableauIle
 	 * @param affichage
 	 * @param equipe
-	 * @return
+	 * @return vrai si le compteur est à 0
 	 */
 	public boolean downCompteur(Case[][] tableauIle, Affichage affichage, int equipe){
 		compteur--;

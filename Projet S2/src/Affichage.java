@@ -216,7 +216,6 @@ public class Affichage {
 
 	/**
 	 * 
-	 * @param equipe
 	 * @return le plateau du jeu
 	 */
 	public Plateau getPlateau(){
@@ -249,7 +248,7 @@ public class Affichage {
 	 * @param texte
 	 * @param titre
 	 * @param listeItem
-	 * @return
+	 * @return l'objet selectionné
 	 */
 	public Object popUpYesNo(int equipe, String texte, String titre, Object[] listeItem){
 		return plateauDuJeu.popUpYesNo(texte, titre, listeItem);

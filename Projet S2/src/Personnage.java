@@ -436,6 +436,8 @@ public class Personnage{
 					tableauIle[x][y].removePersonnageCourant();
 				this.perteEnergie(1, xApres, yApres, tableauIle, false, true, affichage, equipe);				
 				tableauIle[xApres][yApres].setPersonnageCourant(this);
+				if(tableauIle[xApres][yApres].getPiege())
+					this.immobilisation(affichage, equipe);
 			}
 		}else{
 			if(tableauIle[xApres][yApres].getBatimentCourant().persoMort()){

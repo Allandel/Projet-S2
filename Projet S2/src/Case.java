@@ -130,7 +130,7 @@ public class Case {
 
 	/**
 	 * Change la valeur de piege
-	 * @param x
+	 * @param setter
 	 */
 	public void setPiege(boolean setter){
 		piege=setter;

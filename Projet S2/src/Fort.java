@@ -8,8 +8,10 @@ public class Fort extends Batiment{
 	protected boolean upgrade=false;
 
 	/**
-	 * Construit un fort en lui attribuant l'ID donnee
-	 * @param id
+	 * Construit un fort au coordonnees données
+	 * @param x
+	 * @param y
+	 * @param joueur
 	 */
 	public Fort(int x, int y, Joueur joueur){
 		super(x, y, joueur);
@@ -61,7 +63,6 @@ public class Fort extends Batiment{
 	}
 /**
  * Permet d'augmenter le niveau du fort
- * @param affichage
  * @param equipe
  * @param ileDuJeu
  */

@@ -10,7 +10,6 @@ public class Guerrier extends Personnage{
 
 	/**
 	 * Constructeur lui attribuant le nom, type, son epee, son equipe et son id
-	 * @param equipe1
 	 * @param joueur
 	 */
 	public Guerrier(Joueur joueur){

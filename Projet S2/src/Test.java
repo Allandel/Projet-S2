@@ -39,7 +39,7 @@ public class Test {
 
 	/**
 	 * Lance le test concernant un personnage
-	 * @param perso
+	 * @param id
 	 */
 	public void testPerso(int id){
 		testEnCours=true;
