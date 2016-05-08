@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class Voleur extends Personnage {
 	/**
 	 * Constructeur cr�ant un voleur avec un nom, un type, un ID en fonction du parametre equipe1 determinant son equipe.
-	 * @param equipe1
+	 * @param joueur
 	 */
 	public Voleur(Joueur joueur){
 		super(joueur);
@@ -32,6 +32,8 @@ public class Voleur extends Personnage {
 	 * @param x
 	 * @param y
 	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void volerObjet(Personnage p, int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		Random random=new Random();
@@ -51,5 +53,4 @@ public class Voleur extends Personnage {
 			}
 		}
 	}
-
 }
