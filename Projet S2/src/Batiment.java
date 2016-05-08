@@ -11,9 +11,9 @@ public class Batiment {
 	 * Constructeur vide
 	 */
 	Batiment(){
-		
+
 	}
-	
+
 	/**
 	 * Constructeur de batiment
 	 * @param x
@@ -256,7 +256,7 @@ public class Batiment {
 	public String toString(){
 		return "";
 	}
-	
+
 	/**
 	 * Tue les personnages situés dans le batiment lors de sa destruction
 	 * @param tableauIle
