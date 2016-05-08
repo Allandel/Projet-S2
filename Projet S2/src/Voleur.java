@@ -43,7 +43,7 @@ public class Voleur extends Personnage {
 					affichage.popUp(equipe,"Vous avez reussi a mettre la main dans le sac de votre cible mais celui ci est vide.", "VOL IMPOSSIBLE" );
 				}else if(!p.getInventaire().isEmpty() && random.nextInt(4)==2 ){
 					int objetVole=random.nextInt(p.getInventaire().size());
-					getInventaire().add(p.getInventaire().get(objetVole));
+					setObjetInventaire(p.getInventaire().get(objetVole));
 					p.getInventaire().remove(objetVole);
 					affichage.popUp(equipe,"Vous avez voler : "+getInventaire().get(getInventaire().size()-1)+" avec un franc succes ! Vous etes un fin voleur !", "VOL REUSSI" );
 				}else{
