@@ -36,6 +36,8 @@ public class Guerrier extends Personnage{
 	 * @param xApres
 	 * @param yApres
 	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void attaque(Personnage p,int x, int y, int xApres, int yApres, Case[][] tableauIle, Affichage affichage, int equipe){
 		Random random=new Random();

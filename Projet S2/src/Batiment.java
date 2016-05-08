@@ -52,9 +52,7 @@ public class Batiment {
 	}
 	
 	/**
-	 * 
-	 * @param type
-	 * @return true si le batiment contient un perso d'un type donné
+	 * @return true si le batiment contient un ouvrier
 	 */
 	public boolean ouvrierPresent(){
 			for(Personnage perso : stockBatiment){
@@ -127,8 +125,6 @@ public class Batiment {
 
 	/**
 	 * Regarde si une case est vide ou si le personnage qui l'occupe peut sortir
-	 * @param i
-	 * @param j
 	 * @param ileDuJeu
 	 * @return vrai s'il n'y a pas de case vide ou de personnage pouvant se deplacer autour du batiment
 	 */
@@ -154,6 +150,11 @@ public class Batiment {
 
 	/**
 	 * Permet a un personnage de sortir du batiment
+	 * @param ileDuJeu
+	 * @param plateauDuJeu
+	 * @param tableauAffichage
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void sortieBatiment(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe){
 		plateauDuJeu.refreshinfo(null,this);
@@ -209,14 +210,22 @@ public class Batiment {
 		affichage.setVisibleActionPerso(false,null);
 	}
 	
+	/**
+	 * Set l'id du batiment
+	 * @param id
+	 */
 	public void setId(int id){
 		this.id=id;
 	}
 	
+	/**
+	 * 
+	 * @return l'id du batiment
+	 */
 	public int getId(){
 		return id;
 	}
-
+	
 	public String toString(){
 		return "";
 	}

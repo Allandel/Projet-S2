@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
  * @version 1.0
  */
 public class Explorateur extends Personnage{
+	
 	/**
 	 * Constructeur d'Explorateur lui attribuant un nom, un id, une equipe et l'ajoute dans l'equipe du joueur correspondant
 	 */
@@ -24,7 +25,8 @@ public class Explorateur extends Personnage{
 	 * @param x
 	 * @param y
 	 * @param tableauIle
-	 * @param joueur
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void interactionRocher(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		boolean key=((CaseRocher)tableauIle[x][y]).getKey();
@@ -60,7 +62,6 @@ public class Explorateur extends Personnage{
 		}
 		super.perteEnergie(5, x,y, tableauIle, false,false, affichage, equipe);
 	}
-
 
 	public String toString(boolean console){
 		return "E";

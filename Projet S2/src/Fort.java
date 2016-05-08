@@ -120,7 +120,11 @@ public class Fort extends Batiment{
 			}
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @return les ressources dans le stock
+	 */
 	public int getStockRessource(){
 		return stockRessources;
 	}

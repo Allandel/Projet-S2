@@ -18,6 +18,7 @@ public class GestionDuJeu {
 	 * @param ileDujeu
 	 * @param tableauAffichage
 	 * @param affichage
+	 * @param joueur
 	 */
 	public GestionDuJeu(ile ileDujeu, int[][] tableauAffichage, Affichage affichage, Joueur[] joueur){
 		this.ileDuJeu=ileDujeu;
@@ -25,9 +26,10 @@ public class GestionDuJeu {
 		this.affichage=affichage;
 		this.joueur=joueur;
 	}
-
+	
 	/**
 	 * Constructeur initialisant le plateau de jeu de base
+	 * @param parametres
 	 */
 	public GestionDuJeu(int [] parametres){
 		this.parametres=parametres;
@@ -107,6 +109,7 @@ public class GestionDuJeu {
 	 * @param perso
 	 * @param equipe
 	 * @param joueur
+	 * @param test
 	 * @return vrai si le personnage rentre dans le bateau avec le tresor
 	 */
 	boolean [] actionPerso(int x, int y, Personnage perso, int equipe, Joueur joueur, boolean test){
@@ -229,7 +232,6 @@ public class GestionDuJeu {
 		for(int i=0;i<parametres[11];i++){
 			Ouvrier roland =new Ouvrier(joueur[1]);
 		}
-
 
 		for(Joueur player: joueur){
 			player.setBateau(ileDuJeu);

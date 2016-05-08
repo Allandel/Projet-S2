@@ -21,6 +21,7 @@ public class Joueur {
 			idFort++;
 		}
 	}
+	
 	/**
 	 * 
 	 * @return l'equipe de personnage du joueur
@@ -36,15 +37,27 @@ public class Joueur {
 	public void addBatiment(Batiment batiment){
 		batiments.add(batiment);
 	}
-
+	
+	/**
+	 * 
+	 * @return la liste de batiment du joueur
+	 */
 	public ArrayList<Batiment> getBatiment(){
 		return batiments;
 	}
 
+	/**
+	 * 
+	 * @return l'id du fort du joueur
+	 */
 	public int getIdFort(){
 		return idFort;
 	}
 
+	/**
+	 * set l'id du fort du joueur
+	 * @param idfort
+	 */
 	public void setIdFort(int idfort){
 		this.idFort=idfort;
 	}
@@ -55,6 +68,7 @@ public class Joueur {
 	public int getLigneBateau() {
 		return ligneBateau;
 	}
+	
 	/**
 	 * 
 	 * @return le nombre de village construit par le joueur
@@ -62,14 +76,25 @@ public class Joueur {
 	public int getNbrVillage(){
 		return nbrVillage;
 	}
-
+	
+	/**
+	 * change nbrVillage à 1
+	 */
 	public void addVillage(){
 		nbrVillage=1;
 	}
 
+	/**
+	 * Augmente le niveau du village du joueur
+	 */
 	public void incrNiveauVillage(){
 		niveauVillage++;
 	}
+	
+	/**
+	 * 
+	 * @return le niveau du village du joueur
+	 */
 	public int getNiveauVillage(){
 		return niveauVillage;
 	}
@@ -140,6 +165,8 @@ public class Joueur {
 
 	/**
 	 * Remet toutes les actions et deplacement des personnages de l'equipe du joueur a true
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void resetAction(Affichage affichage, int equipe){
 		if(Test.testEnCours){
@@ -164,7 +191,13 @@ public class Joueur {
 			}
 		}
 	}
-
+	
+	/**
+	 * Fait exploser les bombes du joueur
+	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe1
+	 */
 	private void ExplosionBombes(Case[][] tableauIle, Affichage affichage, int equipe1){
 		for(Personnage perso : equipe){
 			if(perso instanceof Piegeur){
@@ -223,7 +256,11 @@ public class Joueur {
 			perso.setDeath(true);
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @return un string listant les perso du joueur qui ont subi des dommages pendant le tour de l'adversaire
+	 */
 	public String persoAttaque(){
 		String actionEnnemi="";
 		int cpt=0;
@@ -246,6 +283,10 @@ public class Joueur {
 		return actionEnnemi;
 	}
 
+	/**
+	 * 
+	 * @return un string listant les perso du joueur a qui ont a volé des affaires pendnat le tour du joueur ennemi
+	 */
 	public String persoVole(){
 		String actionEnnemi="";
 		int cpt=0;
@@ -271,12 +312,21 @@ public class Joueur {
 		return actionEnnemi;
 	}
 
+	/**
+	 * Soigne les personnages du joueur qui sont dans des batiments
+	 */
 	private void soinPersoBatiment(){
 		for(Batiment bat:batiments){
 			bat.recupEnergie();
 		}
 	}
 	
+	/**
+	 * Attaque les ennemis qui sont autour du fort du joueur
+	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
+	 */
 	private void attaqueFort(Case[][] tableauIle, Affichage affichage, int equipe){
 		for(Batiment bat: batiments){
 			if(bat instanceof Fort)
@@ -284,6 +334,12 @@ public class Joueur {
 		}
 	}
 	
+	/**
+	 * Action du joueur à la fin de son tour
+	 * @param ileDuJeu
+	 * @param affichage
+	 * @param equipe
+	 */
 	public void actionFinPartie(ile ileDuJeu, Affichage affichage, int equipe){
 		soinPersoBatiment();
 		ExplosionBombes(ileDuJeu.getTableau(), affichage, equipe);

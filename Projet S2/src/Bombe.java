@@ -3,11 +3,23 @@ import java.util.Random;
 public class Bombe {
 	private int x,y,compteur=2;
 	
+	/**
+	 * Constructeur de la bombe, set les coordonnees de la bombe
+	 * @param x
+	 * @param y
+	 */
 	public Bombe(int x, int y){
 		this.x=x;
 		this.y=y;
 	}
 	
+	/**
+	 * Diminue le temps restant avant l'explosion de la bombe 
+	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
+	 * @return
+	 */
 	public boolean downCompteur(Case[][] tableauIle, Affichage affichage, int equipe){
 		compteur--;
 		if(compteur==0){
@@ -18,10 +30,20 @@ public class Bombe {
 		return false;
 	 }
 	
+	/**
+	 * 
+	 * @return le compteur de temps
+	 */
 	public int getCompteur(){
 		return compteur;
 	}
 	
+	/**
+	 * explosion de la bombe, fait des dommages aux alentours
+	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
+	 */
 	public void explosion(Case[][] tableauIle, Affichage affichage, int equipe){
 		Random deg=new Random();
 		int dommages=deg.nextInt(10)+20;
@@ -34,6 +56,14 @@ public class Bombe {
 		}
 	}
 	
+	/**
+	 * Explosion d'un batiment
+	 * @param p
+	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
+	 * @param joueur
+	 */
 	public void explosionObjet(Personnage p, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
 		if(tableauIle[this.x][this.y] instanceof CaseRocher){
 			if(((CaseRocher)tableauIle[this.x][this.y]).getChest()){
