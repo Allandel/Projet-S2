@@ -67,7 +67,7 @@ public class Piegeur extends Personnage{
 				}else if(action.compareTo("Poser une bombe")==0 && this.getObjetInventaire("Bombe")){
 					super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 					this.poserBombe(p, x, y, tableauIle, affichage, equipe, joueur);
-					this.getInventaire().remove(this.getInventaire().indexOf("Bombe"));					
+					super.removeObjetInventaire("Bombe",false);					
 				}else if(!this.getObjetInventaire("Bombe")){
 					affichage.popUp(equipe,"Vous n'avez plus de bombes... Retournez au bateau pour en récupérer.", "PAS D'ACTION POSSIBLE");
 				}else{
