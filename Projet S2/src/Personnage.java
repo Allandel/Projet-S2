@@ -298,14 +298,14 @@ public class Personnage{
 	public boolean[] entreeBatiment(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
 		boolean victoire[]={false,false};
 
-		if(joueur.nbrVivant()>tableauIle[xApres][yApres].getBatimentCourant().nbrVivantStock()+1 || tableauIle[xApres][xAvant].getBatimentCourant() instanceof Fort || tableauIle[xApres][xAvant].getBatimentCourant() instanceof Mine || Test.testEnCours){
+		if(joueur.nbrVivant()>tableauIle[xApres][yApres].getBatimentCourant().nbrVivantStock()+1 || tableauIle[xApres][yApres].getBatimentCourant() instanceof Fort|| tableauIle[xApres][yApres].getBatimentCourant() instanceof Mine || Test.testEnCours){
 			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment rentrer votre personnage ?", "Rentrer",null);
 			if (decision==0){
 				tableauIle[xApres][yApres].getBatimentCourant().addPersoBatiment(this);
 				tableauIle[xAvant][yAvant].removePersonnageCourant();
 				this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle, affichage, equipe);
 				perteEnergie(1, xApres,yApres, tableauIle, false,false, affichage, equipe);
-				if(inventaire.contains("Tresor")){
+				if(inventaire.contains("Tresor") && tableauIle[xApres][yApres].getBatimentCourant() instanceof Navire){
 					victoire[0]=true;
 					victoire[1]=joueur.getEquipe();
 				}else if(!(tableauIle[xApres][yApres].getBatimentCourant() instanceof Mine)){
@@ -339,7 +339,7 @@ public class Personnage{
 					}
 				}
 
-			}else
+			}else if(tableauIle[xApres][yApres].getBatimentCourant() instanceof Navire)
 				affichage.popUp(equipe,"Il faut au moins un personnage sur l'ile pour pouvoir rentrer au bateau.", "Entree impossible" );
 		}
 		return victoire;

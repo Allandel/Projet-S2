@@ -30,7 +30,7 @@ public class Fort extends Batiment{
 		return niveau;
 	}
 
-	public void evolution(Affichage affichage, int equipe, ile ileDuJeu){
+	public void  evolution(Affichage affichage, int equipe, ile ileDuJeu){
 		Personnage perso = getPersonnageListe("Ouvrier");
 		if(niveau==1 && stockRessources>=10 && this.ouvrierPresent()){
 			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment améliorer votre Village en Forteresse ?\n\n(Attention, l'amélioration immobilisera votre ouvrier pour 2 tours)", "Améliorer votre village",null);

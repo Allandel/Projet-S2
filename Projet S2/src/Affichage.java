@@ -1,4 +1,4 @@
-import java.awt.Color;
+ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -160,7 +160,7 @@ public class Affichage {
 		}
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<16 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdFort()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<16 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdFort() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdMine()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
 							plateauDuJeu.resetHighlight(y, x);
@@ -294,7 +294,7 @@ public class Affichage {
 	 * @param ileDuJeu
 	 * @param tableauAffichage
 	 */
-	public void actionDebutTour(int equipe, Joueur []joueur, ile ileDuJeu, int [][] tableauAffichage){
+	public void  actionDebutTour(int equipe, Joueur []joueur, ile ileDuJeu, int [][] tableauAffichage){
 		plateauDuJeu.resetInfo();
 		if(!Test.testEnCours){
 			plateauDuJeu.masquer();

@@ -17,12 +17,23 @@ public class Ouvrier extends Personnage{
 		this.setObjetInventaire("Pierre");
 		this.setObjetInventaire("Pierre");
 		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pioche");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
 		if(joueur.getEquipe())
 			setId(10);
 		else
 			setId(15);
 	}
 
+	public String toString(boolean console){
+		return "O";
+	}
+	
+	
 	/**
 	 * Construit un village sur la case selectionnée
 	 * @param x
@@ -74,6 +85,7 @@ public class Ouvrier extends Personnage{
 		tableauIle[x][y].removePersonnageCourant();
 		tableauIle[x][y].setBatimentCourant(new Mine(x,y,joueur));
 		tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
+		this.viderInventaireDeRochers();
 	}
 
 	/**
@@ -152,14 +164,14 @@ public class Ouvrier extends Personnage{
 		if(tableauIle[x][y].getId()==1){
 			this.minage(x, y, tableauIle, affichage, equipe);
 		}else if(tableauIle[x][y].getId()==this.getId()){
-			if(this.nbPierre()==5){
+			if(this.nbPierre()>=5){
 				if(joueur.getNbrVillage()==0){
 					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer votre village ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
 					if (decision==0){
 						construireVillage(x,y, tableauIle, joueur);
 						super.perteEnergie(30, x,y, tableauIle, false, false,affichage, equipe);
 					}
-				}else if(joueur.getNiveauVillage()>=2){
+				}else if(joueur.getNiveauVillage()>=1){
 					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer une Mine ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
 					if (decision==0){
 						construireMine(x,y,tableauIle,joueur);
@@ -167,7 +179,7 @@ public class Ouvrier extends Personnage{
 					}
 				}	
 			}else{
-				affichage.popUp(equipe,"Vous n'avez pas assez de pierres ! Impossible de construire quoi que ce soit", "CONSTRUCTION IMPOSSIBLE" );
+				affichage.popUp(equipe,"Vous avez moins de 5 pierres ! Impossible de construire quoi que ce soit", "CONSTRUCTION IMPOSSIBLE" );
 			}
 		}
 	}	

@@ -51,10 +51,10 @@ public class GestionDuJeu {
 		int equipe=0 ;
 
 		while(!gagner[0]){
-
 			joueur[equipe].resetAction(affichage, equipe,ileDuJeu);
 			affichage.actionDebutTour(equipe, joueur, ileDuJeu, tableauAffichage);
-
+			
+			
 			while(!gagner[0] && joueur[equipe].actionPossible()){
 				affichage.getPlateau().resetId();
 				int [] cordonnees=action.choixCase(affichage.getPlateau(), tableauAffichage,ileDuJeu, joueur[equipe]);
@@ -150,7 +150,7 @@ public class GestionDuJeu {
 				//si le perso peut faire une action	
 				if(perso instanceof Explorateur && tableauAffichage[cordonnees[1]][cordonnees[0]] == 1 || tableauAffichage[cordonnees[1]][cordonnees[0]] == 4){
 					((Explorateur)perso).interactionRocher(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
-				}else if(perso instanceof Piegeur && ((cordonnees[0]==x && cordonnees[1]==y) || tableauAffichage[cordonnees[1]][cordonnees[0]]==1 || (tableauAffichage[cordonnees[1]][cordonnees[0]]==2 || tableauAffichage[cordonnees[1]][cordonnees[0]]==3)&& tableauAffichage[cordonnees[1]][cordonnees[0]]!=perso.getJoueur().getIdBateau())){
+				}else if(perso instanceof Piegeur && ((cordonnees[0]==x && cordonnees[1]==y) || tableauAffichage[cordonnees[1]][cordonnees[0]]==1 || (tableauAffichage[cordonnees[1]][cordonnees[0]]==2 || tableauAffichage[cordonnees[1]][cordonnees[0]]==3)&& tableauAffichage[cordonnees[1]][cordonnees[0]]!=perso.getJoueur().getIdBateau()) || (tableauAffichage[cordonnees[1]][cordonnees[0]]>19 && tableauAffichage[cordonnees[1]][cordonnees[0]]!=joueur.getIdFort() && tableauAffichage[cordonnees[1]][cordonnees[0]]!=joueur.getIdMine()) ){
 					((Piegeur)perso).pieger(perso, cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe, this.joueur);
 				}else if(perso instanceof Ouvrier && ((cordonnees[0]==x && cordonnees[1]==y) || tableauAffichage[cordonnees[1]][cordonnees[0]]==1)){
 					((Ouvrier)perso).actionOuvrier(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe,joueur);

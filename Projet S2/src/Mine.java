@@ -29,4 +29,9 @@ public class Mine extends Batiment{
 			joueur.setUpStockRessource(miner);
 		}
 	}
+	
+	public String toString(){
+		return "M";
+	}
+
 }

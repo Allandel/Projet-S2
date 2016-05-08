@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
  */
 public class Piegeur extends Personnage{
 	ArrayList<Bombe>listeBombe=new ArrayList<Bombe>();
-	
-	
+
+
 	/**
 	 * Constructeur creant un piegeur avec un nom, un type, un ID en fonction du parametre equipe1 determinant son equipe.
 	 * @param joueur
@@ -28,11 +28,11 @@ public class Piegeur extends Personnage{
 		else
 			setId(13);
 	}
-	
+
 	public String toString(boolean console){
 		return "P";
 	}
-	
+
 	/**
 	 * Permet au personnage de pieger une case
 	 * @param p
@@ -44,7 +44,7 @@ public class Piegeur extends Personnage{
 	 * @param joueur
 	 */
 	public void pieger(Personnage p,int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
-		if(tableauIle[x][y].getId()>0 && tableauIle[x][y].getId()<4){
+		if((tableauIle[x][y].getId()>0 && tableauIle[x][y].getId()<4) || tableauIle[x][y].getId()>19  ){
 			int decision =(int)affichage.popUpYesNo(equipe,"Voulez vous faire exploser cet objet ?", "POSER UNE BOMBE", null );
 			if(decision==0){
 				this.poserBombe(p, x, y, tableauIle, affichage, equipe,joueur);
@@ -78,7 +78,7 @@ public class Piegeur extends Personnage{
 			affichage.popUp(equipe,"Un piege ou une bombe a deja été posé ici", "PAS D'ACTION POSSIBLE");
 		}
 	}
-	
+
 	/**
 	 * Pose une bombe sur la case choisie
 	 * @param p
@@ -90,17 +90,17 @@ public class Piegeur extends Personnage{
 	 * @param joueur
 	 */
 	public void poserBombe(Personnage p,int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
-		if(tableauIle[x][y] instanceof CaseRocher || tableauIle[x][y].getBatimentCourant() instanceof Navire){
+		if(tableauIle[x][y] instanceof CaseRocher || tableauIle[x][y].getBatimentCourant()!=null){
 			Bombe b=new Bombe(x,y);
 			this.removeObjetInventaire("Bombe",false);
 			b.explosionObjet(p,tableauIle, affichage, equipe, joueur);
 		}else{
-		Bombe b=new Bombe(x,y);
-		tableauIle[x][y].setBombe(b);
-		listeBombe.add(b);
+			Bombe b=new Bombe(x,y);
+			tableauIle[x][y].setBombe(b);
+			listeBombe.add(b);
 		}
 	}
-	
+
 	/**
 	 * Diminue le comteur des bombes
 	 * @param tableauIle
@@ -120,6 +120,6 @@ public class Piegeur extends Personnage{
 			}
 		}
 	}
-	
-	
+
+
 }
