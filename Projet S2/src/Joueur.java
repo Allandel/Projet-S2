@@ -22,7 +22,7 @@ public class Joueur {
 			idMine++;
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return l'equipe de personnage du joueur
@@ -38,7 +38,7 @@ public class Joueur {
 	public void addBatiment(Batiment batiment){
 		batiments.add(batiment);
 	}
-	
+
 	/**
 	 * 
 	 * @return la liste de batiment du joueur
@@ -70,14 +70,14 @@ public class Joueur {
 	public int getIdMine(){
 		return idMine;
 	}
-	
+
 	/**
 	 * @return the ligneBateau
 	 */
 	public int getLigneBateau() {
 		return ligneBateau;
 	}
-	
+
 	/**
 	 * 
 	 * @return le nombre de village construit par le joueur
@@ -85,7 +85,7 @@ public class Joueur {
 	public int getNbrVillage(){
 		return nbrVillage;
 	}
-	
+
 	/**
 	 * change nbrVillage à 1
 	 */
@@ -99,7 +99,7 @@ public class Joueur {
 	public void incrNiveauVillage(){
 		niveauVillage++;
 	}
-	
+
 	/**
 	 * 
 	 * @return les stock de ressources du joueur
@@ -107,7 +107,7 @@ public class Joueur {
 	public int getStockRessource(){
 		return stockRessources;
 	}
-	
+
 	/**
 	 * diminue le stock du joueur
 	 * @param stock
@@ -115,7 +115,7 @@ public class Joueur {
 	public void setDownStockRessource(int stock){
 		stockRessources-=stock;
 	}
-	
+
 	/**
 	 * Augmente le stock du joueur
 	 * @param stock
@@ -123,7 +123,7 @@ public class Joueur {
 	public void setUpStockRessource(int stock){
 		stockRessources+=stock;
 	}
-	
+
 	/**
 	 * 
 	 * @return le niveau du village du joueur
@@ -175,14 +175,14 @@ public class Joueur {
 	public void coffreTrouve(){
 		coffreTrouve=true;
 	}
-	
+
 	public Batiment getBatimentListe(String type){
-			for(Batiment bati : batiments){
-				if(type.compareTo(bati.getType())==0){
-					return bati;
-				}
+		for(Batiment bati : batiments){
+			if(type.compareTo(bati.getType())==0){
+				return bati;
 			}
-			return null;
+		}
+		return null;
 	}
 
 	/**
@@ -214,19 +214,21 @@ public class Joueur {
 		if(Test.testEnCours){
 			if(this.equipe.get(this.equipe.size()-1).getCompteur()==0){
 				this.equipe.get(this.equipe.size()-1).setActionDeplacement(true);
-			}else{
+			}else
 				this.equipe.get(this.equipe.size()-1).downCompteur();
-				if(this.equipe.get(this.equipe.size()-1) instanceof Ouvrier && this.equipe.get(this.equipe.size()-1).compteur==0 && ((Ouvrier) this.equipe.get(this.equipe.size()-1)).getUpgrade()){
-					((Ouvrier)this.equipe.get(this.equipe.size()-1)).setUpgrade(false);
-				}
+			if(this.equipe.get(this.equipe.size()-1) instanceof Ouvrier && this.equipe.get(this.equipe.size()-1).compteur==0 && ((Ouvrier) this.equipe.get(this.equipe.size()-1)).getUpgrade()){
+				((Ouvrier)this.equipe.get(this.equipe.size()-1)).setUpgrade(false);
+				((Fort)getBatimentListe("Fort")).upgrade=false;
+				((Fort)getBatimentListe("Fort")).evolutionFinale(affichage, equipe, ileDuJeu);
+
 			}
 		}else{
 			for(Personnage perso : this.equipe){
 				if(perso.getCompteur()==0){
 					perso.setActionDeplacement(true);
-				}else{
+				}else
 					perso.downCompteur();
-				}if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getUpgrade()){
+				if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getUpgrade()){
 					((Ouvrier)perso).setUpgrade(false);
 					((Fort)getBatimentListe("Fort")).upgrade=false;
 					((Fort)getBatimentListe("Fort")).evolutionFinale(affichage, equipe, ileDuJeu);
@@ -234,7 +236,7 @@ public class Joueur {
 			}
 		}
 	}
-	
+
 	/**
 	 * Fait exploser les bombes du joueur
 	 * @param tableauIle
@@ -299,7 +301,7 @@ public class Joueur {
 			perso.setDeath(true);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return un string listant les perso du joueur qui ont subi des dommages pendant le tour de l'adversaire
@@ -363,7 +365,7 @@ public class Joueur {
 			bat.recupEnergie();
 		}
 	}
-	
+
 	/**
 	 * Attaque les ennemis qui sont autour du fort du joueur
 	 * @param tableauIle
@@ -383,7 +385,7 @@ public class Joueur {
 				((Mine) bat).minage();
 		}
 	}
-	
+
 	/**
 	 * Action du joueur à la fin de son tour
 	 * @param ileDuJeu

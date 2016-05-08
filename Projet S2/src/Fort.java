@@ -30,20 +30,23 @@ public class Fort extends Batiment{
 		return niveau;
 	}
 
-	public void evolution(Personnage perso, Affichage affichage, int equipe, ile ileDuJeu){
+	public void evolution(Affichage affichage, int equipe, ile ileDuJeu){
+		Personnage perso = getPersonnageListe("Ouvrier");
 		if(niveau==1 && stockRessources>=10 && this.ouvrierPresent()){
-			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment améliorer votre Village en Forteresse ?\n\n(Attention, l'amélioration immobilisera votre ouvrier pour 3 tours)", "Améliorer votre village",null);
+			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment améliorer votre Village en Forteresse ?\n\n(Attention, l'amélioration immobilisera votre ouvrier pour 2 tours)", "Améliorer votre village",null);
+			if (decision==0){
+				((Ouvrier)perso).setUpgrade(true);
+				perso.compteur=2;
+				upgrade=true;
+				perso.setActionDeplacement(false);
+			}
+		}else if(niveau==2 && stockRessources>=30 && this.ouvrierPresent()){
+			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous améliorer votre Forteresse au niveau 3 ?\n\n(Attention, l'amélioration immobilisera votre ouvrier pendant 3 tours)", "Créer un village",null);
 			if (decision==0){
 				((Ouvrier)perso).setUpgrade(true);
 				perso.compteur=3;
 				upgrade=true;
-			}
-		}else if(niveau==2 && stockRessources>=30 && this.ouvrierPresent()){
-			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous améliorer votre Forteresse au niveau 3 ?\n\n(Attention, l'amélioration immobilisera votre ouvrier pendant 4 tours)", "Créer un village",null);
-			if (decision==0){
-				((Ouvrier)perso).setUpgrade(true);
-				perso.compteur=4;
-				upgrade=true;
+				perso.setActionDeplacement(false);
 			}
 		}else{
 			if((niveau==1 && stockRessources<=10)){
@@ -108,7 +111,7 @@ public void evolutionFinale(Affichage affichage, int equipe, ile ileDuJeu){
 	 * @param affichage
 	 * @param equipe
 	 */
-	public void actionFort(int x, int y, ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe, Personnage perso){
+	public void actionFort(int x, int y, ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe){
 		plateauDuJeu.refreshinfo(null,this);
 		if(niveau==3)
 			this.sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
@@ -121,7 +124,7 @@ public void evolutionFinale(Affichage affichage, int equipe, ile ileDuJeu){
 					this.sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
 				}else{
 					if(upgrade==false){
-						((Fort)this).evolution(perso, affichage, equipe, ileDuJeu);
+						this.evolution(affichage, equipe, ileDuJeu);
 					}else{
 						affichage.popUp(equipe, "Votre Fort est déja en évolution, veuillez patienter encore un peu !", "Evolution en cours");
 					}

@@ -298,7 +298,7 @@ public class Personnage{
 	public boolean[] entreeBatiment(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
 		boolean victoire[]={false,false};
 
-		if(joueur.nbrVivant()>tableauIle[xApres][yApres].getBatimentCourant().nbrVivantStock()+1 || tableauIle[xApres][xAvant].getBatimentCourant() instanceof Fort || Test.testEnCours){
+		if(joueur.nbrVivant()>tableauIle[xApres][yApres].getBatimentCourant().nbrVivantStock()+1 || tableauIle[xApres][xAvant].getBatimentCourant() instanceof Fort || tableauIle[xApres][xAvant].getBatimentCourant() instanceof Mine || Test.testEnCours){
 			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment rentrer votre personnage ?", "Rentrer",null);
 			if (decision==0){
 				tableauIle[xApres][yApres].getBatimentCourant().addPersoBatiment(this);
@@ -308,37 +308,39 @@ public class Personnage{
 				if(inventaire.contains("Tresor")){
 					victoire[0]=true;
 					victoire[1]=joueur.getEquipe();
-				}else if(this instanceof Guerrier && !inventaire.contains("Epee") && !inventairePlein(affichage, "Ce guerrier n'a plus de place dans son inventaire pour récupérer une épée.")){
-					this.setObjetInventaire("Epee");
-					affichage.popUp(equipe,"En retournant dans le batiment, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme");
-				}else if(this instanceof Piegeur && !inventaire.contains("Pelle") && !inventaire.contains("Bombe") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une pelle et des bombes.")){
-					this.setObjetInventaire("Pelle");
-					int cpt=0;
-					while(inventaire.size()<6 && cpt<3){
-						this.setObjetInventaire("Bombe");
-						cpt++;
+				}else if(!(tableauIle[xApres][yApres].getBatimentCourant() instanceof Mine)){
+					if(this instanceof Guerrier && !inventaire.contains("Epee") && !inventairePlein(affichage, "Ce guerrier n'a plus de place dans son inventaire pour récupérer une épée.")){
+						this.setObjetInventaire("Epee");
+						affichage.popUp(equipe,"En retournant dans le batiment, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme");
+					}else if(this instanceof Piegeur && !inventaire.contains("Pelle") && !inventaire.contains("Bombe") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une pelle et des bombes.")){
+						this.setObjetInventaire("Pelle");
+						int cpt=0;
+						while(inventaire.size()<6 && cpt<3){
+							this.setObjetInventaire("Bombe");
+							cpt++;
+						}
+					}else if(this instanceof Piegeur && !inventaire.contains("Pelle") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une pelle.")){
+						this.setObjetInventaire("Pelle");
+						affichage.popUp(equipe,"En retournant dans le batiment, votre Pigeur à récupére une pelle!", "Recuperation d'une pelle");
+					}else if(this instanceof Piegeur && !inventaire.contains("Bombe") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une bombe.")){
+						int cpt=0;
+						do{
+							this.setObjetInventaire("Bombe");
+							cpt++;
+						}while(inventaire.size()<6 && cpt<3);
+						affichage.popUp(equipe,"En retournant dans le batiment, votre Pigeur à récupére une/des bombe(s)!", "Recuperation de bombe");
 					}
-				}else if(this instanceof Piegeur && !inventaire.contains("Pelle") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une pelle.")){
-					this.setObjetInventaire("Pelle");
-					affichage.popUp(equipe,"En retournant dans le batiment, votre Pigeur à récupére une pelle!", "Recuperation d'une pelle");
-				}else if(this instanceof Piegeur && !inventaire.contains("Bombe") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une bombe.")){
-					int cpt=0;
-					do{
-						this.setObjetInventaire("Bombe");
-						cpt++;
-					}while(inventaire.size()<6 && cpt<3);
-					affichage.popUp(equipe,"En retournant dans le batiment, votre Pigeur à récupére une/des bombe(s)!", "Recuperation de bombe");
 				}
 				if(victoire[0]==false){
 					int cpt=this.viderInventaireDeRochers();
 					joueur.setUpStockRessource(cpt);
 					if(cpt>0){
-						affichage.popUp(equipe,"En retournant dans votre base, votre Ouvrier à livrer "+cpt+" pierre(s) au stock de ressources", "Ajout de pierres");	
+						affichage.popUp(equipe,"En retournant dans ce batiment, votre Ouvrier à livrer "+cpt+" pierre(s) au stock de ressources", "Ajout de pierres");	
 					}
 				}
-			}
-		}else{
-			affichage.popUp(equipe,"Il faut au moins un personnage sur l'ile pour pouvoir rentrer au bateau.", "Entree impossible" );
+
+			}else
+				affichage.popUp(equipe,"Il faut au moins un personnage sur l'ile pour pouvoir rentrer au bateau.", "Entree impossible" );
 		}
 		return victoire;
 	}
@@ -529,15 +531,15 @@ public class Personnage{
 	 */
 	public int getCompteur(){
 		return compteur;
-		}
-	
+	}
+
 	/**
 	 * Set le compteur d'immobilisation
 	 * @param i
 	 */
 	public void setCompteur(int i){
 		compteur=i;
-		}
+	}
 
 	/**
 	 * ToString pour l'affichage dans le menu de sortie de bateau

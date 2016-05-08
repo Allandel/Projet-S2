@@ -2,7 +2,7 @@ import java.util.Random;
 
 
 public class Mine extends Batiment{
-
+	
 	/**
 	 * Constructeur
 	 * @param x
@@ -16,6 +16,7 @@ public class Mine extends Batiment{
 			this.setId(24);
 		else
 			this.setId(25);
+		this.heal=0;
 	}
 
 	/**

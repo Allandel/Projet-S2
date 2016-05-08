@@ -12,6 +12,11 @@ public class Ouvrier extends Personnage{
 		setNom("Bertrand");
 		setType("Ouvrier");
 		this.setObjetInventaire("Pioche");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
 		if(joueur.getEquipe())
 			setId(10);
 		else
@@ -39,38 +44,38 @@ public class Ouvrier extends Personnage{
 			tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
 		}
 	}
-	
+
 	public int viderInventaireDeRochers(){
 		int cpt=0;
 		for(int i=0; i<6;i++){
 			if(this.getObjetInventaire("Pierre")){
-			this.removeObjetInventaire("Pierre", false);
-			cpt++;
+				this.removeObjetInventaire("Pierre", false);
+				cpt++;
 			}
 		}
 		return cpt;
 	}
 
-	
+
 	public void commencerUpgrade(){
-			upgrade=true;
-			this.setCompteur(4);
+		upgrade=true;
+		this.setCompteur(4);
 	}
-	
+
 	public void setUpgrade(boolean a){
 		upgrade=a;
 	}
-	
+
 	public boolean getUpgrade(){
 		return upgrade;
 	}
-	
+
 	public void construireMine(int x, int y, Case[][] tableauIle, Joueur joueur){
 		tableauIle[x][y].removePersonnageCourant();
 		tableauIle[x][y].setBatimentCourant(new Mine(x,y,joueur));
 		tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
 	}
-	
+
 	/**
 	 * 
 	 * @return le nombre de pierre présente dans l'inventaire du perso
@@ -84,7 +89,7 @@ public class Ouvrier extends Personnage{
 		}
 		return cpt;
 	}
-	
+
 	/**
 	 * Permet de miner un rocher
 	 * @param x
@@ -112,7 +117,7 @@ public class Ouvrier extends Personnage{
 				resultMinage=1;
 				affichage.popUp(equipe,"Votre minage à reussi ! Vous avez récolter 1 pierre taillée", "MINAGE REUSSI");
 				super.perteEnergie(10, x,y, tableauIle, false, false,affichage, equipe);
-				
+
 			}
 
 			for(int i=0;i<resultMinage;i++){
@@ -146,7 +151,7 @@ public class Ouvrier extends Personnage{
 	public void actionOuvrier(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur joueur){
 		if(tableauIle[x][y].getId()==1){
 			this.minage(x, y, tableauIle, affichage, equipe);
-		}else{
+		}else if(tableauIle[x][y].getId()==this.getId()){
 			if(this.nbPierre()==5){
 				if(joueur.getNbrVillage()==0){
 					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer votre village ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
