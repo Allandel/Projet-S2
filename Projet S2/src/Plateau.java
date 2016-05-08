@@ -547,6 +547,9 @@ public class Plateau {
 				recupNiveau.setText(""+((Fort)batiment).getNiveau());
 				niveau.setVisible(true);
 				recupNiveau.setVisible(true);
+			}else{
+				niveau.setVisible(false);
+				recupNiveau.setVisible(false);
 			}
 			recupStockRessource.setText(""+batiment.getJoueur().getStockRessource());
 			nomPerso.setVisible(false);
