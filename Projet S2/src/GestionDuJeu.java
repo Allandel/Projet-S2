@@ -153,7 +153,7 @@ public class GestionDuJeu {
 				}else if(perso instanceof Piegeur && ((cordonnees[0]==x && cordonnees[1]==y) || tableauAffichage[cordonnees[1]][cordonnees[0]]==1 || (tableauAffichage[cordonnees[1]][cordonnees[0]]==2 || tableauAffichage[cordonnees[1]][cordonnees[0]]==3)&& tableauAffichage[cordonnees[1]][cordonnees[0]]!=perso.getJoueur().getIdBateau()) || (tableauAffichage[cordonnees[1]][cordonnees[0]]>19 && tableauAffichage[cordonnees[1]][cordonnees[0]]!=joueur.getIdFort() && tableauAffichage[cordonnees[1]][cordonnees[0]]!=joueur.getIdMine()) ){
 					((Piegeur)perso).pieger(perso, cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe, this.joueur);
 				}else if(perso instanceof Ouvrier && ((cordonnees[0]==x && cordonnees[1]==y) || tableauAffichage[cordonnees[1]][cordonnees[0]]==1)){
-					((Ouvrier)perso).actionOuvrier(cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe,joueur);
+					((Ouvrier)perso).actionOuvrier(ileDuJeu, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe,joueur);
 				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<16 && perso.getJoueur()==ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur()){
 					perso.echangeObjet(ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant(), affichage, equipe);
 				}else if(perso instanceof Guerrier && tableauAffichage[cordonnees[1]][cordonnees[0]]>5 && tableauAffichage[cordonnees[1]][cordonnees[0]]<16 && perso.getJoueur()!=ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getPersonnageCourant().getJoueur()){

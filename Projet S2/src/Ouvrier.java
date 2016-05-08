@@ -162,12 +162,12 @@ public class Ouvrier extends Personnage{
 	 * @param equipe
 	 * @param joueur
 	 */
-	public void actionOuvrier(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur joueur){
+	public void actionOuvrier(ile ileDuJeu, int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur joueur){
 		if(tableauIle[x][y].getId()==1){
 			this.minage(x, y, tableauIle, affichage, equipe);
 		}else if(tableauIle[x][y].getId()==this.getId()){
 			if(this.nbPierre()>=5){
-				if(this.constructible(tableauIle, x, y, affichage)){
+				if(this.constructible(ileDuJeu, x, y, affichage)){
 					if(joueur.getNbrVillage()==0){
 						int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer votre village ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
 						if (decision==0){
@@ -196,16 +196,14 @@ public class Ouvrier extends Personnage{
 	 * @param affichage
 	 * @return
 	 */
-	private boolean constructible(Case[][] tableauIle, int x, int y, Affichage affichage){
-		boolean res=true;
-		if(tableauIle[x+1][y].getId()<5 || tableauIle[x+1][y].getId()>19)
-			res=false;
-		else if(tableauIle[x-1][y].getId()<5 || tableauIle[x-1][y].getId()>19)
-			res=false;
-		else if(tableauIle[x][y+1].getId()<5 || tableauIle[x][y+1].getId()>19)
-			res=false;
-		else if(tableauIle[x][y-1].getId()<5 || tableauIle[x][y-1].getId()>19)
-			res=false;
+	private boolean constructible(ile ileDuJeu,int x, int y, Affichage affichage){
+		boolean res=ileDuJeu.accessible(x+1, y);
+		if(res)
+			res=ileDuJeu.accessible(x-1, y);
+		else if(res)
+			res=ileDuJeu.accessible(x, y+1);
+		else if(res)
+			res=ileDuJeu.accessible(x, y-1);
 		if(!res)
 			affichage.popUp(joueur.getIdBateau()-2, "Il n'y a pas de place pour construire ici, les rochers bloquent le chemin", "Construction impossible");
 		return res;

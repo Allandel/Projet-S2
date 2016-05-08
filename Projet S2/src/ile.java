@@ -12,7 +12,7 @@ public class ile {
 	private int taille, nbRocher, Rocherx, Rochery, colonneNavJ1=1, colonneNavJ2, ligneNavJ1, ligneNavJ2;
 	private float proportion;
 	private boolean accesNav1, accesNav2;
-	
+
 	/**
 	 * Construit une ile puis la rempli en fonction de la proportion de Rochers choisie
 	 * @param taille
@@ -116,7 +116,7 @@ public class ile {
 			}
 		}while(cpt<2);
 	}
-	
+
 	/**
 	 * Initialise les Case Neutres
 	 */
@@ -127,7 +127,7 @@ public class ile {
 			}
 		}
 	}
-	
+
 	/**
 	 * Initialise la mer
 	 */
@@ -139,7 +139,7 @@ public class ile {
 			tableauIle[i][tableauIle.length-1].setId(5);
 		}
 	}
-	
+
 	/**
 	 * Initialise les Rochers
 	 * @param taille
@@ -165,21 +165,21 @@ public class ile {
 	public Case getCaseCoffre() {
 		return CaseCoffre;
 	}
-	
+
 	/**
 	 * @return the caseCle
 	 */
 	public Case getCaseCle() {
 		return CaseCle;
 	}
-	
+
 	/**
 	 * @return the ligneNavJ1
 	 */
 	public int getLigneNavJ1() {
 		return ligneNavJ1;
 	}
-	
+
 	/**
 	 * @return the colonneNavJ1
 	 */
@@ -193,7 +193,7 @@ public class ile {
 	public int getLigneNavJ2() {
 		return ligneNavJ2;
 	}
-	
+
 	/**
 	 * @return the colonneNavJ2
 	 */
@@ -209,35 +209,35 @@ public class ile {
 	void estAccessible(int x, int y){
 		tableauIle[x][y].setAccessible(true);
 		if(x>0){
-			if(tableauIle[x-1][y].getId()==17 && !tableauIle[x-1][y].isAccessible()){
+			if(tableauIle[x-1][y].getId()>5 && tableauIle[x-1][y].getId()<20 && !tableauIle[x-1][y].isAccessible()){
 				estAccessible(x-1,y);
 			}else{
 				tableauIle[x-1][y].setAccessible(true);
 			}
 		}
 		if(y<tableauIle.length-1){
-			if(tableauIle[x][y+1].getId()==17 && !tableauIle[x][y+1].isAccessible()){
+			if(tableauIle[x][y+1].getId()>5 && tableauIle[x-1][y].getId()<20 && !tableauIle[x][y+1].isAccessible()){
 				estAccessible(x,y+1);
 			}else{
 				tableauIle[x][y+1].setAccessible(true);
 			}
 		}
 		if(x<tableauIle.length-1){
-			if(tableauIle[x+1][y].getId()==17 && !tableauIle[x+1][y].isAccessible()){
+			if(tableauIle[x+1][y].getId()>5 && tableauIle[x-1][y].getId()<20 && !tableauIle[x+1][y].isAccessible()){
 				estAccessible(x+1,y);
 			}else{
 				tableauIle[x+1][y].setAccessible(true);
 			}
 		}
 		if(y>0){
-			if(tableauIle[x][y-1].getId()==17 && !tableauIle[x][y-1].isAccessible()){
+			if(tableauIle[x][y-1].getId()>5 && tableauIle[x-1][y].getId()<20 && !tableauIle[x][y-1].isAccessible()){
 				estAccessible(x,y-1);
 			}else{
 				tableauIle[x][y-1].setAccessible(true);
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @returnun booleen en fonction de l'accessibilite du coffre et de la cle
@@ -250,6 +250,19 @@ public class ile {
 		}
 	}
 
+	boolean accessible(int x, int y){
+		boolean access=false;
+		resetAcces();
+		estAccessible(ligneNavJ1, 1);
+		if(tableauIle[x][y].isAccessible()){
+			resetAcces();
+			estAccessible(ligneNavJ2, tableauIle.length-2);
+			if(tableauIle[x][y].isAccessible())
+				access =true;
+		}
+		return access;
+	}
+
 	/**
 	 * Reinitialise tous les booleens accessible a false
 	 */
@@ -259,10 +272,12 @@ public class ile {
 				tableauIle[i][j].setAccessible(false);
 			}
 		}
-		CaseCoffre.setAccessible(false);
-		CaseCle.setAccessible(false);
+		if(!Test.testEnCours){
+			CaseCoffre.setAccessible(false);
+			CaseCle.setAccessible(false);
+		}
 	}
-	
+
 	/**
 	 * @return the tableauIle
 	 */
