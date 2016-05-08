@@ -30,7 +30,7 @@ public class ActionJoueur {
 				yEvent=coordonnees[1];
 			}while(coordonnees[0]==777 || (coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]<2 || tableauAffichage[yEvent][xEvent]==5 || (tableauAffichage[yEvent][xEvent]>=16  && tableauAffichage[yEvent][xEvent]<19))));
 		}while(coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]==5 && (tableauAffichage[yEvent][xEvent]!=2 && tableauAffichage[yEvent][xEvent]!=3 && !(tableauAffichage[yEvent][xEvent]>=20) && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()!=joueur)));
-		return coordonnees;
+ 		return coordonnees;
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class ActionJoueur {
 					xEvent=coordonnees[0];
 					yEvent=coordonnees[1];
 				}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && ((x-xEvent)>1 || (xEvent-x)>1 || (y-yEvent)>1 || (yEvent-y)>1));
-			}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=17 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=perso.getIdFort() && (tableauAffichage[yEvent][xEvent]<1 || tableauAffichage[yEvent][xEvent]>6) && tableauAffichage[yEvent][xEvent]!=16) && !(tableauAffichage[yEvent][xEvent]>5 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur()));
+			}while(coordonnees[0]!=666 && coordonnees[0]!=777 && coordonnees[0]!=888 && coordonnees[0]!=999 && (tableauAffichage[yEvent][xEvent]!=17 && tableauAffichage[yEvent][xEvent]!=perso.getIdBateau() && tableauAffichage[yEvent][xEvent]!=perso.getIdFort() && (tableauAffichage[yEvent][xEvent]<1 || tableauAffichage[yEvent][xEvent]>6) && tableauAffichage[yEvent][xEvent]!=16) && !(tableauAffichage[yEvent][xEvent]>5 && tableauAffichage[yEvent][xEvent]<16 && ileDuJeu.getTableau()[xEvent][yEvent].getPersonnageCourant().getJoueur()==perso.getJoueur()));
 
 		}else if(perso instanceof Piegeur){
 			do{

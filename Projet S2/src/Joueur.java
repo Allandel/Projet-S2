@@ -9,7 +9,7 @@ public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
 	private ArrayList<Batiment> batiments = new ArrayList<Batiment>();
 	private boolean equipe1, coffreTrouve=false;
-	private int idBateau=2, ligneBateau, colonneBateau, nbrVillage=0, niveauVillage=0, idFort=20, stockRessources=40;
+	private int idBateau=2, idMine=24, ligneBateau, colonneBateau, nbrVillage=0, niveauVillage=0, idFort=20, stockRessources=40;
 
 	/**
 	 * Construit un joueur en lui donnant un boolean correspondant a son equipe et l'id de son bateau
@@ -19,6 +19,7 @@ public class Joueur {
 		if(!equipe1){
 			idBateau++;
 			idFort++;
+			idMine++;
 		}
 	}
 	
@@ -62,6 +63,14 @@ public class Joueur {
 		this.idFort=idfort;
 	}
 
+	/**
+	 * 
+	 * @return l'id de la mine du joueur
+	 */
+	public int getIdMine(){
+		return idMine;
+	}
+	
 	/**
 	 * @return the ligneBateau
 	 */
@@ -357,6 +366,13 @@ public class Joueur {
 				((Fort) bat).attaque(tableauIle, affichage, equipe);
 		}
 	}
+
+	private void minage(){
+		for(Batiment bat: batiments){
+			if(bat instanceof Mine)
+				((Mine) bat).minage();
+		}
+	}
 	
 	/**
 	 * Action du joueur à la fin de son tour
@@ -368,5 +384,6 @@ public class Joueur {
 		soinPersoBatiment();
 		ExplosionBombes(ileDuJeu.getTableau(), affichage, equipe);
 		attaqueFort(ileDuJeu.getTableau(), affichage, equipe);
+		minage();
 	}
 }

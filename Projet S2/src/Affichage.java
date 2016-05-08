@@ -35,7 +35,9 @@ public class Affichage {
 			"img/1.village.jpg",        //id 20
 			"img/2.village.jpg",		//id 21
 			"img/1.forteresse.jpg",		//id 22
-			"img/2.forteresse.jpg"		//id 23
+			"img/2.forteresse.jpg",		//id 23
+			"img/1.mine.jpg",			//id 24
+			"img/2.mine.jpg"			//id 25
 	};			
 
 	/**

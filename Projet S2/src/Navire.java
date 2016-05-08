@@ -18,6 +18,7 @@ public class Navire extends Batiment {
 		super(x, y, joueur);
 		this.setId(id);
 		this.type="Navire";
+		batimentHealth=200;
 	}
 
 	public String toString(){

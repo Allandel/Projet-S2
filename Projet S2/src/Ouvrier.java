@@ -30,11 +30,11 @@ public class Ouvrier extends Personnage{
 			Fort fort;
 			joueur.addVillage();
 			this.viderInventaireDeRochers();
-			tableauIle[x][y].removePersonnageCourant(); 
 			if(joueur.getEquipe())
 				fort=new Fort(x,y,joueur);
 			else
 				fort=new Fort(x,y,joueur);
+			tableauIle[x][y].removePersonnageCourant();
 			tableauIle[x][y].setBatimentCourant(fort);
 			tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
 		}
@@ -55,6 +55,9 @@ public class Ouvrier extends Personnage{
 	}
 
 	public void construireMine(int x, int y, Case[][] tableauIle, Joueur joueur){
+		tableauIle[x][y].removePersonnageCourant();
+		tableauIle[x][y].setBatimentCourant(new Mine(x,y,joueur));
+		tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
 	}
 	
 	/**
