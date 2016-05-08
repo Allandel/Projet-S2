@@ -35,7 +35,7 @@ public class Plateau {
 	private JPanel infos=new JPanel(), infosPerso=new JPanel(), actionPartie=new JPanel(),inventairePerso=new JPanel();
 	private JLabel nomPerso = new JLabel("Nom : "),recupNomPerso = new JLabel("  "),typePerso = new JLabel("Type : "),recupTypePerso = new JLabel("  ");
 	private JLabel energie = new JLabel("Energie : "),recupenergie = new JLabel("  ");
-	private JLabel inventaire  = new JLabel("Inventaire"), JLvide=new JLabel(), stockRessource=new JLabel("Ressources : "), recupStockRessource=new JLabel();
+	private JLabel inventaire  = new JLabel("Inventaire"), niveau=new JLabel("Niveau : "), recupNiveau=new JLabel(),JLvide=new JLabel(), stockRessource=new JLabel("Ressources : "), recupStockRessource=new JLabel();
 	private JButton passageDuTour=new JButton("Passer son tour"), abandon, annulerSelection=new JButton("Retour"), aide=new JButton("Aide"), lacherObjet=new JButton("Lacher objet");
 	private int id;
 	private ArrayList<JLabel> objetIventaire=new ArrayList<JLabel>();
@@ -126,7 +126,7 @@ public class Plateau {
 		infos.setLayout(new BorderLayout());
 		actionPartie.setLayout(new GridLayout(5,1));
 		inventairePerso.setLayout(new GridLayout(2,3));
-		infosPerso.setLayout(new GridLayout(5,2));
+		infosPerso.setLayout(new GridLayout(6,2));
 
 		infos.add(vide,BorderLayout.CENTER);
 		infos.add(actionPartie,BorderLayout.SOUTH);
@@ -167,6 +167,8 @@ public class Plateau {
 		infosPerso.add(recupenergie);
 		infosPerso.add(inventaire);
 		infosPerso.add(JLvide);
+		infosPerso.add(niveau);
+		infosPerso.add(recupNiveau);
 		infosPerso.add(stockRessource);
 		infosPerso.add(recupStockRessource);
 		
@@ -215,6 +217,8 @@ public class Plateau {
 		lacherObjet.setVisible(false);
 		stockRessource.setVisible(false);
 		recupStockRessource.setVisible(false);
+		niveau.setVisible(false);
+		recupNiveau.setVisible(false);
 	}
 
 	/**
@@ -538,13 +542,18 @@ public class Plateau {
 			recupenergie.setText(""+perso.getEnergie());
 			stockRessource.setVisible(false);
 			recupStockRessource.setVisible(false);
+			niveau.setVisible(false);
+			recupNiveau.setVisible(false);
 		}else{
 			recupTypePerso.setText(batiment.getType());
 			recupenergie.setText(""+batiment.batimentHealth);
 			if(batiment instanceof Fort){
 				recupStockRessource.setText(""+((Fort)batiment).getStockRessource());
+				recupNiveau.setText(""+((Fort)batiment).getNiveau());
 				stockRessource.setVisible(true);
 				recupStockRessource.setVisible(true);
+				niveau.setVisible(true);
+				recupNiveau.setVisible(true);
 			}
 			nomPerso.setVisible(false);
 			inventairePerso.setVisible(false);

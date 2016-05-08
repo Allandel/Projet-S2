@@ -2,7 +2,7 @@ import java.util.Random;
 
 
 public class Fort extends Batiment{
-	int niveau=1;
+	private int niveau=1;
 	protected int stockRessources=40, dmg=10;
 
 	/**
@@ -19,6 +19,14 @@ public class Fort extends Batiment{
 
 	public String toString(){
 		return "F";
+	}
+
+	/**
+	 * 
+	 * @return le niveau actuel du fort
+	 */
+	public int getNiveau(){
+		return niveau;
 	}
 
 	public void evolution(Affichage affichage, int equipe, ile ileDuJeu){
@@ -69,14 +77,18 @@ public class Fort extends Batiment{
 	 */
 	public void actionFort(int x, int y, ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe){
 		plateauDuJeu.refreshinfo(null,this);
-		String [] tab={"Sortir un Personnage","Monter le Niveau de la Forteresse"};
-		String action=null;
-		action=(String)affichage.popUpYesNo(equipe,"\nQue voulez vous faire ?\n\n[Cliquez sur annuler si vous ne voulez rien faire]\n", "Choix de l'action",tab);
-		if(action!=null){
-			if(action.compareTo("Sortir un Personnage")==0){
-				this.sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
-			}else{
-				((Fort)this).evolution(affichage, equipe, ileDuJeu);
+		if(niveau==3){
+			this.sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
+		}else{
+			String [] tab={"Sortir un Personnage","Monter le Niveau de la Forteresse"};
+			String action=null;
+			action=(String)affichage.popUpYesNo(equipe,"\nQue voulez vous faire ?\n\n[Cliquez sur annuler si vous ne voulez rien faire]\n", "Choix de l'action",tab);
+			if(action!=null){
+				if(action.compareTo("Sortir un Personnage")==0){
+					this.sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
+				}else{
+					((Fort)this).evolution(affichage, equipe, ileDuJeu);
+				}
 			}
 		}
 		plateauDuJeu.refreshinfo(null,this);
