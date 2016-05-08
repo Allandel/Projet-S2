@@ -343,6 +343,7 @@ public class Personnage{
 		return victoire;
 	}
 
+
 	/**
 	 * Vide l'inventaire du joueur s'il contient des pierres
 	 * @return le nombre de rocher de l'inventaire

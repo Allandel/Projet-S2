@@ -52,7 +52,7 @@ public class GestionDuJeu {
 
 		while(!gagner[0]){
 
-			joueur[equipe].resetAction(affichage, equipe);
+			joueur[equipe].resetAction(affichage, equipe,ileDuJeu);
 			affichage.actionDebutTour(equipe, joueur, ileDuJeu, tableauAffichage);
 
 			while(!gagner[0] && joueur[equipe].actionPossible()){
@@ -80,7 +80,7 @@ public class GestionDuJeu {
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==(equipe+2) || tableauAffichage[cordonnees[1]][cordonnees[0]]==joueur[equipe].getIdMine()){
 						ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant().sortieBatiment(ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
 					}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==joueur[equipe].getIdFort()){
-						((Fort)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant()).actionFort(cordonnees[0],cordonnees[1], ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe);
+						((Fort)ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].getBatimentCourant()).actionFort(cordonnees[0],cordonnees[1], ileDuJeu, affichage.getPlateau(), tableauAffichage, affichage, equipe, joueur[equipe].getBatimentListe("Fort").getPersonnageListe("Ouvrier"));
 					}
 					affichage.affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 				}

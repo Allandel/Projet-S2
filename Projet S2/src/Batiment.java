@@ -50,7 +50,7 @@ public class Batiment {
 	public ArrayList<Personnage> getStockBatiment(){
 		return stockBatiment;
 	}
-	
+
 	/**
 	 * 
 	 * @return le joueur du batiment
@@ -69,6 +69,20 @@ public class Batiment {
 				}
 			}
 		return false;
+	}
+	/**
+	 * 
+	 * @return Le personnage désigné par son type en paramètre.
+	 */
+	public Personnage getPersonnageListe(String type){
+		if(!stockBatiment.isEmpty()){
+			for(Personnage perso : stockBatiment){
+				if(perso.getType().compareTo(type)==0){
+					return perso;
+				}
+			}
+		}
+		return null;
 	}
 	
 	/**

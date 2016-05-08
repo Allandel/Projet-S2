@@ -17,7 +17,7 @@ public class Ouvrier extends Personnage{
 		else
 			setId(15);
 	}
-	
+
 	/**
 	 * Construit un village sur la case selectionnée
 	 * @param x
@@ -39,21 +39,32 @@ public class Ouvrier extends Personnage{
 			tableauIle[x][y].getBatimentCourant().addPersoBatiment(this);
 		}
 	}
+	
+	public int viderInventaireDeRochers(){
+		int cpt=0;
+		for(int i=0; i<6;i++){
+			if(this.getObjetInventaire("Pierre")){
+			this.removeObjetInventaire("Pierre", false);
+			cpt++;
+			}
+		}
+		return cpt;
+	}
 
 	
 	public void commencerUpgrade(){
-		upgrade=true;
-		this.setCompteur(4);
+			upgrade=true;
+			this.setCompteur(4);
 	}
-
+	
 	public void setUpgrade(boolean a){
 		upgrade=a;
 	}
-
+	
 	public boolean getUpgrade(){
 		return upgrade;
 	}
-
+	
 	public void construireMine(int x, int y, Case[][] tableauIle, Joueur joueur){
 		tableauIle[x][y].removePersonnageCourant();
 		tableauIle[x][y].setBatimentCourant(new Mine(x,y,joueur));
@@ -101,7 +112,7 @@ public class Ouvrier extends Personnage{
 				resultMinage=1;
 				affichage.popUp(equipe,"Votre minage à reussi ! Vous avez récolter 1 pierre taillée", "MINAGE REUSSI");
 				super.perteEnergie(10, x,y, tableauIle, false, false,affichage, equipe);
-
+				
 			}
 
 			for(int i=0;i<resultMinage;i++){
@@ -144,19 +155,15 @@ public class Ouvrier extends Personnage{
 						super.perteEnergie(30, x,y, tableauIle, false, false,affichage, equipe);
 					}
 				}else if(joueur.getNiveauVillage()>=2){
-					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer une Mine ici ?\n\n(Attention, ce choix est irréversible)", "Créer une mine",null);
+					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer une Mine ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
 					if (decision==0){
 						construireMine(x,y,tableauIle,joueur);
 						super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
 					}
 				}	
 			}else{
-				affichage.popUp(equipe,"Vous avez besoin de 5 pierres pour pouvoir construire ! Impossible de construire quoi que ce soit", "CONSTRUCTION IMPOSSIBLE" );
+				affichage.popUp(equipe,"Vous n'avez pas assez de pierres ! Impossible de construire quoi que ce soit", "CONSTRUCTION IMPOSSIBLE" );
 			}
 		}
 	}	
-
-	public String toString(boolean console){
-		return "O";
-	}
 }
