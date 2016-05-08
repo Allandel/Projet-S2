@@ -159,6 +159,8 @@ public class Plateau {
 		actionPartie.add(abandon);
 
 		// Ajout des composants à la fenetre
+		infosPerso.add(stockRessource);
+		infosPerso.add(recupStockRessource);
 		infosPerso.add(typePerso);
 		infosPerso.add(recupTypePerso);
 		infosPerso.add(nomPerso);
@@ -169,8 +171,6 @@ public class Plateau {
 		infosPerso.add(JLvide);
 		infosPerso.add(niveau);
 		infosPerso.add(recupNiveau);
-		infosPerso.add(stockRessource);
-		infosPerso.add(recupStockRessource);
 		
 		window.getContentPane().add(infos, BorderLayout.EAST);
 		window.getContentPane().add(graphic, BorderLayout.WEST);
@@ -215,9 +215,6 @@ public class Plateau {
 		});
 		annulerSelection.setVisible(false);
 		lacherObjet.setVisible(false);
-		stockRessource.setVisible(false);
-		recupStockRessource.setVisible(false);
-		niveau.setVisible(false);
 		recupNiveau.setVisible(false);
 	}
 
@@ -525,10 +522,10 @@ public class Plateau {
 	}
 
 	/**
-	 * refrsh des info suivant si c'est un personnage ou un bateau.
+	 * refrsh des info suivant si c'est un personnage ou un batiment.
 	 * Mettre à null perso si c'est le bateau qui est refresh
 	 * @param perso
-	 * @param coqueHealth
+	 * @param batiment
 	 */
 	public void refreshinfo(Personnage perso, Batiment batiment){
 		if(perso!=null){
@@ -540,21 +537,18 @@ public class Plateau {
 			recupNomPerso.setText(perso.getNom());
 			recupTypePerso.setText(perso.getType());
 			recupenergie.setText(""+perso.getEnergie());
-			stockRessource.setVisible(false);
-			recupStockRessource.setVisible(false);
 			niveau.setVisible(false);
 			recupNiveau.setVisible(false);
+			recupStockRessource.setText(""+perso.getJoueur().getStockRessource());
 		}else{
 			recupTypePerso.setText(batiment.getType());
 			recupenergie.setText(""+batiment.batimentHealth);
 			if(batiment instanceof Fort){
-				recupStockRessource.setText(""+((Fort)batiment).getStockRessource());
 				recupNiveau.setText(""+((Fort)batiment).getNiveau());
-				stockRessource.setVisible(true);
-				recupStockRessource.setVisible(true);
 				niveau.setVisible(true);
 				recupNiveau.setVisible(true);
 			}
+			recupStockRessource.setText(""+batiment.getJoueur().getStockRessource());
 			nomPerso.setVisible(false);
 			inventairePerso.setVisible(false);
 			inventaire.setVisible(false);
@@ -597,6 +591,9 @@ public class Plateau {
 		recupNomPerso.setText("");
 		recupTypePerso.setText("");
 		recupenergie.setText("");
+		niveau.setVisible(false);
+		recupNiveau.setText("");
+		recupStockRessource.setText("");
 		this.affichagePanel();
 	}
 

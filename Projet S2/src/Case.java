@@ -10,6 +10,7 @@ public class Case {
 	private Personnage personnageCourant=null;
 	private Bombe bombe=null;
 	private Batiment batimentCourant=null;
+
 	/**
 	 * Construit une case initialisant l'attribut accessible a false
 	 */
@@ -23,18 +24,23 @@ public class Case {
 	public int getId() {
 		return id;
 	}
-	
+
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	/**
+	 * Set une bombe dans la case
+	 * @param b
+	 */
 	public void setBombe(Bombe b){
 		this.bombe=b;
-		
+
 	}
-	
+
 	/**
 	 * @return the batimentCourant
 	 */
@@ -49,18 +55,23 @@ public class Case {
 		this.batimentCourant = batimentCourant;
 		this.setId(batimentCourant.getId());
 	}
-	
+
+	/**
+	 * Enleve le batiment courant et réitinialise l'id de la case
+	 */
 	public void removeBatimentCourant(){
 		this.batimentCourant = null;
 		this.setId(17);
 	}
 
+	/**
+	 * 
+	 * @return vrai s'il y a une bombe dans la case
+	 */
 	public boolean getBombe(){
-		if(bombe!=null){
+		if(bombe!=null)
 			return true;
-		}else{
-			return false;
-		}
+		return false;
 	}
 
 	/**
@@ -101,6 +112,7 @@ public class Case {
 		this.personnageCourant = p;
 		this.setId(p.getId());
 	}
+	
 	/**
 	 * Supprime un Personnage qui se trouve sur une Case et remet l'id d'une case vide
 	 */
@@ -108,14 +120,14 @@ public class Case {
 		this.personnageCourant = null;
 		this.setId(17);
 	}
-	
+
 	/**
 	 * Donne le Personnage Courant affilie a une case
 	 */
 	public Personnage getPersonnageCourant(){
 		return personnageCourant;
 	}
-	
+
 	/**
 	 * Change la valeur de piege
 	 * @param x
@@ -123,7 +135,7 @@ public class Case {
 	public void setPiege(boolean setter){
 		piege=setter;
 	}
-	
+
 	/**
 	 * 
 	 * @return si la case est piege ou non
@@ -131,17 +143,17 @@ public class Case {
 	public boolean getPiege(){
 		return piege;
 	}
-	
+
 	/**
 	 * return un string vide ou celui specifique au personnage si la case est occupe
 	 */
 	public String toString(){
-			
+
 		if(batimentCourant!=null)
 			return batimentCourant.toString();
 		else if(personnageCourant!=null)
 			return personnageCourant.toString(true);
 		return  " ";
 	}
-	
+
 }

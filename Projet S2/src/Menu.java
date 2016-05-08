@@ -296,8 +296,8 @@ public class Menu extends JFrame{
 		lol=new JTextArea(
 				"                                             BIENVENUE DANS LE MANUEL DE LA CHASSE AU TRESOR\n\n\n"
 						+ "Vous trouverez dans ce manuel toutes les explications necessaires afin de jouer convenablement une \npartie de Chasse au Trésor. "
-						+ "Afin de vous déplacer dans le manuel, utilisez la barre de Menu du Haut qui vous \npermettra de trouver les information necessaires en quelques instants.\n\n"
-						+ "Bonne Navigation !"
+						+ "Afin de vous déplacer dans le manuel, utilisez la barre de Menu du Haut qui vous \npermettra de trouver les informations necessaires en quelques instants.\n\n"
+						+ "Bonne Lecture !"
 						,5,5);
 		//=================================================================
 		JMenuItem itemperso1 = new JMenuItem("Explorateurs");
@@ -315,8 +315,8 @@ public class Menu extends JFrame{
 		//==================================================================
 		JMenuItem itembut1 = new JMenuItem("Les Objetifs");
 		//==================================================================
-		JMenuItem itemcomm1 = new JMenuItem("Les Commandes Basiques");
-		JMenuItem itemcomm2 = new JMenuItem("Les Commandes Avancées");
+		JMenuItem itemcomm1 = new JMenuItem("Les Commandes Souris");
+		JMenuItem itemcomm2 = new JMenuItem("Les Commandes Clavier");
 
 		menuRegle.setSize(700, 400);
 		menuRegle.setLocationRelativeTo(null);
@@ -339,9 +339,9 @@ public class Menu extends JFrame{
 		itembut1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				lol.setText("                                                                         LES OBJECTIFS\n\n\n"
-						+"Sur l'Ile au Trésor, différents choix s'offrent à vous pour obtenir la victoire finale ! Choisissez la meilleure \nstratégie parmis celles suivantes :\n\n"
-						+"- Retrouver la clé et le coffre au trésor afin d'ouvrir le coffre et d'en découvrir son contenu ! Ammenez le trésor \n  sur votre Navire et la victoire sera à vous !\n"
-						+"- Détruire l'équipe adverse et la réduire à néant. Soyez les derniers sur l'ile !\n\n"
+						+"Dans l'Ile au Trésor, différents choix s'offrent à vous pour obtenir la victoire ! Choisissez la meilleure \nstratégie parmis les suivantes :\n\n"
+						+"- Retrouver la clé et le coffre au trésor afin d'ouvrir le coffre et d'en découvrir son contenu ! Ammenez le trésor \n  dans votre Navire et la victoire sera à vous !\n"
+						+"- Détruire l'équipe adverse. Soyez les derniers sur l'ile !\n\n"
 						+"A vous de jouer ! Remportez la victoire à tout prix !");
 			}        
 		});
@@ -349,7 +349,7 @@ public class Menu extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				lol.setText("                                                                         L'EXPLORATEUR\n\n\n"
 						+"CAPACITES\n\n"
-						+"L'explorateur est un personnage clé du jeu. En effet, celui ci est l'unique personnage capable de soulever un\nrocher afin de regarder au dessous si une clé ou un trésor ne s'y trouve pas\n"
+						+"L'explorateur est un personnage clé du jeu. En effet, celui ci est l'unique personnage capable de soulever un\nrocher afin de regarder en dessous si une clé ou un coffre ne s'y trouve pas\n"
 						+"Une fois la clé en sa possession, l'explorateur sera le seul personnage capable d'aller ouvrir le coffre et de\ns'emparer du trésor !\n\n"
 						+"DEPLACEMENTS\n\n"
 						+"L'Explorateur se déplace uniquement en croix, c'est a dire qu'il ne peut aller qu'au dessus, en dessous,\nà droite ou à gauche\n");
@@ -359,10 +359,10 @@ public class Menu extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				lol.setText("                                                                         LES GUERRIERS\n\n\n"
 						+"CAPACITES\n\n"
-						+"Les Guerriers sont les seuls capables de frapper un autre personnage. Avec une épée, ou sans ils infligeront\nde nombreux dégats aux adversaires ! Mais prenez garde aux voleurs\n"
-						+"car ils peuvent vous voler votre épée et vous priver de votre unique moyen de faire des dégats !\nSi vous perdez votre épée, vous pourrez en récupérer au Navire.\n\n"
+						+"Les Guerriers sont les seuls capables d'attaquer un autre personnage. Avec une épée, ou sans ils infligeront\nde nombreux dégats aux adversaires ! Mais prenez garde aux voleurs\n"
+						+"car ils peuvent vous voler votre épée et vous priver de votre moyen le plus efficace de faire des dégats !\nSi vous perdez votre épée, vous pourrez en récupérer une au Navire.\n\n"
 						+"DEPLACEMENTS\n\n"
-						+"Les Guerriers sont capables de se déplacer en diagonale et aussi d'interagir en Diagonale.");
+						+"Les Guerriers sont capables de se déplacer et d'interagir dans toutes les directions.");
 			}        
 		});
 		itemperso3.addActionListener(new ActionListener(){
@@ -370,11 +370,12 @@ public class Menu extends JFrame{
 				lol.setText("                                                                         LES PIEGEURS\n\n\n"
 						+"CAPACITES\n\n"
 						+"Les piegeurs disposent de plusieurs capacités très utiles au groupe :\n\n"
-						+"- Ils sont capables de poser des pièges à l'aide d'une pelle. Ils seront visibles par votre équipe uniquement qui\n immobiliseront les personnages adverses durant 3 tours (Clic gauche sur lui même)\n\n"
-						+"- Ils peuvent poser des bombes au sol qui, au bout d'un compte a rebours, explose dans un rayon d'une case, imposant\n de lourd dégâts a quiconque se trouverait au alentours.(Clic Gauche sur lui même)\n\n"
-						+"- Ils peuvent aussi poser des bombes dans des rochers afin de les détruire ou bien dans le Navire ennemi\n afin de le couler ! (Clic gauche sur le rocher ou navire)"
+						+"- Ils sont capables de poser des pièges à l'aide d'une pelle. Ils seront visibles par votre équipe uniquement et\n immobiliseront les personnages adverses durant 3 tours\n\n"
+						+"- Ils peuvent poser des bombes au sol qui, au bout de 2 tours, explose dans toutes les directions dans un rayon d'une case, imposant\n de lourd dégâts a quiconque se trouverait au alentours.\n\n"
+						+"Il faut cliquer sur lui même une fois le piegeur selectionner pour poser une bombe ou un piege au sol.\n\n"
+						+"- Ils peuvent aussi poser des bombes sur des rochers ou batiments ennemis\n afin de les détruire ! (Clic gauche sur le rocher ou batiment)"
 						+"\n\nDEPLACEMENTS\n\n"
-						+"Les Piegeurs sont capables de se déplacer en diagonale et aussi d'interagir en Diagonale.");
+						+"Les Piegeurs sont capables de se déplacer et d'interagir dans toutes les directions.");
 			}        
 		});
 		itemperso4.addActionListener(new ActionListener(){
@@ -383,28 +384,28 @@ public class Menu extends JFrame{
 						+"CAPACITES\n\n"
 						+"Les voleurs sont capables de dérober des objets aux personnages adverses dans un rayon de 1 case.\nCette fonctionnalité peut permettre a votre équipe de priver temporairement un joueur adverse des\nfonctionnalité d'un personnage clé ! En effet, privez le Guerrier de son épée, et il sera bien moins dangereux !\nPrivez Le piégeur de sa pelle ou de ses bombes, et il ne sera plus capable de vous poser\ndes bâtons dans les roues ! \n"
 						+"\n\nDEPLACEMENTS\n\n"
-						+"Les Voleurs sont capables de se déplacer en diagonale et aussi d'interagir en Diagonale.");
+						+"Les Voleurs sont capables de se déplacer et d'interagir dans toutes les directions.");
 			}        
 		});
 		itemperso5.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				lol.setText("                                                                         LES OUVRIERS\n\n\n"
 						+"CAPACITES\n\n"
-						+"Les ouvriers sont des personnages spéciaux disposant de capacités de support très importantes par\nrapport au autres personnages. Ce personnage est le seul capable de :\n\n"
-						+"- Récolter des ressources avec du Minage. Ces ressources pourraient s'avérer cruciales pour permettre\naux autre personnages de devenir plus puissants !\n\n"
+						+"Les ouvriers sont des personnages spéciaux disposant de capacités de support très importantes par\nrapport aux autres personnages. Ce personnage est le seul capable de :\n\n"
+						+"- Récolter des ressources avec en minant.\n\n"
 						+"- Créer un Village, puis une Forteresse à l'aide des ressources nécessaires à l'amélioration.\n\n"
 						+"Ainsi, en utilisant l'ouvrier prudemment afin de le garder en vie, vous serez capables de monter\nvotre propre cité et tout les avantages qui en découlent !"
 						+"\n\nDEPLACEMENTS\n\n"
-						+"Les Ouvriers sont capables de se déplacer en diagonale et aussi d'interagir en Diagonale.");
+						+"Les Ouvriers sont capables de se déplacer et d'interagir dans toutes les directions.");
 			}        
 		});
 		itemenvir1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				lol.setText("                                                                         L'HERBE\n\n\n"
 						+"DESCRIPTION\n\n"
-						+"L'herbe est le terrain par défaut de l’île."
+						+"L'herbe est le terrain de base de l’île."
 						+"\n\nINTERACTIONS POSSIBLES\n\n"
-						+"- Mouvement (Tout les personnages)\n- Minage (Ouvrier)");
+						+"- Mouvement (Tout les personnages)\n- Piege (Piegeur)");
 			}        
 		});
 		itemenvir2.addActionListener(new ActionListener(){
@@ -413,14 +414,14 @@ public class Menu extends JFrame{
 						+"DESCRIPTION\n\n"
 						+"Les Rochers constituent la cachette de la clé du trésor et du coffre au trésor, ou de rien du tout."
 						+"\n\nINTERACTIONS POSSIBLES\n\n"
-						+"- Regarder sous le rocher (Explorateur)\n- Explosion du Rocher (Piégeur)");
+						+"- Regarder sous le rocher (Explorateur)\n- Explosion du Rocher (Piégeur)\n Miner (Ouvrier)");
 			}        
 		});
 		itemenvir3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				lol.setText("                                                                         L'OCEAN\n\n\n"
 						+"DESCRIPTION\n\n"
-						+"L'océan entoure l'île au trésor ! Les personnages ne peuvent que la contempler…"
+						+"L'océan entoure l'île au trésor ! Les personnages ne peuvent que le contempler…"
 						+"\n\nINTERACTIONS POSSIBLES\n\n"
 						+"- Aucune (X)");
 			}        
@@ -447,23 +448,23 @@ public class Menu extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				lol.setText("                                                                         FORTERESSE\n\n\n"
 						+"DESCRIPTION\n\n"
-						+"La Forteresse constitue un refuge pour vos alliés ! En plus de régénérer la vie de vos personnages\nplus rapidement, elle leur permet d'autres actions très intéressantes :"
+						+"La Forteresse constitue un refuge pour vos alliés ! Il vous permet de régénérer votre énergie et de récupérer\nles outils que vous vous êtes fait dérober !"
 						+"\n\nINTERACTIONS POSSIBLES\n\n"
-						+"- Revente d'Item au Marché de contrebande\n- Achat d'Item au Marché de contrebande\n- Stockage d'Item dans un Entrepot");
+						+"- Rentrer dedans (Tout les Personnages Alliés)\n- Sortir un personnage (Clic Gauche souris)\n- Exploser le batiment ennemie (Piégeur)");
 			}        
 		});
 		itemcomm1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				lol.setText("                                                                    COMMANDES BASIQUES\n\n\n"
-						+"Les interactions basiques avec le jeu se font à l'aide de la souris.\n\n"
+				lol.setText("                                                                    COMMANDES SOURIS\n\n\n"
+						+"Les interactions avec le jeu peuvent se faire à l'aide de la souris.\n\n"
 						+"SORTIR UN PERSONNAGE DU NAVIRE : Clic gauche sur le Navire allié puis Clic gauche sur l'une des\n                                                         cases bleutée.\n\nMOUVEMENT D'UN PERSONNAGE : Clic gauche sur un personnage puis Clic gauche sur l'une des cases de type\n                                                    \"Herbe\" bleutée\n\nACTION D'UN PERSONNAGE : Clic gauche sur un personnage puis clic gauche sur l'une des cases bleuté autre\n                                              que une case de type herbe\n\nPASSER SON TOUR : Clic gauche sur le bouton d'interaction «Passer son tour»en bas au droite du menu\n                               d'information.\n\nDESELECTIONNER UN PERSONNAGE : Clic gauche sur le bouton d'interaction «Retour»en bas au droite du menu\n                                                           d'information.\n\nABANDONNER UNE PARTIE : Clic gauche sur le bouton d'interaction «Abandonner»en bas au droite du menu\n                                           d'information.");
 			}        
 		});
 		itemcomm2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				lol.setText("                                                                    COMMANDES AVANCEES\n\n\n"
-						+"Les interaction avancées ajoutent le clavier à la souris :\n\n"
-						+"");
+				lol.setText("                                                                    COMMANDES CLAVIER\n\n\n"
+						+"Les interactions avec le jeu peuvent se faire à l'aide du clavier.\n\n"
+						+"SORTIR UN PERSONNAGE DU NAVIRE : Utiliser les chiffres du pad numériques pour selectionner\n                                                         la case de sortie.\n\nMOUVEMENT/ACTION D'UN PERSONNAGE : Clic gauche sur un personnage puis utilisez les chiffres du pad\n                                                    numériques pour selectionner la case ou le déplacer ou faire l'action\n\nPASSER SON TOUR : Appuyer sur la touche espace.\n\nDESELECTIONNER UN PERSONNAGE : Appuyer sur la touche suppr.\n\nABANDONNER UNE PARTIE : Appuyer sur la touche echap.");
 			}        
 		});
 		menuRegle.add(menuBar);

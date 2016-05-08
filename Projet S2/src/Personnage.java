@@ -128,7 +128,11 @@ public class Personnage{
 	public int getIdBateau(){
 		return joueur.getIdBateau();
 	}
-	
+
+	/**
+	 * 
+	 * @return l'id du fort de l'équipe du joueur
+	 */
 	public int getIdFort(){
 		return joueur.getIdFort();
 	}
@@ -164,7 +168,7 @@ public class Personnage{
 		return id;
 	}
 	/**
-	 * Ajoute un objet � l'inventaire
+	 * Ajoute un objet à l'inventaire
 	 * @param objet
 	 */
 	public void setObjetInventaire(String objet){
@@ -172,6 +176,11 @@ public class Personnage{
 		inventaireTourPrecedent.add(objet);
 	}
 
+	/**
+	 * Enleve un objet de l'inventaire et aussi de celui de l'inventaire du tour précédent en fonction de si c'était un vol ou pas
+	 * @param objet
+	 * @param vol
+	 */
 	public void removeObjetInventaire(String objet, boolean vol){
 		inventaire.remove(objet);
 		if(!vol)
@@ -209,6 +218,8 @@ public class Personnage{
 	/**
 	 * Permet a un personnage de faire un echange avec un personnage de son equipe
 	 * @param p
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void echangeObjet(Personnage p, Affichage affichage, int equipe){
 		String itemEchange;
@@ -257,11 +268,13 @@ public class Personnage{
 
 	/**
 	 * Permet les deplacement des personnages
-	 * @param yApres
-	 * @param xApres
-	 * @param yAvant
 	 * @param xAvant
+	 * @param yAvant
+	 * @param xApres
+	 * @param yApres
 	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void mouvement(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
 		tableauIle[xAvant][yAvant].removePersonnageCourant();
@@ -272,19 +285,21 @@ public class Personnage{
 	}
 
 	/**
-	 * Permet a un personnage de rentrer dans le bateau
+	 * Permet a un personnage de rentrer dans le bateau 
 	 * @param xAvant
 	 * @param yAvant
 	 * @param xApres
 	 * @param yApres
 	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
 	 * @return true si le personnage possède le tresor
 	 */
-	public boolean[] entreeBateau(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
+	public boolean[] entreeBatiment(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
 		boolean victoire[]={false,false};
 
-		if(joueur.nbrVivant()>tableauIle[xApres][yApres].getBatimentCourant().nbrVivantStock()+1 || Test.testEnCours){
-			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment rentrer au Navire ?", "Rentrer au Navire",null);
+		if(joueur.nbrVivant()>tableauIle[xApres][yApres].getBatimentCourant().nbrVivantStock()+1 || tableauIle[xApres][xAvant].getBatimentCourant() instanceof Fort || Test.testEnCours){
+			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment rentrer votre personnage ?", "Rentrer",null);
 			if (decision==0){
 				tableauIle[xApres][yApres].getBatimentCourant().addPersoBatiment(this);
 				tableauIle[xAvant][yAvant].removePersonnageCourant();
@@ -293,10 +308,9 @@ public class Personnage{
 				if(inventaire.contains("Tresor")){
 					victoire[0]=true;
 					victoire[1]=joueur.getEquipe();
-				}
-				if(this instanceof Guerrier && !inventaire.contains("Epee") && !inventairePlein(affichage, "Ce guerrier n'a plus de place dans son inventaire pour récupérer une épée.")){
+				}else if(this instanceof Guerrier && !inventaire.contains("Epee") && !inventairePlein(affichage, "Ce guerrier n'a plus de place dans son inventaire pour récupérer une épée.")){
 					this.setObjetInventaire("Epee");
-					affichage.popUp(equipe,"En retournant au Navire, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme");
+					affichage.popUp(equipe,"En retournant dans le batiment, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme");
 				}else if(this instanceof Piegeur && !inventaire.contains("Pelle") && !inventaire.contains("Bombe") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une pelle et des bombes.")){
 					this.setObjetInventaire("Pelle");
 					int cpt=0;
@@ -306,14 +320,21 @@ public class Personnage{
 					}
 				}else if(this instanceof Piegeur && !inventaire.contains("Pelle") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une pelle.")){
 					this.setObjetInventaire("Pelle");
-					affichage.popUp(equipe,"En retournant au Navire, votre Pigeur à récupére une pelle!", "Recuperation d'une pelle");
+					affichage.popUp(equipe,"En retournant dans le batiment, votre Pigeur à récupére une pelle!", "Recuperation d'une pelle");
 				}else if(this instanceof Piegeur && !inventaire.contains("Bombe") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une bombe.")){
 					int cpt=0;
 					do{
 						this.setObjetInventaire("Bombe");
 						cpt++;
 					}while(inventaire.size()<6 && cpt<3);
-					affichage.popUp(equipe,"En retournant au Navire, votre Pigeur à récupére une/des bombe(s)!", "Recuperation de bombe");
+					affichage.popUp(equipe,"En retournant dans le batiment, votre Pigeur à récupére une/des bombe(s)!", "Recuperation de bombe");
+				}
+				if(victoire[0]==false){
+					int cpt=this.viderInventaireDeRochers();
+					joueur.setUpStockRessource(cpt);
+					if(cpt>0){
+						affichage.popUp(equipe,"En retournant dans votre base, votre Ouvrier à livrer "+cpt+" pierre(s) au stock de ressources", "Ajout de pierres");	
+					}
 				}
 			}
 		}else{
@@ -321,51 +342,24 @@ public class Personnage{
 		}
 		return victoire;
 	}
-	
-	public void entreeFort(int xAvant, int yAvant, int xApres, int yApres, Case [][] tableauIle, Affichage affichage, int equipe){
 
-		if(joueur.nbrVivant()>tableauIle[xApres][yApres].getBatimentCourant().nbrVivantStock()+1 || Test.testEnCours){
-			int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous vraiment rentrer dans votre base ?", "Rentrer au Fort",null);
-			if (decision==0){
-				tableauIle[xApres][yApres].getBatimentCourant().addPersoBatiment(this);
-				tableauIle[xAvant][yAvant].removePersonnageCourant();
-				this.recuperationStuff(false,true, xAvant,yAvant,xApres,yApres, tableauIle, affichage, equipe);
-				perteEnergie(1, xApres,yApres, tableauIle, false,false, affichage, equipe);
-				if(this instanceof Guerrier && !inventaire.contains("Epee") && !inventairePlein(affichage, "Ce guerrier n'a plus de place dans son inventaire pour récupérer une épée.")){
-					this.setObjetInventaire("Epee");
-					affichage.popUp(equipe,"En retournant dans votre base, votre Guerrier à récupére une épée ! Au combat !", "Recuperation d'une arme");
-				}else if(this instanceof Piegeur && !inventaire.contains("Pelle") && !inventaire.contains("Bombe") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une pelle et des bombes.")){
-					this.setObjetInventaire("Pelle");
-					int cpt=0;
-					while(inventaire.size()<6 && cpt<3){
-						this.setObjetInventaire("Bombe");
-						cpt++;
-					}
-				}else if(this instanceof Piegeur && !inventaire.contains("Pelle") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une pelle.")){
-					this.setObjetInventaire("Pelle");
-					affichage.popUp(equipe,"En retournant dans votre base, votre Pigeur à récupére une pelle!", "Recuperation d'une pelle");
-				}else if(this instanceof Piegeur && !inventaire.contains("Bombe") && !inventairePlein(affichage, "Ce piegeur n'a plus de place dans son inventaire pour récupérer une bombe.")){
-					int cpt=0;
-					do{
-						this.setObjetInventaire("Bombe");
-						cpt++;
-					}while(inventaire.size()<6 && cpt<3);
-					affichage.popUp(equipe,"En retournant dans votre base, votre Pigeur à récupére une/des bombe(s)!", "Recuperation de bombe");
-				}
-				if(this instanceof Ouvrier){
-					int cpt=((Ouvrier)this).viderInventaireDeRochers();
-					((Fort)tableauIle[xApres][yApres].getBatimentCourant()).stockRessources+=cpt;
-					if(cpt>0){
-						affichage.popUp(equipe,"En retournant dans votre base, votre Personnage à livrer "+cpt+" pierre(s) au stock de ressources", "Ajout de pierres");	
-					}
-				}
+
+	/**
+	 * Vide l'inventaire du joueur s'il contient des pierres
+	 * @return le nombre de rocher de l'inventaire
+	 */
+	public int viderInventaireDeRochers(){
+		int cpt=0;
+		for(int i=0; i<6;i++){
+			if(this.getObjetInventaire("Pierre")){
+				this.removeObjetInventaire("Pierre", false);
+				cpt++;
 			}
-		}else{
-			affichage.popUp(equipe,"Il faut au moins un personnage sur l'ile pour pouvoir rentrer dans la base.", "Entree impossible" );
 		}
+		return cpt;
 	}
-	
-	
+
+
 	/**
 	 * Fait perdre de l'energie au personnage
 	 * @param nrj
@@ -374,6 +368,8 @@ public class Personnage{
 	 * @param tableauIle
 	 * @param attaque
 	 * @param deplacement
+	 * @param affichage
+	 * @param equipe
 	 * @return true si le personnage meurt de la perte d'energie
 	 */
 	protected boolean perteEnergie(int nrj, int x, int y, Case[][] tableauIle, boolean attaque, boolean deplacement, Affichage affichage, int equipe){
@@ -412,6 +408,8 @@ public class Personnage{
 	 * @param xApres
 	 * @param yApres
 	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void recuperationStuff(boolean sortieBateau, boolean entreeBateau, int x, int y, int xApres, int yApres, Case[][] tableauIle, Affichage affichage, int equipe){
 		String res="\n\n";
@@ -451,6 +449,8 @@ public class Personnage{
 
 	/**
 	 * Immobilise un personnage a cause d'un piege
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void immobilisation(Affichage affichage, int equipe){
 		affichage.popUp(equipe,"Votre personnage est tomber dans un piege adverse ! Il sera immobilise durant les 3 tours suivants et ne pourra effectuer aucune action !", "C'ETAIT UN PIEGE !" );
@@ -491,6 +491,7 @@ public class Personnage{
 
 	/**
 	 * augmente l'energie du personnage
+	 * @param heal
 	 */
 	public void addEnergie(int heal){
 		if(energie<100){
@@ -526,8 +527,17 @@ public class Personnage{
 	 * 
 	 * @return le nombre de tour ou le personnage est encore immobilise
 	 */
-	public int getCompteur(){return compteur;}
-	public void setCompteur(int i){compteur=i;}
+	public int getCompteur(){
+		return compteur;
+		}
+	
+	/**
+	 * Set le compteur d'immobilisation
+	 * @param i
+	 */
+	public void setCompteur(int i){
+		compteur=i;
+		}
 
 	/**
 	 * ToString pour l'affichage dans le menu de sortie de bateau
@@ -561,11 +571,20 @@ public class Personnage{
 			return false;
 	}
 
+	/**
+	 * Set deplacement et action
+	 * @param setter
+	 */
 	public void setActionDeplacement(boolean setter){
 		this.setAction(setter);
 		this.setDeplacement(setter);
 	}
 
+	/**
+	 * Permet au perso d'abandonner un objet
+	 * @param affichage
+	 * @param equipe
+	 */
 	public void abandonnerObjet(Affichage affichage, int equipe){
 		String itemAbandonne;
 		String [] listeItem;
@@ -591,6 +610,12 @@ public class Personnage{
 		}
 	}
 
+	/**
+	 * 
+	 * @param objet
+	 * @param list
+	 * @return le nombre d'objet dans l'inventaire
+	 */
 	public int nbrObjetInventaire(String objet,ArrayList<String> list){
 		int nbr=0;
 		for(String obj:list){

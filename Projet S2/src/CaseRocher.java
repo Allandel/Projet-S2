@@ -28,13 +28,22 @@ public class CaseRocher extends Case{
 		}
 	}
 	
+	/**
+	 * Setter du minage du rocher
+	 * @param minage
+	 */
 	public void setMinage(int minage){
 		cptMinage=minage;
 	}
 	
+	/**
+	 * 
+	 * @return la quantité de minerai restant
+	 */
 	public int getMinage(){
 		return cptMinage;
 	}
+	
 	/**
 	 * Setter de Key
 	 * @param setter
@@ -42,6 +51,7 @@ public class CaseRocher extends Case{
 	public void setKey(boolean setter){
 		this.key = setter; 
 	}
+	
 	/**
 	 * Setter de Chest
 	 * @param setter
@@ -57,6 +67,7 @@ public class CaseRocher extends Case{
 		this.keyTaken = keyTaken;
 		key=!keyTaken;
 	}
+	
 	/**
 	 * @param chestTaken the chestTaken to set
 	 */

@@ -2,7 +2,11 @@ import java.util.Random;
 
 public class Ouvrier extends Personnage{
 	private boolean upgrade=false;
-	
+
+	/**
+	 * Construit un ouvrier
+	 * @param joueur
+	 */
 	Ouvrier(Joueur joueur) {
 		super(joueur);
 		setNom("Bertrand");
@@ -13,7 +17,14 @@ public class Ouvrier extends Personnage{
 		else
 			setId(15);
 	}
-	
+
+	/**
+	 * Construit un village sur la case selectionnée
+	 * @param x
+	 * @param y
+	 * @param tableauIle
+	 * @param joueur
+	 */
 	public void construireVillage(int x, int y, Case[][] tableauIle, Joueur joueur){
 		if(joueur.getNbrVillage()<1){
 			joueur.addVillage();
@@ -40,6 +51,7 @@ public class Ouvrier extends Personnage{
 		}
 		return cpt;
 	}
+
 	
 	public void commencerUpgrade(){
 			upgrade=true;
@@ -57,16 +69,28 @@ public class Ouvrier extends Personnage{
 	public void construireMine(int x, int y, Case[][] tableauIle, Joueur joueur){
 	}
 	
+	/**
+	 * 
+	 * @return le nombre de pierre présente dans l'inventaire du perso
+	 */
 	public int nbPierre(){
 		int cpt=0;
 		for(String test : getInventaire()){
-			if(test.compareTo("Pierre")==0){
+			if(test.equals("Pierre")){
 				cpt++;
 			}
 		}
 		return cpt;
 	}
 	
+	/**
+	 * Permet de miner un rocher
+	 * @param x
+	 * @param y
+	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
+	 */
 	public void minage(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe){
 		if(this.getObjetInventaire("Pioche") && ((CaseRocher)tableauIle[x][y]).getMinage()>0 && this.getInventaire().size()<6){
 			int cpt;
@@ -107,7 +131,16 @@ public class Ouvrier extends Personnage{
 			}
 		}
 	}
-	
+
+	/**
+	 * Affiche la liste des actions possible de l'ouvrier
+	 * @param x
+	 * @param y
+	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
+	 * @param joueur
+	 */
 	public void actionOuvrier(int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur joueur){
 		if(tableauIle[x][y].getId()==1){
 			this.minage(x, y, tableauIle, affichage, equipe);

@@ -7,10 +7,12 @@ import java.util.ArrayList;
  */
 public class Navire extends Batiment {
 
-
 	/**
 	 * Construit un navire en lui attribuant l'ID donnee
 	 * @param id
+	 * @param x
+	 * @param y
+	 * @param joueur
 	 */
 	public Navire(int id, int x, int y, Joueur joueur){
 		super(x, y, joueur);

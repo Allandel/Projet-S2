@@ -12,10 +12,12 @@ public class ile {
 	private int taille, nbRocher, Rocherx, Rochery, colonneNavJ1=1, colonneNavJ2, ligneNavJ1, ligneNavJ2;
 	private float proportion;
 	private boolean accesNav1, accesNav2;
+	
 	/**
 	 * Construit une ile puis la rempli en fonction de la proportion de Rochers choisie
 	 * @param taille
 	 * @param proportion
+	 * @param joueur
 	 */
 	ile(int taille, int proportion, Joueur[] joueur){
 		this.proportion = proportion;
@@ -34,6 +36,7 @@ public class ile {
 	/**
 	 * Ile qui sert pour les tests
 	 * @param test
+	 * @param joueur
 	 */
 	ile(boolean test, Joueur[] joueur){
 		tableauIle = new Case[9][9];
@@ -72,6 +75,7 @@ public class ile {
 
 	/**
 	 * Cree un nouveau plateau de Case, puis le rempli de Navire et de Rochers.
+	 * @param joueur
 	 */
 	void initialiser(Joueur [] joueur){
 		tableauIle = new Case[taille][taille];
@@ -112,6 +116,7 @@ public class ile {
 			}
 		}while(cpt<2);
 	}
+	
 	/**
 	 * Initialise les Case Neutres
 	 */
@@ -122,6 +127,7 @@ public class ile {
 			}
 		}
 	}
+	
 	/**
 	 * Initialise la mer
 	 */
@@ -133,6 +139,7 @@ public class ile {
 			tableauIle[i][tableauIle.length-1].setId(5);
 		}
 	}
+	
 	/**
 	 * Initialise les Rochers
 	 * @param taille
@@ -158,18 +165,21 @@ public class ile {
 	public Case getCaseCoffre() {
 		return CaseCoffre;
 	}
+	
 	/**
 	 * @return the caseCle
 	 */
 	public Case getCaseCle() {
 		return CaseCle;
 	}
+	
 	/**
 	 * @return the ligneNavJ1
 	 */
 	public int getLigneNavJ1() {
 		return ligneNavJ1;
 	}
+	
 	/**
 	 * @return the colonneNavJ1
 	 */
@@ -183,6 +193,7 @@ public class ile {
 	public int getLigneNavJ2() {
 		return ligneNavJ2;
 	}
+	
 	/**
 	 * @return the colonneNavJ2
 	 */
@@ -226,6 +237,7 @@ public class ile {
 			}
 		}
 	}
+	
 	/**
 	 * 
 	 * @returnun booleen en fonction de l'accessibilite du coffre et de la cle
@@ -250,6 +262,7 @@ public class ile {
 		CaseCoffre.setAccessible(false);
 		CaseCle.setAccessible(false);
 	}
+	
 	/**
 	 * @return the tableauIle
 	 */

@@ -13,7 +13,6 @@ public class Piegeur extends Personnage{
 	
 	/**
 	 * Constructeur creant un piegeur avec un nom, un type, un ID en fonction du parametre equipe1 determinant son equipe.
-	 * @param equipe1
 	 * @param joueur
 	 */
 	public Piegeur(Joueur joueur){
@@ -36,9 +35,13 @@ public class Piegeur extends Personnage{
 	
 	/**
 	 * Permet au personnage de pieger une case
+	 * @param p
 	 * @param x
 	 * @param y
 	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
+	 * @param joueur
 	 */
 	public void pieger(Personnage p,int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
 		if(tableauIle[x][y].getId()>0 && tableauIle[x][y].getId()<4){
@@ -76,6 +79,16 @@ public class Piegeur extends Personnage{
 		}
 	}
 	
+	/**
+	 * Pose une bombe sur la case choisie
+	 * @param p
+	 * @param x
+	 * @param y
+	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
+	 * @param joueur
+	 */
 	public void poserBombe(Personnage p,int x, int y, Case[][] tableauIle, Affichage affichage, int equipe, Joueur [] joueur){
 		if(tableauIle[x][y] instanceof CaseRocher || tableauIle[x][y].getBatimentCourant() instanceof Navire){
 			Bombe b=new Bombe(x,y);
@@ -88,6 +101,12 @@ public class Piegeur extends Personnage{
 		}
 	}
 	
+	/**
+	 * Diminue le comteur des bombes
+	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
+	 */
 	public void downCompteurBombe(Case[][] tableauIle, Affichage affichage, int equipe){
 		int indexBombe=0;
 		if(!listeBombe.isEmpty()){
