@@ -374,7 +374,7 @@ public class Personnage{
 	 */
 	protected boolean perteEnergie(int nrj, int x, int y, Case[][] tableauIle, boolean attaque, boolean deplacement, Affichage affichage, int equipe){
 		if(energie-nrj<=0){
-			if(tableauIle[x][y].getId()!=2 && tableauIle[x][y].getId()!=3)
+			if(tableauIle[x][y].getId()!=2 && tableauIle[x][y].getId()!=3 && tableauIle[x][y].getId()<20 )
 				tableauIle[x][y].setId(16);
 			death=true;
 			if(!attaque){
