@@ -45,7 +45,7 @@ public class Batiment {
 		return stockBatiment;
 	}
 	
-	public boolean getPersonnage(String type){
+	public boolean getPresencePersonnage(String type){
 		if(!stockBatiment.isEmpty()){
 			for(Personnage perso : stockBatiment){
 				if(perso.getType().compareTo(type)==0){
@@ -54,6 +54,20 @@ public class Batiment {
 			}
 		}
 		return false;
+	}
+	/**
+	 * 
+	 * @return Le personnage désigné par son type en paramètre.
+	 */
+	public Personnage getPersonnageListe(String type){
+		if(!stockBatiment.isEmpty()){
+			for(Personnage perso : stockBatiment){
+				if(perso.getType().compareTo(type)==0){
+					return perso;
+				}
+			}
+		}
+		return null;
 	}
 	
 	/**

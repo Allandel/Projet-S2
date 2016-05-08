@@ -117,6 +117,15 @@ public class Joueur {
 	public void coffreTrouve(){
 		coffreTrouve=true;
 	}
+	
+	public Batiment getBatimentListe(String type){
+			for(Batiment bati : batiments){
+				if(type.compareTo(bati.getType())==0){
+					return bati;
+				}
+			}
+			return null;
+	}
 
 	/**
 	 * 
@@ -141,7 +150,7 @@ public class Joueur {
 	/**
 	 * Remet toutes les actions et deplacement des personnages de l'equipe du joueur a true
 	 */
-	public void resetAction(Affichage affichage, int equipe){
+	public void resetAction(Affichage affichage, int equipe, ile ileDuJeu){
 		if(Test.testEnCours){
 			if(this.equipe.get(this.equipe.size()-1).getCompteur()==0){
 				this.equipe.get(this.equipe.size()-1).setActionDeplacement(true);
@@ -157,13 +166,14 @@ public class Joueur {
 					perso.setActionDeplacement(true);
 				}else{
 					perso.downCompteur();
-					if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getUpgrade()){
+					}if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getUpgrade()){
 						((Ouvrier)perso).setUpgrade(false);
+						((Fort)getBatimentListe("Fort")).upgrade=false;
+						((Fort)getBatimentListe("Fort")).evolutionFinale(affichage, equipe, ileDuJeu);
 					}
 				}
 			}
 		}
-	}
 
 	private void ExplosionBombes(Case[][] tableauIle, Affichage affichage, int equipe1){
 		for(Personnage perso : equipe){

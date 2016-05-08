@@ -351,11 +351,12 @@ public class Personnage{
 						cpt++;
 					}while(inventaire.size()<6 && cpt<3);
 					affichage.popUp(equipe,"En retournant dans votre base, votre Pigeur à récupére une/des bombe(s)!", "Recuperation de bombe");
-				}else if(this instanceof Ouvrier){
+				}
+				if(this instanceof Ouvrier){
 					int cpt=((Ouvrier)this).viderInventaireDeRochers();
 					((Fort)tableauIle[xApres][yApres].getBatimentCourant()).stockRessources+=cpt;
 					if(cpt>0){
-						affichage.popUp(equipe,"En retournant dans votre base, votre Ouvrier à livrer "+cpt+" pierre(s) au stock de ressources", "Ajout de pierres");	
+						affichage.popUp(equipe,"En retournant dans votre base, votre Personnage à livrer "+cpt+" pierre(s) au stock de ressources", "Ajout de pierres");	
 					}
 				}
 			}
