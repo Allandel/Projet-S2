@@ -19,7 +19,7 @@ public class Batiment {
 		this.joueur=joueur;
 		joueur.addBatiment(this);
 	}
-	
+
 	/**
 	 * 
 	 * @return le type du batiment
@@ -27,7 +27,7 @@ public class Batiment {
 	public String getType(){
 		return type;
 	}
-	
+
 	/**
 	 * Fait des dommages au batiment
 	 * @param deg
@@ -35,7 +35,7 @@ public class Batiment {
 	public void dommageBatiment(int deg){
 		batimentHealth-=deg;
 	}
-	
+
 	/**
 	 * 
 	 * @return la vie du batiment
@@ -43,7 +43,7 @@ public class Batiment {
 	public int getBatimentHealth(){
 		return batimentHealth;
 	}
-	
+
 	/**
 	 * Retourne la liste de Personnage du Batiment
 	 */
@@ -58,16 +58,16 @@ public class Batiment {
 	public Joueur getJoueur(){
 		return joueur;
 	}
-	
+
 	/**
 	 * @return true si le batiment contient un ouvrier
 	 */
 	public boolean ouvrierPresent(){
-			for(Personnage perso : stockBatiment){
-				if(perso.getType().equals("Ouvrier")){
-					return true;
-				}
+		for(Personnage perso : stockBatiment){
+			if(perso.getType().equals("Ouvrier")){
+				return true;
 			}
+		}
 		return false;
 	}
 	/**
@@ -84,7 +84,7 @@ public class Batiment {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 
 	 * @return le nombre de personnage vivant dans le batiment
@@ -136,10 +136,9 @@ public class Batiment {
 	 * @return vrai si une case est vide
 	 */
 	private boolean placeLibre(ile ileDuJeu){
-		for(int i=x-1;i<x+2;i++){
-			for(int j=y-1;j<y+2;j++){
-				if(ileDuJeu.getTableau()[i][j].getId()==17 || ileDuJeu.getTableau()[i][j].getId()==16)
-					return true;
+		for(Personnage perso: stockBatiment){
+			if(perso.sortiePossible(y, x, ileDuJeu)){
+				return true;
 			}
 		}
 		return false;
@@ -180,8 +179,7 @@ public class Batiment {
 	 */
 	public void sortieBatiment(ile ileDuJeu, Plateau plateauDuJeu, int[][] tableauAffichage, Affichage affichage, int equipe){
 		plateauDuJeu.refreshinfo(null,this);
-		
-		
+
 		if(stockBatiment.isEmpty()){
 			//affichage d'un message si pas de personnage dans le batiment
 			affichage.popUp(equipe, "Il n'y a pas de personnages.", "Attention" );
@@ -231,7 +229,7 @@ public class Batiment {
 		}
 		affichage.setVisibleActionPerso(false,null);
 	}
-	
+
 	/**
 	 * Set l'id du batiment
 	 * @param id
@@ -239,7 +237,7 @@ public class Batiment {
 	public void setId(int id){
 		this.id=id;
 	}
-	
+
 	/**
 	 * 
 	 * @return l'id du batiment
@@ -247,7 +245,7 @@ public class Batiment {
 	public int getId(){
 		return id;
 	}
-	
+
 	public String toString(){
 		return "";
 	}
