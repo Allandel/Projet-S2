@@ -367,6 +367,8 @@ public class Personnage{
 	 * @param tableauIle
 	 * @param attaque
 	 * @param deplacement
+	 * @param affichage
+	 * @param equipe
 	 * @return true si le personnage meurt de la perte d'energie
 	 */
 	protected boolean perteEnergie(int nrj, int x, int y, Case[][] tableauIle, boolean attaque, boolean deplacement, Affichage affichage, int equipe){
@@ -405,6 +407,8 @@ public class Personnage{
 	 * @param xApres
 	 * @param yApres
 	 * @param tableauIle
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void recuperationStuff(boolean sortieBateau, boolean entreeBateau, int x, int y, int xApres, int yApres, Case[][] tableauIle, Affichage affichage, int equipe){
 		String res="\n\n";
@@ -444,6 +448,8 @@ public class Personnage{
 
 	/**
 	 * Immobilise un personnage a cause d'un piege
+	 * @param affichage
+	 * @param equipe
 	 */
 	public void immobilisation(Affichage affichage, int equipe){
 		affichage.popUp(equipe,"Votre personnage est tomber dans un piege adverse ! Il sera immobilise durant les 3 tours suivants et ne pourra effectuer aucune action !", "C'ETAIT UN PIEGE !" );
@@ -484,6 +490,7 @@ public class Personnage{
 
 	/**
 	 * augmente l'energie du personnage
+	 * @param heal
 	 */
 	public void addEnergie(int heal){
 		if(energie<100){
@@ -519,8 +526,17 @@ public class Personnage{
 	 * 
 	 * @return le nombre de tour ou le personnage est encore immobilise
 	 */
-	public int getCompteur(){return compteur;}
-	public void setCompteur(int i){compteur=i;}
+	public int getCompteur(){
+		return compteur;
+		}
+	
+	/**
+	 * Set le compteur d'immobilisation
+	 * @param i
+	 */
+	public void setCompteur(int i){
+		compteur=i;
+		}
 
 	/**
 	 * ToString pour l'affichage dans le menu de sortie de bateau
@@ -554,11 +570,20 @@ public class Personnage{
 			return false;
 	}
 
+	/**
+	 * Set deplacement et action
+	 * @param setter
+	 */
 	public void setActionDeplacement(boolean setter){
 		this.setAction(setter);
 		this.setDeplacement(setter);
 	}
 
+	/**
+	 * Permet au perso d'abandonner un objet
+	 * @param affichage
+	 * @param equipe
+	 */
 	public void abandonnerObjet(Affichage affichage, int equipe){
 		String itemAbandonne;
 		String [] listeItem;
@@ -584,6 +609,12 @@ public class Personnage{
 		}
 	}
 
+	/**
+	 * 
+	 * @param objet
+	 * @param list
+	 * @return le nombre d'objet dans l'inventaire
+	 */
 	public int nbrObjetInventaire(String objet,ArrayList<String> list){
 		int nbr=0;
 		for(String obj:list){
