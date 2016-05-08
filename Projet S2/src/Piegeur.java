@@ -55,7 +55,6 @@ public class Piegeur extends Personnage{
 			String action=null;
 			action=(String)affichage.popUpYesNo(equipe,"\nQue voulez vous faire ?\n\n[Cliquez sur annuler si vous ne voulez rien faire]\n", "Choix de l'action",tab);
 			if(action!=null){
-
 				if (action.compareTo("Pieger la case")==0 && this.getObjetInventaire("Pelle")){
 					tableauIle[x][y].setPiege(true);
 					if(joueur[equipe].getEquipe()){

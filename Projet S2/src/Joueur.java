@@ -214,24 +214,24 @@ public class Joueur {
 		if(Test.testEnCours){
 			if(this.equipe.get(this.equipe.size()-1).getCompteur()==0){
 				this.equipe.get(this.equipe.size()-1).setActionDeplacement(true);
+				if(this.equipe.get(this.equipe.size()-1) instanceof Ouvrier && ((Ouvrier) this.equipe.get(this.equipe.size()-1)).getUpgrade()){
+					((Ouvrier)this.equipe.get(this.equipe.size()-1)).setUpgrade(false);
+					((Fort)getBatimentListe("Fort")).upgrade=false;
+					return ((Fort)getBatimentListe("Fort")).evolutionFinale(equipe, ileDuJeu);
+				}
 			}else
 				this.equipe.get(this.equipe.size()-1).downCompteur();
-			if(this.equipe.get(this.equipe.size()-1) instanceof Ouvrier && this.equipe.get(this.equipe.size()-1).compteur==0 && ((Ouvrier) this.equipe.get(this.equipe.size()-1)).getUpgrade()){
-				((Ouvrier)this.equipe.get(this.equipe.size()-1)).setUpgrade(false);
-				((Fort)getBatimentListe("Fort")).upgrade=false;
-				return ((Fort)getBatimentListe("Fort")).evolutionFinale(equipe, ileDuJeu);
-			}
 		}else{
 			for(Personnage perso : this.equipe){
 				if(perso.getCompteur()==0){
 					perso.setActionDeplacement(true);
+					if(perso instanceof Ouvrier && ((Ouvrier) perso).getUpgrade()){
+						((Ouvrier)perso).setUpgrade(false);
+						((Fort)getBatimentListe("Fort")).upgrade=false;
+						return ((Fort)getBatimentListe("Fort")).evolutionFinale(equipe, ileDuJeu);
+					}
 				}else
 					perso.downCompteur();
-				if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getUpgrade()){
-					((Ouvrier)perso).setUpgrade(false);
-					((Fort)getBatimentListe("Fort")).upgrade=false;
-					return ((Fort)getBatimentListe("Fort")).evolutionFinale(equipe, ileDuJeu);
-				}
 			}
 		}
 		return "";
