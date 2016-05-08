@@ -12,6 +12,19 @@ public class Ouvrier extends Personnage{
 		setNom("Bertrand");
 		setType("Ouvrier");
 		this.setObjetInventaire("Pioche");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
+		this.setObjetInventaire("Pierre");
 		if(joueur.getEquipe())
 			setId(10);
 		else
@@ -21,8 +34,8 @@ public class Ouvrier extends Personnage{
 	public String toString(boolean console){
 		return "O";
 	}
-	
-	
+
+
 	/**
 	 * Construit un village sur la case selectionnée
 	 * @param x
@@ -154,22 +167,47 @@ public class Ouvrier extends Personnage{
 			this.minage(x, y, tableauIle, affichage, equipe);
 		}else if(tableauIle[x][y].getId()==this.getId()){
 			if(this.nbPierre()>=5){
-				if(joueur.getNbrVillage()==0){
-					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer votre village ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
-					if (decision==0){
-						construireVillage(x,y, tableauIle, joueur);
-						super.perteEnergie(30, x,y, tableauIle, false, false,affichage, equipe);
-					}
-				}else if(joueur.getNiveauVillage()>=1){
-					int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer une Mine ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
-					if (decision==0){
-						construireMine(x,y,tableauIle,joueur);
-						super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
-					}
-				}	
+				if(this.constructible(tableauIle, x, y, affichage)){
+					if(joueur.getNbrVillage()==0){
+						int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer votre village ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
+						if (decision==0){
+							construireVillage(x,y, tableauIle, joueur);
+							super.perteEnergie(30, x,y, tableauIle, false, false,affichage, equipe);
+						}
+					}else if(joueur.getNiveauVillage()>=1){
+						int decision=(int)affichage.popUpYesNo(equipe,"Voulez vous créer une Mine ici ?\n\n(Attention, ce choix est irréversible)", "Créer un village",null);
+						if (decision==0){
+							construireMine(x,y,tableauIle,joueur);
+							super.perteEnergie(20, x,y, tableauIle, false, false,affichage, equipe);
+						}
+					}	
+				}
 			}else{
 				affichage.popUp(equipe,"Vous avez moins de 5 pierres ! Impossible de construire quoi que ce soit", "CONSTRUCTION IMPOSSIBLE" );
 			}
 		}
 	}	
+
+	/**
+	 * Test s'il y a des rochers au alentours qui risquent d'être bloqués à cause de la construction
+	 * @param tableauIle
+	 * @param x
+	 * @param y
+	 * @param affichage
+	 * @return
+	 */
+	private boolean constructible(Case[][] tableauIle, int x, int y, Affichage affichage){
+		boolean res=true;
+		if(tableauIle[x+1][y].getId()<5 || tableauIle[x+1][y].getId()>19)
+			res=false;
+		else if(tableauIle[x-1][y].getId()<5 || tableauIle[x-1][y].getId()>19)
+			res=false;
+		else if(tableauIle[x][y+1].getId()<5 || tableauIle[x][y+1].getId()>19)
+			res=false;
+		else if(tableauIle[x][y-1].getId()<5 || tableauIle[x][y-1].getId()>19)
+			res=false;
+		if(!res)
+			affichage.popUp(joueur.getIdBateau()-2, "Il n'y a pas de place pour construire ici, les rochers bloquent le chemin", "Construction impossible");
+		return res;
+	}
 }
