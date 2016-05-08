@@ -127,7 +127,7 @@ public class Affichage {
 		for(int i= 1; i<ileDuJeu.getTableau().length-1;i++){
 			for(int j = 1; j<ileDuJeu.getTableau()[0].length-1;j++){
 
-				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<16 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdFort()){
+				if(ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<16 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getJoueur()==joueur || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdBateau() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdFort() || ileDuJeu.getTableau()[j][i].getId()==joueur.getIdMine()){
 					for(int x=i-1;x<i+2;x++){
 						for(int y=j-1;y<j+2;y++){
 							if(ileDuJeu.getTableau()[y][x].getId()==4 && !joueur.getCoffreTrouve())
@@ -279,10 +279,11 @@ public class Affichage {
 	 * Affiche les actions effectuées par l'ennemi pendant son tour sur les personnages du joueur
 	 * @param joueur
 	 */
-	private void actionEnnemi(Joueur joueur){
+	private void actionEnnemi(Joueur joueur, String actionPassive){
 		String actionEnnemi="Tour du Joueur "+(joueur.getIdBateau()-1+"\n");
 		actionEnnemi+=joueur.persoAttaque();
 		actionEnnemi+=joueur.persoVole();
+		actionEnnemi+=actionPassive;
 		if(!actionEnnemi.equals(""))
 			this.popUp(joueur.getIdBateau()-2, actionEnnemi, "Tour du Joueur "+(joueur.getIdBateau()-1));
 	}
@@ -294,11 +295,11 @@ public class Affichage {
 	 * @param ileDuJeu
 	 * @param tableauAffichage
 	 */
-	public void  actionDebutTour(int equipe, Joueur []joueur, ile ileDuJeu, int [][] tableauAffichage){
+	public void  actionDebutTour(int equipe, Joueur []joueur, ile ileDuJeu, int [][] tableauAffichage, String actionPassive){
 		plateauDuJeu.resetInfo();
 		if(!Test.testEnCours){
 			plateauDuJeu.masquer();
-			actionEnnemi(joueur[equipe]);
+			actionEnnemi(joueur[equipe], actionPassive);
 		}
 		affichageDuJeuJoueur(ileDuJeu, tableauAffichage,joueur[equipe], equipe);
 	}

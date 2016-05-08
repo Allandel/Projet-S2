@@ -210,7 +210,7 @@ public class Joueur {
 	 * @param affichage
 	 * @param equipe
 	 */
-	public void resetAction(Affichage affichage, int equipe, ile ileDuJeu){
+	public String resetAction(Affichage affichage, int equipe, ile ileDuJeu){
 		if(Test.testEnCours){
 			if(this.equipe.get(this.equipe.size()-1).getCompteur()==0){
 				this.equipe.get(this.equipe.size()-1).setActionDeplacement(true);
@@ -219,8 +219,7 @@ public class Joueur {
 			if(this.equipe.get(this.equipe.size()-1) instanceof Ouvrier && this.equipe.get(this.equipe.size()-1).compteur==0 && ((Ouvrier) this.equipe.get(this.equipe.size()-1)).getUpgrade()){
 				((Ouvrier)this.equipe.get(this.equipe.size()-1)).setUpgrade(false);
 				((Fort)getBatimentListe("Fort")).upgrade=false;
-				((Fort)getBatimentListe("Fort")).evolutionFinale(affichage, equipe, ileDuJeu);
-
+				return ((Fort)getBatimentListe("Fort")).evolutionFinale(equipe, ileDuJeu);
 			}
 		}else{
 			for(Personnage perso : this.equipe){
@@ -231,10 +230,11 @@ public class Joueur {
 				if(perso instanceof Ouvrier && perso.compteur==0 && ((Ouvrier) perso).getUpgrade()){
 					((Ouvrier)perso).setUpgrade(false);
 					((Fort)getBatimentListe("Fort")).upgrade=false;
-					((Fort)getBatimentListe("Fort")).evolutionFinale(affichage, equipe, ileDuJeu);
+					return ((Fort)getBatimentListe("Fort")).evolutionFinale(equipe, ileDuJeu);
 				}
 			}
 		}
+		return "";
 	}
 
 	/**

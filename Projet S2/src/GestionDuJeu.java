@@ -49,10 +49,10 @@ public class GestionDuJeu {
 	public boolean [] tourDuJoueur(){
 		boolean [] gagner={false,false};
 		int equipe=0 ;
-
+		String actionPassive="";
 		while(!gagner[0]){
-			joueur[equipe].resetAction(affichage, equipe,ileDuJeu);
-			affichage.actionDebutTour(equipe, joueur, ileDuJeu, tableauAffichage);
+			actionPassive=joueur[equipe].resetAction(affichage, equipe,ileDuJeu);
+			affichage.actionDebutTour(equipe, joueur, ileDuJeu, tableauAffichage, actionPassive);
 			
 			
 			while(!gagner[0] && joueur[equipe].actionPossible()){
