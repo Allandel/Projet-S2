@@ -140,10 +140,8 @@ public class GestionDuJeu {
 					}else{
 						perso.mouvement(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
 					}
-				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau()){
-					gagner=perso.entreeBateau(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(),affichage, equipe);
-				}else if(joueur.getNbrVillage()>0 && tableauAffichage[cordonnees[1]][cordonnees[0]]==joueur.getIdFort()){
-					perso.entreeFort(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(),affichage, equipe);
+				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==perso.getIdBateau() || tableauAffichage[cordonnees[1]][cordonnees[0]]==joueur.getIdFort()){
+					gagner=perso.entreeBatiment(x, y, cordonnees[0], cordonnees[1], ileDuJeu.getTableau(),affichage, equipe);
 				}else if(tableauAffichage[cordonnees[1]][cordonnees[0]]==16){
 					perso.recuperationStuff(false,false, x,y,cordonnees[0],cordonnees[1], ileDuJeu.getTableau(), affichage, equipe);
 				}

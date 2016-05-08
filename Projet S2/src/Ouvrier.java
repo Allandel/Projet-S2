@@ -40,21 +40,7 @@ public class Ouvrier extends Personnage{
 		}
 	}
 
-	/**
-	 * Vide l'inventaire du joueur s'il contient des pierres
-	 * @return
-	 */
-	public int viderInventaireDeRochers(){
-		int cpt=0;
-		for(int i=0; i<6;i++){
-			if(this.getObjetInventaire("Pierre")){
-				this.removeObjetInventaire("Pierre", false);
-				cpt++;
-			}
-		}
-		return cpt;
-	}
-
+	
 	public void commencerUpgrade(){
 		upgrade=true;
 		this.setCompteur(4);

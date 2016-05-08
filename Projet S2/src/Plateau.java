@@ -546,7 +546,7 @@ public class Plateau {
 			recupTypePerso.setText(batiment.getType());
 			recupenergie.setText(""+batiment.batimentHealth);
 			if(batiment instanceof Fort){
-				recupStockRessource.setText(""+((Fort)batiment).getStockRessource());
+				recupStockRessource.setText(""+batiment.getJoueur().getStockRessource());
 				recupNiveau.setText(""+((Fort)batiment).getNiveau());
 				stockRessource.setVisible(true);
 				recupStockRessource.setVisible(true);

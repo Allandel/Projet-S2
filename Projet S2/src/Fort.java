@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Fort extends Batiment{
 	private int niveau=1;
-	protected int stockRessources=40, dmg=10;
+	protected int dmg=10;
 
 	/**
 	 * Construit un fort en lui attribuant l'ID donnee
@@ -36,11 +36,11 @@ public class Fort extends Batiment{
 	 * @param ileDuJeu
 	 */
 	public void evolution(Affichage affichage, int equipe, ile ileDuJeu){
-		if(niveau==1 && stockRessources>=10 && this.ouvrierPresent()){
+		if(niveau==1 && joueur.getStockRessource()>=10 && this.ouvrierPresent()){
 			niveau=2;
 			batimentHealth=200;
 			joueur.incrNiveauVillage();
-			stockRessources-=10;
+			joueur.setDownStockRessource(10);
 			heal=20;
 			if(equipe==0){
 				this.setId(22);
@@ -52,18 +52,18 @@ public class Fort extends Batiment{
 				ileDuJeu.getTableau()[x][y].setId(23);
 			}
 			affichage.popUp(equipe, "Votre village a été amélioré en Forteresse ! Votre base est désormais plus résistante et soigne mieux !", "Evolution au niveau 2" );
-		}else if(niveau==2 && stockRessources>=30 && this.ouvrierPresent()){
+		}else if(niveau==2 && joueur.getStockRessource()>=30 && this.ouvrierPresent()){
 			niveau=3;
 			dmg=20;
 			batimentHealth=300;
 			joueur.incrNiveauVillage();
-			stockRessources-=30;
+			joueur.setDownStockRessource(30);
 			affichage.popUp(equipe, "Votre Forteresse a été amélioré! Elle est désormais plus résistante et inflige plus de dégats alentours !", "Evolution au niveau 3" );
 		}else{
-			if((niveau==1 && stockRessources<10)){
-				affichage.popUp(equipe, "Vous n'avez pas assez de ressources, il vous en faut encore "+(10-stockRessources), "Impossible d'évoluer");
-			}else if((niveau==2 && stockRessources<30)){
-				affichage.popUp(equipe, "Vous n'avez pas assez de ressources, il vous en faut encore "+(30-stockRessources), "Impossible d'évoluer");
+			if((niveau==1 && joueur.getStockRessource()<10)){
+				affichage.popUp(equipe, "Vous n'avez pas assez de ressources, il vous en faut encore "+(10-joueur.getStockRessource()), "Impossible d'évoluer");
+			}else if((niveau==2 && joueur.getStockRessource()<30)){
+				affichage.popUp(equipe, "Vous n'avez pas assez de ressources, il vous en faut encore "+(30-joueur.getStockRessource()), "Impossible d'évoluer");
 			}else if(!this.ouvrierPresent()){
 				affichage.popUp(equipe, "Il vous faut un ouvrier au sein de votre ville pour évoluer !", "Impossible d'évoluer");
 			}
@@ -119,13 +119,5 @@ public class Fort extends Batiment{
 				}
 			}
 		}
-	}
-	
-	/**
-	 * 
-	 * @return les ressources dans le stock
-	 */
-	public int getStockRessource(){
-		return stockRessources;
 	}
 }

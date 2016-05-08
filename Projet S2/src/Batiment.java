@@ -52,6 +52,14 @@ public class Batiment {
 	}
 	
 	/**
+	 * 
+	 * @return le joueur du batiment
+	 */
+	public Joueur getJoueur(){
+		return joueur;
+	}
+	
+	/**
 	 * @return true si le batiment contient un ouvrier
 	 */
 	public boolean ouvrierPresent(){

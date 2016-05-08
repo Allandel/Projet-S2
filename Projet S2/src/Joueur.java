@@ -9,7 +9,7 @@ public class Joueur {
 	private ArrayList<Personnage> equipe = new ArrayList<Personnage>();
 	private ArrayList<Batiment> batiments = new ArrayList<Batiment>();
 	private boolean equipe1, coffreTrouve=false;
-	private int idBateau=2, ligneBateau, colonneBateau, nbrVillage=0, niveauVillage=0, idFort=20;
+	private int idBateau=2, ligneBateau, colonneBateau, nbrVillage=0, niveauVillage=0, idFort=20, stockRessources=40;
 
 	/**
 	 * Construit un joueur en lui donnant un boolean correspondant a son equipe et l'id de son bateau
@@ -89,6 +89,30 @@ public class Joueur {
 	 */
 	public void incrNiveauVillage(){
 		niveauVillage++;
+	}
+	
+	/**
+	 * 
+	 * @return les stock de ressources du joueur
+	 */
+	public int getStockRessource(){
+		return stockRessources;
+	}
+	
+	/**
+	 * diminue le stock du joueur
+	 * @param stock
+	 */
+	public void setDownStockRessource(int stock){
+		stockRessources-=stock;
+	}
+	
+	/**
+	 * Augmente le stock du joueur
+	 * @param stock
+	 */
+	public void setUpStockRessource(int stock){
+		stockRessources+=stock;
 	}
 	
 	/**
