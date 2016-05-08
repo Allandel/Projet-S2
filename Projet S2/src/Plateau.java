@@ -215,9 +215,7 @@ public class Plateau {
 		});
 		annulerSelection.setVisible(false);
 		lacherObjet.setVisible(false);
-		stockRessource.setVisible(false);
 		recupStockRessource.setVisible(false);
-		niveau.setVisible(false);
 		recupNiveau.setVisible(false);
 	}
 
@@ -597,6 +595,10 @@ public class Plateau {
 		recupNomPerso.setText("");
 		recupTypePerso.setText("");
 		recupenergie.setText("");
+		niveau.setVisible(false);
+		stockRessource.setVisible(false);
+		recupNiveau.setText("");
+		recupStockRessource.setText("");
 		this.affichagePanel();
 	}
 
