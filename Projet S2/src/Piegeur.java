@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 /**
  * Classe heritee de Personnage creant un personnage de type piegeur
  * @author louis

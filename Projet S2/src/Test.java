@@ -5,7 +5,6 @@
  *
  */
 public class Test {
-	private ActionJoueur action =new ActionJoueur();
 	private ile ileDuJeu;
 	private int[][] tableauAffichage;
 	private Affichage affichage;

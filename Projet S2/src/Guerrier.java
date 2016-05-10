@@ -1,6 +1,5 @@
 import java.util.Random;
 
-import javax.swing.JOptionPane;
 /**
  * Classe heritee de personnage representant un explorateur
  * @author louis

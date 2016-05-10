@@ -37,7 +37,6 @@ public class Menu extends JFrame{
 	 * Permet de recuperer la taille et le pourcentage de rocher
 	 */
 	public void menuPrincipal(){
-		int nbrPointJ1=10,nbrPointJ2=10;
 
 		JPanel onglet1 =  new ImagePanel(new ImageIcon("img/carte.jpg").getImage());
 		JPanel onglet2 = new JPanel();

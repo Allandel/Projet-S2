@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 /**
  * Classe heritee de Case representant les navires

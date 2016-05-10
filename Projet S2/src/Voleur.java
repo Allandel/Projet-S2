@@ -1,7 +1,5 @@
 import java.util.Random;
 
-import javax.swing.JOptionPane;
-
 /**
  * Classe heritee de Personnage creant un personnage de type voleur
  * @author Valentin
