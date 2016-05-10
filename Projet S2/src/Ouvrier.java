@@ -12,19 +12,6 @@ public class Ouvrier extends Personnage{
 		setNom("Bertrand");
 		setType("Ouvrier");
 		this.setObjetInventaire("Pioche");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
-		this.setObjetInventaire("Pierre");
 		if(joueur.getEquipe())
 			setId(10);
 		else
