@@ -143,9 +143,10 @@ public class Batiment {
 	 * @return vrai si une case est vide
 	 */
 	private boolean placeLibre(ile ileDuJeu){
-		for(Personnage perso: stockBatiment){
-			if(perso.sortiePossible(y, x, ileDuJeu)){
-				return true;
+		for(int i=x-1;i<x+2;i++){
+			for(int j=y-1;j<y+2;j++){
+				if(ileDuJeu.getTableau()[i][j].getId()==16 || ileDuJeu.getTableau()[i][j].getId()==17)
+					return true;
 			}
 		}
 		return false;
@@ -159,7 +160,7 @@ public class Batiment {
 	public boolean sortieImpossible(ile ileDuJeu){
 		for(int i=x-1;i<x+2;i++){
 			for(int j=y-1;j<y+2;j++){
-				if(ileDuJeu.getTableau()[j][i].getId()==16 || ileDuJeu.getTableau()[i][j].getId()==17 || (ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<16 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getDeplacement()))
+				if(ileDuJeu.getTableau()[i][j].getId()==16 || ileDuJeu.getTableau()[i][j].getId()==17 || (ileDuJeu.getTableau()[i][j].getId()>5 && ileDuJeu.getTableau()[i][j].getId()<16 && ileDuJeu.getTableau()[i][j].getPersonnageCourant().getDeplacement()))
 					return false;
 			}
 		}
@@ -190,7 +191,7 @@ public class Batiment {
 		if(stockBatiment.isEmpty()){
 			//affichage d'un message si pas de personnage dans le batiment
 			affichage.popUp(equipe, "Il n'y a pas de personnages.", "Attention" );
-		}else if(this.placeLibre(ileDuJeu)){
+		}else if(!this.sortieImpossible(ileDuJeu)){
 			//S'il y a de la place autour du batiment
 			Personnage persoSortant = null;
 			ActionJoueur action= new ActionJoueur();
@@ -200,33 +201,32 @@ public class Batiment {
 					nbrVivantJouable++;
 			}
 			if(nbrVivantJouable>0){
-				//S'il y a au moins un personnage vivant et jouable dans le batiment	
-				Personnage [] listePerso= new Personnage[nbrVivantJouable];
-				for(Personnage perso: stockBatiment){
-					if(perso.sortiePossible(y, x, ileDuJeu)){
-						listePerso[i]=perso;
-						i++;
+				if(this.placeLibre(ileDuJeu)){
+					//S'il y a au moins un personnage vivant et jouable dans le batiment	
+					Personnage [] listePerso= new Personnage[nbrVivantJouable];
+					for(Personnage perso: stockBatiment){
+						if(perso.sortiePossible(y, x, ileDuJeu)){
+							listePerso[i]=perso;
+							i++;
+						}
 					}
-				}
-				persoSortant=(Personnage)affichage.popUpYesNo(equipe,"\nQuels personnage voulez-vous faire sortir ?\n\n", "Sortie de personnage",listePerso);  
-				if(persoSortant!=null){
-					//si le joueur a choisi de faire sortir un personnage	
-					affichage.setVisibleActionPerso(true, null);
-					int[] cordonnees = action.choixCaseSortie(plateauDuJeu, tableauAffichage, x, y, persoSortant);
-					if(cordonnees[0]!=777){
-						//si le joueur n'annule pas l'action	
-						if(tableauAffichage[cordonnees[1]][cordonnees[0]]==17)
-							ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
-						else
-							persoSortant.recuperationStuff(true,false, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau(), affichage, equipe);
-						persoSortant.setAction(false);
-						stockBatiment.remove(persoSortant);
+					persoSortant=(Personnage)affichage.popUpYesNo(equipe,"\nQuels personnage voulez-vous faire sortir ?\n\n", "Sortie de personnage",listePerso);  
+					if(persoSortant!=null){
+						//si le joueur a choisi de faire sortir un personnage	
+						affichage.setVisibleActionPerso(true, null);
+						int[] cordonnees = action.choixCaseSortie(plateauDuJeu, tableauAffichage, x, y, persoSortant);
+						if(cordonnees[0]!=777){
+							//si le joueur n'annule pas l'action	
+							if(tableauAffichage[cordonnees[1]][cordonnees[0]]==17)
+								ileDuJeu.getTableau()[cordonnees[0]][cordonnees[1]].setPersonnageCourant(persoSortant);
+							else
+								persoSortant.recuperationStuff(true,false, 0, 0, cordonnees[0], cordonnees[1],ileDuJeu.getTableau(), affichage, equipe);
+							persoSortant.setAction(false);
+							stockBatiment.remove(persoSortant);
+						}
 					}
-				}
-				if(this.sortieImpossible(ileDuJeu))
-					//S'il n'y a plus de case vide ou de personnage pouvant se deplacer autour du batiment
-					this.actionImpossible();
-				//met les personnages dans le batiment comme sans action ni deplacement pour eviter une boucle infini dans le tour du joueur
+				}else
+					affichage.popUp(equipe, "Il n'y a pas de place libre pour pouvoir placer un personnage", "Attention" );
 			}else{
 				affichage.popUp(equipe, "Il n'y a pas de personnages jouables", "Attention" );
 			}

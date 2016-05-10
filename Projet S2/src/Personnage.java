@@ -477,7 +477,7 @@ public class Personnage{
 			if(!(this instanceof Explorateur)){
 				for(int x=i-1;x<i+2;x++){
 					for(int y=j-1;y<j+2;y++){
-						if(ileDuJeu.getTableau()[y][x].getId()==17 || ileDuJeu.getTableau()[y][x].getId()==16 || (ileDuJeu.getTableau()[j][i].getId()>5 && ileDuJeu.getTableau()[j][i].getId()<16 && ileDuJeu.getTableau()[j][i].getPersonnageCourant().getDeplacement()))
+						if(ileDuJeu.getTableau()[y][x].getId()==17 || ileDuJeu.getTableau()[y][x].getId()==16 || (ileDuJeu.getTableau()[y][x].getId()>5 && ileDuJeu.getTableau()[y][x].getId()<16 && ileDuJeu.getTableau()[y][x].getPersonnageCourant().getDeplacement()))
 							return true;
 					}
 				}
