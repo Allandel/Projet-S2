@@ -312,6 +312,7 @@ public class Menu extends JFrame{
 		JMenuItem itemenvir4 = new JMenuItem("Navire");
 		JMenuItem itemenvir5 = new JMenuItem("Coffre");
 		JMenuItem itemenvir6 = new JMenuItem("Forteresse");
+		JMenuItem itemenvir7 = new JMenuItem("Mine");
 		//==================================================================
 		JMenuItem itembut1 = new JMenuItem("Les Objetifs");
 		//==================================================================
@@ -333,6 +334,7 @@ public class Menu extends JFrame{
 		envir.add(itemenvir4);
 		envir.add(itemenvir5);
 		envir.add(itemenvir6);
+		envir.add(itemenvir7);
 		but.add(itembut1);
 		comm.add(itemcomm1);
 		comm.add(itemcomm2);
@@ -449,6 +451,17 @@ public class Menu extends JFrame{
 				lol.setText("                                                                         FORTERESSE\n\n\n"
 						+"DESCRIPTION\n\n"
 						+"La Forteresse constitue un refuge pour vos alliés ! Il vous permet de régénérer votre énergie et de récupérer\nles outils que vous vous êtes fait dérober !"
+						+"\nIl est possible de l'améliorer pour lui permettre d'attaquer \nles ennemis aux alentours, améliorer les soins et les dommages."
+						+"\n\nINTERACTIONS POSSIBLES\n\n"
+						+"- Rentrer dedans (Tout les Personnages Alliés)\n- Sortir un personnage (Clic Gauche souris)\n- Exploser le batiment ennemie (Piégeur)");
+			}        
+		});
+		itemenvir7.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				lol.setText("                                                                         Mine\n\n\n"
+						+"DESCRIPTION\n\n"
+						+"La mine sert à l'ouvrier à miner des ressources. Cela se fait automatique \nà chaque tour si un ouvrier est présent dedans."
+						+"\nElle donne 2 à 3 ressources par tour et peut être construite à partir du niveau 1 de la forteresse"
 						+"\n\nINTERACTIONS POSSIBLES\n\n"
 						+"- Rentrer dedans (Tout les Personnages Alliés)\n- Sortir un personnage (Clic Gauche souris)\n- Exploser le batiment ennemie (Piégeur)");
 			}        
