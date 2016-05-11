@@ -103,8 +103,8 @@ public class Ouvrier extends Personnage{
 		if(this.getObjetInventaire("Pioche") && ((CaseRocher)tableauIle[x][y]).getMinage()>0 && this.getInventaire().size()<6){
 			int cpt;
 			int resultMinage;
-			Random random=new Random(7);
-			cpt=random.nextInt();
+			Random random=new Random();
+			cpt=random.nextInt(7);
 			if(cpt==0){
 				resultMinage=0;
 				affichage.popUp(equipe,"Votre minage à échoué...", "MINAGE RATER" );

@@ -1,9 +1,7 @@
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
@@ -27,6 +25,33 @@ class GraphicPane extends JPanel {
 	private String[][] text ;
 	private boolean[][] highlight = null ;
 	private Color[][] highlightColor = null ;
+	private String[] gifs = new String[]{ 
+			"rocher.jpg",			//id 1
+			"1.navire.jpg",			//id 2
+			"2.navire.jpg",			//id 3
+			"coffre.jpg",			//id 4
+			"mer.jpg",				//id 5
+			"1.explorateur.jpg",	//id 6
+			"1.voleur.jpg",			//id 7
+			"1.piegeur.jpg",		//id 8
+			"1.guerrier.jpg",		//id 9
+			"1.ouvrier.jpg",		//id 10
+			"2.explorateur.jpg",	//id 11
+			"2.voleur.jpg",			//id 12
+			"2.piegeur.jpg",		//id 13
+			"2.guerrier.jpg",		//id 14
+			"2.ouvrier.jpg",		//id 15
+			"death.jpg",			//id 16
+			"herbe.jpg",			//id 17
+			"piege.jpg",			//id 18
+			"bombe.jpg",			//id 19
+			"1.village.jpg",        //id 20
+			"2.village.jpg",		//id 21
+			"1.forteresse.jpg",		//id 22
+			"2.forteresse.jpg",		//id 23
+			"1.mine.jpg",			//id 24
+			"2.mine.jpg"			//id 25
+	};			
 	/**
 	 * Construit un plateau de jeu vide de dimension taille x taille.
 	 * Initialement, les cellules sont vides. Le constructeur demande la fourniture
@@ -42,7 +67,15 @@ class GraphicPane extends JPanel {
 		if (gif!=null){
 			nbImages=gif.length;
 			images=new ImageIcon[nbImages];	
-			for (int i=0;i<nbImages;i++) images[i]=new ImageIcon(gif[i]);
+			for (int i=0;i<nbImages;i++){
+				java.net.URL imageURL = Plateau.class.getResource(gifs[i]);
+				   if (imageURL != null) {
+				      images[i] = new ImageIcon(imageURL);
+				   } else { // Traitement  si image non trouvée
+				      System.err.println("Image : '" + gifs[i]+ "' non trouvée") ;
+				      images[i] = null ;
+				   }
+			}
 			dimImage=images[0].getIconHeight()+2;
 			setGraphicSize() ;
 			this.setBackground(Color.LIGHT_GRAY);

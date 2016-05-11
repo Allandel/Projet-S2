@@ -331,14 +331,14 @@ public class Personnage{
 						affichage.popUp(equipe,"En retournant dans le batiment, votre Pigeur à récupére une/des bombe(s)!", "Recuperation de bombe");
 					}else if(this instanceof Ouvrier && !inventaire.contains("Pioche") && !inventairePlein(affichage, "Cet ouvrier n'a plus de place dans son inventaire pour récupérer une pioche.")){
 						this.setObjetInventaire("Pioche");
-						affichage.popUp(equipe,"En retournant dans le batiment, votre Pigeur à récupére une pioche!", "Recuperation d'une pioche");
+						affichage.popUp(equipe,"En retournant dans le batiment, votre Ouvrier à récupére une pioche!", "Recuperation d'une pioche");
 					}
 				}
 				if(victoire[0]==false){
 					int cpt=this.viderInventaireDeRochers();
 					joueur.setUpStockRessource(cpt);
 					if(cpt>0){
-						affichage.popUp(equipe,"En retournant dans ce batiment, votre Ouvrier à livrer "+cpt+" pierre(s) au stock de ressources", "Ajout de pierres");	
+						affichage.popUp(equipe,"En retournant dans ce batiment, votre Personnage à livrer "+cpt+" pierre(s) au stock de ressources", "Ajout de pierres");	
 					}
 				}
 

@@ -13,31 +13,31 @@ public class Affichage {
 	private ArrayList<int[][]> tableaux=new ArrayList<>();
 	private Plateau  plateauDuJeu;
 	private String[] images = new String[]{ 
-			"img/rocher.jpg",			//id 1
-			"img/1.navire.jpg",			//id 2
-			"img/2.navire.jpg",			//id 3
-			"img/coffre.jpg",			//id 4
-			"img/mer.jpg",				//id 5
-			"img/1.explorateur.jpg",	//id 6
-			"img/1.voleur.jpg",			//id 7
-			"img/1.piegeur.jpg",		//id 8
-			"img/1.guerrier.jpg",		//id 9
-			"img/1.ouvrier.jpg",		//id 10
-			"img/2.explorateur.jpg",	//id 11
-			"img/2.voleur.jpg",			//id 12
-			"img/2.piegeur.jpg",		//id 13
-			"img/2.guerrier.jpg",		//id 14
-			"img/2.ouvrier.jpg",		//id 15
-			"img/death.jpg",			//id 16
-			"img/herbe.jpg",			//id 17
-			"img/piege.jpg",			//id 18
-			"img/bombe.jpg",			//id 19
-			"img/1.village.jpg",        //id 20
-			"img/2.village.jpg",		//id 21
-			"img/1.forteresse.jpg",		//id 22
-			"img/2.forteresse.jpg",		//id 23
-			"img/1.mine.jpg",			//id 24
-			"img/2.mine.jpg"			//id 25
+			"rocher.jpg",			//id 1
+			"1.navire.jpg",			//id 2
+			"2.navire.jpg",			//id 3
+			"coffre.jpg",			//id 4
+			"mer.jpg",				//id 5
+			"1.explorateur.jpg",	//id 6
+			"1.voleur.jpg",			//id 7
+			"1.piegeur.jpg",		//id 8
+			"1.guerrier.jpg",		//id 9
+			"1.ouvrier.jpg",		//id 10
+			"2.explorateur.jpg",	//id 11
+			"2.voleur.jpg",			//id 12
+			"2.piegeur.jpg",		//id 13
+			"2.guerrier.jpg",		//id 14
+			"2.ouvrier.jpg",		//id 15
+			"death.jpg",			//id 16
+			"herbe.jpg",			//id 17
+			"piege.jpg",			//id 18
+			"bombe.jpg",			//id 19
+			"1.village.jpg",        //id 20
+			"2.village.jpg",		//id 21
+			"1.forteresse.jpg",		//id 22
+			"2.forteresse.jpg",		//id 23
+			"1.mine.jpg",			//id 24
+			"2.mine.jpg"			//id 25
 	};			
 
 	/**

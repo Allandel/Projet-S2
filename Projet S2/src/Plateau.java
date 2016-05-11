@@ -39,6 +39,7 @@ public class Plateau {
 	private JButton passageDuTour=new JButton("Passer son tour"), abandon, annulerSelection=new JButton("Retour"), aide=new JButton("Aide"), lacherObjet=new JButton("Lacher objet");
 	private int id;
 	private ArrayList<JLabel> objetIventaire=new ArrayList<JLabel>();
+	private String[] imageinventaire= new String[]{"inventaire_vide.png","key.jpeg","sword.png","treasure.png","Bombe.png","pelle.png","Pioche.png","Pierre.png"};
 
 	/**
 	 *  Attribut ou est enregistré un événement observé. Cet attribut est
@@ -471,23 +472,34 @@ public class Plateau {
 	 * @param objet
 	 */
 	private void addImageIcon(JLabel label, String objet){
+		int nbImages=imageinventaire.length;
+		ImageIcon[] images=new ImageIcon[nbImages];	
+		for (int i=0;i<nbImages;i++){
+			java.net.URL imageURL = Plateau.class.getResource(imageinventaire[i]);
+			   if (imageURL != null) {
+			      images[i] = new ImageIcon(imageURL);
+			   } else { // Traitement  si image non trouvée
+			      System.err.println("Image : '" + imageinventaire[i]+ "' non trouvée") ;
+			      images[i] = null ;
+			   }
+		}
 		label.setVisible(true);
 		if(objet.equals("Vide"))
-			label.setIcon(new ImageIcon("img/inventaire_vide.png"));
+			label.setIcon(images[0]);
 		else if(objet.equals("Cle"))
-			label.setIcon(new ImageIcon("img/key.jpeg"));
+			label.setIcon(images[1]);
 		else if(objet.equals("Epee"))
-			label.setIcon(new ImageIcon("img/sword.png"));
+			label.setIcon(images[2]);
 		else if(objet.equals("Tresor"))
-			label.setIcon(new ImageIcon("img/treasure.png"));
+			label.setIcon(images[3]);
 		else if(objet.equals("Bombe"))
-			label.setIcon(new ImageIcon("img/Bombe.png"));
+			label.setIcon(images[4]);
 		else if(objet.equals("Pelle"))
-			label.setIcon(new ImageIcon("img/pelle.png"));
+			label.setIcon(images[5]);
 		else if(objet.equals("Pioche"))
-			label.setIcon(new ImageIcon("img/Pioche.png"));
+			label.setIcon(images[6]);
 		else if(objet.equals("Pierre"))
-			label.setIcon(new ImageIcon("img/Pierre.png"));
+			label.setIcon(images[7]);
 	}
 
 	/**
