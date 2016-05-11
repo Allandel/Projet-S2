@@ -4,7 +4,7 @@ import java.util.Random;
 public class Fort extends Batiment{
 	private int niveau=1;
 
-	protected int stockRessources=40, dmg=10;
+	protected int stockRessources=0 , dmg=10;
 	protected boolean upgrade=false;
 
 	/**

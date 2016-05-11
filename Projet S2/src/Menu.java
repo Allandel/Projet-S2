@@ -38,8 +38,9 @@ public class Menu extends JFrame{
 	 */
 	public void menuPrincipal(){
 		int nbrPointJ1=10,nbrPointJ2=10;
-
-		JPanel onglet1 =  new ImagePanel(new ImageIcon("img/carte.jpg").getImage());
+		
+		java.net.URL imageURL = Plateau.class.getResource("carte.jpg");
+		JPanel onglet1 =  new ImagePanel((Image)(new ImageIcon(imageURL)).getImage());
 		JPanel onglet2 = new JPanel();
 		JPanel onglet3 = new JPanel();
 		JPanel onglet4 = new JPanel();
